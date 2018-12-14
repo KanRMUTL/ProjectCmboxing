@@ -13,7 +13,7 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a href="../../index2.html"><b>Admin</b>LTE</a>
+      <h2>ระบบจัดการฝ่ายการตลาด</h4>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -22,7 +22,7 @@
       <form  action="{{ route('login') }}" method="post">
         {{ csrf_field() }}
         <div class="form-group has-feedback">
-          <input type="email" class="form-control" placeholder="Email" name="email">
+          <input type="username" class="form-control" placeholder="username" name="username">
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
