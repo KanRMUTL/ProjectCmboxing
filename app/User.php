@@ -19,7 +19,8 @@ class User extends Authenticatable
         'username',
         'email',
         'role_id',
-        'zone_id'
+        'zone_id',
+        'password'
     ];
 
     /**
@@ -48,4 +49,19 @@ class User extends Authenticatable
      {
          return $this->hasMany('App\marketing\Sale');
      }
+
+     public function scopeUserForAdmin($query){
+         return $query
+                ->where('role_id','NOT LIKE', 1)
+                ->orderBy('zone_id');
+     }
+
+     public function scopeUserForMkhead($query){
+        return $query
+               ->where([
+                   ['zone_id','=', Auth::user()->zone_id],
+                   ['role_id','=', 3]
+               ])
+               ->orderBy('zone_id');
+    }
 }
