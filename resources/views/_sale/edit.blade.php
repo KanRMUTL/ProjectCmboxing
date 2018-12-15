@@ -29,14 +29,14 @@
    <br>
       <div class="row">
          <div class="col-xs-6">
-            <label for="role">ตำแหน่ง</label>
-            <select class="form-control" id="role" name="role">
-            @foreach ($roles as $role)
+            <label for="status">ตำแหน่ง</label>
+            <select class="form-control" id="status" name="status">
+            @foreach ($statuss as $status)
                 {{ $selected = ''}}
-                @if($user->role_id == $role->id)
+                @if($user->status_id == $status->id)
                     {{ $selected = 'selected' }}
                 @endif()
-                <option value="{{ $role->id }}" {{ $selected }} >{{ $role->name }}</option>
+                <option value="{{ $status->id }}" {{ $selected }}>{{ $status->status_name }}</option>
             @endforeach
             </select>
          </div>
@@ -45,10 +45,10 @@
             <select class="form-control" id="znoe" name="zone">
             @foreach ($zones as $zone)
                 {{ $selected = ''}}
-                @if($zone->id == $user->zone_id)
+                @if($zone->zone_id == $user->user_zone->zones['zone_id'])
                     {{ $selected ='selected'}}
                 @endif()
-                <option value="{{ $zone->id }}" {{ $selected }}>{{ $zone->name }}</option>
+                <option value="{{ $zone->zone_id }}" {{ $selected }}>{{ $zone->zone_name }}</option>
             @endforeach
             </select>
          </div>

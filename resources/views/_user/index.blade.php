@@ -74,7 +74,8 @@
     <table class="table table-striped table-hover" style="font-size: 150%;">
       <thead>
       <tr align="center" style="text-align-last: center;">
-        <th>ชื่อ</th>
+        <th>ชื่อ-นามสกุล</th>
+        <th>username</th>
         <th>อีเมล์</th>
         <th>ตำแหน่ง</th>
         <th>โซน</th>
@@ -86,6 +87,7 @@
        @foreach ($users as $user)
            <tr align="center">
             <td>{{ $user->name }}</td>
+            <td>{{ $user->username }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->role->name }}</td>
             <td>

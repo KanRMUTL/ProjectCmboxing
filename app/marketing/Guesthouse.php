@@ -3,9 +3,11 @@
 namespace App\marketing;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Guesthouse extends Model
 {
+    protected $table = 'guesthouses';
     protected $fillable = [
         'name',
         'zone_id'
@@ -18,6 +20,12 @@ class Guesthouse extends Model
 
     public function sales()
     {
-        return $this->hasMany('App\market\Sale');
+        return $this->hasMany('App\marketing\Sale');
+    }
+
+    public function scopeForsale($query){
+        return $query
+               ->where('zone_id','=', Auth::user()->zone_id)
+               ->orderBy('name');
     }
 }

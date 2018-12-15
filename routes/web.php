@@ -30,4 +30,5 @@ Route::group(['middleware' =>['auth']], function(){
 });
 
 Route::resource('user', 'UserController');
+Route::resource('sale', 'marketing\SaleController');
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout

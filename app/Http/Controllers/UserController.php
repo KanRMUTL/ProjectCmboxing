@@ -64,7 +64,7 @@ class UserController extends Controller
   
     public function edit($id)
     {
-        $user = User::find($id);
+       $user = User::find($id);
         $zones = Zone::get();
         $roles = Role::get();
         $data = [
@@ -80,7 +80,20 @@ class UserController extends Controller
    
     public function update(Request $request, $id)
     {
-        
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'role_id' => $request->role,
+            'zone_id' => $request->zone,   
+        ];
+
+        if($request->password != null){
+           $data['password'] = bcrypt($request->password);
+         }
+             User::find($request->id)->update($data);
+         
+         return redirect('user');
+
     }
 
   

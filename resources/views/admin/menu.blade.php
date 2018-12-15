@@ -5,7 +5,7 @@
      <span>ผู้ใช้งาน</span></a>
   </li>
   <li class="active"><a href="{{ url('sale') }}">
-    <i class="fa fa-users fa-lg"></i>
+    <i class="fa fa-ticket fa-lg"></i>
      <span>ข้อมูลการขายบัตร</span></a>
   </li>
     {{-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> --}}

@@ -32,4 +32,10 @@ class Sale extends Model
     {
         return $this->hasMany('App\marketing\Income');
     }
+
+    public function guesthouse()
+    {
+        return $this->belongsTo('App\marketing\Guesthouse');
+    }
+
 }
