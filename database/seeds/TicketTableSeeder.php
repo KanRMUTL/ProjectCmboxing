@@ -24,7 +24,7 @@ class TicketTableSeeder extends Seeder
            ],
            [
                 'id' => 3,
-                'name' => 'Grandstand',
+                'name' => 'VIP',
                 'price' => 1500
            ],
         ];

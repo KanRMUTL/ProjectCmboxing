@@ -61,10 +61,10 @@
      
       @if(Auth::user()->role_id == 1)
         @include('admin.menu')
-      {{-- @elseif(Auth::user()->role_id == 2)
-        @include('mk_head.menu')
+      @elseif(Auth::user()->role_id == 2)
+        @include('head.menu')
       @elseif(Auth::user()->role_id == 3)
-        @include('mk_head.menu') --}}
+        @include('employee.menu') 
       @endif
     </section>
   </aside>

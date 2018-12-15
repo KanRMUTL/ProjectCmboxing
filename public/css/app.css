@@ -18128,3 +18128,7 @@ button.close {
   clip: auto;
 }
 
+  /* custom Css */
+.label{
+  font-size: 127%
+}

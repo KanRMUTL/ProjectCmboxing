@@ -17,7 +17,7 @@ class SaleController extends Controller
     {
         $tickets = Ticket::all();
         $guesthouses = Guesthouse::forSale()->get();
-        $sales = Sale::all();
+        $sales = Sale::sale()->get();
 
         // dd($sales[0]->guesthouse);
         $data = [

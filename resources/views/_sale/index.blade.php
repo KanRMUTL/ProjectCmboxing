@@ -10,7 +10,6 @@
 </button>
   
   <!-- Modal -->
-  <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -105,6 +104,7 @@
               <th>เกสเฮาท์</th>
               <th>บัตร</th>
               <th>จำนวน</th>
+              <th>ยอดรวม</th>
               <th>วันที่เข้ามาชมมวย</th>
               <th>ขายโดย...</th>
             </tr>
@@ -116,6 +116,7 @@
                 <td>{{ $sale->guesthouse->name }}</td>
                 <td><span class="label label-success">{{ $sale->ticket->name }}</span></td>
                 <td>{{ $sale->amount }}</td>
+                <td><span class="label label-danger">{{ $sale->total }}</span></td>
                 <td>{{ $sale->visit }}</td>
                 <td>{{ $sale->user->name }}</td>
                 {{-- <td><span class="label label-success">Approved</span></td>
@@ -131,3 +132,4 @@
   </div>
 
   @endsection()
+
