@@ -16,9 +16,15 @@ Route::group(['middleware' =>['auth']], function(){
     });
     Route::resource('user', 'UserController');
     Route::resource('sale', 'marketing\SaleController');
-    Route::get('/chart', 'marketing\ChartSaleController@index');
-    Route::get('/chart/data', 'marketing\ChartSaleController@getJson');
-});
-Route::get('/logout', 'Auth\LoginController@logout'); // For logout
+    Route::resource('ticket', 'marketing\TicketController');
 
-Route::get('/play','marketing\ChartSaleController@chartZone');
+    Route::prefix('chart')->group(function(){
+        Route::get('/', 'marketing\ChartSaleController@index');
+        Route::get('/data', 'marketing\ChartSaleController@getJson');//ทดสอบเฉยๆ
+        Route::get('/zone/','marketing\ChartSaleController@zonePage'); //รายงานการขายแต่ละโซน
+        Route::get('/zone/data','marketing\ChartSaleController@chartZone'); //รายงานการขายแต่ละโซน
+    });
+
+    });
+
+Route::get('/logout', 'Auth\LoginController@logout'); // For logout

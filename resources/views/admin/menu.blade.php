@@ -8,4 +8,12 @@
     <i class="fa fa-ticket fa-lg"></i>
      <span>ข้อมูลการขายบัตร</span></a>
   </li>
+  <li class="active"><a href="{{ url('sale') }}">
+    <i class="fa fa-edit fa-lg"></i>
+     <span>จัดการบัตร</span></a>
+  </li>
+  <li class="active"><a href="{{ url('chart/zone') }}">
+    <i class="fa fa-chart-pie fa-lg"></i>
+     <span>รายงานการขายแต่ละโซน</span></a>
+  </li>
   </ul>

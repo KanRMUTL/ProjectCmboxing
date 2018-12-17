@@ -13,6 +13,11 @@ class ChartSaleController extends Controller
     {
         return view('chart');
     }
+
+    public function zonePage()
+    {
+        return view('_sale.chart_zone');
+    }
     public function getJson()
     {
         Sale::get();
@@ -25,15 +30,13 @@ class ChartSaleController extends Controller
         return $data;
     }
 
-    public function chartZone()
+    public function chartZone() // สำหรับ Admin เท่านั้น
     {
-        $sale =  Sale::chartZone()->get();
-        // dd($sale[0]['total']);
-        $data = [];
+         $sale =  Sale::chartZone()->get();
+        
         $index = 0;
         foreach ($sale as $item) {  
-            $sale[$index]['name'] = $item->user->name;
-            $sale[$index]['zone'] = $item->user->zone->name;
+            $sale[$index]['zone_name'] = $item->zone->name;
             $index++;
         }
         return $sale;

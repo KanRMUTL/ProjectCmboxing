@@ -20,6 +20,7 @@
         {!! Form::open(['route' => 'sale.store', 'method' => 'POST']) !!}
         {{ Form::token()}}
         <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+        <input type="hidden" name="zoneId" value="{{ Auth::user()->zone_id }}">
         <div class="modal-body">
           <div class="form-group">
             <label for="customerName">ชื่อ - นามสกุล(ของลูกค้า)</label>

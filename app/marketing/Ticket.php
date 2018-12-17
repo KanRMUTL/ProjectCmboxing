@@ -9,7 +9,8 @@ class Ticket extends Model
     protected $fillable = [
         'name', 'price'
     ];
-
+    public $timestamps  = false;
+    
     public function employee_commission()
     {
         return $this->hasOne('App\marketing\EmployeeCommission');

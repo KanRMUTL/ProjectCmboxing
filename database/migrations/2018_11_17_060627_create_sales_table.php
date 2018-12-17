@@ -22,6 +22,7 @@ class CreateSalesTable extends Migration
             $table->date('visit'); //วันที่ลูกค้าเข้ามาชมมวย
             $table->integer('ticket_id');
             $table->integer('user_id');
+            $table->integer('zone_id',2);
             $table->integer('guesthouse_id');
             $table->timestamps();
         });

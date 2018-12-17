@@ -29,13 +29,6 @@ class SaleController extends Controller
         
         return view('_sale.index',$data);
     }
-
-   
-    public function create()
-    {
-        //
-    }
-
    
     public function store(Request $request)
     {
@@ -49,18 +42,12 @@ class SaleController extends Controller
             'visit' => $request->visitDay,
             'ticket_id' => $request->ticketId,
             'user_id' => $request->userId,
+            'zone_id' => $request->zoneId,
             'total' =>  $ticket['price'] * $request->amount
         ];
         Sale::create($data);
         return redirect('sale');
     }
-
-    
-    public function show($id)
-    {
-        //
-    }
-
   
     public function edit($id)
     {

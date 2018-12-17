@@ -18,6 +18,7 @@ class Sale extends Model
         'visit',
         'ticket_id',
         'user_id',
+        'zone_id',
         'guesthouse_id'
     ];
 
@@ -40,7 +41,10 @@ class Sale extends Model
     {
         return $this->belongsTo('App\marketing\Guesthouse');
     }
-    
+    public function zone()
+    {
+        return $this->belongsTo('App\marketing\Zone');
+    }
     public function scopeSale($query)
     {
         if(Auth::user()->role_id == 1){
@@ -69,14 +73,19 @@ class Sale extends Model
         ]);
     }
 
-    public function scopeChartZone($query)
+    public function scopeChartZone($query)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
     {
        return $query
-                ->select('user_id',DB::raw('SUM(total) as total'))
-                ->join('users', 'users.id', '=', 'sales.user_id')
-                ->groupBy('user_id');
+                ->select('zone_id',DB::raw('SUM(total) as total'))
+                ->groupBy('zone_id')
+                ->orderBy(DB::raw('SUM(total)'),'ADSC');
     }
 
+    // public function scopeChartZone($query)  
+    // {
+    //     return $query
+    //             ->select
+    // }
 
     public function getVisitAttribute($value)
     {
