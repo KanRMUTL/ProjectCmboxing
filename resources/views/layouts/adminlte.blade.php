@@ -6,7 +6,7 @@
   <title> @yield('title')</title>
    <!-- CSRF Token -->
    <meta name="csrf-token" content="{{ csrf_token() }}">
-<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 
 </head>
@@ -56,8 +56,6 @@
           <i class="fa fa-circle text-success"></i> Online
         </div>
       </div>
-
-    
      
       @if(Auth::user()->role_id == 1)
         @include('admin.menu')
@@ -91,6 +89,7 @@
   </div>
   <!-- /.content-wrapper -->
 </div>
+@yield('script')
 <script src="{{ asset('js/app.js')}}"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <div class="box-header with-border">
    <h3 class="box-title">ผู้ใช้ : {{ $user->name }}</h3>
 </div>
-{!! Form::open(['action' => ['UserController@update', 1], 'method' => 'PUT']) !!}
+{!! Form::open(['action' => ['UserController@update', $user->id], 'method' => 'PUT']) !!}
 {{ Form::token()}}
 <input type="hidden" name="id" value="{{ $user->id}}">
 <div class="box-body">

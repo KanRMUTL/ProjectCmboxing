@@ -19,7 +19,7 @@ class CreateSalesTable extends Migration
             $table->string('customer_name',100);
             $table->string('customer_phone', 11);
             $table->string('customer_room',6);
-            $table->timestamp('visit'); //วันที่ลูกค้าเข้ามาชมมวย
+            $table->date('visit'); //วันที่ลูกค้าเข้ามาชมมวย
             $table->integer('ticket_id');
             $table->integer('user_id');
             $table->integer('guesthouse_id');

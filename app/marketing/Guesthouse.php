@@ -23,7 +23,7 @@ class Guesthouse extends Model
         return $this->hasMany('App\marketing\Sale');
     }
 
-    public function scopeForsale($query){
+    public function scopeForsale($query){  // แสดงรายชื่อเกสเฮาท์ที่อยู่ในโซนเดียวกับผู้ใช้
         return $query
                ->where('zone_id','=', Auth::user()->zone_id)
                ->orderBy('name');

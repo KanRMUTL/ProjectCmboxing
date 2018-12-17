@@ -14,8 +14,11 @@ Route::group(['middleware' =>['auth']], function(){
             return view('employee.index');
         }
     });
+    Route::resource('user', 'UserController');
+    Route::resource('sale', 'marketing\SaleController');
+    Route::get('/chart', 'marketing\ChartSaleController@index');
+    Route::get('/chart/data', 'marketing\ChartSaleController@getJson');
 });
-
-Route::resource('user', 'UserController');
-Route::resource('sale', 'marketing\SaleController');
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout
+
+Route::get('/play','marketing\ChartSaleController@chartZone');

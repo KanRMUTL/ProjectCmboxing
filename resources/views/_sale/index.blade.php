@@ -27,7 +27,7 @@
           </div>
           <div class="form-group">
             <label for="phone">เบอร์โทรศัพท์</label>
-            <input type="number" class="form-control" id="phone" name="customerPhone" placeholder="เบอร์โทรศัพท์" >
+            <input type="text" class="form-control" maxlength="10" id="phone" name="customerPhone" placeholder="เบอร์โทรศัพท์" >
           </div>
 
           <div class="row"> <!-- Row-->
@@ -107,6 +107,8 @@
               <th>ยอดรวม</th>
               <th>วันที่เข้ามาชมมวย</th>
               <th>ขายโดย...</th>
+              <th>แก้ไข</th>
+              <th>ลบ</th>
             </tr>
             @foreach ($sales as $sale)
             <tr>
@@ -119,6 +121,22 @@
                 <td><span class="label label-danger">{{ $sale->total }}</span></td>
                 <td>{{ $sale->visit }}</td>
                 <td>{{ $sale->user->name }}</td>
+                <td>
+                    @if (Auth::user()->id == $sale->user_id)  
+                    <a href="/sale/{{ $sale->id }}/edit" class="btn btn-warning">
+                      <i class="fa fa-edit fa-lg"></i>
+                    </a>
+                    @endif
+                </td>
+                <td>
+                    @if (Auth::user()->id == $sale->user_id)  
+                    {!! Form::open(['action' => ['marketing\SaleController@destroy', $sale->id]]) !!}
+                      {{ csrf_field() }}
+                    {{ Form::hidden('_method','DELETE') }}
+                      <button type="submit" class="btn btn-danger"><i class="fa fa-trash fa-lg"></i></button>
+                    {{ Form::close() }}
+                    @endif  
+                </td>
                 {{-- <td><span class="label label-success">Approved</span></td>
                 <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td> --}}
               </tr>

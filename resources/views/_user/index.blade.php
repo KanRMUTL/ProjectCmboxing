@@ -33,6 +33,8 @@
             <label for="email">อีเมล์</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล์"  value="">
           </div>
+
+          @if (auth::user()->role_id == 1)  <!-- ถ้าเป็น Admin สามารถกำหนด ตำแหน่ง กับ โซน -->
           <label for="role">ตำแหน่ง</label>
           <div class="form-group" id="role">
             <select class="form-control" name="role">
@@ -43,7 +45,7 @@
             @endforeach
             </select>
           </div>
-          <label for="zone">โซน</label>
+              <label for="zone">โซน</label>
           <div class="form-group" id="zone">
             <option disabled selected>เลือกโซน</option>
             <select class="form-control" name="zone">
@@ -52,6 +54,11 @@
               @endforeach
             </select>
           </div>
+          @else <!-- ถ้าไม่ใช่ Admin กำหนดตำแหน่งกับโซนไม่ได้ -->
+            <input type="hidden" name="zone" value="{{ auth::user()->zone_id }}">
+            <input type="hidden" name="role" value="3">
+          @endif
+
           <div class="form-group">
             <label for="password">รหัสผ่าน</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="รหัสผ่าน" value="password">
@@ -104,7 +111,6 @@
               {!! Form::open(['action' => ['UserController@destroy', $user->id]]) !!}
               {{ csrf_field() }}
               {{ Form::hidden('_method','DELETE') }}
-              {{-- <input type="submit" class="btn btn-danger" value="delete"> --}}
               <button type="submit" class="btn btn-danger"><i class="fa fa-trash fa-lg"></i></button>
               {{ Form::close() }}
             </td>

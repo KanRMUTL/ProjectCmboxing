@@ -1,62 +1,90 @@
 @extends('layouts.adminlte')
 @section('title','Edit User')
-@section('header','แก้ไขผู้ใช้')
-@section('description','สำหรับแก้ไขข้อมูลผู้ใช้')
+@section('header','แก้ไขการขายบัตร')
+@section('description','สำหรับแก้ไขข้อมูลการขายบัตร')
 
 @section('content')
-<div class="box box-info">
-<div class="box-header with-border">
-   <h3 class="box-title">ผู้ใช้ : {{ $user->name }}</h3>
-</div>
-{!! Form::open(['action' => ['UserController@update', 1], 'method' => 'PUT']) !!}
+{!! Form::open(['action' => ['marketing\SaleController@update', $sale->id ], 'method' => 'PUT']) !!}
 {{ Form::token()}}
-<input type="hidden" name="id" value="{{ $user->id}}">
-<div class="box-body">
-   <div class="input-group">
-      <span class="input-group-addon">ชื่อ</span>
-      <input type="text" class="form-control" placeholder="ชื่อผู้ใช้" name="name" value="{{ $user->name}}">
-   </div>
-   <br>
-   <div class="input-group">
-      <span class="input-group-addon">อีเมล์</span>
-      <input type="email" class="form-control" placeholder="อีเมล์" name="email" value="{{ $user->email}}">
-   </div>
-   <br>
-   <div class="input-group">
-      <span class="input-group-addon">รหัสผ่าน</span>
-      <input type="password" class="form-control" placeholder="รหัสผ่านใหม่(ไม่จำเป็น)" name="password">
-   </div>
-   <br>
-      <div class="row">
-         <div class="col-xs-6">
-            <label for="status">ตำแหน่ง</label>
-            <select class="form-control" id="status" name="status">
-            @foreach ($statuss as $status)
-                {{ $selected = ''}}
-                @if($user->status_id == $status->id)
-                    {{ $selected = 'selected' }}
-                @endif()
-                <option value="{{ $status->id }}" {{ $selected }}>{{ $status->status_name }}</option>
-            @endforeach
-            </select>
-         </div>
-         <div class="col-xs-6">
-            <label for="zone">โซน</label>
-            <select class="form-control" id="znoe" name="zone">
-            @foreach ($zones as $zone)
-                {{ $selected = ''}}
-                @if($zone->zone_id == $user->user_zone->zones['zone_id'])
-                    {{ $selected ='selected'}}
-                @endif()
-                <option value="{{ $zone->zone_id }}" {{ $selected }}>{{ $zone->zone_name }}</option>
-            @endforeach
-            </select>
-         </div>
+<div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">{{$sale->customer_name}}</h4>
+        </div>
+        <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="customerName">ชื่อ - นามสกุล(ของลูกค้า)</label>
+          <input type="text" class="form-control" id="customerName" name="customerName"  value="{{$sale->customer_name}}" >
+          </div>
+          <div class="form-group">
+            <label for="phone">เบอร์โทรศัพท์</label>
+            <input type="number" class="form-control" id="phone" name="customerPhone" value="{{$sale->customer_phone}}" >
+          </div>
+
+          <div class="row"> <!-- Row-->
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="customerRoom">หมายเลขห้องลูกค้า</label>
+                <input type="text" class="form-control" id="customerRoom" name="customerRoom" value="{{$sale->customer_room}}"  >
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+              <label for="guesthouseId">เกสเฮาท์</label>
+              <div class="form-group" id="guesthouseId">
+                <select class="form-control" name="guesthouseId">
+                  @foreach ($guesthouses as $guesthouse)
+                        {{ $selected = ''}}
+                     @if($sale->guesthouse_id == $guesthouse->id)
+                        {{ $selected = 'selected' }}
+                     @endif
+                    <option value="{{ $guesthouse->id }}" {{ $selected }}>{{ $guesthouse->name }} </option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+
+          </div>  <!-- end Row-->
+
+          <div class="form-group">
+              <label for="visitDay">วันที่เข้ามาชม</label>
+          <input type="date" class="form-control" id="visitDay" name="visitDay" value="{{ $visit }}" >
+            </div>
+          <div class="row">
+              <div class="col-md-6 col-sm-12">
+              <label for="ticketId">ประเภทบัตร</label>
+              <div class="form-group" id="ticketId">
+                <select class="form-control" name="ticketId">
+                  @foreach ($tickets as $ticket)
+                  {{ $selected = ''}}
+                  @if($sale->ticket_id == $ticket->id)
+                     {{ $selected = 'selected' }}
+                  @endif
+                  <option value="{{ $ticket->id }}"  {{ $selected }}>{{ $ticket->name}} ({{ $ticket->price }})</option>
+                @endforeach
+                </select>
+              </div>
+            </div>
+        
+            <div class="col-md-6 col-sm-12">
+              <label for="amount">จำนวนบัตร</label>
+              <div class="form-group" id="amount">
+                <select class="form-control" name="amount">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">บันทึก</button>
+        </div>
       </div>
-   <div class="box-footer">
-      <button type="submit" class="btn btn-primary pull-right">บันทึก</button>
-   </div>
-</div>
 <!-- /.box -->
 {!! Form::close() !!}
 @stop()
