@@ -50,7 +50,11 @@
        @foreach ($tickets as $ticket)
            <tr align="center">
             <td>{{ $ticket->name }}</td>
-            <td>{{ $ticket->price }}</td>
+            <td>
+                <span class="label label-primary">
+                  {{ $ticket->price }}
+                </span>
+            </td>
             <td>
               <a href="/ticket/{{ $ticket->id }}/edit" class="btn btn-warning">
                 <i class="fa fa-edit fa-lg"></i>

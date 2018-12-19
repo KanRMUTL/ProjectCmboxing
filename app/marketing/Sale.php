@@ -73,10 +73,11 @@ class Sale extends Model
         ]);
     }
 
-    public function scopeChartZone($query)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
+    public function scopeChartZone($query,$before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
     {
        return $query
                 ->select('zone_id',DB::raw('SUM(total) as total'))
+                ->whereBetween('created_at',[$before, $after])
                 ->groupBy('zone_id')
                 ->orderBy(DB::raw('SUM(total)'),'ADSC');
     }
@@ -92,5 +93,6 @@ class Sale extends Model
         $visit = Carbon::parse($value);
         return $visit->format('d/m/Y');
     }
+    
     
 }

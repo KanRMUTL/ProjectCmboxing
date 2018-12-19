@@ -21,8 +21,9 @@ Route::group(['middleware' =>['auth']], function(){
     Route::prefix('chart')->group(function(){
         Route::get('/', 'marketing\ChartSaleController@index');
         Route::get('/data', 'marketing\ChartSaleController@getJson');//ทดสอบเฉยๆ
-        Route::get('/zone/','marketing\ChartSaleController@zonePage'); //รายงานการขายแต่ละโซน
-        Route::get('/zone/data','marketing\ChartSaleController@chartZone'); //รายงานการขายแต่ละโซน
+        Route::get('/zone','marketing\ChartSaleController@zonePage'); //รายงานการขายแต่ละโซน
+        Route::post('/zone/data','marketing\ChartSaleController@chartZone'); //รายงานการขายแต่ละโซน
+        Route::post('/zone/play','marketing\ChartSaleController@play'); //รายงานการขายแต่ละโซน
     });
 
     });

@@ -54,7 +54,7 @@
 
           <div class="form-group">
               <label for="visitDay">วันที่เข้ามาชม</label>
-              <input type="date" class="form-control" id="visitDay" name="visitDay" placeholder="เบอร์โทรศัพท์" >
+              <input type="date" class="form-control" id="visitDay" name="visitDay">
             </div>
           <div class="row">
               <div class="col-md-6 col-sm-12">
@@ -70,16 +70,7 @@
         
             <div class="col-md-6 col-sm-12">
               <label for="amount">จำนวนบัตร</label>
-              <div class="form-group" id="amount">
-                <select class="form-control" name="amount">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                </select>
-              </div>
+              <input type="number" class="form-control" id="visitDay" name="amount" placeholder="จำนวน" >
             </div>
           </div>
         </div>
@@ -117,9 +108,21 @@
                 <td>{{ $sale->customer_phone }}</td>
                 <td>{{ $sale->customer_room }}</td>
                 <td>{{ $sale->guesthouse->name }}</td>
-                <td><span class="label label-success">{{ $sale->ticket->name }}</span></td>
-                <td>{{ $sale->amount }}</td>
-                <td><span class="label label-danger">{{ $sale->total }}</span></td>
+                <td>
+                  <span class="label label-success">
+                    {{ $sale->ticket->name }}
+                  </span>
+                </td>
+                <td>
+                    <span class="label label-primary">
+                      {{ $sale->amount }}
+                    </span>
+                </td>
+                <td>
+                  <span class="label label-danger">
+                    {{ number_format($sale->total, 2, '.',',') }}
+                  </span>
+                </td>
                 <td>{{ $sale->visit }}</td>
                 <td>{{ $sale->user->name }}</td>
                 <td>

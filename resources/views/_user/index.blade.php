@@ -1,6 +1,6 @@
 
 @extends('layouts.adminlte')
-@section('title','User')
+@section('title','ผู้ใช้งาน')
 @section('header','ผู้ใช้ทั้งหมด')
 @section('description','สำหรับจัดการผู้ใช้ทั้งหมด')
 

@@ -25,4 +25,9 @@ class Ticket extends Model
     {
         return $this->hasMany('App\marketing\Sale');
     }
+
+    public function getPriceAttribute($value)
+    {
+        return number_format($value, 2, '.',',');
+    }
 }
