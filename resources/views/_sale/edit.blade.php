@@ -67,16 +67,9 @@
             </div>
         
             <div class="col-md-6 col-sm-12">
-              <label for="amount">จำนวนบัตร</label>
+            <label for="amount">จำนวนบัตร </label>
               <div class="form-group" id="amount">
-                <select class="form-control" name="amount">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                </select>
+                <input type="number" name="amount" class="form-control"value="{{ $sale->amount }}">
               </div>
             </div>
           </div>

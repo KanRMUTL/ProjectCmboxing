@@ -73,13 +73,31 @@ class Sale extends Model
         ]);
     }
 
-    public function scopeChartZone($query,$before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
+    public function scopeChartZoneTotal($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
     {
        return $query
                 ->select('zone_id',DB::raw('SUM(total) as total'))
                 ->whereBetween('created_at',[$before, $after])
                 ->groupBy('zone_id')
                 ->orderBy(DB::raw('SUM(total)'),'ADSC');
+    }
+
+    public function scopeChartZoneCustomer($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
+    {
+       return $query
+                ->select('zone_id',DB::raw('COUNT(id) as total'))
+                ->whereBetween('created_at', [$before, $after])
+                ->groupBy('zone_id')
+                ->orderBy(DB::raw('COUNT(id)'),'ADSC');
+    }
+
+    public function scopeChartTicket($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
+    {
+       return $query
+                ->select('ticket_id',DB::raw('COUNT(id) as total'))
+                ->whereBetween('created_at', [$before, $after])
+                ->groupBy('ticket_id')
+                ->orderBy(DB::raw('COUNT(id)'),'ADSC');
     }
 
     // public function scopeChartZone($query)  

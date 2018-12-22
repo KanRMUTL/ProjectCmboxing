@@ -62,7 +62,7 @@
               <div class="form-group" id="ticketId">
                 <select class="form-control" name="ticketId">
                   @foreach ($tickets as $ticket)
-                  <option value="{{ $ticket->id }}">{{ $ticket->name}} ({{ $ticket->price }})</option>
+                  <option value="{{ $ticket->id }}">{{ $ticket->name}} ({{ number_format($ticket->price, 2, '.',',') }})</option>
                 @endforeach
                 </select>
               </div>
@@ -126,14 +126,14 @@
                 <td>{{ $sale->visit }}</td>
                 <td>{{ $sale->user->name }}</td>
                 <td>
-                    @if (Auth::user()->id == $sale->user_id)  
+                    @if (Auth::user()->id == $sale->user_id || Auth::user()->role_id == 1)  
                     <a href="/sale/{{ $sale->id }}/edit" class="btn btn-warning">
                       <i class="fa fa-edit fa-lg"></i>
                     </a>
                     @endif
                 </td>
                 <td>
-                    @if (Auth::user()->id == $sale->user_id)  
+                    @if (Auth::user()->id == $sale->user_id  || Auth::user()->role_id == 1)  
                     {!! Form::open(['action' => ['marketing\SaleController@destroy', $sale->id]]) !!}
                       {{ csrf_field() }}
                     {{ Form::hidden('_method','DELETE') }}

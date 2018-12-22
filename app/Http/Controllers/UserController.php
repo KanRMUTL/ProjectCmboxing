@@ -27,7 +27,7 @@ class UserController extends Controller
         $data = [
             'users' => $users,
             'zones' => Zone::all(),
-            'roles' => Role::all()
+            'roles' => Role::where('id', '!=', 1)->get()
         ];
         return view('_user.index',$data);
 
