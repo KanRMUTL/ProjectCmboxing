@@ -44,7 +44,7 @@ class ChartSaleController extends Controller
     {
         $before = $request->before;
         $after  = $request->after; 
-        $sale = Sale::apiZoneCustomer($before, $after)->get();
+        $sale = Sale::ChartZoneCustomer($before, $after)->get();
         $index = 0;
         foreach ($sale as $item) {  
             $sale[$index]['zone_name'] = $item->zone->name;
