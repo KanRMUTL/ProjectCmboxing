@@ -7,31 +7,34 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\marketing\Sale;
 use App\marketing\Ticket;
+use Carbon\Carbon;
+use Auth;
 
 class CommissionController extends Controller
 {
     public function empCommission()
     {
-        $data = Sale::
-                    select(
-                        'user_id', 
-                        DB::raw('SUM(amount) as amount'), 
-                        'ticket_id'                        
-                    )
-                    ->groupBy('ticket_id', 'created_at', 'user_id')
-                    ->orderBy('created_at')
-                    ->get();
-
+        if(Auth::user()->role_id == 1)
+        {
+            $data = Sale::commissionForAdmin()->get();
+        }
+        else if(Auth::user()->role_id == 2)
+        {
+            $data = Sale::commissionForHead()->get();
+        }
+        else if(Auth::user()->role_id == 3)
+        {
+            $data = Sale::commissionForEmp()->get();
+        }
         // เพิ่ม ชื่อผู้ใช้  ชื่อบัตร  คำนวณค่าคอมมิดชั่น              
         $index = 0;
         foreach ($data as $item) {  
-            $data[$index]['user_name'] = $item->user->name;
-            $data[$index]['ticket_price'] = $item->ticket->price;
             $data[$index]['commission'] = $this->calculationCommission($item->ticket_id, $item->amount);
+            $data[$index]['date_formated'] = Carbon::parse($item->created_at)->format('d/m/Y');
             $index++;
         }
 
-        return $data;
+        return view('_commission.index')->with('data', $data);
     }
 
 

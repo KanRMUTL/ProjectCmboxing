@@ -99,12 +99,46 @@ class Sale extends Model
                 ->groupBy('ticket_id')
                 ->orderBy(DB::raw('COUNT(id)'),'ADSC');
     }
+    public function scopeCommissionForAdmin($query)
+    {
+        return $query
+                ->select(
+                    'user_id', 
+                    DB::raw('SUM(amount) as amount'), 
+                    'ticket_id',                      
+                    'created_at'
+                )
+                ->groupBy('ticket_id', 'created_at', 'user_id')
+                ->orderByRaw('created_at DESC');
+    }
 
-    // public function scopeChartZone($query)  
-    // {
-    //     return $query
-    //             ->select
-    // }
+    public function scopeCommissionForHead($query)
+    {
+        return $query
+                ->select(
+                    'user_id', 
+                    DB::raw('SUM(amount) as amount'), 
+                    'ticket_id',
+                    'created_at'                        
+                )
+                ->where('zone_id', '=', Auth::user()->zone_id)
+                ->groupBy('ticket_id', 'created_at', 'user_id')
+                ->orderByRaw('created_at DESC');
+    }
+
+    public function scopeCommissionForEmp($query)
+    {
+        return $query
+                ->select(
+                    'user_id', 
+                    DB::raw('SUM(amount) as amount'), 
+                    'ticket_id',                      
+                    'created_at'
+                )
+                ->where('user_id', '=', Auth::user()->id)
+                ->groupBy('ticket_id', 'created_at', 'user_id')
+                ->orderByRaw('created_at DESC');
+    }
 
     public function getVisitAttribute($value)
     {
@@ -112,5 +146,9 @@ class Sale extends Model
         return $visit->format('d/m/Y');
     }
     
-    
+    public function getCreated_atAttribute($value)
+    {
+        $created = Carbon::parse($value);
+        return $created->format('d/m/Y');
+    }
 }
