@@ -87,7 +87,7 @@
     <div class="col-xs-12">
       <div class="box">
         <!-- /.box-header -->
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body table-responsive">
           <table class="table table-hover">
             <tr>
               <th>ชื่อลูกค้า</th>

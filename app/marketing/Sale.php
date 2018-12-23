@@ -99,7 +99,7 @@ class Sale extends Model
                 ->groupBy('ticket_id')
                 ->orderBy(DB::raw('COUNT(id)'),'ADSC');
     }
-    public function scopeCommissionForAdmin($query)
+    public function scopeCommissionForAdmin($query, $before, $after)
     {
         return $query
                 ->select(
@@ -108,6 +108,7 @@ class Sale extends Model
                     'ticket_id',                      
                     'created_at'
                 )
+                ->whereBetween('created_at', [$before, $after])
                 ->groupBy('ticket_id', 'created_at', 'user_id')
                 ->orderByRaw('created_at DESC');
     }
@@ -146,9 +147,5 @@ class Sale extends Model
         return $visit->format('d/m/Y');
     }
     
-    public function getCreated_atAttribute($value)
-    {
-        $created = Carbon::parse($value);
-        return $created->format('d/m/Y');
-    }
+   
 }

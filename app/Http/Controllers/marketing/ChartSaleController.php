@@ -9,22 +9,21 @@ use Carbon\Carbon;
 use App\User;
 class ChartSaleController extends Controller
 {
+    
+
     public function index()
     {
-        return view('chart');
-    }
+        $now = Carbon::now();
+        $start =  $now->startOfWeek()->format('Y-m-d');
+        $end = $now->endOfWeek()->format('Y-m-d');
 
-    public function zonePage()
-    {
-        return view('_sale.chart');
+        $data = [
+            'start' => $start,
+            'end' => $end
+        ];
+        return view('_sale.chart', $data);
     }
-    public function getJson()  // ฟังชั่นทดสอบ
-    {
-        Sale::get();
-        $data = Sale::chartWeek('2018-12-2')->get();
-        $count = $data->count();
-        return $data;
-    }
+    
 
     public function apiZoneTotal(Request $request) // สำหรับ Admin เท่านั้น
     {

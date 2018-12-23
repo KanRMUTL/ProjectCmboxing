@@ -14,9 +14,41 @@ class CommissionController extends Controller
 {
     public function empCommission()
     {
+        $now = Carbon::now();
+        $start =  $now->startOfWeek()->format('Y-m-d');
+        $end = $now->endOfWeek()->format('Y-m-d');
+
+        $data = $this->getCommission($start, $end);
+        $range = [
+            'start' => $start,
+            'end' => $end
+        ];
+        return view('_commission.index')
+                ->with('data', $data)
+                ->with('range', $range);
+    }
+
+    public function searchCommission(Request $request)
+    {   
+        $start = $request->start;
+        $end = $request->end;
+        
+        $data = $this->getCommission($start, $end);
+        $range = [
+            'start' => $start,
+            'end' => $end
+        ];
+
+        return view('_commission.index')
+                ->with('data', $data)
+                ->with('range', $range);
+    }
+
+    private function getCommission($start, $end)
+    {
         if(Auth::user()->role_id == 1)
         {
-            $data = Sale::commissionForAdmin()->get();
+            $data = Sale::commissionForAdmin($start, $end)->get();
         }
         else if(Auth::user()->role_id == 2)
         {
@@ -34,9 +66,8 @@ class CommissionController extends Controller
             $index++;
         }
 
-        return view('_commission.index')->with('data', $data);
+        return $data;
     }
-
 
     private function calculationCommission($ticketId, $amount)
     {

@@ -5,10 +5,10 @@
 @section('content')
 
   <div class="col-md-2 col-sm-3">
-    <input type="date" name="before" class="form-control" id="before" placeholder="กรุณาระบุวันที่" value="2018-12-15">
+    <input type="date" name="before" class="form-control" id="before" placeholder="กรุณาระบุวันที่" value="{{ $start }}">
   </div>
   <div class="col-md-2 col-sm-3">
-    <input type="date" name="after" class="form-control" id="after" placeholder="กรุณาระบุวันที่" value="2018-12-17">
+    <input type="date" name="after" class="form-control" id="after" placeholder="กรุณาระบุวันที่" value="{{ $end }}">
   </div>
   <div class="col-md-8 col-sm-6">
     <button type="" class="btn btn-primary" id="sale-total">แบ่งตามยอดขาย</button>

@@ -20,12 +20,6 @@ Route::group(['middleware' =>['auth']], function(){
     
     Route::prefix('chart')->group(function(){
         Route::get('/', 'marketing\ChartSaleController@index');
-        Route::get('/data', 'marketing\ChartSaleController@getJson');//ทดสอบเฉยๆ
-        Route::get('/zone','marketing\ChartSaleController@zonePage'); //รายงานการขายแต่ละโซน
-    });
-
-    Route::prefix('commission')->group(function(){
-        Route::get('/all', 'marketing\ChartSaleController@index');
     });
 
     Route::prefix('api')->group(function(){
@@ -33,10 +27,10 @@ Route::group(['middleware' =>['auth']], function(){
         Route::get('/customer','marketing\ChartSaleController@apiZoneCustomer'); //รายงานการขายแบ่งตามจำนวนลูกค้า
         Route::get('/ticket','marketing\ChartSaleController@apiTicket'); //รายงานการขายแบ่งตามประเภทบัตร
     });
+    Route::prefix('commission')->group(function(){
+        Route::get('/', 'marketing\CommissionController@empCommission');
+        Route::post('/search', 'marketing\CommissionController@searchCommission')->name('commission.search');
+    });
 });
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout
-
-//PLAY
-Route::get('/commission', 'marketing\CommissionController@empCommission');
-Route::get('/duration', 'marketing\CommissionController@duration');
