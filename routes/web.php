@@ -18,6 +18,8 @@ Route::group(['middleware' =>['auth']], function(){
     Route::resource('sale', 'marketing\SaleController');
     Route::resource('ticket', 'marketing\TicketController');
     
+    Route::post('sale/search', 'marketing\SaleController@searchSale')->name('sale.search');
+
     Route::prefix('chart')->group(function(){
         Route::get('/', 'marketing\ChartSaleController@index');
     });

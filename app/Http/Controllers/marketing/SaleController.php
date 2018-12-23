@@ -18,14 +18,45 @@ class SaleController extends Controller
     {
         $tickets = Ticket::all();
         $guesthouses = Guesthouse::forSale()->get();
-        $sales = Sale::sale()->get();
+        $now = Carbon::now();
+        $start =  $now->startOfWeek()->format('Y-m-d');
+        $end = $now->endOfWeek()->format('Y-m-d');
+        $range = [
+            'start' => $start,
+            'end' => $end
+        ];
+        $sales = Sale::sale($start, $end)->get();
         $data = [
             'tickets' => $tickets,
             'guesthouses' => $guesthouses,
-            'sales' => $sales
+            'sales' => $sales,
+            'range' => $range
         ];
         
-        return view('_sale.index',$data);
+        return view('_sale.index', $data);
+    }
+
+    public function searchSale(Request $request)
+    {
+        $start = $request->start;
+        $end = $request->end;
+        $range = [
+            'start' => $start,
+            'end' => $end
+        ];
+        
+        $sales = Sale::sale($start, $end)->get();
+        $tickets = Ticket::all();
+        $guesthouses = Guesthouse::forSale()->get();
+
+        $data = [
+            'tickets' => $tickets,
+            'guesthouses' => $guesthouses,
+            'sales' => $sales,
+            'range' => $range
+        ];
+
+        return view('_sale.index', $data);
     }
    
     public function store(Request $request)
@@ -65,7 +96,6 @@ class SaleController extends Controller
    
     public function update(Request $request, $id)
     {
-        // dd($id);
         $ticket = Ticket::find($request->ticketId);
         $data = [
             'amount' => $request->amount,

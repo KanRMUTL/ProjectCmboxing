@@ -45,20 +45,26 @@ class Sale extends Model
     {
         return $this->belongsTo('App\marketing\Zone');
     }
-    public function scopeSale($query)
+    public function scopeSale($query, $start, $end)
     {
         if(Auth::user()->role_id == 1){
-            return $query->orderBy('visit'); // เรียงตามวันที่มาชมมวย
+            return $query
+                    ->whereBetween('created_at', [$start, $end])
+                    ->orderByRaw('created_at DESC') ;
         }else if(Auth::user()->role_id == 2){
             return $query
-                ->join('users','users.id', '=','sales.user_id')
-                ->join('zones',function($join){
-                    $join->on('zones.id','=', 'users.zone_id')
-                        ->where('zones.id', '=', Auth::user()->zone_id);
-                })
-                ->orderBy('visit');
+                    ->whereBetween('created_at', [$start, $end])
+                    ->join('users','users.id', '=','sales.user_id')
+                    ->join('zones',function($join){
+                        $join->on('zones.id','=', 'users.zone_id')
+                            ->where('zones.id', '=', Auth::user()->zone_id);
+                    })
+                    ->orderByRaw('created_at DESC');
         }else if(Auth::user()->role_id == 3){
-            return $query->where('user_id', '=', Auth::user()->id)->orderBy('visit');;
+            return $query
+                    ->where('user_id', '=', Auth::user()->id)
+                    ->whereBetween('created_at', [$start, $end])
+                    ->orderByRaw('created_at DESC');;
         }
     }
 
@@ -66,11 +72,12 @@ class Sale extends Model
     {
         $now = Carbon::now();
         // $now = Carbon::parse($date); // นำค่า $date ส่งให้ Carbon::class เพื่อเอาไปใช้กับ format()
-        return $query->select('customer_name','total')
-        ->whereBetween('created_at', [
-            $now->startOfWeek()->format('Y-m-d'),
-            $now->endOfWeek()->format('Y-m-d'),
-        ]);
+        return $query
+                ->select('customer_name','total')
+                ->whereBetween('created_at', [
+                    $now->startOfWeek()->format('Y-m-d'),
+                    $now->endOfWeek()->format('Y-m-d'),
+                ]);
     }
 
     public function scopeChartZoneTotal($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
