@@ -18,7 +18,11 @@ Route::group(['middleware' =>['auth']], function(){
     Route::resource('sale', 'marketing\SaleController');
     Route::resource('ticket', 'marketing\TicketController');
     
-    Route::post('sale/search', 'marketing\SaleController@searchSale')->name('sale.search');
+    // ข้อมูลการขายของพนักงานกับไกด์
+    Route::get('/saleByEmployee', 'marketing\SaleController@getByEmployee')->name('getSaleByEmp');
+    Route::post('/saleByEmployee', 'marketing\SaleController@searchByEmployee')->name('searchSaleByEmp');
+    Route::post('/saleByGuide', 'marketing\SaleController@searchByEmployee')->name('getSaleByEmp');
+    
 
     Route::prefix('chart')->group(function(){
         Route::get('/', 'marketing\ChartSaleController@index');

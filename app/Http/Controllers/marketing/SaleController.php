@@ -14,35 +14,43 @@ use Carbon\Carbon;
 
 class SaleController extends Controller
 {
-    
-    
-    public function index()
-    {
-        $tickets = Ticket::all();
-        $guesthouses = Guesthouse::forSale()->get();
-        $zones = Zone::all();
-        $now = Carbon::now();
-        $start =  $now->startOfWeek()->format('Y-m-d');
-        $end = $now->endOfWeek()->format('Y-m-d');
-        $range = [
-            'start' => $start,
-            'end' => $end
+    protected $tickets;
+    protected $zones;
+    protected $now;
+    protected $range;
+    protected $start;
+    protected $end;
+
+    public function __construct(){
+        $this->tickets = Ticket::all();
+        $this->zones = Zone::all();
+        $this->now = Carbon::now();
+        $this->start =  $this->now->startOfWeek()->format('Y-m-d');
+        $this->end = $this->now->endOfWeek()->format('Y-m-d');
+        $this->range = [
+            'start' => $this->start,
+            'end' => $this->end
         ];
+    }
+
+    public function getByEmployee()
+    {       
+        $guesthouses = Guesthouse::forSale()->get();
         $userZone = Auth::user()->zone_id;
-        $sales = Sale::sale($start, $end, $userZone)->get();
+        $sales = Sale::saleEmp($this->start, $this->end, $userZone)->get();
         $data = [
-            'tickets' => $tickets,
+            'tickets' => $this->tickets,
             'guesthouses' => $guesthouses,
-            'zones' => $zones,
+            'zones' => $this->zones,
             'zoneSelected' => $userZone,
             'sales' => $sales,
-            'range' => $range
+            'range' => $this->range
         ];
         
-        return view('_sale.index', $data);
+        return view('_sale.by_employee', $data);
     }
     
-    public function searchSale(Request $request)
+    public function searchByEmployee(Request $request)
     {
         $start = $request->start;
         $end = $request->end;
@@ -52,21 +60,19 @@ class SaleController extends Controller
             'end' => $end
         ];
         
-        $sales = Sale::sale($start, $end, $zoneId)->get();
-        $tickets = Ticket::all();
-        $zones = Zone::all();
+        $sales = Sale::saleEmp($start, $end, $zoneId)->get();
         $guesthouses = Guesthouse::forSale()->get();
 
         $data = [
-            'tickets' => $tickets,
+            'tickets' => $this->tickets,
             'guesthouses' => $guesthouses,
-            'zones' => $zones,
+            'zones' => $this->zones,
             'sales' => $sales,
             'range' => $range,
             'zoneSelected' => $zoneId 
         ];
 
-        return view('_sale.index', $data);
+        return view('_sale.by_employee', $data);
     }
    
     public function store(Request $request)
@@ -78,6 +84,7 @@ class SaleController extends Controller
             'customer_phone' => $request->customerPhone,
             'customer_room' => $request->customerRoom,
             'guesthouse_id' => $request->guesthouseId,
+            'sale_type' => $request->saleType,
             'visit' => $request->visitDay,
             'ticket_id' => $request->ticketId,
             'user_id' => $request->userId,
@@ -85,7 +92,7 @@ class SaleController extends Controller
             'total' =>  $ticket['price'] * $request->amount
         ];
         Sale::create($data);
-        return redirect('sale');
+        return redirect('/saleByEmployee');
     }
   
     public function edit($id)
@@ -96,7 +103,7 @@ class SaleController extends Controller
         $visit =  Carbon::createFromFormat('d/m/Y',$sale->visit); // สร้าง obj ของ carbon ให้สามารถกำหนด format ของวันที่ได้
         $data = [
             'sale' => $sale,
-            'tickets' => $tickets,
+            'tickets' => $this->tickets,
             'guesthouses' => $guesthouses,
             'visit' => $visit->format('Y-m-d') // set ให้กำหนด input[type=date] ได้
         ];
@@ -106,7 +113,7 @@ class SaleController extends Controller
    
     public function update(Request $request, $id)
     {
-        $ticket = Ticket::find($request->ticketId);
+        $ticket = Ticket::find($request->ticketId); // เอาไว้คำนวณราคาสุทธิ total
         $data = [
             'amount' => $request->amount,
             'customer_name' => $request->customerName,
@@ -120,7 +127,7 @@ class SaleController extends Controller
         ];
         
         Sale::find($id)->update($data);
-        return redirect('sale');
+        return redirect('/saleByEmployee');
     }
 
   
@@ -128,6 +135,6 @@ class SaleController extends Controller
     {
         $user = Sale::find($id);
         $user->delete();
-        return redirect('/sale');
+        return redirect('/saleByEmployee');
     }
 }

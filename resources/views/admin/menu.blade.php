@@ -4,10 +4,21 @@
     <i class="fa fa-users fa-lg"></i>
      <span>ผู้ใช้งาน</span></a>
   </li>
-  <li class="active"><a href="{{ url('/sale') }}">
-    <i class="fa fa-ticket fa-lg"></i>
-     <span>ข้อมูลการขายบัตร</span></a>
-  </li>
+  <!--treeview  -->
+  <li class="treeview active">
+    <a href="#">
+      <i class="fa fa-ticket fa-lg"></i>
+      <span>ข้อมูลการขายบัตร</span>
+      <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+    </a>
+    <ul class="treeview-menu">
+      <li><a href="{{ url('/saleByEmployee') }}"><i class="fa fa-circle-o"></i>พนักงาน</a></li>
+      <li><a href="{{ url('/sale/guide') }}"><i class="fa fa-circle-o"></i>ไกด์</a></li>
+    </ul>
+  </li>  
+  <!--treeview  -->
   <li class="active"><a href="{{ url('/ticket') }}">
     <i class="fa fa-edit fa-lg"></i>
      <span>จัดการบัตร</span></a>

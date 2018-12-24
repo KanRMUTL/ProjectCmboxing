@@ -19,7 +19,8 @@ class Sale extends Model
         'ticket_id',
         'user_id',
         'zone_id',
-        'guesthouse_id'
+        'guesthouse_id',
+        'sale_type'
     ];
 
     public function ticket()
@@ -45,11 +46,14 @@ class Sale extends Model
     {
         return $this->belongsTo('App\marketing\Zone');
     }
-    public function scopeSale($query, $start, $end, $zoneId = null)
+    public function scopeSaleEmp($query, $start, $end, $zoneId = null)
     {
         if(Auth::user()->role_id == 1){
             return $query
-                    ->where('zone_id', '=', $zoneId)
+                    ->where([
+                        ['zone_id', '=', $zoneId],
+                        ['sale_type', '=', 1]
+                    ])
                     ->whereBetween('created_at', [$start, $end])
                     ->orderByRaw('created_at DESC') ;
         }else if(Auth::user()->role_id == 2){
