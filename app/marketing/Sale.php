@@ -45,20 +45,17 @@ class Sale extends Model
     {
         return $this->belongsTo('App\marketing\Zone');
     }
-    public function scopeSale($query, $start, $end)
+    public function scopeSale($query, $start, $end, $zoneId = null)
     {
         if(Auth::user()->role_id == 1){
             return $query
+                    ->where('zone_id', '=', $zoneId)
                     ->whereBetween('created_at', [$start, $end])
                     ->orderByRaw('created_at DESC') ;
         }else if(Auth::user()->role_id == 2){
             return $query
-                    ->whereBetween('created_at', [$start, $end])
-                    ->join('users','users.id', '=','sales.user_id')
-                    ->join('zones',function($join){
-                        $join->on('zones.id','=', 'users.zone_id')
-                            ->where('zones.id', '=', Auth::user()->zone_id);
-                    })
+                    ->where('zone_id', '=', $zoneId)
+                    ->whereBetween('created_at', [$start, $end])    
                     ->orderByRaw('created_at DESC');
         }else if(Auth::user()->role_id == 3){
             return $query
@@ -101,12 +98,12 @@ class Sale extends Model
     public function scopeChartTicket($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
     {
        return $query
-                ->select('ticket_id',DB::raw('COUNT(id) as total'))
+                ->select('ticket_id',DB::raw('SUM(amount) as total'))
                 ->whereBetween('created_at', [$before, $after])
                 ->groupBy('ticket_id')
-                ->orderBy(DB::raw('COUNT(id)'),'ADSC');
+                ->orderBy(DB::raw('SUM(amount)'),'ADSC');
     }
-    public function scopeCommissionForAdmin($query, $before, $after)
+    public function scopeCommissionForAdmin($query, $before, $after, $zoneId = null)
     {
         return $query
                 ->select(
@@ -115,6 +112,7 @@ class Sale extends Model
                     'ticket_id',                      
                     'created_at'
                 )
+                ->where('zone_id', '=', $zoneId)
                 ->whereBetween('created_at', [$before, $after])
                 ->groupBy('ticket_id', 'created_at', 'user_id')
                 ->orderByRaw('created_at DESC');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\marketing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Users;
+use Auth;
 use App\marketing\Sale;
 use App\marketing\Zone;
 use App\marketing\Ticket;
@@ -14,10 +15,12 @@ use Carbon\Carbon;
 class SaleController extends Controller
 {
     
+    
     public function index()
     {
         $tickets = Ticket::all();
         $guesthouses = Guesthouse::forSale()->get();
+        $zones = Zone::all();
         $now = Carbon::now();
         $start =  $now->startOfWeek()->format('Y-m-d');
         $end = $now->endOfWeek()->format('Y-m-d');
@@ -25,35 +28,42 @@ class SaleController extends Controller
             'start' => $start,
             'end' => $end
         ];
-        $sales = Sale::sale($start, $end)->get();
+        $userZone = Auth::user()->zone_id;
+        $sales = Sale::sale($start, $end, $userZone)->get();
         $data = [
             'tickets' => $tickets,
             'guesthouses' => $guesthouses,
+            'zones' => $zones,
+            'zoneSelected' => $userZone,
             'sales' => $sales,
             'range' => $range
         ];
         
         return view('_sale.index', $data);
     }
-
+    
     public function searchSale(Request $request)
     {
         $start = $request->start;
         $end = $request->end;
+        $zoneId = $request->zoneId;
         $range = [
             'start' => $start,
             'end' => $end
         ];
         
-        $sales = Sale::sale($start, $end)->get();
+        $sales = Sale::sale($start, $end, $zoneId)->get();
         $tickets = Ticket::all();
+        $zones = Zone::all();
         $guesthouses = Guesthouse::forSale()->get();
 
         $data = [
             'tickets' => $tickets,
             'guesthouses' => $guesthouses,
+            'zones' => $zones,
             'sales' => $sales,
-            'range' => $range
+            'range' => $range,
+            'zoneSelected' => $zoneId 
         ];
 
         return view('_sale.index', $data);

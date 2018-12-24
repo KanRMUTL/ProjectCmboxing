@@ -120,7 +120,7 @@ $('#sale-total').click(function () {
         options: {
           title: {
             display: true,
-            text: 'ยอดลูกค้าแต่ละโซน',
+            text: 'ยอดขายของแต่ละโซน',
             fontSize: 25
           },
           scales: {
@@ -186,7 +186,7 @@ $('#sale-amount').click(function () {
         options: {
           title: {
             display: true,
-            text: 'ยอดขายของแต่ละโซน',
+            text: 'ยอดลูกค้าแต่ละโซน',
             fontSize: 25
           }
         }
@@ -221,7 +221,6 @@ $('#sale-ticket').click(function () {
     data: time,
     dataType: 'json',
     success: function (data) {
-      console.log(data)
       var total = []
       var ticket_name = []
       for (var i in data) {
@@ -233,7 +232,7 @@ $('#sale-ticket').click(function () {
         labels: ticket_name,
         datasets: [
           {
-            label: 'จำนวนลูกค้า(คน)',
+            label: 'จำนวนบัตรที่ขายได้ ',
             backgroundColor: 'rgba(66, 146, 244, 0.6)',
             borderWidth: 1,
             borderHoverColor: 'rgba(66, 146, 244, 1)',
@@ -250,7 +249,7 @@ $('#sale-ticket').click(function () {
         options: {
           title: {
             display: true,
-            text: 'ยอดขายของแต่ละโซน',
+            text: 'ยอดขายแบ่งตามประเภทบัตร',
             fontSize: 25
           }
         }

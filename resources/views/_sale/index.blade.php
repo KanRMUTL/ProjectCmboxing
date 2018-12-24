@@ -97,6 +97,22 @@
       <div class="col-md-2 form-group">
         <input type="date" class="form-control" value="{{ $range['end'] }}" name="end">
       </div>
+      @if(Auth::user()->role_id == 1)
+        <div class="col-md-2">
+          <select name="zoneId" class="form-control">
+            @foreach ($zones as $zone)
+              @if ($zone->id == $zoneSelected)
+                <option value="{{ $zone->id }}" selected>โซน {{ $zone->name }}</option>
+                @continue
+              @endif
+              <option value="{{ $zone->id }}">โซน {{ $zone->name }}</option>
+            @endforeach
+          </select>
+        </div>
+      @else
+      <input type="hidden" name="zoneId" value="{{ Auth::user()->zone_id }}">
+      @endif
+      
       <div class="col-md-2 form-group">
         <button type="submit" class="btn btn-primary" name="submit">
           <i class="fa fa-search fa-lg"></i>

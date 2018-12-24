@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\marketing\Sale;
 use App\marketing\Ticket;
+use App\marketing\Zone;
 use Carbon\Carbon;
 use Auth;
 
@@ -17,23 +18,27 @@ class CommissionController extends Controller
         $now = Carbon::now();
         $start =  $now->startOfWeek()->format('Y-m-d');
         $end = $now->endOfWeek()->format('Y-m-d');
-
-        $data = $this->getCommission($start, $end);
+        $zones = Zone::all();
+        $userZone = Auth::user()->zone_id;
+        $data = $this->getCommission($start, $end, $userZone);
         $range = [
             'start' => $start,
             'end' => $end
         ];
         return view('_commission.index')
                 ->with('data', $data)
-                ->with('range', $range);
+                ->with('range', $range)
+                ->with('zones', $zones)
+                ->with('zoneSelected', $userZone);
     }
 
     public function searchCommission(Request $request)
     {   
         $start = $request->start;
         $end = $request->end;
-        
-        $data = $this->getCommission($start, $end);
+        $zoneId = $request->zoneId;
+        $zones = Zone::all();
+        $data = $this->getCommission($start, $end, $zoneId);
         $range = [
             'start' => $start,
             'end' => $end
@@ -41,14 +46,16 @@ class CommissionController extends Controller
 
         return view('_commission.index')
                 ->with('data', $data)
-                ->with('range', $range);
+                ->with('range', $range)
+                ->with('zoneSelected', $zoneId)
+                ->with('zones', $zones);
     }
 
-    private function getCommission($start, $end)
+    private function getCommission($start, $end, $zoneId)
     {
         if(Auth::user()->role_id == 1)
         {
-            $data = Sale::commissionForAdmin($start, $end)->get();
+            $data = Sale::commissionForAdmin($start, $end, $zoneId)->get();
         }
         else if(Auth::user()->role_id == 2)
         {
