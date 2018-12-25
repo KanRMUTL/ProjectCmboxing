@@ -8,4 +8,8 @@
     <i class="fa fa-ticket fa-lg"></i>
      <span>การขายบัตร</span></a>
   </li>
+  <li class="active"><a href="{{ url('/commission') }}">
+    <i class="fa fa-usd fa-lg"></i>
+     <span>ค่าคอมมิชชั่น</span></a>
+  </li>
   </ul>

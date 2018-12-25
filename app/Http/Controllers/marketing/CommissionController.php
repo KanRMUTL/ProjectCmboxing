@@ -63,19 +63,8 @@ class CommissionController extends Controller
 
     private function getCommission($start, $end, $zoneId)
     {
-        if(Auth::user()->role_id == 1)
-        {
-            $data = Sale::commissionForAdmin($start, $end, $zoneId)->get();
-        }
-        else if(Auth::user()->role_id == 2)
-        {
-            $data = Sale::commissionForHead()->get();
-        }
-        else if(Auth::user()->role_id == 3)
-        {
-            $data = Sale::commissionForEmp()->get();
-        }
-        // เพิ่ม ชื่อผู้ใช้  ชื่อบัตร  คำนวณค่าคอมมิดชั่น              
+        $data = Sale::commissionEmployee($start, $end, $zoneId)->get();
+              
         $index = 0;
         foreach ($data as $item) {  
             $data[$index]['commission'] = $this->calculationCommission($item->ticket_id, $item->amount);

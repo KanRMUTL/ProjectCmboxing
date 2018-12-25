@@ -22,7 +22,12 @@ class Sale extends Model
         'guesthouse_id',
         'sale_type'
     ];
+    protected   $roleId;
 
+    public function __construct()
+    {
+        $this->roleId = Auth::user()->role_id;
+    }
     public function ticket()
     {
         return $this->belongsTo('App\marketing\Ticket');
@@ -48,7 +53,7 @@ class Sale extends Model
     }
     public function scopeSaleEmp($query, $start, $end, $zoneId = null)
     {
-        if(Auth::user()->role_id == 1){
+        if($this->roleId == 1){
             return $query
                     ->where([
                         ['zone_id', '=', $zoneId],
@@ -56,12 +61,12 @@ class Sale extends Model
                     ])
                     ->whereBetween('created_at', [$start, $end])
                     ->orderByRaw('created_at DESC') ;
-        }else if(Auth::user()->role_id == 2){
+        }else if($this->roleId == 2){
             return $query
                     ->where('zone_id', '=', $zoneId)
                     ->whereBetween('created_at', [$start, $end])    
                     ->orderByRaw('created_at DESC');
-        }else if(Auth::user()->role_id == 3){
+        }else if($this->roleId == 3){
             return $query
                     ->where('user_id', '=', Auth::user()->id)
                     ->whereBetween('created_at', [$start, $end])
@@ -107,24 +112,23 @@ class Sale extends Model
                 ->groupBy('ticket_id')
                 ->orderBy(DB::raw('SUM(amount)'),'ADSC');
     }
-    public function scopeCommissionForAdmin($query, $before, $after, $zoneId = null)
+    public function scopeCommissionEmployee($query, $before, $after, $zoneId = null)
     {
-        return $query
-                ->select(
-                    'user_id', 
-                    DB::raw('SUM(amount) as amount'), 
-                    'ticket_id',                      
-                    'created_at'
-                )
-                ->where('zone_id', '=', $zoneId)
-                ->whereBetween('created_at', [$before, $after])
-                ->groupBy('ticket_id', 'created_at', 'user_id')
-                ->orderByRaw('created_at DESC');
-    }
-
-    public function scopeCommissionForHead($query)
-    {
-        return $query
+        if($this->roleId == 1){
+            return $query
+                    ->select(
+                        'user_id', 
+                        DB::raw('SUM(amount) as amount'), 
+                        'ticket_id',                      
+                        'created_at'
+                    )
+                    ->where('zone_id', '=', $zoneId)
+                    ->whereBetween('created_at', [$before, $after])
+                    ->groupBy('ticket_id', 'created_at', 'user_id')
+                    ->orderByRaw('created_at DESC');
+        }
+        else if($this->roleId == 2) {
+            return $query
                 ->select(
                     'user_id', 
                     DB::raw('SUM(amount) as amount'), 
@@ -132,22 +136,23 @@ class Sale extends Model
                     'created_at'                        
                 )
                 ->where('zone_id', '=', Auth::user()->zone_id)
+                ->whereBetween('created_at', [$before, $after])
                 ->groupBy('ticket_id', 'created_at', 'user_id')
                 ->orderByRaw('created_at DESC');
-    }
-
-    public function scopeCommissionForEmp($query)
-    {
-        return $query
-                ->select(
-                    'user_id', 
-                    DB::raw('SUM(amount) as amount'), 
-                    'ticket_id',                      
-                    'created_at'
-                )
-                ->where('user_id', '=', Auth::user()->id)
-                ->groupBy('ticket_id', 'created_at', 'user_id')
-                ->orderByRaw('created_at DESC');
+        }
+        else if($this->roleId == 3){
+            return $query
+            ->select(
+                'user_id', 
+                DB::raw('SUM(amount) as amount'), 
+                'ticket_id',                      
+                'created_at'
+            )
+            ->where('user_id', '=', Auth::user()->id)
+            ->whereBetween('created_at', [$before, $after])
+            ->groupBy('ticket_id', 'created_at', 'user_id')
+            ->orderByRaw('created_at DESC');
+        }
     }
 
     public function getVisitAttribute($value)
@@ -156,5 +161,4 @@ class Sale extends Model
         return $visit->format('d/m/Y');
     }
     
-   
 }

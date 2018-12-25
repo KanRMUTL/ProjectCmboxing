@@ -8,16 +8,18 @@
 <div class="row">
   {!! Form::open(['route' => 'commission.search', 'method' => 'POST']) !!}
   {{ Form::token()}}
+    <input type="hidden" name="zoneId" value="{{ auth::user()->zone_id }}">
     <div class="col-md-2 form-group">
     <input type="date" class="form-control" value="{{ $range['start'] }}" name="start">
     </div>
     <div class="col-md-2 form-group">
       <input type="date" class="form-control" value="{{ $range['end'] }}" name="end">
     </div>
+    @if(auth::user()->role_id == 1)
     <div class="col-md-2">
       <select name="zoneId" class="form-control">
         @foreach ($zones as $zone)
-          @if (isset($zoneSelected) && $zone->id == $zoneSelected)
+          @if (isset($zoneSelected) && $zone->id == $zoneSelected   )
             <option value="{{ $zone->id }}" selected>โซน {{ $zone->name }}</option>
             @continue
           @endif
@@ -25,6 +27,7 @@
         @endforeach
       </select>
     </div>
+    @endif
     <div class="col-md-2 form-group">
       <button type="submit" class="btn btn-primary" name="submit">
         <i class="fa fa-search fa-lg"></i>
