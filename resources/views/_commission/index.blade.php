@@ -6,7 +6,7 @@
 @section('content')
 <!-- Button trigger modal -->
 <div class="row">
-  {!! Form::open(['route' => 'sale.search', 'method' => 'POST']) !!}
+  {!! Form::open(['route' => 'commission.search', 'method' => 'POST']) !!}
   {{ Form::token()}}
     <div class="col-md-2 form-group">
     <input type="date" class="form-control" value="{{ $range['start'] }}" name="start">

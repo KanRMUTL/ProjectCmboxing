@@ -13,22 +13,33 @@ use Auth;
 
 class CommissionController extends Controller
 {
+    public $now;
+    public $start;
+    public $end;
+    public $range;
+    public $zone;
+
+
+    public function __construct()
+    {
+        $this->now = Carbon::now();
+        $this->start =  $this->now->startOfWeek()->format('Y-m-d');
+        $this->end = $this->now->endOfWeek()->format('Y-m-d');
+        $this->zones = Zone::all();
+        $this->range = [
+            'start' => $this->start,
+            'end' => $this->end
+        ];
+    }
+
     public function empCommission()
     {
-        $now = Carbon::now();
-        $start =  $now->startOfWeek()->format('Y-m-d');
-        $end = $now->endOfWeek()->format('Y-m-d');
-        $zones = Zone::all();
         $userZone = Auth::user()->zone_id;
-        $data = $this->getCommission($start, $end, $userZone);
-        $range = [
-            'start' => $start,
-            'end' => $end
-        ];
+        $data = $this->getCommission($this->start, $this->end, $userZone);
         return view('_commission.index')
                 ->with('data', $data)
-                ->with('range', $range)
-                ->with('zones', $zones)
+                ->with('range', $this->range)
+                ->with('zones', $this->zones)
                 ->with('zoneSelected', $userZone);
     }
 
@@ -37,7 +48,6 @@ class CommissionController extends Controller
         $start = $request->start;
         $end = $request->end;
         $zoneId = $request->zoneId;
-        $zones = Zone::all();
         $data = $this->getCommission($start, $end, $zoneId);
         $range = [
             'start' => $start,
@@ -48,7 +58,7 @@ class CommissionController extends Controller
                 ->with('data', $data)
                 ->with('range', $range)
                 ->with('zoneSelected', $zoneId)
-                ->with('zones', $zones);
+                ->with('zones', $this->zones);
     }
 
     private function getCommission($start, $end, $zoneId)
@@ -78,10 +88,8 @@ class CommissionController extends Controller
 
     private function calculationCommission($ticketId, $amount)
     {
-
         if($ticketId == 1)  // Grandstand
         {
-            $ticket = Ticket::get();
             if($amount <= 10)
             {
                 return $amount * 20;
@@ -100,7 +108,6 @@ class CommissionController extends Controller
         }
         else if($ticketId == 2)  // RingSide
         {
-            $ticket = Ticket::get();
             if($amount <= 10)
             {
                 return $amount * 20;
@@ -119,7 +126,6 @@ class CommissionController extends Controller
         }
         else if($ticketId == 3)  // VIP
         {
-            $ticket = Ticket::get();
             if($amount <= 10)
             {
                 return $amount * 50;

@@ -10,9 +10,13 @@ use Auth;
 
 class UserController extends Controller
 {
-    //  public function __construct(){
-    //      $this->middleware('admin');
-    //  }
+    private $zones;
+    private $roles;
+    
+    public function __construct(){
+         $this->zones = Zone::all();
+         $this->roles =  Role::where('id', '!=', 1)->get();
+    }
 
    
 
@@ -26,8 +30,8 @@ class UserController extends Controller
 
         $data = [
             'users' => $users,
-            'zones' => Zone::all(),
-            'roles' => Role::where('id', '!=', 1)->get()
+            'zones' => $this->zones,
+            'roles' => $this->roles
         ];
         return view('_user.index',$data);
 
@@ -65,12 +69,11 @@ class UserController extends Controller
     public function edit($id)
     {
        $user = User::find($id);
-        $zones = Zone::get();
-        $roles = Role::get();
+        $zones = $this->zones;
         $data = [
             'user' => $user,
             'zones' => $zones,
-            'roles' => $roles
+            'roles' => $this->roles
         ];
 
         // return $data;
