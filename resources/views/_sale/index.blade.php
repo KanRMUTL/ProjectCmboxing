@@ -127,7 +127,7 @@
       <div class="box">
         <!-- /.box-header -->
         <div class="box-body table-responsive">
-          <table class="table table-hover">
+          <table style="font-size: 120%" style="font-size: 120%" class="table table-hover">
             <tr>
               <th>ชื่อลูกค้า</th>
               <th>เบอร์โทร</th>

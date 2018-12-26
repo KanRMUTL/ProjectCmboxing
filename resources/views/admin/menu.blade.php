@@ -1,5 +1,9 @@
 <ul class="sidebar-menu" data-widget="tree">
     <li class="header">Menu</li>
+    <li class="active"><a href="{{ url('/') }}">
+      <i class="fa fa-dashboard fa-lg"></i>
+       <span>แดชบอร์ด</span></a>
+    </li>
   <li class="active"><a href="{{ url('/user') }}">
     <i class="fa fa-users fa-lg"></i>
      <span>ผู้ใช้งาน</span></a>

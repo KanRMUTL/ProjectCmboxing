@@ -78,20 +78,20 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $ticket = Ticket::find($request->ticketId);
-        $data = [
-            'amount' => $request->amount,
-            'customer_name' => $request->customerName,
-            'customer_phone' => $request->customerPhone,
-            'customer_room' => $request->customerRoom,
-            'guesthouse_id' => $request->guesthouseId,
-            'sale_type' => $request->saleType,
-            'visit' => $request->visitDay,
-            'ticket_id' => $request->ticketId,
-            'user_id' => $request->userId,
-            'zone_id' => $request->zoneId,
-            'total' =>  $ticket['price'] * $request->amount
-        ];
-        Sale::create($data);
+        $sale = new Sale;
+        $sale->amount = $request->amount;
+        $sale->amount = $request->amount;
+        $sale->customer_name = $request->customerName;
+        $sale->customer_phone = $request->customerPhone;
+        $sale->customer_room = $request->customerRoom;
+        $sale->guesthouse_id = $request->guesthouseId;
+        $sale->sale_type = $request->saleType;
+        $sale->visit = $request->visitDay;
+        $sale->ticket_id = $request->ticketId;
+        $sale->user_id = $request->userId;
+        $sale->zone_id = $request->zoneId;
+        $sale->total =  $ticket['price'] * $request->amount;
+        $sale->save();
         return redirect('/saleByEmployee');
     }
   

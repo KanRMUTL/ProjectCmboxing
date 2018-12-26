@@ -64,4 +64,17 @@ class ChartSaleController extends Controller
         }
         return response($sale, 200)->header('Content-Type', 'text/plain');
     }
+
+    public function apiChartAmountCustomer(Request $request)
+    {
+        $before = $request->before;
+        $after  = $request->after; 
+        $sale = Sale::chartAmountCustomer($before, $after)->get();
+        $index = 0;
+        foreach ($sale as $item) {  
+            $sale[$index]['name'] = $item->user->name;
+            $index++;
+        }
+        return response($sale, 200)->header('Content-Type', 'text/plain');
+    }
 } 

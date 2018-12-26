@@ -258,4 +258,64 @@ $('#sale-ticket').click(function () {
   });
 })
 
+// ----------- แบ่งตามจำนวนลูกค้าสำหรับหัวหน้าโซน -------------
+$('#sale-amountcustomer').click(function () {
+  barGraph.destroy();
+  // กำหนดช่วงเวลา
+  var before = $('#before').val()
+  var after = $('#after').val()
+  var time = {
+    before: before,
+    after: after
+  }
 
+  //  CSRF
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  // POST
+  $.ajax({
+    url: '/api/amountcustomer',
+    type: 'GET',
+    data: time,
+    dataType: 'json',
+    success: function (data) {
+      console.log(data)
+      var customer = []
+      var name = []
+      for (var i in data) {
+        customer.push(data[i].customer_amount)
+        name.push(data[i].name)
+      }
+      customer.push(0)
+      chartData = {
+        labels: name,
+        datasets: [
+          {
+            label: 'จำนวนลูกค้า(คน)',
+            backgroundColor: 'rgba(66, 146, 244, 0.6)',
+            borderWidth: 1,
+            borderHoverColor: 'rgba(66, 146, 244, 1)',
+            borderColor: 'rgba(66, 146, 244, 1)',
+            data: customer
+          }
+        ]
+      }
+
+      barGraph = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+          title: {
+            display: true,
+            text: 'ยอดลูกค้าแต่ละโซน',
+            fontSize: 25
+          }
+        }
+      })
+    }
+  });
+})

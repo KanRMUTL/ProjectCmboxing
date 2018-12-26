@@ -3,9 +3,9 @@
 namespace App\marketing;
 
 use Illuminate\Database\Eloquent\Model;
-use Auth;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Auth;
 
 class Sale extends Model
 {
@@ -22,11 +22,17 @@ class Sale extends Model
         'guesthouse_id',
         'sale_type'
     ];
-    protected   $roleId;
+    public   $roleId;
+    public $now;
+    public $startOfWeek;
+    public $endOfWeek;
 
     public function __construct()
     {
         $this->roleId = Auth::user()->role_id;
+        $this->now = Carbon::now();
+        $this->startOfWeek =  $this->now->startOfWeek()->format('Y-m-d');
+        $this->endOfWeek = $this->now->endOfWeek()->format('Y-m-d');
     }
     public function ticket()
     {
@@ -74,6 +80,7 @@ class Sale extends Model
         }
     }
 
+    // ================= Chart ===================
     public function scopeChartWeek($query,$date)
     {
         $now = Carbon::now();
@@ -97,7 +104,7 @@ class Sale extends Model
 
     public function scopeChartZoneCustomer($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
     {
-       return $query
+            return $query
                 ->select('zone_id',DB::raw('COUNT(id) as total'))
                 ->whereBetween('created_at', [$before, $after])
                 ->groupBy('zone_id')
@@ -106,12 +113,35 @@ class Sale extends Model
 
     public function scopeChartTicket($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
     {
-       return $query
+        if($this->roleId == 1) 
+        {
+            return $query
                 ->select('ticket_id',DB::raw('SUM(amount) as total'))
                 ->whereBetween('created_at', [$before, $after])
                 ->groupBy('ticket_id')
                 ->orderBy(DB::raw('SUM(amount)'),'ADSC');
+        }
+        else if($this->roleId == 2)
+        {
+            return $query
+                ->select('ticket_id', DB::raw('SUM(amount) as total'))
+                ->where('zone_id', '=', Auth::user()->zone_id)
+                ->whereBetween('created_at', [$before, $after])
+                ->groupBy('ticket_id')
+                ->orderBy(DB::raw('SUM(amount)'),'ADSC');
+        }
     }
+
+    public function scopeChartAmountCustomer($query, $before, $after)
+    {
+        return $query
+            ->select('user_id',DB::raw('COUNT(id) as customer_amount'))
+            ->where('zone_id', '=', Auth::user()->zone_id)
+            ->whereBetween('created_at', [$before, $after])
+            ->groupBy('user_id')
+            ->orderBy(DB::raw('COUNT(id)'),'ADSC');
+    }
+
     public function scopeCommissionEmployee($query, $before, $after, $zoneId = null)
     {
         if($this->roleId == 1){
