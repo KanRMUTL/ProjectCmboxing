@@ -1,12 +1,12 @@
 
 @extends('layouts.adminlte')
 @section('title','ค่าคอมมิชชั่น')
-@section('header','ข้อมูลค่าคอมมิชชั่น')
+@section('header','ข้อมูลค่าคอมมิชชั่นของไกด์')
 
 @section('content')
 <!-- Button trigger modal -->
 <div class="row">
-  {!! Form::open(['route' => 'commission.search', 'method' => 'POST']) !!}
+  {!! Form::open(['route' => 'empCommission.search', 'method' => 'POST']) !!}
   {{ Form::token()}}
     <input type="hidden" name="zoneId" value="{{ auth::user()->zone_id }}">
     <div class="col-md-2 col-xs-6 form-group">

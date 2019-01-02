@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\marketing\Sale;
 use App\marketing\Ticket;
 use App\marketing\Zone;
+use App\marketing\GuideCommission;
 use Carbon\Carbon;
 use Auth;
 
@@ -35,46 +36,45 @@ class CommissionController extends Controller
     public function empCommission()
     {
         $userZone = Auth::user()->zone_id;
-        $data = $this->getCommission($this->start, $this->end, $userZone);
-        return view('_commission.index')
+        $data = $this->getCommissionOfEmp($this->start, $this->end, $userZone);
+        return view('_commission.emp')
                 ->with('data', $data)
                 ->with('range', $this->range)
                 ->with('zones', $this->zones)
                 ->with('zoneSelected', $userZone);
     }
 
-    public function searchCommission(Request $request)
+    public function searchEmp(Request $request)
     {   
         $start = $request->start;
         $end = $request->end;
         $zoneId = $request->zoneId;
-        $data = $this->getCommission($start, $end, $zoneId);
+        $data = $this->getCommissionOfEmp($start, $end, $zoneId);
         $range = [
             'start' => $start,
             'end' => $end
         ];
 
-        return view('_commission.index')
+        return view('_commission.emp')
                 ->with('data', $data)
                 ->with('range', $range)
                 ->with('zoneSelected', $zoneId)
                 ->with('zones', $this->zones);
     }
 
-    private function getCommission($start, $end, $zoneId)
+    private function getCommissionOfEmp($start, $end, $zoneId)
     {
-        $data = Sale::commissionEmployee($start, $end, $zoneId)->get();
+        $data = Sale::commission($start, $end, $zoneId, 1)->get();
               
-        $index = 0;
-        foreach ($data as $item) {  
+        foreach ($data as $index => $item) {  
             $data[$index]['commission'] = $this->calEmpCommission($item->ticket_id, $item->amount);
             $data[$index]['date_formated'] = Carbon::parse($item->created_at)->format('d/m/Y');
-            $index++;
         }
 
         return $data;
     }
 
+   
     private function calEmpCommission($ticketId, $amount)
     {
         if($ticketId == 1)  // Grandstand
@@ -132,9 +132,31 @@ class CommissionController extends Controller
             }
         }
     }
+    
+    public function guideCommission()
+    {
+        $userZone = Auth::user()->zone_id;
+        $data = $this->getCommissionOfGuide($this->start, $this->end, $userZone);
+        return view('_commission.guide')
+        ->with('data', $data)
+        ->with('range', $this->range)
+        ->with('zones', $this->zones)
+        ->with('zoneSelected', $userZone);
+    }
+
+    private function getCommissionOfGuide($start, $end, $zoneId)
+    {
+        $data = Sale::commission($start, $end, $zoneId, 2)->get();
+        foreach($data as $index => $item){
+            $data[$index]['commission'] = $this->calGuideCommission($item->ticket_id, $item->amount);
+            $data[$index]['date_formated'] = Carbon::parse($item->created_at)->format('d/m/Y');
+        }
+        return $data;
+    }
 
     private function calGuideCommission($ticketId, $amount)
     {
-       
+       $commission = GuideCommission::where('ticket_id', '=', $ticketId)->get();
+       return $commission[0]->commission * $amount;
     }
 }

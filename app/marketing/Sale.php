@@ -22,7 +22,8 @@ class Sale extends Model
         'guesthouse_id',
         'sale_type_id'
     ];
-    public   $roleId;
+    public $timestamps  = false;
+    public  $roleId;
     public $now;
     public $startOfWeek;
     public $endOfWeek;
@@ -61,22 +62,22 @@ class Sale extends Model
     {
         if($this->roleId == 1){
             return $query
-                    ->where([
-                        ['zone_id', '=', $zoneId],
-                        ['sale_type_id', '=', 1]
-                    ])
-                    ->whereBetween('created_at', [$start, $end])
-                    ->orderByRaw('created_at DESC') ;
+                ->where([
+                    ['zone_id', '=', $zoneId],
+                    ['sale_type_id', '=', 1]
+                ])
+                ->whereBetween('created_at', [$start, $end])
+                ->orderByRaw('created_at DESC');
         }else if($this->roleId == 2){
             return $query
-                    ->where('zone_id', '=', $zoneId)
-                    ->whereBetween('created_at', [$start, $end])    
-                    ->orderByRaw('created_at DESC');
+                ->where('zone_id', '=', $zoneId)
+                ->whereBetween('created_at', [$start, $end])
+                ->orderByRaw('created_at DESC');
         }else if($this->roleId == 3){
             return $query
-                    ->where('user_id', '=', Auth::user()->id)
-                    ->whereBetween('created_at', [$start, $end])
-                    ->orderByRaw('created_at DESC');;
+                ->where('user_id', '=', Auth::user()->id)
+                ->whereBetween('created_at', [$start, $end])
+                ->orderByRaw('created_at DESC');
         }
     }
 
@@ -86,29 +87,29 @@ class Sale extends Model
         $now = Carbon::now();
         // $now = Carbon::parse($date); // นำค่า $date ส่งให้ Carbon::class เพื่อเอาไปใช้กับ format()
         return $query
-                ->select('customer_name','total')
-                ->whereBetween('created_at', [
-                    $now->startOfWeek()->format('Y-m-d'),
-                    $now->endOfWeek()->format('Y-m-d'),
-                ]);
+            ->select('customer_name','total')
+            ->whereBetween('created_at', [
+                $now->startOfWeek()->format('Y-m-d'),
+                $now->endOfWeek()->format('Y-m-d'),
+            ]);
     }
 
     public function scopeChartZoneTotal($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
     {
        return $query
-                ->select('zone_id',DB::raw('SUM(total) as total'))
-                ->whereBetween('created_at',[$before, $after])
-                ->groupBy('zone_id')
-                ->orderBy(DB::raw('SUM(total)'),'ADSC');
+            ->select('zone_id',DB::raw('SUM(total) as total'))
+            ->whereBetween('created_at',[$before, $after])
+            ->groupBy('zone_id')
+            ->orderBy(DB::raw('SUM(total)'),'ADSC');
     }
 
     public function scopeChartZoneCustomer($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
     {
-            return $query
-                ->select('zone_id',DB::raw('COUNT(id) as total'))
-                ->whereBetween('created_at', [$before, $after])
-                ->groupBy('zone_id')
-                ->orderBy(DB::raw('COUNT(id)'),'ADSC');
+        return $query
+            ->select('zone_id',DB::raw('COUNT(id) as total'))
+            ->whereBetween('created_at', [$before, $after])
+            ->groupBy('zone_id')
+            ->orderBy(DB::raw('COUNT(id)'),'ADSC');
     }
 
     public function scopeChartTicket($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
@@ -142,20 +143,23 @@ class Sale extends Model
             ->orderBy(DB::raw('COUNT(id)'),'ADSC');
     }
 
-    public function scopeCommissionEmployee($query, $before, $after, $zoneId = null)
+    public function scopeCommission($query, $before, $after, $zoneId = null, $saleId)
     {
         if($this->roleId == 1){
             return $query
-                    ->select(
-                        'user_id', 
-                        DB::raw('SUM(amount) as amount'), 
-                        'ticket_id',                      
-                        'created_at'
-                    )
-                    ->where('zone_id', '=', $zoneId)
-                    ->whereBetween('created_at', [$before, $after])
-                    ->groupBy('ticket_id', 'created_at', 'user_id')
-                    ->orderByRaw('created_at DESC');
+                ->select(
+                    'user_id', 
+                    DB::raw('SUM(amount) as amount'), 
+                    'ticket_id',                      
+                    'created_at'
+                )
+                ->where([
+                    ['zone_id', '=', $zoneId],
+                    ['sale_type_id', '=', $saleId]
+                ])
+                ->whereBetween('created_at', [$before, $after])
+                ->groupBy('ticket_id', 'created_at', 'user_id')
+                ->orderByRaw('created_at DESC');
         }
         else if($this->roleId == 2) {
             return $query
@@ -165,23 +169,29 @@ class Sale extends Model
                     'ticket_id',
                     'created_at'                        
                 )
-                ->where('zone_id', '=', Auth::user()->zone_id)
+                ->where([
+                    ['zone_id', '=', Auth::user()->zone_id],
+                    ['sale_type_id', '=', $saleId]    
+                ])
                 ->whereBetween('created_at', [$before, $after])
                 ->groupBy('ticket_id', 'created_at', 'user_id')
                 ->orderByRaw('created_at DESC');
         }
         else if($this->roleId == 3){
             return $query
-            ->select(
-                'user_id', 
-                DB::raw('SUM(amount) as amount'), 
-                'ticket_id',                      
-                'created_at'
-            )
-            ->where('user_id', '=', Auth::user()->id)
-            ->whereBetween('created_at', [$before, $after])
-            ->groupBy('ticket_id', 'created_at', 'user_id')
-            ->orderByRaw('created_at DESC');
+                ->select(
+                    'user_id', 
+                    DB::raw('SUM(amount) as amount'), 
+                    'ticket_id',                      
+                    'created_at'
+                )
+                ->where([
+                    ['user_id', '=', Auth::user()->id],
+                    ['sale_type_id', '=', $saleId]    
+                ])
+                ->whereBetween('created_at', [$before, $after])
+                ->groupBy('ticket_id', 'created_at', 'user_id')
+                ->orderByRaw('created_at DESC');
         }
     }
 

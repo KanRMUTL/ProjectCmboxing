@@ -5,11 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSalesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('sales', function (Blueprint $table) {
@@ -25,15 +20,10 @@ class CreateSalesTable extends Migration
             $table->smallInteger('zone_id');
             $table->integer('guesthouse_id');
             $table->smallInteger('sale_type_id');
-            $table->date('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::drop('sales');

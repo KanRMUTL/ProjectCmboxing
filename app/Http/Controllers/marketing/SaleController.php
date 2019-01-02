@@ -10,12 +10,14 @@ use App\marketing\Sale;
 use App\marketing\Zone;
 use App\marketing\Ticket;
 use App\marketing\Guesthouse;
+use App\marketing\SaleType;
 use Carbon\Carbon;
 
 class SaleController extends Controller
 {
     protected $tickets;
     protected $zones;
+    protected $saleTypes;
     protected $now;
     protected $range;
     protected $start;
@@ -24,6 +26,7 @@ class SaleController extends Controller
     public function __construct(){
         $this->tickets = Ticket::all();
         $this->zones = Zone::all();
+        $this->saleTypes = SaleType::all();
         $this->now = Carbon::now();
         $this->start =  $this->now->startOfWeek()->format('Y-m-d');
         $this->end = $this->now->endOfWeek()->format('Y-m-d');
@@ -42,6 +45,7 @@ class SaleController extends Controller
             'tickets' => $this->tickets,
             'guesthouses' => $guesthouses,
             'zones' => $this->zones,
+            'saleTypes' => $this->saleTypes,
             'zoneSelected' => $userZone,
             'sales' => $sales,
             'range' => $this->range
@@ -67,6 +71,7 @@ class SaleController extends Controller
             'tickets' => $this->tickets,
             'guesthouses' => $guesthouses,
             'zones' => $this->zones,
+            'saleTypes' => $this->saleTypes,
             'sales' => $sales,
             'range' => $range,
             'zoneSelected' => $zoneId 
@@ -85,7 +90,7 @@ class SaleController extends Controller
         $sale->customer_phone = $request->customerPhone;
         $sale->customer_room = $request->customerRoom;
         $sale->guesthouse_id = $request->guesthouseId;
-        $sale->sale_type_id = $request->saleType;
+        $sale->sale_type_id = $request->saleTypeId;
         $sale->visit = $request->visitDay;
         $sale->ticket_id = $request->ticketId;
         $sale->user_id = $request->userId;

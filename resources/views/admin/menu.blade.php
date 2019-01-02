@@ -35,8 +35,28 @@
     <i class="fa fa-flag fa-lg" style="color: #eaffff"></i>
      <span>รายงานการขาย</span></a>
   </li>
-  <li class="active"><a href="{{ url('/commission') }}">
-    <i class="fa fa-usd fa-lg"></i>
-     <span>ค่าคอมมิชชั่น</span></a>
+
+  <li class="treeview active">
+    <a href="#">
+      <i class="fa fa-usd fa-lg"></i> <span>ค่าคอมมิชชั่น</span>
+      <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+    </a>
+    <ul class="treeview-menu">
+      <li><a href="{{ url('/commissionOfEmp') }}">
+        <i class="fa fa-circle-o"></i>
+         <span>พนักงาน</span></a>
+      </li>
+      <li><a href="{{ url('/commissionOfGuide') }}">
+        <i class="fa fa-circle-o"></i>
+         <span>ไกด์</span></a>
+      </li>
+    </ul>
   </li>
+
+
+
+
+ 
   </ul>

@@ -24,10 +24,12 @@ Route::group(['middleware' =>['auth']], function(){
         Route::get('/ticket','marketing\ChartSaleController@apiTicket'); //รายงานการขายแบ่งตามประเภทบัตร
         Route::get('/amountcustomer','marketing\ChartSaleController@apiChartAmountCustomer'); //รายงานการขายแบ่งตามประเภทบัตร
     });
-    Route::prefix('commission')->group(function(){
-        Route::get('/', 'marketing\CommissionController@empCommission');
-        Route::post('/search', 'marketing\CommissionController@searchCommission')->name('commission.search');
-    });
+    
+        Route::get('/commissionOfEmp', 'marketing\CommissionController@empCommission')->name('empCommission');
+        Route::post('/commissionOfEmp', 'marketing\CommissionController@searchEmp')->name('empCommission.search');
+        Route::get('/commissionOfGuide', 'marketing\CommissionController@guideCommission')->name('guideCommission');
+        Route::post('/commissionOfGuide', 'marketing\CommissionController@searchguide')->name('guidecommission.search');
+    
 
     Route::prefix('pdf')->group(function(){
         Route::get('/', 'PdfController@index');
@@ -35,3 +37,7 @@ Route::group(['middleware' =>['auth']], function(){
 });
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout
+
+Route::get('play', function(){
+    
+});

@@ -19,7 +19,6 @@
       {{ Form::token()}}
       <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
       <input type="hidden" name="zoneId" value="{{ Auth::user()->zone_id }}">
-      <input type="hidden" name="saleType" value="1">
       <div class="modal-body">
         <div class="form-group">
           <label for="customerName">ชื่อ - นามสกุล(ของลูกค้า)</label>
@@ -61,9 +60,9 @@
           <div class="col-md-6 col-sm-12">
             <label for="ticketId">ประเภทการขาย</label>
             <div class="form-group" id="ticketId">
-              <select class="form-control" name="ticketId">
-                @foreach ($tickets as $ticket)
-                <option value="{{ $ticket->id }}">{{ $ticket->name}} ({{ number_format($ticket->price, 2, '.',',') }})</option>
+              <select class="form-control" name="saleTypeId">
+                @foreach ($saleTypes as $saleType)
+                <option value="{{ $saleType->id }}">{{ $saleType->name}}</option>
                 @endforeach
               </select>
             </div>
