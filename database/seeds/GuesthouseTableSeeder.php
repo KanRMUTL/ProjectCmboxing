@@ -13,6 +13,14 @@ class GuesthouseTableSeeder extends Seeder
     {
         $data =[
             [
+                'name' => 'ปางสวนแก้ว Hotel',
+                'zone_id' => 1
+            ],
+            [
+                'name' => 'เกสเฮาส์ช้างเผือก',
+                'zone_id' => 1
+            ],
+            [
                 'name' => 'โรงแรมเมอร์เคียว',
                 'zone_id' => 2
             ],

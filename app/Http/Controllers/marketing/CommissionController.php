@@ -67,7 +67,7 @@ class CommissionController extends Controller
               
         $index = 0;
         foreach ($data as $item) {  
-            $data[$index]['commission'] = $this->calculationCommission($item->ticket_id, $item->amount);
+            $data[$index]['commission'] = $this->calEmpCommission($item->ticket_id, $item->amount);
             $data[$index]['date_formated'] = Carbon::parse($item->created_at)->format('d/m/Y');
             $index++;
         }
@@ -75,7 +75,7 @@ class CommissionController extends Controller
         return $data;
     }
 
-    private function calculationCommission($ticketId, $amount)
+    private function calEmpCommission($ticketId, $amount)
     {
         if($ticketId == 1)  // Grandstand
         {
@@ -131,5 +131,10 @@ class CommissionController extends Controller
                 return $amount * 130;
             }
         }
+    }
+
+    private function calGuideCommission($ticketId, $amount)
+    {
+       
     }
 }

@@ -28,6 +28,10 @@ Route::group(['middleware' =>['auth']], function(){
         Route::get('/', 'marketing\CommissionController@empCommission');
         Route::post('/search', 'marketing\CommissionController@searchCommission')->name('commission.search');
     });
+
+    Route::prefix('pdf')->group(function(){
+        Route::get('/', 'PdfController@index');
+    });
 });
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout

@@ -27,6 +27,10 @@
     <i class="fa fa-edit fa-lg"></i>
      <span>จัดการบัตร</span></a>
   </li>
+  <li class="active"><a href="{{ url('/guesthouse') }}">
+    <i class="fa fa-hotel fa-lg"></i>
+     <span>จัดการเกสเฮาส์</span></a>
+  </li>
   <li class="active"><a href="{{ url('/chart/') }}">
     <i class="fa fa-flag fa-lg" style="color: #eaffff"></i>
      <span>รายงานการขาย</span></a>

@@ -54,6 +54,7 @@
        @endforeach
       </tbody>
     </table>
+    {{ $users->links()}}
           </div><!-- box-body -->
         </div><!-- box-info -->
       </div><!-- col -->

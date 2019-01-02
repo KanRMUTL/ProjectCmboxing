@@ -23,10 +23,10 @@ class UserController extends Controller
     public function index()
     {
         if(Auth()->user()->role_id == 1)
-            $users = User::userForAdmin()->get();
+            $users = User::userForAdmin()->paginate(10);
 
         else
-            $users = User::userForMkhead()->get();
+            $users = User::userForMkhead()->paginate(10);
 
         $data = [
             'users' => $users,
@@ -34,8 +34,6 @@ class UserController extends Controller
             'roles' => $this->roles
         ];
         return view('_user.index',$data);
-
-
     }
 
    

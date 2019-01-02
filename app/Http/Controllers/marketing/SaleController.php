@@ -85,7 +85,7 @@ class SaleController extends Controller
         $sale->customer_phone = $request->customerPhone;
         $sale->customer_room = $request->customerRoom;
         $sale->guesthouse_id = $request->guesthouseId;
-        $sale->sale_type = $request->saleType;
+        $sale->sale_type_id = $request->saleType;
         $sale->visit = $request->visitDay;
         $sale->ticket_id = $request->ticketId;
         $sale->user_id = $request->userId;

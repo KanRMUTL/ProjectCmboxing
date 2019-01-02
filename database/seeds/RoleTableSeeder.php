@@ -12,9 +12,9 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => 'แอดมิน'],
-            ['name' => 'หัวหน้าฝ่ายการตลาด'],
-            ['name' => 'พนักงานฝ่ายการตลาด']
+            ['id' => 1, 'name' => 'แอดมิน'],
+            ['id' => 2, 'name' => 'หัวหน้าฝ่ายการตลาด'],
+            ['id' => 3, 'name' => 'พนักงานฝ่ายการตลาด']
         ];
 
         Role::insert($data);

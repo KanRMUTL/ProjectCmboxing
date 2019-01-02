@@ -80,6 +80,7 @@
               </tr>
             @endforeach
           </table>
+          
         </div>
         <!-- /.box-body -->
       </div>

@@ -55,10 +55,10 @@
       
                 <div class="form-group">
                   <label for="password">รหัสผ่าน</label>
-                  <input type="password" class="form-control" id="password" name="password" placeholder="รหัสผ่าน" value="password">
+                  <input type="password" class="form-control" id="password" name="password" placeholder="รหัสผ่าน" >
                 </div>
                 <div class="form-group">
-                <input type="password" class="form-control"  name="confirm_password" placeholder="ยืนยันรหัสผ่าน" value="password">
+                <input type="password" class="form-control"  name="confirm_password" placeholder="ยืนยันรหัสผ่าน" >
                 </div>
               </div>
               <div class="modal-footer">

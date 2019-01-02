@@ -16,7 +16,7 @@ class CreateGuideCommissionsTable extends Migration
         Schema::create('guide_commissions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('commission');
-            $table->tinyInteger('ticket_id');
+            $table->smallInteger('ticket_id');
         });
     }
 

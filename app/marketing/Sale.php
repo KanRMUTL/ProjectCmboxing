@@ -20,7 +20,7 @@ class Sale extends Model
         'user_id',
         'zone_id',
         'guesthouse_id',
-        'sale_type'
+        'sale_type_id'
     ];
     public   $roleId;
     public $now;
@@ -63,7 +63,7 @@ class Sale extends Model
             return $query
                     ->where([
                         ['zone_id', '=', $zoneId],
-                        ['sale_type', '=', 1]
+                        ['sale_type_id', '=', 1]
                     ])
                     ->whereBetween('created_at', [$start, $end])
                     ->orderByRaw('created_at DESC') ;

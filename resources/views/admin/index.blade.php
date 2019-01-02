@@ -1,6 +1,6 @@
 @extends('layouts.adminlte')
 @section('title','แดชบอร์ด')
-@section('header','แดชบอร์ด')
+@section('header','ข้อมูลรายสัปดาห์')
 @section('content')
 <div class="row">
     <div class="col-lg-3 col-xs-12 ">
