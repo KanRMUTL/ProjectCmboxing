@@ -18,7 +18,7 @@
       </span>
     </a>
     <ul class="treeview-menu">
-      <li><a href="{{ url('/saleByEmployee') }}"><i class="fa fa-circle-o"></i>พนักงาน</a></li>
+      <li><a href="{{ url('/sale/employee') }}"><i class="fa fa-circle-o"></i>พนักงาน</a></li>
       <li><a href="{{ url('/sale/guide') }}"><i class="fa fa-circle-o"></i>ไกด์</a></li>
     </ul>
   </li>  

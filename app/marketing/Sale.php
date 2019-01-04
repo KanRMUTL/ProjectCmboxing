@@ -58,25 +58,25 @@ class Sale extends Model
     {
         return $this->belongsTo('App\marketing\Zone');
     }
-    public function scopeSaleEmp($query, $start, $end, $zoneId = null)
+    public function scopeSaleDetail($query, $before, $after, $zoneId = null, $saleType = null)
     {
         if($this->roleId == 1){
             return $query
                 ->where([
                     ['zone_id', '=', $zoneId],
-                    ['sale_type_id', '=', 1]
+                    ['sale_type_id', '=', $saleType]
                 ])
-                ->whereBetween('created_at', [$start, $end])
+                ->whereBetween('created_at', [$before, $after])
                 ->orderByRaw('created_at DESC');
         }else if($this->roleId == 2){
             return $query
                 ->where('zone_id', '=', $zoneId)
-                ->whereBetween('created_at', [$start, $end])
+                ->whereBetween('created_at', [$before, $after])
                 ->orderByRaw('created_at DESC');
         }else if($this->roleId == 3){
             return $query
                 ->where('user_id', '=', Auth::user()->id)
-                ->whereBetween('created_at', [$start, $end])
+                ->whereBetween('created_at', [$before, $after])
                 ->orderByRaw('created_at DESC');
         }
     }
@@ -143,7 +143,7 @@ class Sale extends Model
             ->orderBy(DB::raw('COUNT(id)'),'ADSC');
     }
 
-    public function scopeCommission($query, $before, $after, $zoneId = null, $saleId)
+    public function scopeCommission($query, $before, $after, $zoneId = null, $saleTypeId)
     {
         if($this->roleId == 1){
             return $query
@@ -155,7 +155,7 @@ class Sale extends Model
                 )
                 ->where([
                     ['zone_id', '=', $zoneId],
-                    ['sale_type_id', '=', $saleId]
+                    ['sale_type_id', '=', $saleTypeId]
                 ])
                 ->whereBetween('created_at', [$before, $after])
                 ->groupBy('ticket_id', 'created_at', 'user_id')

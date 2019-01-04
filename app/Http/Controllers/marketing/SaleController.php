@@ -36,11 +36,13 @@ class SaleController extends Controller
         ];
     }
 
-    public function getByEmployee()
+    public function index($saleTypeName)
     {       
+        $dataForSaleType = $this->setDataForSaleType($saleTypeName);
+        $saleTypeId = $saleTypeName == 'employee'? 1 : 2;
         $guesthouses = Guesthouse::forSale()->get();
         $userZone = Auth::user()->zone_id;
-        $sales = Sale::saleEmp($this->start, $this->end, $userZone)->get();
+        $sales = Sale::saleDetail($this->start, $this->end, $userZone, $saleTypeId)->get();
         $data = [
             'tickets' => $this->tickets,
             'guesthouses' => $guesthouses,
@@ -48,14 +50,17 @@ class SaleController extends Controller
             'saleTypes' => $this->saleTypes,
             'zoneSelected' => $userZone,
             'sales' => $sales,
-            'range' => $this->range
+            'range' => $this->range,
+            'url' => $dataForSaleType['url'],
+            'header' => $dataForSaleType['header'],
         ];
-        
-        return view('_sale.by_employee', $data);
+            return view('_sale.index', $data);
     }
-    
-    public function searchByEmployee(Request $request)
+        
+    public function search(Request $request, $saleTypeName)
     {
+        $dataForSaleType = $this->setDataForSaleType($saleTypeName);
+        $saleTypeId = $saleTypeName == 'employee'? 1 : 2;
         $start = $request->start;
         $end = $request->end;
         $zoneId = $request->zoneId;
@@ -64,7 +69,7 @@ class SaleController extends Controller
             'end' => $end
         ];
         
-        $sales = Sale::saleEmp($start, $end, $zoneId)->get();
+        $sales = Sale::saleDetail($start, $end, $zoneId, $saleTypeId)->get();
         $guesthouses = Guesthouse::forSale()->get();
 
         $data = [
@@ -74,12 +79,14 @@ class SaleController extends Controller
             'saleTypes' => $this->saleTypes,
             'sales' => $sales,
             'range' => $range,
+            'url' => $dataForSaleType['url'],
+            'header' => $dataForSaleType['header'],
             'zoneSelected' => $zoneId 
         ];
 
-        return view('_sale.by_employee', $data);
+        return view('_sale.index', $data);
     }
-   
+
     public function store(Request $request)
     {
         $ticket = Ticket::find($request->ticketId);
@@ -96,8 +103,12 @@ class SaleController extends Controller
         $sale->user_id = $request->userId;
         $sale->zone_id = $request->zoneId;
         $sale->total =  $ticket['price'] * $request->amount;
+        $sale->created_at = now();
         $sale->save();
-        return redirect('/saleByEmployee');
+
+        $url = $this->changeRedirect($sale->sale_type_id);
+        return redirect($url);
+        
     }
   
     public function edit($id)
@@ -110,6 +121,7 @@ class SaleController extends Controller
             'sale' => $sale,
             'tickets' => $this->tickets,
             'guesthouses' => $guesthouses,
+            'saleTypes' => $this->saleTypes,
             'visit' => $visit->format('Y-m-d') // set ให้กำหนด input[type=date] ได้
         ];
         return view('_sale.edit',$data);
@@ -128,11 +140,13 @@ class SaleController extends Controller
             'visit' => $request->visitDay,
             'ticket_id' => $request->ticketId,
             'user_id' => $request->userId,
+            'sale_type_id' => $request->saleTypeId,
             'total' =>  $ticket['price'] * $request->amount
         ];
         
         Sale::find($id)->update($data);
-        return redirect('/saleByEmployee');
+        $url = $this->changeRedirect($data['sale_type_id']);
+        return redirect($url);
     }
 
   
@@ -140,6 +154,33 @@ class SaleController extends Controller
     {
         $user = Sale::find($id);
         $user->delete();
-        return redirect('/saleByEmployee');
+        $url = $this->changeRedirect($user->sale_type_id);    
+        return redirect($url);
+    }
+
+    public function changeRedirect($saleTypeId)
+    {
+        if($saleTypeId == 1){
+             return '/sale/employee';
+        }
+        return 'sale/guide';
+    }
+
+    public function setDataForSaleType($saleTypeName)
+    {
+        if($saleTypeName == 'employee'){
+            $data = [
+                'url' => '/sale/employee',
+                'header' => 'ข้อมูลการขายบัตรของพนักงาน',
+                'saleTypeId' => 1
+            ];
+        } else if($saleTypeName == 'guide') {
+            $data = [
+                'url' => '/sale/guide',
+                'header' => 'ข้อมูลการขายบัตรของไกด์',
+                'saleTypeId' => 2
+            ];
+        }
+        return $data;
     }
 }

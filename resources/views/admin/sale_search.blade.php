@@ -1,4 +1,4 @@
-{!! Form::open(['route' => 'searchSaleByEmp', 'method' => 'POST']) !!}
+{!! Form::open(['url' => $url, 'method' => 'POST']) !!}
     {{ Form::token()}}
       <div class="col-md-2 col-xs-6 form-group">
         <input type="date" class="form-control" value="{{ $range['start'] }}" name="start">

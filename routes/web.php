@@ -5,14 +5,19 @@ Route::auth();
 Route::group(['middleware' =>['auth']], function(){
     Route::get('/', 'PageController@index');
     Route::resource('user', 'UserController');
-    Route::resource('sale', 'marketing\SaleController');
     Route::resource('ticket', 'marketing\TicketController');
     
+   
     // ข้อมูลการขายของพนักงานกับไกด์
-    Route::get('/saleByEmployee', 'marketing\SaleController@getByEmployee')->name('getSaleByEmp');
-    Route::post('/saleByEmployee', 'marketing\SaleController@searchByEmployee')->name('searchSaleByEmp');
-    Route::post('/saleByGuide', 'marketing\SaleController@searchByEmployee')->name('getSaleByEmp');
-    
+    Route::prefix('sale')->group(function(){
+        Route::get('/{saleTypeName}', 'marketing\SaleController@index')->name('sale.index'); 
+        Route::post('/{saleTypeName}', 'marketing\SaleController@search')->name('sale.search'); // ค้นหา
+        Route::post('/sale', 'marketing\SaleController@store')->name('sale.store');
+        Route::match(['put', 'patch'], '/update/{id}', 'marketing\SaleController@update')->name('sale.update');
+        Route::delete('/{id}', 'marketing\SaleController@destroy')->name('sale.destroy');
+        Route::get('/{id}/edit', 'marketing\SaleController@edit')->name('sale.edit');
+    });
+
 
     Route::prefix('chart')->group(function(){
         Route::get('/', 'marketing\ChartSaleController@index');

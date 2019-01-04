@@ -1,7 +1,7 @@
 
 @extends('layouts.adminlte')
 @section('title','ข้อมูลการขายบัตร')
-@section('header','ข้อมูลการขายบัตรของพนักงาน')
+@section('header', $header)
 
 @section('content')
 
