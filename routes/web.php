@@ -12,7 +12,7 @@ Route::group(['middleware' =>['auth']], function(){
     Route::prefix('sale')->group(function(){
         Route::get('/{saleTypeName}', 'marketing\SaleController@index')->name('sale.index'); 
         Route::post('/{saleTypeName}', 'marketing\SaleController@search')->name('sale.search'); // ค้นหา
-        Route::post('/sale', 'marketing\SaleController@store')->name('sale.store');
+        Route::post('/', 'marketing\SaleController@store')->name('sale.store');
         Route::match(['put', 'patch'], '/update/{id}', 'marketing\SaleController@update')->name('sale.update');
         Route::delete('/{id}', 'marketing\SaleController@destroy')->name('sale.destroy');
         Route::get('/{id}/edit', 'marketing\SaleController@edit')->name('sale.edit');
@@ -43,6 +43,4 @@ Route::group(['middleware' =>['auth']], function(){
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout
 
-Route::get('play', function(){
-    
-});
+Route::get('play', 'marketing\IncomeController@income');

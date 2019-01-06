@@ -11,26 +11,13 @@ use App\marketing\Zone;
 use App\marketing\GuideCommission;
 use Carbon\Carbon;
 use Auth;
+use App\Http\Controllers\marketing\StarterController;
 
-class CommissionController extends Controller
+class CommissionController extends StarterController
 {
-    public $now;
-    public $start;
-    public $end;
-    public $range;
-    public $zone;
-
-
     public function __construct()
     {
-        $this->now = Carbon::now();
-        $this->start =  $this->now->startOfWeek()->format('Y-m-d');
-        $this->end = $this->now->endOfWeek()->format('Y-m-d');
-        $this->zones = Zone::all();
-        $this->range = [
-            'start' => $this->start,
-            'end' => $this->end
-        ];
+       parent::__construct();        
     }
 
     public function empCommission()

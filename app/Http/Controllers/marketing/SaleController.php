@@ -12,34 +12,17 @@ use App\marketing\Ticket;
 use App\marketing\Guesthouse;
 use App\marketing\SaleType;
 use Carbon\Carbon;
-
-class SaleController extends Controller
+use App\Http\Controllers\marketing\StarterController;
+class SaleController extends StarterController
 {
-    protected $tickets;
-    protected $zones;
-    protected $saleTypes;
-    protected $now;
-    protected $range;
-    protected $start;
-    protected $end;
-
     public function __construct(){
-        $this->tickets = Ticket::all();
-        $this->zones = Zone::all();
-        $this->saleTypes = SaleType::all();
-        $this->now = Carbon::now();
-        $this->start =  $this->now->startOfWeek()->format('Y-m-d');
-        $this->end = $this->now->endOfWeek()->format('Y-m-d');
-        $this->range = [
-            'start' => $this->start,
-            'end' => $this->end
-        ];
+       parent::__construct();
     }
 
     public function index($saleTypeName)
     {       
         $dataForSaleType = $this->setDataForSaleType($saleTypeName);
-        $saleTypeId = $saleTypeName == 'employee'? 1 : 2;
+        $saleTypeId = $this->saleTypeUrl[$saleTypeName];
         $guesthouses = Guesthouse::forSale()->get();
         $userZone = Auth::user()->zone_id;
         $sales = Sale::saleDetail($this->start, $this->end, $userZone, $saleTypeId)->get();
@@ -60,7 +43,7 @@ class SaleController extends Controller
     public function search(Request $request, $saleTypeName)
     {
         $dataForSaleType = $this->setDataForSaleType($saleTypeName);
-        $saleTypeId = $saleTypeName == 'employee'? 1 : 2;
+        $saleTypeId = $this->saleTypeUrl[$saleTypeName];
         $start = $request->start;
         $end = $request->end;
         $zoneId = $request->zoneId;
@@ -108,7 +91,6 @@ class SaleController extends Controller
 
         $url = $this->changeRedirect($sale->sale_type_id);
         return redirect($url);
-        
     }
   
     public function edit($id)
@@ -158,29 +140,4 @@ class SaleController extends Controller
         return redirect($url);
     }
 
-    public function changeRedirect($saleTypeId)
-    {
-        if($saleTypeId == 1){
-             return '/sale/employee';
-        }
-        return 'sale/guide';
-    }
-
-    public function setDataForSaleType($saleTypeName)
-    {
-        if($saleTypeName == 'employee'){
-            $data = [
-                'url' => '/sale/employee',
-                'header' => 'ข้อมูลการขายบัตรของพนักงาน',
-                'saleTypeId' => 1
-            ];
-        } else if($saleTypeName == 'guide') {
-            $data = [
-                'url' => '/sale/guide',
-                'header' => 'ข้อมูลการขายบัตรของไกด์',
-                'saleTypeId' => 2
-            ];
-        }
-        return $data;
-    }
 }
