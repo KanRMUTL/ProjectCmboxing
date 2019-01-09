@@ -29,11 +29,10 @@ class ChartSaleController extends StarterController
     {
         $before = $request->before;
         $after  = $request->after; 
-        $sale =  Chart::chartZoneTotal($before, $after)->get();
+        $sale =  Chart::ZoneTotal($before, $after)->get();
         
-        $index = 0;
-        foreach ($sale as $item) {  
-            $sale[$index]['zone_name'] = $item->zone->name;
+        foreach ($sale as $index => $item) {  
+            $sale[$index]['label'] = $item->zone->name;
             $index++;
         }
         return response($sale, 200)->header('Content-Type', 'text/plain');
@@ -43,10 +42,10 @@ class ChartSaleController extends StarterController
     {
         $before = $request->before;
         $after  = $request->after; 
-        $sale = Chart::ChartZoneCustomer($before, $after)->get();
-        $index = 0;
-        foreach ($sale as $item) {  
-            $sale[$index]['zone_name'] = $item->zone->name;
+        $sale = Chart::ZoneCustomer($before, $after)->get();
+       
+        foreach ($sale as $index => $item) {  
+            $sale[$index]['label'] = $item->zone->name;
             $index++;
         }
         return response($sale, 200)->header('Content-Type', 'text/plain');
@@ -56,10 +55,10 @@ class ChartSaleController extends StarterController
     {
         $before = $request->before;
         $after  = $request->after; 
-        $sale = Chart::chartTicket($before, $after)->get();
-        $index = 0;
-        foreach ($sale as $item) {  
-            $sale[$index]['ticket_name'] = $item->ticket->name;
+        $sale = Chart::saleTicket($before, $after)->get();
+        
+        foreach ($sale as $index => $item) {  
+            $sale[$index]['label'] = $item->ticket->name;
             $index++;
         }
         return response($sale, 200)->header('Content-Type', 'text/plain');
@@ -69,10 +68,10 @@ class ChartSaleController extends StarterController
     {
         $before = $request->before;
         $after  = $request->after; 
-        $sale = Chart::chartAmountCustomer($before, $after)->get();
-        $index = 0;
-        foreach ($sale as $item) {  
-            $sale[$index]['name'] = $item->user->name;
+        $sale = Chart::AmountCustomer($before, $after)->get();
+        
+        foreach ($sale as $index => $item) {  
+            $sale[$index]['label'] = $item->user->name;
             $index++;
         }
         return response($sale, 200)->header('Content-Type', 'text/plain');

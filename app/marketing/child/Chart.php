@@ -23,7 +23,7 @@ class Chart extends Sale
             ]);
     }
 
-    public function scopeChartZoneTotal($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
+    public function scopeZoneTotal($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
     {
        return $query
             ->select('zone_id',DB::raw('SUM(total) as total'))
@@ -32,7 +32,7 @@ class Chart extends Sale
             ->orderBy(DB::raw('SUM(total)'),'ADSC');
     }
 
-    public function scopeChartZoneCustomer($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
+    public function scopeZoneCustomer($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
     {
         return $query
             ->select('zone_id',DB::raw('COUNT(id) as total'))
@@ -41,7 +41,7 @@ class Chart extends Sale
             ->orderBy(DB::raw('COUNT(id)'),'ADSC');
     }
 
-    public function scopeChartTicket($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
+    public function scopeSaleTicket($query, $before, $after)  // หารายได้ของแต่ละโซนรวมกันทั้งหมดเรียงจากมากไปน้อย
     {
         if($this->roleId == 1) 
         {
@@ -62,10 +62,10 @@ class Chart extends Sale
         }
     }
 
-    public function scopeChartAmountCustomer($query, $before, $after)
+    public function scopeAmountCustomer($query, $before, $after)
     {
         return $query
-            ->select('user_id',DB::raw('COUNT(id) as customer_amount'))
+            ->select('user_id',DB::raw('COUNT(id) as total'))
             ->where('zone_id', '=', Auth::user()->zone_id)
             ->whereBetween('created_at', [$before, $after])
             ->groupBy('user_id')

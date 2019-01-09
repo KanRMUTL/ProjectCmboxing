@@ -1,50 +1,27 @@
 var ctx = $('.canvas');
 var barGraph = []
-var chartData = []
 
 // ----------------- Chart Start ------------------
-  // กำหนดช่วงเวลา
-  var before = $('#before').val()
-  var after = $('#after').val()
-  var time = {
-    before: before,
-    after: after
-  }
+// กำหนดช่วงเวลา
+var before = $('#before').val()
+var after = $('#after').val()
+var url = '/api/total'
+var time = {
+  before: before,
+  after: after
+}
 
-  //  CSRF
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
+getChart('/api/total', 'ยอดขาย(บาท)', 'ยอดขายของแต่ละโซน')
 
-  // POST
+function getChart(url, barName, header) {
+
   $.ajax({
-    url: '/api/total',
+    url: url,
     type: 'GET',
     data: time,
     dataType: 'json',
     success: function (data) {
-      var total = []
-      var zone_name = []
-      for (var i in data) {
-        total.push(data[i].total)
-        zone_name.push(data[i].zone_name)
-      }
-      total.push(0)
-      chartData = {
-        labels: zone_name,
-        datasets: [
-          {
-            label: 'ยอดขายที่ผ่านมา',
-            backgroundColor: 'rgba(255, 99, 132, 0.6)',
-            borderWidth: 1,
-            borderHoverColor: 'rgba(255, 99, 132, 1)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            data: total
-          }
-        ]
-      }
+      chartData = pushData(data, barName)
 
       barGraph = new Chart(ctx, {
         type: 'bar',
@@ -53,7 +30,7 @@ var chartData = []
         options: {
           title: {
             display: true,
-            text: 'ยอดลูกค้าแต่ละโซน',
+            text: header,
             fontSize: 25
           },
           scales: {
@@ -66,133 +43,56 @@ var chartData = []
     }
   });
 
+}
+
+function pushData(data, barName) {
+  var total = []
+  var label = []
+  for (var i in data) {
+    total.push(data[i].total)
+    label.push(data[i].label)
+  }
+  total.push(0)
+  chartData = {
+    labels: label,
+    datasets: [
+      {
+        label: barName,
+        backgroundColor: 'rgba(66, 146, 244, 0.6)',
+        borderWidth: 1,
+        borderHoverColor: 'rgba(66, 146, 244, 1)',
+        borderColor: 'rgba(66, 146, 244, 1)',
+        data: total
+      }
+    ]
+  }
+  return chartData
+}
 
 // ----------- แบ่งตามยอดขาย -------------
 $('#sale-total').click(function () {
   barGraph.destroy();
   // กำหนดช่วงเวลา
-  var before = $('#before').val()
-  var after = $('#after').val()
-  var time = {
+  before = $('#before').val()
+  after = $('#after').val()
+  time = {
     before: before,
     after: after
   }
-
-  //  CSRF
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-
-  // POST
-  $.ajax({
-    url: '/api/total',
-    type: 'GET',
-    data: time,
-    dataType: 'json',
-    success: function (data) {
-      var total = []
-      var zone_name = []
-      for (var i in data) {
-        total.push(data[i].total)
-        zone_name.push(data[i].zone_name)
-      }
-      total.push(0)
-      chartData = {
-        labels: zone_name,
-        datasets: [
-          {
-            label: 'ยอดขายที่ผ่านมา',
-            backgroundColor: 'rgba(255, 99, 132, 0.6)',
-            borderWidth: 1,
-            borderHoverColor: 'rgba(255, 99, 132, 1)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            data: total
-          }
-        ]
-      }
-
-      barGraph = new Chart(ctx, {
-        type: 'bar',
-        responsive: true,
-        data: chartData,
-        options: {
-          title: {
-            display: true,
-            text: 'ยอดขายของแต่ละโซน',
-            fontSize: 25
-          },
-          scales: {
-            yAxes: [{
-              labelString: 'y'
-            }]
-          }
-        }
-      })
-    }
-  });
+  getChart('/api/total', 'ยอดขาย(บาท)', 'ยอดขายของแต่ละโซน')
 })
 
 // ----------- แบ่งตามจำนวนลูกค้า -------------
 $('#sale-amount').click(function () {
   barGraph.destroy();
   // กำหนดช่วงเวลา
-  var before = $('#before').val()
-  var after = $('#after').val()
-  var time = {
+  before = $('#before').val()
+  after = $('#after').val()
+  time = {
     before: before,
     after: after
   }
-
-  //  CSRF
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-
-  // POST
-  $.ajax({
-    url: '/api/customer',
-    type: 'GET',
-    data: time,
-    dataType: 'json',
-    success: function (data) {
-      var total = []
-      var zone_name = []
-      for (var i in data) {
-        total.push(data[i].total)
-        zone_name.push(data[i].zone_name)
-      }
-      total.push(0)
-      chartData = {
-        labels: zone_name,
-        datasets: [
-          {
-            label: 'จำนวนลูกค้า(คน)',
-            backgroundColor: 'rgba(66, 146, 244, 0.6)',
-            borderWidth: 1,
-            borderHoverColor: 'rgba(66, 146, 244, 1)',
-            borderColor: 'rgba(66, 146, 244, 1)',
-            data: total
-          }
-        ]
-      }
-
-      barGraph = new Chart(ctx, {
-        type: 'bar',
-        data: chartData,
-        options: {
-          title: {
-            display: true,
-            text: 'ยอดลูกค้าแต่ละโซน',
-            fontSize: 25
-          }
-        }
-      })
-    }
-  });
+  getChart('/api/customer', 'จำนวนลูกค้า(คน)', 'ยอดลูกค้าแต่ละโซน')
 })
 
 
@@ -206,116 +106,18 @@ $('#sale-ticket').click(function () {
     before: before,
     after: after
   }
-
-  //  CSRF
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-
-  // POST
-  $.ajax({
-    url: '/api/ticket',
-    type: 'GET',
-    data: time,
-    dataType: 'json',
-    success: function (data) {
-      var total = []
-      var ticket_name = []
-      for (var i in data) {
-        total.push(data[i].total)
-        ticket_name.push(data[i].ticket_name)
-      }
-      total.push(0)
-      chartData = {
-        labels: ticket_name,
-        datasets: [
-          {
-            label: 'จำนวนบัตรที่ขายได้ ',
-            backgroundColor: 'rgba(66, 146, 244, 0.6)',
-            borderWidth: 1,
-            borderHoverColor: 'rgba(66, 146, 244, 1)',
-            borderColor: 'rgba(66, 146, 244, 1)',
-            data: total
-          }
-        ]
-      }
-
-
-      barGraph = new Chart(ctx, {
-        type: 'bar',
-        data: chartData,
-        options: {
-          title: {
-            display: true,
-            text: 'ยอดขายแบ่งตามประเภทบัตร',
-            fontSize: 25
-          }
-        }
-      })
-    }
-  });
+  getChart('/api/ticket', 'จำนวนบัตรที่ขายได้(ใบ)', 'ยอดขายแบ่งตามประเภทบัตร')
 })
 
 // ----------- แบ่งตามจำนวนลูกค้าสำหรับหัวหน้าโซน -------------
 $('#sale-amountcustomer').click(function () {
   barGraph.destroy();
   // กำหนดช่วงเวลา
-  var before = $('#before').val()
-  var after = $('#after').val()
-  var time = {
+  before = $('#before').val()
+  after = $('#after').val()
+  time = {
     before: before,
     after: after
   }
-
-  //  CSRF
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-
-  // POST
-  $.ajax({
-    url: '/api/amountcustomer',
-    type: 'GET',
-    data: time,
-    dataType: 'json',
-    success: function (data) {
-      console.log(data)
-      var customer = []
-      var name = []
-      for (var i in data) {
-        customer.push(data[i].customer_amount)
-        name.push(data[i].name)
-      }
-      customer.push(0)
-      chartData = {
-        labels: name,
-        datasets: [
-          {
-            label: 'จำนวนลูกค้า(คน)',
-            backgroundColor: 'rgba(66, 146, 244, 0.6)',
-            borderWidth: 1,
-            borderHoverColor: 'rgba(66, 146, 244, 1)',
-            borderColor: 'rgba(66, 146, 244, 1)',
-            data: customer
-          }
-        ]
-      }
-
-      barGraph = new Chart(ctx, {
-        type: 'bar',
-        data: chartData,
-        options: {
-          title: {
-            display: true,
-            text: 'ยอดลูกค้าแต่ละโซน',
-            fontSize: 25
-          }
-        }
-      })
-    }
-  });
+  getChart('/api/amountcustomer', 'จำนวนลูกค้า(คน)', 'ยอดลูกค้าแต่ละโซน')
 })
