@@ -59,6 +59,11 @@ class Sale extends Model
     {
         return $this->belongsTo('App\marketing\Zone');
     }
+
+    public function saleType()
+    {
+        return $this->belongsTo('App\marketing\SaleType');
+    }
     public function scopeSaleDetail($query, $before, $after, $zoneId = null, $saleType = null)
     {
         if($this->roleId == 1){

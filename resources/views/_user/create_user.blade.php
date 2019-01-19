@@ -3,7 +3,9 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
         <i class="fa fa-lg fa-user-plus"></i> เพิ่มผู้ใช้
       </button>
-        
+      @foreach ($errors->all() as $message)
+      <p class="text-red"> {{ $message }}</p>
+    @endforeach
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
@@ -17,7 +19,7 @@
               <div class="modal-body">
                 <div class="form-group">
                   <label for="name">ชื่อ</label>
-                  <input type="text" class="form-control" id="name" name="name" placeholder="ชื่อ - นามสกุล"  value="">
+                  <input type="text" class="form-control" id="name" name="names" placeholder="ชื่อ - นามสกุล"  value="">
                 </div>
                 <div class="form-group">
                   <label for="username">Username</label>
@@ -32,7 +34,6 @@
                 <label for="role">ตำแหน่ง</label>
                 <div class="form-group" id="role">
                   <select class="form-control" name="role">
-                 
                     <option disabled selected>เลือกตำแหน่ง</option>
                     @foreach ($roles as $role)
                     <option value="{{ $role->id }}">{{ $role->name}}</option>

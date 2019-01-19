@@ -10,4 +10,9 @@ class SaleType extends Model
     protected $fillable =[
         'name', 'id'
     ];
+
+    public function sale()
+    {
+        return $this->hasMany('App\marketing\Sale');
+    }
 }

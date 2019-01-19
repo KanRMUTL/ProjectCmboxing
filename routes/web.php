@@ -29,7 +29,8 @@ Route::group(['middleware' =>['auth']], function(){
         Route::get('/ticket','marketing\ChartSaleController@apiTicket'); //รายงานการขายแบ่งตามประเภทบัตร
         Route::get('/amountcustomer','marketing\ChartSaleController@apiChartAmountCustomer'); //รายงานการขายแบ่งตามประเภทบัตร
     });
-    
+
+        Route::get('/income', 'marketing\IncomeController@income')->name('income.income');
         Route::get('/commissionOfEmp', 'marketing\CommissionController@empCommission')->name('empCommission');
         Route::post('/commissionOfEmp', 'marketing\CommissionController@searchEmp')->name('empCommission.search');
         Route::get('/commissionOfGuide', 'marketing\CommissionController@guideCommission')->name('guideCommission');

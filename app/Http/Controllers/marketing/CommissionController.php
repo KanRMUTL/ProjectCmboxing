@@ -62,7 +62,7 @@ class CommissionController extends StarterController
     }
 
    
-    private function calEmpCommission($ticketId, $amount)
+    public static function calEmpCommission($ticketId, $amount)
     {
         if($ticketId == 1)  // Grandstand
         {
@@ -131,7 +131,7 @@ class CommissionController extends StarterController
         ->with('zoneSelected', $userZone);
     }
 
-    private function getCommissionOfGuide($start, $end, $zoneId)
+    public function getCommissionOfGuide($start, $end, $zoneId)
     {
         $data = Sale::commission($start, $end, $zoneId, 2)->get();
         foreach($data as $index => $item){
@@ -141,7 +141,7 @@ class CommissionController extends StarterController
         return $data;
     }
 
-    private function calGuideCommission($ticketId, $amount)
+    public static function calGuideCommission($ticketId, $amount)
     {
        $commission = GuideCommission::where('ticket_id', '=', $ticketId)->get();
        return $commission[0]->commission * $amount;
