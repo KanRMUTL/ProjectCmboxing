@@ -4,69 +4,86 @@ use Illuminate\Database\Seeder;
 use App\User;
 class UserTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+    
     public function run()
     {
         $data = [
             [
-                'name' => 'Admin Admin',
+                'id' => 1,
+                'firstname' => 'Admin',
+                'lastname' => 'CMBoxing',
                 'username' => 'Admin',
                 'email' => 'admin@localhost.com',
+                'phone_number' => '0841753818',
+                'address' => '6/2 ม.5 ต.ช้างเผือก อ.เมือง จ.เชียงใหม่',
                 'password' => bcrypt('1234'),
-                'role_id' => 1,
-                'zone_id' => 1
+                'role' => 1,
             ],
             [
-                'name' => 'หัวหน้าโซน A',
+                'id' => 2,
+                'firstname' => 'หัวหน้าโซน A',
+                'lastname' => 'CMBoxing',
                 'username' => 'headA',
                 'email' => 'headA@localhost.com',
+                'phone_number' => '0841753818',
+                'address' => '6/2 ม.5 ต.ช้างเผือก อ.เมือง จ.เชียงใหม่',
                 'password' => bcrypt('1234'),
-                'role_id' => 2,
-                'zone_id' => 2
+                'role' => 2,
             ],
             [
-                'name' => 'หัวหน้าโซน B',
+                'id' => 3,
+                'firstname' => 'หัวหน้าโซน B',
+                'lastname' => 'CMBoxing',
                 'username' => 'headB',
                 'email' => 'headB@localhost.com',
+                'phone_number' => '0841753818',
+                'address' => '6/2 ม.5 ต.ช้างเผือก อ.เมือง จ.เชียงใหม่',
                 'password' => bcrypt('1234'),
-                'role_id' => 2,
-                'zone_id' => 3
+                'role' => 2,
             ],
             [
-                'name' => 'พนักงานโซน A',
+                'id' => 4,
+                'firstname' => 'พนักงานโซน A',
+                'lastname' => 'CMBoxing',
                 'username' => 'empA',
                 'email' => 'empA@localhost.com',
+                'phone_number' => '0841753818',
+                'address' => '6/2 ม.5 ต.ช้างเผือก อ.เมือง จ.เชียงใหม่',
                 'password' => bcrypt('1234'),
-                'role_id' => 3,
-                'zone_id' => 2
+                'role' => 3,
             ],
             [
-                'name' => 'พนักงานโซน B',
+                'id' => 5,
+                'firstname' => 'พนักงานโซน B',
+                'lastname' => 'CMBoxing',
                 'username' => 'empB',
                 'email' => 'empB@localhost.com',
+                'phone_number' => '0841753818',
+                'address' => '6/2 ม.5 ต.ช้างเผือก อ.เมือง จ.เชียงใหม่',
                 'password' => bcrypt('1234'),
-                'role_id' => 3,
-                'zone_id' => 3
+                'role' => 3,
             ],
             [
-                'name' => 'หัวหน้าโซน C',
+                'id' => 6,
+                'firstname' => 'หัวหน้าโซน C',
+                'lastname' => 'CMBoxing',
                 'username' => 'headC',
                 'email' => 'headC@localhost.com',
+                'phone_number' => '0841753818',
+                'address' => '6/2 ม.5 ต.ช้างเผือก อ.เมือง จ.เชียงใหม่',
                 'password' => bcrypt('1234'),
-                'role_id' => 2,
-                'zone_id' => 4
+                'role' => 2,
             ],
             [
-                'name' => 'พนักงานโซน C',
+                'id' => 7,
+                'firstname' => 'พนักงานโซน C',
+                'lastname' => 'CMBoxing',
                 'username' => 'empC',
                 'email' => 'empC@localhost.com',
+                'phone_number' => '0841753818',
+                'address' => '6/2 ม.5 ต.ช้างเผือก อ.เมือง จ.เชียงใหม่',
                 'password' => bcrypt('1234'),
-                'role_id' => 3,
-                'zone_id' => 4
+                'role' => 3,
             ],
         ];
 

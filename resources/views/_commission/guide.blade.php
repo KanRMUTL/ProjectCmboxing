@@ -4,18 +4,18 @@
 @section('header','ข้อมูลค่าคอมมิชชั่นของไกด์')
 
 @section('content')
-<!-- Button trigger modal -->
+
 <div class="row">
-  {!! Form::open(['route' => 'empCommission.search', 'method' => 'POST']) !!}
+  {!! Form::open(['route' => 'guidecommission.search', 'method' => 'POST']) !!}
   {{ Form::token()}}
-    <input type="hidden" name="zoneId" value="{{ auth::user()->zone_id }}">
+    <input type="hidden" name="zoneId" value="{{ auth::user()->employee->zone_id }}">
     <div class="col-md-2 col-xs-6 form-group">
-    <input type="date" class="form-control" value="{{ $range['start'] }}" name="start">
+      <input type="date" class="form-control" value="{{ $range['start'] }}" name="start">
     </div>
     <div class="col-md-2 col-xs-6 form-group">
       <input type="date" class="form-control" value="{{ $range['end'] }}" name="end">
     </div>
-    @if(auth::user()->role_id == 1)
+    @if(auth::user()->role == 1)
     <div class="col-md-2 col-xs-6 form-group">
       <select name="zoneId" class="form-control">
         @foreach ($zones as $zone)
@@ -36,15 +36,16 @@
     </div>
   {!! Form::close() !!}
 </div>
+
   <div class="row">
     <div class="col-xs-12 col-md-12 col-sm-12">
       <div class="box box box-info">
         <div class="box-body table-responsive">
           <table style="font-size: 120%" class="table table-hover">
             <tr>
-              @if(auth::user()->role_id != 3)
+              @if(auth::user()->role != 3)
               <th>ชื่อพนักงาน</th>
-                @if(auth::user()->role_id != 2)
+                @if(auth::user()->role != 2)
                 <th>โซน</th>
                 @endif
               @endif
@@ -55,10 +56,10 @@
             </tr>
             @foreach ($data as $item)
             <tr>
-                @if(auth::user()->role_id != 3)
-                <td>{{ $item->user->name }}</td>
-                  @if(auth::user()->role_id != 2)
-                  <td>{{ $item->user->zone->name }}</td>
+                @if(auth::user()->role != 3)
+                <td>{{ $item->user->firstname }}&emsp;{{ $item->user->lastname }}</td>
+                  @if(auth::user()->role != 2)
+                  <td>{{ $item->user->employee->zone->name }}</td>
                   @endif
                 @endif
                 <td>

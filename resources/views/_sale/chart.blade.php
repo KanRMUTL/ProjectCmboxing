@@ -11,11 +11,11 @@
     <input type="date" name="after" class="form-control" id="after" placeholder="กรุณาระบุวันที่" value="{{ $end }}">
   </div>
   <div class="col-md-8 col-sm-6">
-      @if(auth::user()->role_id == 1)
+      @if(auth::user()->role == 1)
         <button type="" class="btn btn-primary" id="sale-total">แบ่งตามยอดขาย</button>
         <button type="" class="btn btn-primary" id="sale-amount">แบ่งตามจำนวนลูกค้า</button>
         <button type="" class="btn btn-primary" id="sale-ticket">แบ่งตามประเภทบัตร</button>
-      @elseif(auth::user()->role_id == 2)
+      @elseif(auth::user()->role == 2)
         <button type="" class="btn btn-primary" id="sale-total">แบ่งตามยอดขาย</button>
         <button type="" class="btn btn-primary" id="sale-amountcustomer">แบ่งตามจำนวนลูกค้า</button>
       @endif

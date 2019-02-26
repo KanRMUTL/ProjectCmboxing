@@ -20,11 +20,11 @@ class SaleController extends StarterController
     }
 
     public function index($saleTypeName)
-    {       
+    {     
         $dataForSaleType = $this->setDataForSaleType($saleTypeName);
         $saleTypeId = $this->saleTypeUrl[$saleTypeName];
         $guesthouses = Guesthouse::forSale()->get();
-        $userZone = Auth::user()->zone_id;
+        $userZone = Auth::user()->employee->zone_id;
         $sales = Sale::saleDetail($this->start, $this->end, $userZone, $saleTypeId)->get();
         $data = [
             'tickets' => $this->tickets,
@@ -80,7 +80,7 @@ class SaleController extends StarterController
         $sale->customer_phone = $request->customerPhone;
         $sale->customer_room = $request->customerRoom;
         $sale->guesthouse_id = $request->guesthouseId;
-        $sale->sale_type_id = $request->saleTypeId;
+        $sale->sale_type = $request->saleTypeId;
         $sale->visit = $request->visitDay;
         $sale->ticket_id = $request->ticketId;
         $sale->user_id = $request->userId;
@@ -89,7 +89,7 @@ class SaleController extends StarterController
         $sale->created_at = now();
         $sale->save();
 
-        $url = $this->changeRedirect($sale->sale_type_id);
+        $url = $this->changeRedirect($sale->sale_type);
         return redirect($url);
     }
   
@@ -122,12 +122,12 @@ class SaleController extends StarterController
             'visit' => $request->visitDay,
             'ticket_id' => $request->ticketId,
             'user_id' => $request->userId,
-            'sale_type_id' => $request->saleTypeId,
+            'sale_type' => $request->saleTypeId,
             'total' =>  $ticket['price'] * $request->amount
         ];
         
         Sale::find($id)->update($data);
-        $url = $this->changeRedirect($data['sale_type_id']);
+        $url = $this->changeRedirect($data['sale_type']);
         return redirect($url);
     }
 
@@ -136,7 +136,7 @@ class SaleController extends StarterController
     {
         $user = Sale::find($id);
         $user->delete();
-        $url = $this->changeRedirect($user->sale_type_id);    
+        $url = $this->changeRedirect($user->sale_type);    
         return redirect($url);
     }
 

@@ -5,63 +5,53 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
+
 class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name',
+        'user_id',
+        'firstname',
+        'lastname',
         'username',
         'email',
-        'role_id',
-        'zone_id',
+        'phone_number',
+        'address',
+        'role',
         'password'
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    public $timestamps = false;
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    public function callUser(){
-       
-     }
+    
+    public function employee()
+    {
+        return $this->hasOne('App\marketing\Employee');
+    }
 
-     public function role()
-     {
-         return $this->belongsTo('App\marketing\Role');
-     }
+   
 
-     public function zone()
-     {
-         return $this->belongsTo('App\marketing\Zone');
-     }
-     public function sales()
-     {
-         return $this->hasMany('App\marketing\Sale');
-     }
+    public function sales()
+    {
+        return $this->hasMany('App\marketing\Sale');
+    }
 
-     public function scopeUserForAdmin($query){
-         return $query
-                ->where('role_id','NOT LIKE', 1)
-                ->orderBy('zone_id');
-     }
-
-     public function scopeUserForMkhead($query){
+    public function scopeUserForAdmin($query)
+    {
         return $query
-               ->where([
-                   ['zone_id','=', Auth::user()->zone_id],
-                   ['role_id','=', 3]
-               ])
-               ->orderBy('zone_id');
+            ->where('role','NOT LIKE', 1)
+            ->join('employees','users.id', '=', 'employees.user_id');
+    }
+
+    public function scopeUserForMkhead($query)
+    {
+        return $query
+            ->where([
+                ['zone_id','=',  Auth::user()->employee->zone_id],
+                ['role','=', 3]
+            ]);
     }
 }

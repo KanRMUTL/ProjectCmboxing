@@ -22,7 +22,7 @@ class CommissionController extends StarterController
 
     public function empCommission()
     {
-        $userZone = Auth::user()->zone_id;
+        $userZone =  Auth::user()->employee->zone_id;
         $data = $this->getCommissionOfEmp($this->start, $this->end, $userZone);
         return view('_commission.emp')
                 ->with('data', $data)
@@ -48,6 +48,23 @@ class CommissionController extends StarterController
                 ->with('zoneSelected', $zoneId)
                 ->with('zones', $this->zones);
     }
+    public function searchGuide(Request $request)
+    {   
+        $start = $request->start;
+        $end = $request->end;
+        $zoneId = $request->zoneId;
+        $data = $this->getCommissionOfGuide($start, $end, $zoneId);
+        $range = [
+            'start' => $start,
+            'end' => $end
+        ];
+
+        return view('_commission.guide')
+                ->with('data', $data)
+                ->with('range', $range)
+                ->with('zoneSelected', $zoneId)
+                ->with('zones', $this->zones);
+    }
 
     private function getCommissionOfEmp($start, $end, $zoneId)
     {
@@ -61,68 +78,89 @@ class CommissionController extends StarterController
         return $data;
     }
 
-   
     public static function calEmpCommission($ticketId, $amount)
     {
-        if($ticketId == 1)  // Grandstand
-        {
-            if($amount <= 10)
-            {
-                return $amount * 20;
-            }
-            else if($amount <= 20)
-            {
-                return $amount * 30;
-            }
-            else if($amount <= 30)
-            {
-                return $amount * 40;
-            }
-            else{
-                return $amount * 50;
-            }
+        $total = 0;
+        
+        if($amount <= 10){  // คิดค่าคอมมิชชั่นการขายบัตร 1-10 ใบ
+            $total += self::calFirst($ticketId, $amount);
         }
-        else if($ticketId == 2)  // RingSide
-        {
-            if($amount <= 10)
-            {
-                return $amount * 20;
-            }
-            else if($amount <= 30)
-            {
-                return $amount * 40;
-            }
-            else if($amount <= 30)
-            {
-                return $amount * 60;
-            }
-            else{
-                return $amount * 80;
-            }
+        else if($amount <= 20){  // คิดค่าคอมมิชชั่นการขายบัตร 1-20 ใบ
+            $realAmount = $amount - 10;
+            $total += self::calSecond($ticketId, $realAmount);
+            $total += self::calFirst($ticketId, 10);
         }
-        else if($ticketId == 3)  // VIP
-        {
-            if($amount <= 10)
-            {
-                return $amount * 50;
-            }
-            else if($amount <= 20)
-            {
-                return $amount * 70;
-            }
-            else if($amount <= 30)
-            {
-                return $amount * 100;
-            }
-            else{
-                return $amount * 130;
-            }
+        else if($amount <= 30){ // คิดค่าคอมมิชชั่นการขายบัตร 1-30 ใบ
+            $realAmount = $amount - 20;
+            $total += self::calThird($ticketId, $realAmount);
+            $total += self::calSecond($ticketId, 10);
+            $total += self::calFirst($ticketId, 10);
+        }
+        else if($amount > 30){  // คิดค่าคอมมิชชั่นการขายบัตรมากกว่า 30 ใบ
+            $realAmount = $amount - 30;
+            $total += self::calFour($ticketId, $realAmount);
+            $total += self::calThird($ticketId, 10);
+            $total += self::calSecond($ticketId, 10);
+            $total += self::calFirst($ticketId, 10);
+        }
+        return $total;
+    }
+
+    public static function calFirst($ticketId, $amount)
+    {
+        if($ticketId == 1){
+            return 20 * $amount;
+        }
+        else if($ticketId == 2){
+            return 30 * $amount;
+        }
+        else if($ticketId == 3){
+            return 50 * $amount;
+        }
+    }
+
+    public static function calSecond($ticketId, $amount)
+    {
+        if($ticketId == 1){
+            return 30 * $amount;
+        }
+        else if($ticketId == 2){
+            return 40 * $amount;
+        }
+        else if($ticketId == 3){
+            return 70 * $amount;
+        }
+    }
+
+    public static function calThird($ticketId, $amount)
+    {
+        if($ticketId == 1){
+            return 40 * $amount;
+        }
+        else if($ticketId == 2){
+            return 60 * $amount;
+        }
+        else if($ticketId == 3){
+            return 100 * $amount;
         }
     }
     
+    public static function calFour($ticketId, $amount)
+    {
+        if($ticketId == 1){
+            return 50 * $amount;
+        }
+        else if($ticketId == 2){
+            return 80 * $amount;
+        }
+        else if($ticketId == 3){
+            return 130 * $amount;
+        }
+    }
+
     public function guideCommission()
     {
-        $userZone = Auth::user()->zone_id;
+        $userZone =  Auth::user()->employee->zone_id;
         $data = $this->getCommissionOfGuide($this->start, $this->end, $userZone);
         return view('_commission.guide')
         ->with('data', $data)

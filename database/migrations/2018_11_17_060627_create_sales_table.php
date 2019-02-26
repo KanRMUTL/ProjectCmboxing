@@ -9,18 +9,18 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
-            $table->smallInteger('amount');
-            $table->integer('total');
-            $table->string('customer_name',100);
-            $table->string('customer_phone', 11);
-            $table->string('customer_room',6);
+            $table->integer('amount');
+            $table->decimal('total',8,2);
+            $table->string('customer_name',30);
+            $table->string('customer_phone', 10);
+            $table->string('customer_room',10);
             $table->date('visit'); //วันที่ลูกค้าเข้ามาชมมวย
-            $table->smallInteger('ticket_id');
-            $table->integer('user_id');
-            $table->smallInteger('zone_id');
-            $table->integer('guesthouse_id');
-            $table->smallInteger('sale_type_id');
             $table->timestamp('created_at')->useCurrent();
+            $table->integer('ticket_id');
+            $table->integer('guesthouse_id');
+            $table->integer('sale_type');
+            $table->integer('zone_id');
+            $table->integer('user_id');
         });
     }
 

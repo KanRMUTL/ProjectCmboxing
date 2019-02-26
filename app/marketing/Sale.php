@@ -21,7 +21,6 @@ class Sale extends Model
         'user_id',
         'zone_id',
         'guesthouse_id',
-        'sale_type_id'
     ];
     public $timestamps  = false;
     public  $roleId;
@@ -31,11 +30,12 @@ class Sale extends Model
 
     public function __construct()
     {
-        $this->roleId = Auth::user()->role_id;
+        $this->roleId = Auth::user()->role;
         $this->now = Carbon::now();
         $this->startOfWeek =  $this->now->startOfWeek()->format('Y-m-d');
         $this->endOfWeek = $this->now->endOfWeek()->format('Y-m-d');
     }
+
     public function ticket()
     {
         return $this->belongsTo('App\marketing\Ticket');
@@ -64,13 +64,14 @@ class Sale extends Model
     {
         return $this->belongsTo('App\marketing\SaleType');
     }
+
     public function scopeSaleDetail($query, $before, $after, $zoneId = null, $saleType = null)
     {
         if($this->roleId == 1){
             return $query
                 ->where([
                     ['zone_id', '=', $zoneId],
-                    ['sale_type_id', '=', $saleType]
+                    ['sale_type', '=', $saleType]
                 ])
                 ->whereBetween('created_at', [$before, $after])
                 ->orderByRaw('created_at DESC');
@@ -87,10 +88,9 @@ class Sale extends Model
         }
     }
 
-
     public function scopeCommission($query, $before, $after, $zoneId = null, $saleTypeId)
     {
-        if($this->roleId == 1){
+        if($this->roleId == 1){ // แอดมิน
             return $query
                 ->select(
                     'user_id', 
@@ -100,13 +100,13 @@ class Sale extends Model
                 )
                 ->where([
                     ['zone_id', '=', $zoneId],
-                    ['sale_type_id', '=', $saleTypeId]
+                    ['sale_type', '=', $saleTypeId]
                 ])
                 ->whereBetween('created_at', [$before, $after])
-                ->groupBy('ticket_id', 'created_at', 'user_id')
+                ->groupBy('created_at', 'ticket_id',  'user_id')
                 ->orderByRaw('created_at DESC');
         }
-        else if($this->roleId == 2) {
+        else if($this->roleId == 2) { // หัวหน้าฝ่ายการตลาด
             return $query
                 ->select(
                     'user_id', 
@@ -115,14 +115,14 @@ class Sale extends Model
                     'created_at'                        
                 )
                 ->where([
-                    ['zone_id', '=', Auth::user()->zone_id],
-                    ['sale_type_id', '=', $saleId]    
+                    ['zone_id', '=',  Auth::user()->employee->zone_id],
+                    ['sale_type', '=', $saleId]    
                 ])
                 ->whereBetween('created_at', [$before, $after])
                 ->groupBy('ticket_id', 'created_at', 'user_id')
                 ->orderByRaw('created_at DESC');
         }
-        else if($this->roleId == 3){
+        else if($this->roleId == 3){ // พนักงาน
             return $query
                 ->select(
                     'user_id', 
@@ -132,7 +132,7 @@ class Sale extends Model
                 )
                 ->where([
                     ['user_id', '=', Auth::user()->id],
-                    ['sale_type_id', '=', $saleId]    
+                    ['sale_type', '=', $saleId]    
                 ])
                 ->whereBetween('created_at', [$before, $after])
                 ->groupBy('ticket_id', 'created_at', 'user_id')
@@ -145,5 +145,5 @@ class Sale extends Model
         $visit = Carbon::parse($value);
         return $visit->format('d/m/Y');
     }
-    
+
 }

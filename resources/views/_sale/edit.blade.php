@@ -58,7 +58,7 @@
         <div class="form-group" id="ticketId">
           <select class="form-control" name="saleTypeId">
             @foreach ($saleTypes as $saleType)
-              @if ($sale->sale_type_id == $saleType->id)
+              @if ($sale->sale_type == $saleType->id)
               <option value="{{ $saleType->id }}" selected>{{ $saleType->name}}</option>
               @continue
               @endif

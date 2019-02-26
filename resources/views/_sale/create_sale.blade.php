@@ -18,7 +18,7 @@
       {!! Form::open(['route' => 'sale.store', 'method' => 'POST']) !!}
       {{ Form::token()}}
       <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
-      <input type="hidden" name="zoneId" value="{{ Auth::user()->zone_id }}">
+      <input type="hidden" name="zoneId" value="{{ Auth::user()->employee->zone_id }}">
       <div class="modal-body">
         <div class="form-group">
           <label for="customerName">ชื่อ - นามสกุล(ของลูกค้า)</label>
@@ -42,8 +42,8 @@
             <label for="guesthouseId">เกสเฮาท์</label>
             <div class="form-group" id="guesthouseId">
               <select class="form-control" name="guesthouseId">
-                @foreach ($guesthouses as $guesthouses)
-                <option value="{{ $guesthouses->id }}">{{ $guesthouses->name }}</option>
+                @foreach ($guesthouses as $guesthouse)
+                <option value="{{ $guesthouse->id }}">{{ $guesthouse->name }}</option>
                 @endforeach
               </select>
             </div>
@@ -61,8 +61,8 @@
             <label for="ticketId">ประเภทการขาย</label>
             <div class="form-group" id="ticketId">
               <select class="form-control" name="saleTypeId">
-                @foreach ($saleTypes as $saleType)
-                <option value="{{ $saleType->id }}">{{ $saleType->name}}</option>
+                @foreach ($saleTypes as $key => $saleType)
+                <option value="{{ $key }}">{{ $saleType }}</option>
                 @endforeach
               </select>
             </div>

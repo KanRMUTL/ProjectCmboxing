@@ -51,17 +51,17 @@
           <img src="{{ asset('images/avatar5.png') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-        <p>{{ Auth::user()->name }}</p>
+        <p>{{ Auth::user()->firstname }}</p>
           <!-- Status -->
           <i class="fa fa-circle text-success"></i> Online
         </div>
       </div>
      
-      @if(Auth::user()->role_id == 1)
+      @if(Auth::user()->role == 1)
         @include('admin.menu')
-      @elseif(Auth::user()->role_id == 2)
+      @elseif(Auth::user()->role == 2)
         @include('head.menu')
-      @elseif(Auth::user()->role_id == 3)
+      @elseif(Auth::user()->role == 3)
         @include('employee.menu') 
       @endif
     </section>

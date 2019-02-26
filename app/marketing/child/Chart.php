@@ -55,7 +55,7 @@ class Chart extends Sale
         {
             return $query
                 ->select('ticket_id', DB::raw('SUM(amount) as total'))
-                ->where('zone_id', '=', Auth::user()->zone_id)
+                ->where('zone_id', '=',  Auth::user()->employee->zone_id)
                 ->whereBetween('created_at', [$before, $after])
                 ->groupBy('ticket_id')
                 ->orderBy(DB::raw('SUM(amount)'),'ADSC');
@@ -66,7 +66,7 @@ class Chart extends Sale
     {
         return $query
             ->select('user_id',DB::raw('COUNT(id) as total'))
-            ->where('zone_id', '=', Auth::user()->zone_id)
+            ->where('zone_id', '=',  Auth::user()->employee->zone_id)
             ->whereBetween('created_at', [$before, $after])
             ->groupBy('user_id')
             ->orderBy(DB::raw('COUNT(id)'),'ADSC');

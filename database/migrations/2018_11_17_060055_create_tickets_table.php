@@ -14,8 +14,9 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->smallInteger('price');
+            $table->string('name',30);
+            $table->decimal('price',8,2);
+            $table->string('img',30);  
         });
     }
 

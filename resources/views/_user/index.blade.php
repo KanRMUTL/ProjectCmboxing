@@ -17,7 +17,7 @@
     <table style="font-size: 120%" style="font-size: 120%" style="font-size: 120%" class="table table-hover" >
       <thead>
       <tr align="center" style="text-align-last: center;">
-        <th>ชื่อ-นามสกุล</th>
+        <th>ชื่อ-นามสกุล</th> 
         <th>username</th>
         <th>อีเมล์</th>
         <th>ตำแหน่ง</th>
@@ -29,13 +29,13 @@
       <tbody>
        @foreach ($users as $user)
            <tr align="center">
-            <td>{{ $user->name }}</td>
+            <td>{{ $user->firstname }}&emsp;{{ $user->lastname }}</td>
             <td>{{ $user->username }}</td>
             <td>{{ $user->email }}</td>
-            <td>{{ $user->role->name }}</td>
+            <td>{{ $roles[$user->role - 1] }}</td>
             <td>
               <span class="label label-primary" style="font-size: 100%;">
-                {{ $user->zone->name}}
+                {{ $user->employee->zone->name}}
                 </span>
               </td>
             <td>

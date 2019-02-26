@@ -4,28 +4,27 @@ use Illuminate\Database\Seeder;
 use App\marketing\Ticket;
 class TicketTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+   
     public function run()
     {
         $data = [
            [
                'id' => 1,
                'name' => 'Grandstand',
-               'price' => 600
-           ],
-           [
-               'id' => 2,
-               'name' => 'Ringside',
-               'price' => 1000
-           ],
-           [
+               'price' => 600,
+               'img' => 'do not have a photo'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Ringside',
+                'price' => 1000,
+                'img' => 'do not have a photo'
+            ],
+            [
                 'id' => 3,
                 'name' => 'VIP',
-                'price' => 1500
+                'price' => 1500,
+                'img' => 'do not have a photo'
            ],
         ];
 

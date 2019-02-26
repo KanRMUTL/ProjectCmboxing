@@ -8,11 +8,11 @@
   @include('_sale.create_sale')
 
   <div class="row">
-    @if(Auth::user()->role_id == 1)  
+    @if(Auth::user()->role == 1)  
       @include('admin.sale_search')
-    @elseif(Auth::user()->role_id == 2)
+    @elseif(Auth::user()->role == 2)
       @include('head.sale_search')
-    @elseif(Auth::user()->role_id == 3)
+    @elseif(Auth::user()->role == 3)
       @include('head.sale_search')
     @endif()
   </div>
@@ -59,17 +59,17 @@
                   </span>
                 </td>
                 <td>{{ $sale->visit }}</td>
-                <td>{{ $sale->user->name }}</td>
+                <td>{{ $sale->user->firstname }}&emsp;{{ $sale->user->lasstname }}</td>
                 <td>{{ date('d/m/Y', strtotime($sale->created_at)) }}</td>
                 <td>
-                    @if (Auth::user()->id == $sale->user_id || Auth::user()->role_id == 1)  
+                    @if (Auth::user()->id == $sale->user_id || Auth::user()->role == 1)  
                     <a href="/sale/{{ $sale->id }}/edit" class="btn btn-warning">
                       <i class="fa fa-edit fa-lg"></i>
                     </a>
                     @endif
                 </td>
                 <td>
-                    @if (Auth::user()->id == $sale->user_id  || Auth::user()->role_id == 1)  
+                    @if (Auth::user()->id == $sale->user_id  || Auth::user()->role == 1)  
                     {!! Form::open(['action' => ['marketing\SaleController@destroy', $sale->id]]) !!}
                       {{ csrf_field() }}
                     {{ Form::hidden('_method','DELETE') }}

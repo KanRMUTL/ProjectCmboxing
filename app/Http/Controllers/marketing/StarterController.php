@@ -17,6 +17,7 @@ class StarterController extends Controller
     protected $tickets;
     protected $zones;
     protected $saleTypes;
+    protected $roles;
     protected $range;
     protected $now;
     protected $start;
@@ -26,10 +27,12 @@ class StarterController extends Controller
     public function __construct(){
         $this->tickets = Ticket::all();
         $this->zones = Zone::all();
-        $this->saleTypes = SaleType::all();
+        $this->roles = ['หัวหน้าการตลาด', 'พนักงานการตลาด'];
         $this->now = Carbon::now();
         $this->start =  $this->now->startOfWeek()->format('Y-m-d');
         $this->end = $this->now->endOfWeek()->format('Y-m-d');
+        $this->saleTypes = ['ปกติ', 'ขายผ่านไกด์', 'หน้า Office'];
+
         $this->range = [
             'start' => $this->start,
             'end' => $this->end
