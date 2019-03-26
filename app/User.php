@@ -32,26 +32,28 @@ class User extends Authenticatable
         return $this->hasOne('App\marketing\Employee');
     }
 
-   
-
     public function sales()
     {
         return $this->hasMany('App\marketing\Sale');
     }
 
-    public function scopeUserForAdmin($query)
+    public function scopeGetUsers($query)
     {
-        return $query
-            ->where('role','NOT LIKE', 1)
-            ->join('employees','users.id', '=', 'employees.user_id');
-    }
-
-    public function scopeUserForMkhead($query)
-    {
-        return $query
-            ->where([
-                ['zone_id','=',  Auth::user()->employee->zone_id],
-                ['role','=', 3]
-            ]);
+        if(Auth()->user()->role == 1)
+        {   // Addmin
+             
+            return $query
+            ->join('employees','users.id', '=', 'employees.user_id')
+            ->where('role','NOT LIKE', 1);
+        }
+        else
+        {   // Marketing Head
+            return $query
+                ->join('employees','users.id', '=', 'employees.user_id')
+                ->where([
+                    ['employees.zone_id','=',  Auth::user()->employee->zone_id],
+                    ['role','=', 3]
+                ]);
+        }               
     }
 }

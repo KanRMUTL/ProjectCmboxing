@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $fillable = [
-        'name', 'price'
+        'name', 'price', 'img'
     ];
     public $timestamps  = false;
     
@@ -24,6 +24,11 @@ class Ticket extends Model
     public function sales()
     {
         return $this->hasMany('App\marketing\Sale');
+    }
+
+    public function seats()
+    {
+        return $this->hasMany('App\shopping\Seat');
     }
     
 }

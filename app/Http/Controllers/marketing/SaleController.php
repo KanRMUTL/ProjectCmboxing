@@ -23,12 +23,11 @@ class SaleController extends StarterController
     {     
         $dataForSaleType = $this->setDataForSaleType($saleTypeName);
         $saleTypeId = $this->saleTypeUrl[$saleTypeName];
-        $guesthouses = Guesthouse::forSale()->get();
         $userZone = Auth::user()->employee->zone_id;
         $sales = Sale::saleDetail($this->start, $this->end, $userZone, $saleTypeId)->get();
         $data = [
             'tickets' => $this->tickets,
-            'guesthouses' => $guesthouses,
+            'guesthouses' => Guesthouse::forSale()->get(),
             'zones' => $this->zones,
             'saleTypes' => $this->saleTypes,
             'zoneSelected' => $userZone,
@@ -37,36 +36,26 @@ class SaleController extends StarterController
             'url' => $dataForSaleType['url'],
             'header' => $dataForSaleType['header'],
         ];
-            return view('_sale.index', $data);
+        return view('_sale.index', $data);
     }
         
     public function search(Request $request, $saleTypeName)
     {
         $dataForSaleType = $this->setDataForSaleType($saleTypeName);
         $saleTypeId = $this->saleTypeUrl[$saleTypeName];
-        $start = $request->start;
-        $end = $request->end;
-        $zoneId = $request->zoneId;
-        $range = [
-            'start' => $start,
-            'end' => $end
-        ];
-        
-        $sales = Sale::saleDetail($start, $end, $zoneId, $saleTypeId)->get();
-        $guesthouses = Guesthouse::forSale()->get();
+        $sales = Sale::saleDetail($request->start, $request->end, $request->zoneId, $saleTypeId)->get();
 
         $data = [
             'tickets' => $this->tickets,
-            'guesthouses' => $guesthouses,
+            'guesthouses' => Guesthouse::forSale()->get(),
             'zones' => $this->zones,
             'saleTypes' => $this->saleTypes,
             'sales' => $sales,
-            'range' => $range,
+            'range' => ['start' => $request->start, 'end' => $request->end],
             'url' => $dataForSaleType['url'],
             'header' => $dataForSaleType['header'],
-            'zoneSelected' => $zoneId 
+            'zoneSelected' => $request->zoneId 
         ];
-
         return view('_sale.index', $data);
     }
 
@@ -74,7 +63,6 @@ class SaleController extends StarterController
     {
         $ticket = Ticket::find($request->ticketId);
         $sale = new Sale;
-        $sale->amount = $request->amount;
         $sale->amount = $request->amount;
         $sale->customer_name = $request->customerName;
         $sale->customer_phone = $request->customerPhone;
@@ -96,13 +84,11 @@ class SaleController extends StarterController
     public function edit($id)
     {
         $sale = Sale::find($id); 
-        $tickets = Ticket::get();
-        $guesthouses = Guesthouse::forSale()->get(); 
         $visit =  Carbon::createFromFormat('d/m/Y',$sale->visit); // สร้าง obj ของ carbon ให้สามารถกำหนด format ของวันที่ได้
         $data = [
             'sale' => $sale,
             'tickets' => $this->tickets,
-            'guesthouses' => $guesthouses,
+            'guesthouses' => Guesthouse::forSale()->get(),
             'saleTypes' => $this->saleTypes,
             'visit' => $visit->format('Y-m-d') // set ให้กำหนด input[type=date] ได้
         ];
@@ -112,20 +98,20 @@ class SaleController extends StarterController
    
     public function update(Request $request, $id)
     {
+    
         $ticket = Ticket::find($request->ticketId); // เอาไว้คำนวณราคาสุทธิ total
         $data = [
             'amount' => $request->amount,
+            'total' =>  $ticket['price'] * $request->amount,
             'customer_name' => $request->customerName,
             'customer_phone' => $request->customerPhone,
             'customer_room' => $request->customerRoom,
-            'guesthouse_id' => $request->guesthouseId,
             'visit' => $request->visitDay,
+            'guesthouse_id' => $request->guesthouseId,
             'ticket_id' => $request->ticketId,
+            'sale_type' => $request->input('saleType'),
             'user_id' => $request->userId,
-            'sale_type' => $request->saleTypeId,
-            'total' =>  $ticket['price'] * $request->amount
         ];
-        
         Sale::find($id)->update($data);
         $url = $this->changeRedirect($data['sale_type']);
         return redirect($url);

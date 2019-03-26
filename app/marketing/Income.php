@@ -10,7 +10,7 @@ class Income extends Model
         'total',
         'sale_id'
     ];
-
+    
     public function sale()
     {
         return $this->belongsTo('App\marketing\Sale');

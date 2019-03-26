@@ -12,19 +12,19 @@ class TicketTableSeeder extends Seeder
                'id' => 1,
                'name' => 'Grandstand',
                'price' => 600,
-               'img' => 'do not have a photo'
+               'img' => 'ticket_grandstand.jpg'
             ],
             [
                 'id' => 2,
                 'name' => 'Ringside',
                 'price' => 1000,
-                'img' => 'do not have a photo'
+                'img' => 'ticket_ringside.jpg'
             ],
             [
                 'id' => 3,
                 'name' => 'VIP',
                 'price' => 1500,
-                'img' => 'do not have a photo'
+                'img' => 'ticket_vip.jpg'
            ],
         ];
 

@@ -17,7 +17,7 @@ class StarterController extends Controller
     protected $tickets;
     protected $zones;
     protected $saleTypes;
-    protected $roles;
+    public $roles ;
     protected $range;
     protected $now;
     protected $start;
@@ -27,28 +27,24 @@ class StarterController extends Controller
     public function __construct(){
         $this->tickets = Ticket::all();
         $this->zones = Zone::all();
-        $this->roles = ['หัวหน้าการตลาด', 'พนักงานการตลาด'];
+        $this->roles = ['แอดมิน','หัวหน้าฝ่ายการตลาด', 'พนักงานฝ่ายการตลาด'];
         $this->now = Carbon::now();
         $this->start =  $this->now->startOfWeek()->format('Y-m-d');
         $this->end = $this->now->endOfWeek()->format('Y-m-d');
         $this->saleTypes = ['ปกติ', 'ขายผ่านไกด์', 'หน้า Office'];
-
-        $this->range = [
-            'start' => $this->start,
-            'end' => $this->end
-        ];
+        $this->range = ['start' => $this->start, 'end' => $this->end];
         $this->saleTypeUrl = [
-            'employee' => 1,
-            'guide' => 2,
-            'office' => 3
+            'employee' => 0,
+            'guide' => 1,
+            'office' => 2
         ];
     }
 
     public function changeRedirect($saleTypeId)
     {
-        if($saleTypeId == 1)
+        if($saleTypeId == 0)
              return '/sale/employee';
-        else if($saleTypeId == 2)
+        else if($saleTypeId == 1)
             return 'sale/guide';
         else
             return 'sale/office';

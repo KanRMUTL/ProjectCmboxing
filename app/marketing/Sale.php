@@ -67,22 +67,43 @@ class Sale extends Model
 
     public function scopeSaleDetail($query, $before, $after, $zoneId = null, $saleType = null)
     {
-        if($this->roleId == 1){
+        if($this->roleId == 1)
+        {   
+            // แอดมิน
             return $query
-                ->where([
-                    ['zone_id', '=', $zoneId],
-                    ['sale_type', '=', $saleType]
-                ])
+                ->where(
+                    [
+                        ['zone_id', '=', $zoneId], 
+                        ['sale_type', '=', $saleType]
+                    ]
+                )
                 ->whereBetween('created_at', [$before, $after])
                 ->orderByRaw('created_at DESC');
-        }else if($this->roleId == 2){
+        }
+        else if($this->roleId == 2)
+        {   
+            // หัวหน้าฝ่ายการตลาด
             return $query
-                ->where('zone_id', '=', $zoneId)
+                ->where(
+                    [
+                        ['zone_id', '=', $zoneId], 
+                        ['sale_type', '=', $saleType]
+                    ]
+                )
                 ->whereBetween('created_at', [$before, $after])
                 ->orderByRaw('created_at DESC');
-        }else if($this->roleId == 3){
+        }
+        else if($this->roleId == 3)
+        {   
+            // พนักงานการตลาด
             return $query
-                ->where('user_id', '=', Auth::user()->id)
+                ->where(
+                    [
+                        ['zone_id', '=', $zoneId], 
+                        ['sale_type', '=', $saleType],
+                        ['user_id', '=', Auth::user()->id]
+                    ]
+                )
                 ->whereBetween('created_at', [$before, $after])
                 ->orderByRaw('created_at DESC');
         }
@@ -139,6 +160,123 @@ class Sale extends Model
                 ->orderByRaw('created_at DESC');
         }
     }
+
+    public function scopeIncome($query, $zoneId, $before, $after)
+    {
+        if(Auth::user()->role == 1)
+        {
+             return $query  
+                ->select(
+                    'user_id',
+                    DB::raw('SUM(amount) AS amount'), 
+                    'ticket_id', 
+                    DB::raw('SUM(total) AS total'), 
+                    'sale_type',
+                    'created_at')
+                ->groupBy('user_id', 'ticket_id', 'sale_type', 'created_at')
+                ->orderByRaw('created_at DESC')
+                ->where(['zone_id' => $zoneId])
+                ->whereBetween('created_at', [$before, $after]);
+        }
+        else if(Auth::user()->role == 2)
+        {
+            return $query  
+                ->select(
+                    'user_id',
+                    DB::raw('SUM(amount) AS amount'), 
+                    'ticket_id', 
+                    DB::raw('SUM(total) AS total'), 
+                    'sale_type',
+                    'created_at')
+                ->groupBy('user_id', 'ticket_id', 'sale_type', 'created_at')
+                ->where(['zone_id' => $zoneId])
+                ->whereBetween('created_at', [$before, $after])
+                ->orderByRaw('created_at DESC');
+        }
+        else if(Auth::user()->role == 3)
+        {
+            return $query  
+                ->select(
+                    'user_id',
+                    DB::raw('SUM(amount) AS amount'), 
+                    'ticket_id', 
+                    DB::raw('SUM(total) AS total'), 
+                    'sale_type',
+                    'created_at')
+                ->groupBy('user_id', 'ticket_id', 'sale_type', 'created_at')
+                ->where(['user_id' => Auth::user()->id])
+                ->whereBetween('created_at', [$before, $after])
+                ->orderByRaw('created_at DESC');;
+        }
+    }
+
+    /* ======= Dasboard ======== */
+    public function scopeAmountTicket($query, $startOfWeek, $endOfWeek)
+    {
+        if( Auth::user()->role == 1){
+            return $query->
+                    select(DB::raw('SUM(amount) as amount'))
+                    ->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
+        }
+        else if(Auth::user()->role == 2){
+            return $query->
+                    select(DB::raw('SUM(amount) as amount'))
+                    ->where('zone_id', '=',  Auth::user()->employee->zone_id )
+                    ->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
+        }
+        else if( Auth::user()->role== 3){
+            return $query->
+                    select(DB::raw('SUM(amount) as amount'))
+                    ->where('user_id', '=', Auth::user()->id )
+                    ->whereBetween('created_at', [$startOfWeek, $endOfWeek]);
+        }
+    }
+
+    public function scopeAmountCustomer($query, $startOfWeek, $endOfWeek)
+    {
+        if( Auth::user()->role == 1){
+             return $query->
+                select(DB::raw('COUNT(id) as amount'))
+                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek]);
+        }
+        else if(Auth::user()->role == 2){
+             return $query->
+                select(DB::raw('COUNT(id) as amount'))
+                ->where('zone_id', '=',  Auth::user()->employee->zone_id )
+                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek]);
+        }
+        else if( Auth::user()->role== 3){
+             return $query->
+                select(DB::raw('COUNT(id) as amount'))
+                ->where('user_id', '=', Auth::user()->id )
+                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek]);
+        }
+    }
+
+    public function scopeCalIncome($query, $startOfWeek, $endOfWeek)
+    {
+        if( Auth::user()->role == 1){
+            return $query->
+                select(DB::raw('SUM(total) as total'))
+                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek]);
+        }
+        else if(Auth::user()->role == 2){
+            return $query->
+                select(DB::raw('SUM(total) as total'))
+                ->where('zone_id', '=',  Auth::user()->employee->zone_id )
+                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek]);
+        }
+        else if( Auth::user()->role== 3){
+            return $query->
+                select(DB::raw('SUM(total) as total'))
+                ->where('user_id', '=', Auth::user()->id )
+                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek]);                
+        }
+    }
+    /* =======  End Dashboard ======== */
+
+
+    /* ======= Commission ======== */
 
     public function getVisitAttribute($value)
     {

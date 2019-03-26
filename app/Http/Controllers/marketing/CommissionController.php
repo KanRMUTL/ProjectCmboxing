@@ -23,58 +23,51 @@ class CommissionController extends StarterController
     public function empCommission()
     {
         $userZone =  Auth::user()->employee->zone_id;
-        $data = $this->getCommissionOfEmp($this->start, $this->end, $userZone);
-        return view('_commission.emp')
-                ->with('data', $data)
-                ->with('range', $this->range)
-                ->with('zones', $this->zones)
-                ->with('zoneSelected', $userZone);
+        $data['commission'] = $this->getCommissionOfEmp($this->start, $this->end, $userZone);
+        $data['range'] = $this->range;
+        $data['zones'] = $this->zones;
+        $data['zoneSelected'] = $userZone;
+        return view('_commission.emp', $data);
     }
 
     public function searchEmp(Request $request)
     {   
-        $start = $request->start;
-        $end = $request->end;
-        $zoneId = $request->zoneId;
-        $data = $this->getCommissionOfEmp($start, $end, $zoneId);
-        $range = [
-            'start' => $start,
-            'end' => $end
-        ];
-
-        return view('_commission.emp')
-                ->with('data', $data)
-                ->with('range', $range)
-                ->with('zoneSelected', $zoneId)
-                ->with('zones', $this->zones);
+        $data['range'] = ['start' => $request->start,'end' => $request->end];
+        $data['commission'] = $this->getCommissionOfEmp($request->start,$request->end, $request->zoneId);
+        $data['zones'] = $this->zones;
+        $data['zoneSelected'] = $request->zoneId;
+        return view('_commission.emp', $data);
     }
     public function searchGuide(Request $request)
     {   
         $start = $request->start;
         $end = $request->end;
         $zoneId = $request->zoneId;
-        $data = $this->getCommissionOfGuide($start, $end, $zoneId);
-        $range = [
-            'start' => $start,
-            'end' => $end
-        ];
+       
+        $data['range'] = ['start' => $request->start, 'end' => $request->end];
+        $data['commission'] = $this->getCommissionOfGuide($request->start, $request->end, $request->zoneId);
+        $data['zoneSelected'] = $request->zoneId;
+        $data['zones'] = $this->zones;
+        return view('_commission.guide', $data);
+    }
 
-        return view('_commission.guide')
-                ->with('data', $data)
-                ->with('range', $range)
-                ->with('zoneSelected', $zoneId)
-                ->with('zones', $this->zones);
+    public function guideCommission()
+    {
+        $userZone =  Auth::user()->employee->zone_id;
+        $data['commission'] = $this->getCommissionOfGuide($this->start, $this->end, $userZone);
+        $data['range'] = $this->range;
+        $data['zones'] = $this->zones;
+        $data['zoneSelected'] = $userZone;
+        return view('_commission.guide', $data);
     }
 
     private function getCommissionOfEmp($start, $end, $zoneId)
     {
         $data = Sale::commission($start, $end, $zoneId, 1)->get();
-              
         foreach ($data as $index => $item) {  
             $data[$index]['commission'] = $this->calEmpCommission($item->ticket_id, $item->amount);
             $data[$index]['date_formated'] = Carbon::parse($item->created_at)->format('d/m/Y');
         }
-
         return $data;
     }
 
@@ -156,18 +149,7 @@ class CommissionController extends StarterController
         else if($ticketId == 3){
             return 130 * $amount;
         }
-    }
-
-    public function guideCommission()
-    {
-        $userZone =  Auth::user()->employee->zone_id;
-        $data = $this->getCommissionOfGuide($this->start, $this->end, $userZone);
-        return view('_commission.guide')
-        ->with('data', $data)
-        ->with('range', $this->range)
-        ->with('zones', $this->zones)
-        ->with('zoneSelected', $userZone);
-    }
+    }   
 
     public function getCommissionOfGuide($start, $end, $zoneId)
     {

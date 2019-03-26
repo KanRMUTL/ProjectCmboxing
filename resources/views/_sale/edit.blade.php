@@ -56,13 +56,13 @@
     <div class="col-md-6 col-sm-12">
         <label for="ticketId">ประเภทการขาย</label>
         <div class="form-group" id="ticketId">
-          <select class="form-control" name="saleTypeId">
-            @foreach ($saleTypes as $saleType)
-              @if ($sale->sale_type == $saleType->id)
-              <option value="{{ $saleType->id }}" selected>{{ $saleType->name}}</option>
-              @continue
+          <select class="form-control" name="saleType">
+            @foreach ($saleTypes as $key => $saleType)
+              @if ($sale->sale_type == $key)
+                <option value="{{ $key }}" selected>{{ $saleType }}</option>
+                @continue
               @endif
-              <option value="{{ $saleType->id }}">{{ $saleType->name}}</option>
+              <option value="{{ $key }}">{{ $saleType}}</option>
             @endforeach
           </select>
         </div>

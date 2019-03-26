@@ -2,8 +2,11 @@
 
 Auth::routes();
 Route::auth();
+Route::get('/', 'shopping\ShoppingController@index');
+Route::get('/about', 'shopping\ShoppingController@about');
+Route::get('/booking', 'shopping\ShoppingController@booking');
 Route::group(['middleware' =>['auth']], function(){
-    Route::get('/', 'PageController@index');
+    Route::get('/dashboard', 'PageController@index');
     Route::resource('user', 'UserController');
     Route::resource('ticket', 'marketing\TicketController');
     
@@ -31,6 +34,8 @@ Route::group(['middleware' =>['auth']], function(){
     });
 
         Route::get('/income', 'marketing\IncomeController@income')->name('income.income');
+        Route::post('/income', 'marketing\IncomeController@searchIncome')->name('income.searchIncome');
+
         Route::get('/commissionOfEmp', 'marketing\CommissionController@empCommission')->name('empCommission');
         Route::post('/commissionOfEmp', 'marketing\CommissionController@searchEmp')->name('empCommission.search');
         Route::get('/commissionOfGuide', 'marketing\CommissionController@guideCommission')->name('guideCommission');
@@ -40,8 +45,15 @@ Route::group(['middleware' =>['auth']], function(){
     Route::prefix('pdf')->group(function(){
         Route::get('/', 'PdfController@index');
     });
+
+    Route::prefix('stock')->group(function(){
+        Route::get('sale', 'pos\SaleController@index');
+        Route::get('get_product', 'pos\SaleController@getProduct');
+        Route::get('checkbill', 'pos\SaleController@checkBill');
+    });
 });
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout
-
-Route::get('play', 'marketing\IncomeController@income');
+Route::get('play', function(){
+    return view('vue');
+});

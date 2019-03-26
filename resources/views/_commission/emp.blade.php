@@ -53,7 +53,7 @@
               <th>ค่าคอมมิชชั่น</th>
               <th>วันที่</th>
             </tr>
-            @foreach ($data as $item)
+            @foreach ($commission as $item)
             <tr>
                 @if(auth::user()->role != 3)
                 <td>{{ $item->user->firstname }}&emsp;{{ $item->user->lastname }} </td>

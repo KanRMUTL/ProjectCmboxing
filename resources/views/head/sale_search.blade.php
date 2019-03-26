@@ -1,4 +1,4 @@
-{!! Form::open(['route' => 'searchSaleByEmp', 'method' => 'POST']) !!}
+{!! Form::open(['url' => $url, 'method' => 'POST']) !!}
     {{ Form::token()}}
     <input type="hidden" name="zoneId" value="{{  Auth::user()->employee->zone_id }}">
       <div class="col-md-2 form-group">

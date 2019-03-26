@@ -16,7 +16,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">เพิ่มบัตรใหม่</h4>
       </div>
-      {!! Form::open(['route' => 'ticket.store', 'method' => 'POST']) !!}
+      {!! Form::open(['route' => 'ticket.store', 'method' => 'POST', 'files' => true]) !!}
       {{ Form::token()}}
       <div class="modal-body">
         <div class="form-group">
@@ -26,6 +26,10 @@
         <div class="form-group">
           <label for="username">ราคา</label>
           <input type="text" class="form-control" id="username" name="price">
+        </div>
+        <div class="form-group">
+          <label for="image">รูปภาพ</label>
+          <input type="file" id="image" name="image">
         </div>
       </div>
       <div class="modal-footer form-group">

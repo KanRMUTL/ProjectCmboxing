@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AddUser;
+use App\Http\Controllers\marketing\StarterController;
 use App\User;
 use App\marketing\Employee;
 use App\marketing\Role;
@@ -14,25 +15,19 @@ class UserController extends Controller
 {
     private $zones;
     private $roles;
-    
+    public $starter;
     public function __construct()
     {
+        $starter = new StarterController();
          $this->zones = Zone::all();
         //  $this->roles =  Auth::user()->role;
     }
 
     public function index()
     {
-        if(Auth()->user()->role == 1)
-            $users = User::userForAdmin()->paginate(10);
-        else
-            $users = User::userForMkhead()->paginate(10);
-        
-        $data = [
-            'users' => $users,
-            'zones' => $this->zones,
-            'roles' => ['แอดมิน','หัวหน้าการตลาด', 'พนักงานการตลาด']
-        ];
+        $data['users'] = User::getUsers()->get();
+        $data['zones'] =$this->zones;
+        $data['roles'] = ['แอดมิน','หัวหน้าฝ่ายการตลาด', 'พนักงานฝ่ายการตลาด'];
         return view('_user.index',$data);
     }
      
@@ -59,8 +54,6 @@ class UserController extends Controller
         catch(Exception $e){
             echo $e->getMessage();
         }
-        
-
         return redirect('/user');
     }
 
@@ -68,18 +61,27 @@ class UserController extends Controller
     {
     }
   
-    public function edit(k$id)
-    {
-       $user = User::find($id);
-       $zones = $this->zones;
-       $data = [
-            'user' => $user,
-            'zones' => $zones,
-            'roles' => 1
-        ];
-
-        // return $data;
-        return view('_user.edit',$data);
+    public function edit($id)
+    { 
+        
+        try
+        {
+            $user = User::find($id);
+            $zones = $this->zones;
+            $data = [
+                    'user' => $user,
+                    'zones' => $zones,
+                    'roles' => ['แอดมิน','หัวหน้าฝ่ายการตลาด', 'พนักงานฝ่ายการตลาด']
+                ];
+                return view('_user.edit',$data);
+        } 
+        catch(Exception $e)
+        {
+            return $e;
+        } 
+        finally
+        {
+        }
     }
 
     public function update(Request $request, $id)
@@ -101,9 +103,9 @@ class UserController extends Controller
         if($request->password != null){
            $user['password'] = bcrypt($request->password);
          }
-        User::find($request->id)->update($user);
-        Employee::where('user_id', '=', $id)->update($employee);
-         return redirect('user');
+        User::find($request->user_id)->update($user);
+        Employee::where('user_id', '=', $request->user_id)->update($employee);
+        return redirect('user');
 
     }
   

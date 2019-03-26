@@ -10,7 +10,7 @@
    </div>
    {!! Form::open(['action' => ['UserController@update', $user->id], 'method' => 'PUT']) !!}
    {{ Form::token()}}
-   <input type="hidden" name="id" value="{{ $user->id}}">
+   <input type="hidden" name="user_id" value="{{ $user->id}}">
    <div class="box-body">
       <div class="row">
          <div class="col-md-6">
@@ -67,32 +67,38 @@
          </div>
       </div>
       <br>
-      <div class="row">
-         <div class="col-md-6">
-            <label for="role">ตำแหน่ง</label>
-            <select class="form-control" id="role" name="role">
-               @foreach ($roles as $role)
-               {{ $selected = ''}}
-               @if($user->role == $role->id)
-               {{ $selected = 'selected' }}
-               @endif()
-               <option value="{{ $role->id }}" {{ $selected }}>{{ $role->name }}</option>
-               @endforeach
-            </select>
+      @if(Auth::user()->role == 1)
+         <div class="row">
+            <div class="col-md-6">
+               <label for="role">ตำแหน่ง</label>
+               <select class="form-control" id="role" name="role">
+                  @foreach ($roles as $key => $role)
+                     @if($user->role == $key)
+                        <option value="{{ $key+1 }}" selected>{{ $role }}</option>           
+                        @continue       
+                     @endif
+                        <option value="{{ $key+1 }}" >{{ $role }}</option>                  
+
+                  @endforeach
+               </select>
+            </div>
+            <div class="col-md-6">
+               <label for="zone">โซน</label>
+               <select class="form-control" id="znoe" name="zone">
+                  @foreach ($zones as $zone)
+                     @if($zone->id == $user->employee->zone_id)
+                        <option value="{{ $zone->id }}" selected>{{ $zone->name }}</option>
+                        @continue
+                     @endif()
+                     <option value="{{ $zone->id }}">{{ $zone->name }}</option>
+                  @endforeach
+               </select>
+            </div>
          </div>
-         <div class="col-md-6">
-            <label for="zone">โซน</label>
-            <select class="form-control" id="znoe" name="zone">
-               @foreach ($zones as $zone)
-               {{ $selected = ''}}
-               @if($zone->id == $user->employee->zone_id)
-               {{ $selected ='selected'}}
-               @endif()
-               <option value="{{ $zone->id }}" {{ $selected }}>{{ $zone->name }}</option>
-               @endforeach
-            </select>
-         </div>
-      </div>
+      @else
+         <input type="hidden" name="zone" value="{{ $user->employee->zone_id }}">
+         <input type="hidden" name="role" value="{{ $user->role }}">
+      @endif
       <div class="box-footer">
          <button type="submit" class="btn btn-primary pull-right">บันทึก</button>
       </div>

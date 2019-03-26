@@ -14,7 +14,7 @@
   <div class="login-box">
     <div class="login-logo">
       <h2>ระบบจัดการฝ่ายการตลาด</h4>
-    </div>
+    </div> 
     <!-- /.login-logo -->
     <div class="login-box-body">
       <p class="login-box-msg">กรุณาเข้าสู่ระบบ</p>
@@ -22,7 +22,7 @@
       <form  action="{{ route('login') }}" method="post">
         {{ csrf_field() }}
         <div class="form-group has-feedback">
-          <input type="username" class="form-control" placeholder="username" name="username">
+          <input type="text" class="form-control" placeholder="username" name="username">
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
