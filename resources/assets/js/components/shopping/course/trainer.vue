@@ -14,13 +14,11 @@
 </template>
 <script>
 export default {
-    mounted(){
-        this.getAllTrainer();
-    },
+    props: ['trainers'],
 
     data(){
         return {
-            trainers : [],
+            
         }
     },
     methods:{

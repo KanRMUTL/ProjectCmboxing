@@ -19,6 +19,8 @@ Vue.component('profile', require('./components/marketing/user/profile.vue'));
 Vue.component('booking', require('./components/shopping/booking.vue'));
 Vue.component('course', require('./components/shopping/addmin/course/course.vue'));
 Vue.component('manage-trainer', require('./components/shopping/addmin/trainer/manage.vue'));
+
+Vue.component('courses-index', require('./components/shopping/course/index.vue'));
 Vue.component('courses', require('./components/shopping/course/courses.vue'));
 Vue.component('trainer', require('./components/shopping/course/trainer.vue'));
 Vue.component('register-course', require('./components/shopping/course/register-course.vue'));

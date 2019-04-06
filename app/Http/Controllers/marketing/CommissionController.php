@@ -63,7 +63,7 @@ class CommissionController extends StarterController
 
     public function getCommissionOfEmp($start, $end, $zoneId)
     {
-        $data = Sale::commission($start, $end, $zoneId, 1)->get();
+        $data = Sale::commission($start, $end, $zoneId, 0)->get();
         foreach ($data as $index => $item) {  
             $data[$index]['commission'] = $this->calEmpCommission($item->ticket_id, $item->amount);
             $data[$index]['date_formated'] = Carbon::parse($item->created_at)->format('d/m/Y');
@@ -153,7 +153,7 @@ class CommissionController extends StarterController
 
     public function getCommissionOfGuide($start, $end, $zoneId)
     {
-        $data = Sale::commission($start, $end, $zoneId, 2)->get();
+        $data = Sale::commission($start, $end, $zoneId, 1)->get();
         foreach($data as $index => $item){
             $data[$index]['commission'] = $this->calGuideCommission($item->ticket_id, $item->amount);
             $data[$index]['date_formated'] = Carbon::parse($item->created_at)->format('d/m/Y');

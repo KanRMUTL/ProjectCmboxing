@@ -38,6 +38,7 @@ class ReportController extends StarterController
             }
             table{
                 border-collapse: collapse;
+                width: 100%;
             }
             table, tr, td, th{
                 border: 1px solid #000;
@@ -196,7 +197,7 @@ class ReportController extends StarterController
             </style>
             <div class='content center'>
             <p class='title'>
-                รายงานค่าคอมมิชชั่นพนักงาน
+                รายงานค่าคอมมิชชั่นไกด์
                 วันที่ ".date('d/m/Y', strtotime($request->start))." 
                 ถึงวันที่ ".date('d/m/Y', strtotime($request->end))." 
             </p>

@@ -12,7 +12,7 @@
             <div class="icon">
                 <i class="fa fa-ticket"></i>
             </div>
-            <a href="/saleByEmployee" class="small-box-footer">
+            <a href="/sale/employee" class="small-box-footer">
                 ข้อมูลเพิ่มเติม <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -28,7 +28,7 @@
             <div class="icon">
                 <i class="fa fa-users"></i>
             </div>
-            <a href="/saleByEmployee" class="small-box-footer">
+            <a href="/sale/employee" class="small-box-footer">
                 ข้อมูลเพิ่มเติม <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -44,7 +44,7 @@
             <div class="icon">
                 <i class="fa fa-money"></i>
             </div>
-            <a href="/saleByEmployee" class="small-box-footer">
+            <a href="/income" class="small-box-footer">
                 ข้อมูลเพิ่มเติม <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>

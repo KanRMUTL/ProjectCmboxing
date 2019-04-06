@@ -124,7 +124,7 @@ class Sale extends Model
                     ['sale_type', '=', $saleTypeId]
                 ])
                 ->whereBetween('created_at', [$before, $after])
-                ->groupBy('created_at', 'ticket_id',  'user_id')
+                ->groupBy('created_at', 'user_id', 'ticket_id')
                 ->orderByRaw('created_at DESC');
         }
         else if($this->roleId == 2) { // หัวหน้าฝ่ายการตลาด
@@ -140,7 +140,7 @@ class Sale extends Model
                     ['sale_type', '=', $saleId]    
                 ])
                 ->whereBetween('created_at', [$before, $after])
-                ->groupBy('ticket_id', 'created_at', 'user_id')
+                ->groupBy('user_id','created_at', 'ticket_id')
                 ->orderByRaw('created_at DESC');
         }
         else if($this->roleId == 3){ // พนักงาน
@@ -156,7 +156,7 @@ class Sale extends Model
                     ['sale_type', '=', $saleId]    
                 ])
                 ->whereBetween('created_at', [$before, $after])
-                ->groupBy('ticket_id', 'created_at', 'user_id')
+                ->groupBy('user_id','created_at', 'ticket_id')
                 ->orderByRaw('created_at DESC');
         }
     }

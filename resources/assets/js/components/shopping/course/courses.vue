@@ -14,19 +14,19 @@
                         class="btn btn-primary" 
                         data-toggle="modal" 
                         data-target="#modal"
-                        @click="courseSelect(index)"
+                        @click="onRegisterClick(course)"
                     >
                         Register Course
                     </button>
                 </div>
             </div>
         </div>
-
-        <register-course :course="courseSelected"/>
     </div>
 </template>
 <script>
 export default {
+    props: ['courseSelect', 'changeShowIndex'],
+
     mounted(){
         this.getAllCourse();
     },
@@ -40,7 +40,7 @@ export default {
                 price: '',
                 detail:''
             },
-            courseSelected:[],
+            
         }
     },
     methods:{
@@ -53,8 +53,9 @@ export default {
             )
         }, 
 
-        courseSelect(index) {  
-            this.courseSelected = this.courses[index];
+        onRegisterClick(course) {
+            this.courseSelect(course)
+            this.changeShowIndex()
         }
         
     },

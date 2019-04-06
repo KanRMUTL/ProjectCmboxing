@@ -1,30 +1,25 @@
 <template>
     <div>
         <h1 align="center">Booking</h1>
-        <div class="seatSelection col-md-12">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="seatRow">
-                        <div v-for="(g1, index) in groups1" :key="index">
-                            <div  :id="'VIP_'+g1.name" role="checkbox" :value="g1.price" aria-checked="false"
-                                focusable="true" tabindex="-1" class="seatNumber" >
-                                {{g1.name}}
-                            </div>
-                        </div>
-                        <!-- <br v-if="index == 19 || index == 39 || index ==59">
-                        <br v-if="index == 19 || index == 39 || index ==59"> -->
-                    </div>
+        <div class="col-md-3">
+            <label for="dateSearch">Select Date</label>
+            <input type="date" id="dateSearch" v-model="dateSearch" class="form-control">
+            <button @click="searchSeat" class="btn btn-success">Search</button>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="seatRow">
+                    <button 
+                        v-for="(g1, index) in groups1"
+                        :key="index"
+                        :title="g1.ticketName"
+                        :disabled="!g1.status"
+                        :class="{'btn btn-primary mr-1 mt-1': g1.status, 'btn btn-danger mr-1 mt-1': !g1.status}"
+                    >
+                    {{ g1.seatName }}
+                    </button>
                 </div>
-            </div>  <!-- End row -->
-        </div>
-        <div class="seatsReceipt col-lg-2">
-            <p><strong>Selected Seats: <span class="seatsAmount">0 </span></strong> <button id="btnClear" class="btn">Clear</button></p>
-            <ul id="seatsList" class="nav nav-stacked"></ul>
-
-        </div>
-
-        <div class="checkout col-lg-offset-6">
-            <span>Subtotal: CA$</span><span class="txtSubTotal">0.00</span><br /><button id="btnCheckout" name="btnCheckout" class="btn btn-primary"> Check out </button>
+            </div>
         </div>
     </div>
 </template>
@@ -37,6 +32,7 @@ export default {
 
     data() {
         return {
+            dateSearch: '',
             groups1: [],        
             groups2: [],       
             groups3: [],      
@@ -48,26 +44,42 @@ export default {
                 id: 0,
                 name: '',
                 price: 0,
-                ticket_id: ''
-            }
+                ticket_id: '',
+                status: ''
+            },
         }
     },
 
     methods: {
-        getSeat()
-        {
+        getSeat() {
             axios.get('/api/booking').then(
               response=>{
                 this.groups1 = response.data.seats_group_1;
-                this.groups2 = response.data.seats_group_1;
-                this.groups3 = response.data.seats_group_1;
-                this.groups4 = response.data.seats_group_1;
-                this.groups5 = response.data.seats_group_1;
-                this.groups6 = response.data.seats_group_1;
-                console.log(response.data)
+                this.groups2 = response.data.seats_group_2;
+                this.groups3 = response.data.seats_group_3;
+                this.groups4 = response.data.seats_group_4;
+                this.groups5 = response.data.seats_group_5;
+                this.groups6 = response.data.seats_group_6;
+                // console.log(response.data)
               }
+            )
+        }, 
+
+        searchSeat() {
+            axios.post('/api/booking/search', {dateSearch: this.dateSearch})
+            .then(
+                response => {
+                    this.groups1 = response.data.seats_group_1;
+                    this.groups2 = response.data.seats_group_2;
+                    this.groups3 = response.data.seats_group_3;
+                    this.groups4 = response.data.seats_group_4;
+                    this.groups5 = response.data.seats_group_5;
+                    this.groups6 = response.data.seats_group_6;
+                    console.log(response.data.date)
+                }
             )
         }
     },
 }
 </script>
+
