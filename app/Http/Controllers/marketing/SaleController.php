@@ -13,6 +13,8 @@ use App\marketing\Guesthouse;
 use App\marketing\SaleType;
 use Carbon\Carbon;
 use App\Http\Controllers\marketing\StarterController;
+use Mpdf\Mpdf;
+
 class SaleController extends StarterController
 {
     public function __construct(){
@@ -30,35 +32,16 @@ class SaleController extends StarterController
             'guesthouses' => Guesthouse::forSale()->get(),
             'zones' => $this->zones,
             'saleTypes' => $this->saleTypes,
+            'saleTypeName' => $saleTypeName,
             'zoneSelected' => $userZone,
             'sales' => $sales,
             'range' => $this->range,
             'url' => $dataForSaleType['url'],
             'header' => $dataForSaleType['header'],
         ];
-        return view('_sale.index', $data);
+        return view('marketing._sale.index', $data);
     }
         
-    public function search(Request $request, $saleTypeName)
-    {
-        $dataForSaleType = $this->setDataForSaleType($saleTypeName);
-        $saleTypeId = $this->saleTypeUrl[$saleTypeName];
-        $sales = Sale::saleDetail($request->start, $request->end, $request->zoneId, $saleTypeId)->get();
-
-        $data = [
-            'tickets' => $this->tickets,
-            'guesthouses' => Guesthouse::forSale()->get(),
-            'zones' => $this->zones,
-            'saleTypes' => $this->saleTypes,
-            'sales' => $sales,
-            'range' => ['start' => $request->start, 'end' => $request->end],
-            'url' => $dataForSaleType['url'],
-            'header' => $dataForSaleType['header'],
-            'zoneSelected' => $request->zoneId 
-        ];
-        return view('_sale.index', $data);
-    }
-
     public function store(Request $request)
     {
         $ticket = Ticket::find($request->ticketId);
@@ -92,7 +75,7 @@ class SaleController extends StarterController
             'saleTypes' => $this->saleTypes,
             'visit' => $visit->format('Y-m-d') // set ให้กำหนด input[type=date] ได้
         ];
-        return view('_sale.edit',$data);
+        return view('marketing._sale.edit',$data);
     }
 
    
@@ -125,5 +108,27 @@ class SaleController extends StarterController
         $url = $this->changeRedirect($user->sale_type);    
         return redirect($url);
     }
+
+    public function search(Request $request, $saleTypeName)
+    {
+        $dataForSaleType = $this->setDataForSaleType($saleTypeName);
+        $saleTypeId = $this->saleTypeUrl[$saleTypeName];
+        $sales = Sale::saleDetail($request->start, $request->end, $request->zoneId, $saleTypeId)->get();
+
+        $data = [
+            'tickets' => $this->tickets,
+            'guesthouses' => Guesthouse::forSale()->get(),
+            'zones' => $this->zones,
+            'saleTypes' => $this->saleTypes,
+            'saleTypeName' => $saleTypeName,
+            'sales' => $sales,
+            'range' => ['start' => $request->start, 'end' => $request->end],
+            'url' => $dataForSaleType['url'],
+            'header' => $dataForSaleType['header'],
+            'zoneSelected' => $request->zoneId 
+        ];
+        return view('marketing._sale.index', $data);
+    }
+
 
 }

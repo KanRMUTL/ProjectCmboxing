@@ -36,7 +36,7 @@ class IncomeController extends StarterController
         $data['zones'] =  $this->zones;
         $data['zoneSelected'] = Auth::user()->employee->zone_id;
         $data['range'] = $this->range;
-        return view('_income/index', $data);
+        return view('marketing._income/index', $data);
     }
 
     public function calIncome($saleType, $total, $ticketId, $amount)
@@ -67,6 +67,6 @@ class IncomeController extends StarterController
         $data['zones'] =  $this->zones;
         $data['zoneSelected'] = $request->zoneId;
         $data['range'] = ['start' => $request->start, 'end' => $request->end];
-        return view('_income/index', $data);
+        return view('marketing._income/index', $data);
     }
 }

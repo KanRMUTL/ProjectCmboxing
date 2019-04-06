@@ -2,11 +2,10 @@
 @section('title','ขายสินค้า')
 @section('header','ขายสินค้า')
 @section('content')
-  {{-- <script src="{{ asset('js/jquery.js')}}"></script>     --}}
-  {{-- <script src="/pos/js/sale_product.js"></script> --}}
+  <link rel="stylesheet" href="{{asset('css/pos/style.css')}}"> 
   <div>
     <div id="vue">
-      <saling></saling>
+      <saling id="{{ Auth::user()->id }}"></saling>
     </div>
 </div>
 @endsection

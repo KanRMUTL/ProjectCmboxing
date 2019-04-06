@@ -31,13 +31,13 @@ class PageController extends Controller
             'income' =>  $income[0]->total
         ];
         // if( Auth::user()->role== 1){
-            return view('admin.index',$data);
+            return view('marketing.admin.index',$data);
         // }
         // else if( Auth::user()->role == 2){
-        //     return view('head.index',$data);
+        //     return view('marketing.head.index',$data);
         // }
         // else if( Auth::user()->role == 3){
-        //     return view('employee.index',$data);
+        //     return view('marketing.employee.index',$data);
         // }
     }
 }

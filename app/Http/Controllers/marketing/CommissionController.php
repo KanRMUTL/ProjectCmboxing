@@ -27,7 +27,7 @@ class CommissionController extends StarterController
         $data['range'] = $this->range;
         $data['zones'] = $this->zones;
         $data['zoneSelected'] = $userZone;
-        return view('_commission.emp', $data);
+        return view('marketing._commission.emp', $data);
     }
 
     public function searchEmp(Request $request)
@@ -36,7 +36,7 @@ class CommissionController extends StarterController
         $data['commission'] = $this->getCommissionOfEmp($request->start,$request->end, $request->zoneId);
         $data['zones'] = $this->zones;
         $data['zoneSelected'] = $request->zoneId;
-        return view('_commission.emp', $data);
+        return view('marketing._commission.emp', $data);
     }
     public function searchGuide(Request $request)
     {   
@@ -48,7 +48,7 @@ class CommissionController extends StarterController
         $data['commission'] = $this->getCommissionOfGuide($request->start, $request->end, $request->zoneId);
         $data['zoneSelected'] = $request->zoneId;
         $data['zones'] = $this->zones;
-        return view('_commission.guide', $data);
+        return view('marketing._commission.guide', $data);
     }
 
     public function guideCommission()
@@ -58,10 +58,10 @@ class CommissionController extends StarterController
         $data['range'] = $this->range;
         $data['zones'] = $this->zones;
         $data['zoneSelected'] = $userZone;
-        return view('_commission.guide', $data);
+        return view('marketing._commission.guide', $data);
     }
 
-    private function getCommissionOfEmp($start, $end, $zoneId)
+    public function getCommissionOfEmp($start, $end, $zoneId)
     {
         $data = Sale::commission($start, $end, $zoneId, 1)->get();
         foreach ($data as $index => $item) {  

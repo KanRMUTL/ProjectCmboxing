@@ -4,12 +4,18 @@ Auth::routes();
 Route::auth();
 Route::get('/', 'shopping\ShoppingController@index');
 Route::get('/about', 'shopping\ShoppingController@about');
-Route::get('/booking', 'shopping\ShoppingController@booking');
+Route::get('/seat', 'shopping\SeatController@index');
+Route::resource('/booking', 'shopping\BookingController');
+Route::get('/courses','shopping\CourseController@courses');
+
 Route::group(['middleware' =>['auth']], function(){
+
     Route::get('/dashboard', 'PageController@index');
+    
     Route::resource('user', 'UserController');
     Route::resource('ticket', 'marketing\TicketController');
-    
+    Route::resource('course', 'shopping\CourseController');
+    Route::resource('trainer', 'shopping\TrainerController');
    
     // ข้อมูลการขายของพนักงานกับไกด์
     Route::prefix('sale')->group(function(){
@@ -20,12 +26,17 @@ Route::group(['middleware' =>['auth']], function(){
         Route::delete('/{id}', 'marketing\SaleController@destroy')->name('sale.destroy');
         Route::get('/{id}/edit', 'marketing\SaleController@edit')->name('sale.edit');
     });
+    
+    Route::post('saleReport', 'marketing\report\ReportController@saleReport')->name('report.sale');
+    Route::post('EmpCommissionReport', 'marketing\report\ReportController@EmpCommissionReport')->name('report.empCommission');
+    Route::post('guideCommissionReport', 'marketing\report\ReportController@guideCommissionReport')->name('report.guideCommission');
 
 
     Route::prefix('chart')->group(function(){
         Route::get('/', 'marketing\ChartSaleController@index');
     });
 
+    //กราฟแท่ง
     Route::prefix('api')->group(function(){
         Route::get('/total','marketing\ChartSaleController@apiZoneTotal'); //รายงานการขายแบ่งตามยอดขาย
         Route::get('/customer','marketing\ChartSaleController@apiZoneCustomer'); //รายงานการขายแบ่งตามจำนวนลูกค้า
@@ -40,20 +51,15 @@ Route::group(['middleware' =>['auth']], function(){
         Route::post('/commissionOfEmp', 'marketing\CommissionController@searchEmp')->name('empCommission.search');
         Route::get('/commissionOfGuide', 'marketing\CommissionController@guideCommission')->name('guideCommission');
         Route::post('/commissionOfGuide', 'marketing\CommissionController@searchguide')->name('guidecommission.search');
-    
-
-    Route::prefix('pdf')->group(function(){
-        Route::get('/', 'PdfController@index');
-    });
 
     Route::prefix('stock')->group(function(){
         Route::get('sale', 'pos\SaleController@index');
-        Route::get('get_product', 'pos\SaleController@getProduct');
-        Route::get('checkbill', 'pos\SaleController@checkBill');
+        Route::resource('product', 'pos\ProductController');
+        Route::resource('report', 'pos\ReportController');
     });
 });
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout
 Route::get('play', function(){
-    return view('vue');
+    
 });

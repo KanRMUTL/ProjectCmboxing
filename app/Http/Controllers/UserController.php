@@ -13,6 +13,7 @@ use Auth;
 
 class UserController extends Controller
 {
+
     private $zones;
     private $roles;
     public $starter;
@@ -28,7 +29,7 @@ class UserController extends Controller
         $data['users'] = User::getUsers()->get();
         $data['zones'] =$this->zones;
         $data['roles'] = ['แอดมิน','หัวหน้าฝ่ายการตลาด', 'พนักงานฝ่ายการตลาด'];
-        return view('_user.index',$data);
+        return view('marketing._user.index',$data);
     }
      
     public function store(Request $request)
@@ -59,11 +60,11 @@ class UserController extends Controller
 
     public function show($id)
     {
+        return view('marketing._user.profile');
     }
   
     public function edit($id)
     { 
-        
         try
         {
             $user = User::find($id);
@@ -73,15 +74,12 @@ class UserController extends Controller
                     'zones' => $zones,
                     'roles' => ['แอดมิน','หัวหน้าฝ่ายการตลาด', 'พนักงานฝ่ายการตลาด']
                 ];
-                return view('_user.edit',$data);
+                return view('marketing._user.edit',$data);
         } 
         catch(Exception $e)
         {
             return $e;
         } 
-        finally
-        {
-        }
     }
 
     public function update(Request $request, $id)

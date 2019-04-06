@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title> @yield('title')</title>
    <!-- CSRF Token -->
+   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
    <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -17,7 +18,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>Cmboxing</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -51,18 +52,22 @@
           <img src="{{ asset('images/avatar5.png') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-        <p>{{ Auth::user()->firstname }}</p>
+        <p>
+          <a href="/user/{{Auth::user()->id}}">
+            {{ Auth::user()->firstname }}
+          </a>
+        </p>
           <!-- Status -->
           <i class="fa fa-circle text-success"></i> Online
         </div>
       </div>
      
       @if(Auth::user()->role == 1)
-        @include('admin.menu')
+        @include('marketing.admin.menu')
       @elseif(Auth::user()->role == 2)
-        @include('head.menu')
+        @include('marketing.head.menu')
       @elseif(Auth::user()->role == 3)
-        @include('employee.menu') 
+        @include('marketing.employee.menu') 
       @endif
     </section>
   </aside>

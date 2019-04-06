@@ -15,7 +15,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="/">Home</a></li>
                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="/booking">Booking</a></li>
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/course">Training Muay Thai</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/courses">Training Muay Thai</a></li>
                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="/about">About</a></li>
                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="/contact">Contact</a></li>
                 @if(Auth::check())

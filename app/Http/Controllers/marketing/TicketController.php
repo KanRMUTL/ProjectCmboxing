@@ -14,7 +14,7 @@ class TicketController extends Controller
         $data = [
             'tickets' => Ticket::all()
         ];
-        return view('_ticket.index', $data);
+        return view('marketing.admin.menu._ticket.index', $data);
     }
 
   
@@ -38,7 +38,7 @@ class TicketController extends Controller
         $data = [
             'ticket' => Ticket::find($id)
         ];
-        return view('_ticket.edit',$data);
+        return view('marketing.admin.menu._ticket.edit',$data);
     }
   
     public function update(Request $request, $id)

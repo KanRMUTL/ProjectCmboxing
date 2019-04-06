@@ -5,8 +5,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="shopping/img/favicon.ico">
@@ -19,11 +19,11 @@
     <link rel="stylesheet" href="shopping/css/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="shopping/css/owl-carousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="shopping/css/style.css">
-
+    <link rel="stylesheet" href="{{ asset('css/shopping/seat.css')}}">
     <link  href="shopping/css/custom/index.css">
 
     <!-- Paypal -->
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    {{-- <script src="https://www.paypalobjects.com/api/checkout.js"></script> --}}
   </head>
 
   <body id="page-top">
@@ -35,6 +35,8 @@
     @yield('content')
 
     
+    <script src="{{ asset('js/app.js') }}"></script>
+
     <!--Global JavaScript -->
     <script src="shopping/js/jquery/jquery.min.js"></script>
     <script src="shopping/js/popper/popper.min.js"></script>
@@ -46,7 +48,7 @@
     <script src="shopping/js/jquery-easing/jquery.easing.min.js"></script> 
     <script src="shopping/js/custom.js"></script> 
 
-    <script src="shopping/js/custom/booking.js"></script>
+    {{-- <script src="shopping/js/custom/booking.js"></script> --}}
   </body>
 
 </html>

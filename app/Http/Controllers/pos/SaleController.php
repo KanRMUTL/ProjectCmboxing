@@ -11,23 +11,17 @@ class SaleController extends Controller
 {
     function index()
     {
-        return view("pos/sale_product");
+        return view("pos.sale_product");
     }
 
-    function getProduct(Request $request)
+    function report()
     {
-        $data = Product::where("barcode", "LIKE", $request->input('barcode'))->first();
-        return $data;
+        return view("pos.report");
     }
 
-    function checkBill(Request $request)
-    {
-        // $bill = [
-        //     "total" => $request->total,
-        //     "user_id" => Auth::user()->id
-        // ];
-        // Bill::insert($bill);
-
-        return $request;
-    }
+    // function getProduct(Request $request)
+    // {
+    //     $data = Product::where("barcode", "LIKE", $request->input('barcode'))->first();
+    //     return $data;
+    // }
 }

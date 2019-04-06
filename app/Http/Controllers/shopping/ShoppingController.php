@@ -27,16 +27,4 @@ class ShoppingController extends StarterController
         
         return view('shopping/about', $data);
     }
-    
-    function booking(){
-        $data =[
-            'seats_group_1' => Seat::where('group', '=', 1)->get(),
-            'seats_group_2' => Seat::where('group', '=', 2)->get(),
-            'seats_group_3' => Seat::where('group', '=', 3)->get(),
-            'seats_group_4' => Seat::where('group', '=', 4)->get(),
-            'seats_group_5' => Seat::where('group', '=', 5)->get(),
-            'seats_group_6' => Seat::where('group', '=', 6)->get(),
-        ];
-        return view('shopping/booking', $data);
-    }
 }

@@ -18,3 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('saling', 'Api\pos\SalingController');
+Route::resource('product', 'Api\pos\ProductController');
+Route::resource('report', 'Api\pos\ReportController');
+Route::resource('booking', 'Api\shopping\BookingController');
+Route::resource('course', 'Api\shopping\CourseController');
+Route::resource('trainer', 'Api\shopping\TrainerController');
+Route::resource('user', 'Api\UserController');
