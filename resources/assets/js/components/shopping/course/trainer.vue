@@ -16,7 +16,7 @@
 export default {
     props: ['trainers'],
 
-    data(){
+    data() {
         return {
             
         }

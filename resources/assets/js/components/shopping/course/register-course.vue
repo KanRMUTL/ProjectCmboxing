@@ -61,7 +61,7 @@ export default {
            this.trainerSelected = trainer
        },
 
-       register(){
+       register() {
            let data = {
                userId: this.userId,
                courseId: this.course.id,

@@ -83,7 +83,7 @@ export default {
         );
       },
 
-      updateUser(){
+      updateUser() {
         var data = {
           firstname: this.user.firstname,
           lastname: this.user.lastname,

@@ -18,7 +18,7 @@
 <script>
 export default {
     props:['id'],
-    mounted(){
+    mounted() {
         this.getAllTrainer();
     },
 

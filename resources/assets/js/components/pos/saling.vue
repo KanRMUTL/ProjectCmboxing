@@ -30,7 +30,7 @@
                 {{product.cart}}
                 <button v-on:click="addAmount(index)">+</button>
               </td>
-              <td>{{ moneyFormat(product.total) }}</td>
+              <td>{{ product.total | moneyFormat }}</td>
               <td>
                 <button class="btn btn-danger" @click="deleteProduct(index)">ลบ</button>
               </td>
@@ -40,7 +40,7 @@
         </table>
       </div>
     </div>
-    <h1 id="total">รวมทั้งสิ้น {{ moneyFormat( SumTotal) }} บาท</h1>
+    <h1 id="total">รวมทั้งสิ้น {{ SumTotal | moneyFormat }} บาท</h1>
     <br>
     <a class="btn btn-primary" id="sale" @click="saleProduct()">ขาย</a>
   </div>
@@ -108,7 +108,7 @@ export default {
           .then(response => {
             swal(
               "บันทึกการขายสินค้าสำเร็จ",
-              "ราคาทั้งหมด " + this.moneyFormat(this.sumTotal) + " บาท",
+              "ราคาทั้งหมด " + this.moneyFormat(this.sumTotal)   + " บาท",
               "success"
             );
             this.clearProduct();
@@ -182,6 +182,14 @@ export default {
       }
       return this.sumTotal;
     },
-  }
+  },
+
+  filters: {
+        moneyFormat: function(Price) {
+            return new Intl.NumberFormat("en-IN", {
+                maximumSignificantDigits: 3
+            }).format(Price);
+        }
+    }
 };
 </script>

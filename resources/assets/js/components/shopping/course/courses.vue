@@ -27,11 +27,11 @@
 export default {
     props: ['courseSelect', 'changeShowIndex'],
 
-    mounted(){
+    mounted() {
         this.getAllCourse();
     },
 
-    data(){
+    data() {
         return {
             courses: [],
             course: {

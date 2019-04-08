@@ -23,7 +23,7 @@
 </template>
 <script>
 export default {
-    data(){
+    data() {
         return{
             trainer :{
                 name: '',
@@ -38,11 +38,11 @@ export default {
             this.trainer.img = event.target.files[0]
         },
 
-        save(){
+        save() {
             this.insertTrainer()
         },  
 
-        insertTrainer(){
+        insertTrainer() {
             const fd = new FormData();
             fd.append('image', this.trainer.img, this.trainer.img.name)
             var data = {

@@ -24,7 +24,7 @@ class StarterController extends Controller
     protected $end;
     protected $saleTypeUrl;
 
-    public function __construct(){
+    public function __construct() {
         $this->tickets = Ticket::all();
         $this->zones = Zone::all();
         $this->roles = ['แอดมิน','หัวหน้าฝ่ายการตลาด', 'พนักงานฝ่ายการตลาด'];

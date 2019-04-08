@@ -67,7 +67,7 @@ export default {
     },
 
     methods: {
-        getAllProduct(){
+        getAllProduct() {
             axios.get('/api/product').then(
               response=>{
                 this.products = response.data;
@@ -93,7 +93,7 @@ export default {
                 }
             });
         },
-        clearData(){
+        clearData() {
             this.product.id = 0;
             this.product.name = '';
             this.product.price = '';

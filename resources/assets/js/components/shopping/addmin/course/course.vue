@@ -160,7 +160,7 @@ export default {
             });
         },
 
-        clearCourse(){
+        clearCourse() {
             this.course.id = 0,
             this.course.name = '',
             this.course.price = '',

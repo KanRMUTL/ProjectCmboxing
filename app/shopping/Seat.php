@@ -21,7 +21,7 @@ class Seat extends Model
         return $this->belongsTo('App\marketing\Ticket');
     }
 
-    public function scopeSeatByGroup($query, $group)
+    public function scopeForBooking($query)
     {
         return $query
                 ->select([
@@ -30,7 +30,6 @@ class Seat extends Model
                     DB::raw('tickets.name as ticketName'),
                     DB::raw('tickets.price as price')
                 ])
-                ->join('tickets', 'seats.ticket_id', '=', 'tickets.id')
-                ->where('group', '=', $group);
+                ->join('tickets', 'seats.ticket_id', '=', 'tickets.id');
     }
 }

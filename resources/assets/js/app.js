@@ -16,7 +16,8 @@ Vue.component('report', require('./components/pos/report.vue'));
 Vue.component('profile', require('./components/marketing/user/profile.vue'));
 
 // เว็บออนไลน์
-Vue.component('booking', require('./components/shopping/booking.vue'));
+Vue.component('booking', require('./components/shopping/booking/booking.vue'));
+Vue.component('booking-detail', require('./components/shopping/booking/booking-detail.vue'));
 Vue.component('course', require('./components/shopping/addmin/course/course.vue'));
 Vue.component('manage-trainer', require('./components/shopping/addmin/trainer/manage.vue'));
 

@@ -18,7 +18,7 @@ class IncomeController extends StarterController
 
     // protected $commission = CommissionController::class;
 
-    public function __construct(){
+    public function __construct() {
         parent::__construct();
     }
 

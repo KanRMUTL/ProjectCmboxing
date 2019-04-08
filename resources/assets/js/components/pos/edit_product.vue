@@ -53,13 +53,13 @@ export default {
     mounted() {
     },
 
-    data(){
+    data() {
         return {
         }
     },
 
     methods: {
-        addProduct(){
+        addProduct() {
             var data = {
                 name: this.product.name,
                 price: this.product.price,
@@ -74,7 +74,7 @@ export default {
             })
         },
 
-        addProduct(){
+        addProduct() {
             var data = {
                     name: this.product.name,
                     price: this.product.price,
@@ -87,7 +87,7 @@ export default {
             })
         },
 
-        updateProduct(){
+        updateProduct() {
             var data = {
                     name: this.product.name,
                     price: this.product.price,
@@ -100,7 +100,7 @@ export default {
             })
         },
 
-        save(){
+        save() {
             if(this.product.modalStatus == 1)
             {
                 this.addProduct();
@@ -115,7 +115,7 @@ export default {
             swal("บันทึกข้อมูลสินค้าเรียบร้อย", "", "success");
         },
 
-           clearData(){
+           clearData() {
             this.product.id = 0;
             this.product.name = '';
             this.product.price = '';

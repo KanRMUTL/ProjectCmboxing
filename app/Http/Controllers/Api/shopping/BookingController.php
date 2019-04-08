@@ -13,24 +13,26 @@ use App\Http\Controllers\marketing\StarterController;
 
 class BookingController extends StarterController
 {
-   
+
     public function index()
     {
         $today = Carbon::today();
-        $group1 = Seat::seatByGroup(1)->get();
-        $group2 = Seat::seatByGroup(2)->get();
-        $group3 = Seat::seatByGroup(3)->get();
-        $group4 = Seat::seatByGroup(4)->get();
-        $group5 = Seat::seatByGroup(5)->get();
-        $group6 = Seat::seatByGroup(6)->get();
-        $data =[
-            'seats_group_1' => $this->addStatusToSeat($group1, $today),
-            'seats_group_2' => $this->addStatusToSeat($group2, $today),
-            'seats_group_3' => $this->addStatusToSeat($group3, $today),
-            'seats_group_4' => $this->addStatusToSeat($group4, $today),
-            'seats_group_5' => $this->addStatusToSeat($group5, $today),
-            'seats_group_6' => $this->addStatusToSeat($group6, $today),
-        ];
+        $seat = Seat::forBooking()->get();
+        $data['seat'] = $this->addAttribute($seat, $today);
+        // $group1 = Seat::forBooking(1)->get();
+        // $group2 = Seat::forBooking(2)->get();
+        // $group3 = Seat::forBooking(3)->get();
+        // $group4 = Seat::forBooking(4)->get();
+        // $group5 = Seat::forBooking(5)->get();
+        // $group6 = Seat::forBooking(6)->get();
+        // $data =[
+        //     'seats_group_1' => $this->addAttribute($group1, $today),
+        //     'seats_group_2' => $this->addAttribute($group2, $today),
+        //     'seats_group_3' => $this->addAttribute($group3, $today),
+        //     'seats_group_4' => $this->addAttribute($group4, $today),
+        //     'seats_group_5' => $this->addAttribute($group5, $today),
+        //     'seats_group_6' => $this->addAttribute($group6, $today),
+        // ];
         
         return response()->json($data);
     }
@@ -71,37 +73,41 @@ class BookingController extends StarterController
         //
     }
 
-    public function addStatusToSeat($data ,$date)
+    public function addAttribute($seat ,$date)
     {
-        foreach($data as $index => $item) 
+        foreach($seat as $index => $item) 
         {
-            $data[$index]['status'] = true;
+            $seat[$index]['status'] = true;
+            $seat[$index]['booked'] = false;
             if(SeatRegister::CheckVisit($item->seatId, $date) > 0)
             {
-                $data[$index]['status'] = false;
+                $seat[$index]['status'] = false;
             }
         }
 
-        return $data;
+        return $seat;
     }
 
     public function search(Request $request)
     {
-        $group1 = Seat::seatByGroup(1)->get();
-        $group2 = Seat::seatByGroup(2)->get();
-        $group3 = Seat::seatByGroup(3)->get();
-        $group4 = Seat::seatByGroup(4)->get();
-        $group5 = Seat::seatByGroup(5)->get();
-        $group6 = Seat::seatByGroup(6)->get();
-        $data =[
-            'seats_group_1' => $this->addStatusToSeat($group1, $request->dateSearch),
-            'seats_group_2' => $this->addStatusToSeat($group2, $request->dateSearch),
-            'seats_group_3' => $this->addStatusToSeat($group3, $request->dateSearch),
-            'seats_group_4' => $this->addStatusToSeat($group4, $request->dateSearch),
-            'seats_group_5' => $this->addStatusToSeat($group5, $request->dateSearch),
-            'seats_group_6' => $this->addStatusToSeat($group6, $request->dateSearch),
-        ];
-        $data['date'] = $request->dateSearch;
+        $today = Carbon::today();
+        $seat = Seat::forBooking()->get();
+        $data['seat'] = $this->addAttribute($seat, $request->dateSearch);
+        // $group1 = Seat::forBooking(1)->get();
+        // $group2 = Seat::forBooking(2)->get();
+        // $group3 = Seat::forBooking(3)->get();
+        // $group4 = Seat::forBooking(4)->get();
+        // $group5 = Seat::forBooking(5)->get();
+        // $group6 = Seat::forBooking(6)->get();
+        // $data =[
+        //     'seats_group_1' => $this->addAttribute($group1, $request->dateSearch),
+        //     'seats_group_2' => $this->addAttribute($group2, $request->dateSearch),
+        //     'seats_group_3' => $this->addAttribute($group3, $request->dateSearch),
+        //     'seats_group_4' => $this->addAttribute($group4, $request->dateSearch),
+        //     'seats_group_5' => $this->addAttribute($group5, $request->dateSearch),
+        //     'seats_group_6' => $this->addAttribute($group6, $request->dateSearch),
+        // ];
+        // $data['date'] = $request->dateSearch;
         return response()->json($data); return response()->json($data);
     }
 }

@@ -90,7 +90,7 @@ export default {
     },
 
     methods: {
-        getBills(){
+        getBills() {
             axios.get('/api/report').then(
                 response=>{
                     this.bills = response.data;

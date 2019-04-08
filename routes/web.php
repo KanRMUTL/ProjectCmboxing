@@ -8,7 +8,7 @@ Route::get('/seat', 'shopping\SeatController@index');
 Route::resource('/booking', 'shopping\BookingController');
 Route::get('/courses','shopping\CourseController@courses');
 
-Route::group(['middleware' =>['auth']], function(){
+Route::group(['middleware' =>['auth']], function() {
 
     Route::get('/dashboard', 'PageController@index');
     
@@ -18,7 +18,7 @@ Route::group(['middleware' =>['auth']], function(){
     Route::resource('trainer', 'shopping\TrainerController');
    
     // ข้อมูลการขายของพนักงานกับไกด์
-    Route::prefix('sale')->group(function(){
+    Route::prefix('sale')->group(function() {
         Route::get('/{saleTypeName}', 'marketing\SaleController@index')->name('sale.index'); 
         Route::post('/{saleTypeName}', 'marketing\SaleController@search')->name('sale.search'); // ค้นหา
         Route::post('/', 'marketing\SaleController@store')->name('sale.store');
@@ -32,12 +32,12 @@ Route::group(['middleware' =>['auth']], function(){
     Route::post('guideCommissionReport', 'marketing\report\ReportController@guideCommissionReport')->name('report.guideCommission');
 
 
-    Route::prefix('chart')->group(function(){
+    Route::prefix('chart')->group(function() {
         Route::get('/', 'marketing\ChartSaleController@index');
     });
 
     //กราฟแท่ง
-    Route::prefix('api')->group(function(){
+    Route::prefix('api')->group(function() {
         Route::get('/total','marketing\ChartSaleController@apiZoneTotal'); //รายงานการขายแบ่งตามยอดขาย
         Route::get('/customer','marketing\ChartSaleController@apiZoneCustomer'); //รายงานการขายแบ่งตามจำนวนลูกค้า
         Route::get('/ticket','marketing\ChartSaleController@apiTicket'); //รายงานการขายแบ่งตามประเภทบัตร
@@ -52,7 +52,7 @@ Route::group(['middleware' =>['auth']], function(){
         Route::get('/commissionOfGuide', 'marketing\CommissionController@guideCommission')->name('guideCommission');
         Route::post('/commissionOfGuide', 'marketing\CommissionController@searchguide')->name('guidecommission.search');
 
-    Route::prefix('stock')->group(function(){
+    Route::prefix('stock')->group(function() {
         Route::get('sale', 'pos\SaleController@index');
         Route::resource('product', 'pos\ProductController');
         Route::resource('report', 'pos\ReportController');
@@ -60,6 +60,6 @@ Route::group(['middleware' =>['auth']], function(){
 });
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout
-Route::get('play', function(){
+Route::get('play', function() {
     
 });
