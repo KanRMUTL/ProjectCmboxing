@@ -25,7 +25,7 @@
 </template>
 <script>
 export default {
-    props: ['courseSelect', 'changeShowIndex'],
+    props: ['courseSelect', 'changeShowIndex', 'userId'],
 
     mounted() {
         this.getAllCourse();
@@ -54,8 +54,16 @@ export default {
         }, 
 
         onRegisterClick(course) {
-            this.courseSelect(course)
-            this.changeShowIndex()
+            if(this.userId !=  0)
+            {
+                this.courseSelect(course)
+                this.changeShowIndex()
+            } else {
+                swal({
+                    icon: 'warning',
+                    title: 'Please login for register course'
+                })
+            }
         }
         
     },

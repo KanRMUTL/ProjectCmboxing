@@ -5,7 +5,11 @@
 @include('shopping.layout.about_banner')
 <div id="vue">
     <div  class="container">
-        <courses-index id="{{ Auth::user()->id }}"></courses-index>
+        @if(Auth::check())
+            <courses-index id="{{ Auth::user()->id }}"></courses-index>
+        @else
+            <courses-index id="0"></courses-index>
+        @endif
     </div>    
 </div>
 @endsection

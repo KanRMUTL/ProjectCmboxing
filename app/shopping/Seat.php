@@ -27,6 +27,7 @@ class Seat extends Model
                 ->select([
                     DB::raw('seats.name as seatName'),
                     DB::raw('seats.id as seatId'),
+                    DB::raw('tickets.id as ticketId'),
                     DB::raw('tickets.name as ticketName'),
                     DB::raw('tickets.price as price')
                 ])

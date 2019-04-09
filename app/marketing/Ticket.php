@@ -31,4 +31,9 @@ class Ticket extends Model
         return $this->hasMany('App\shopping\Seat');
     }
     
+    public function saleTicketDetil()
+    {
+        return $this->hasMany('App\shopping\SaleTicketDetail');
+    }
+
 }

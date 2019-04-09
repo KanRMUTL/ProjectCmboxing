@@ -17,20 +17,54 @@
                Total is {{ total | moneyFormat }} ฿
             </button>
         </div>
-        <button class="btn btn-success">Pay</button>
+        <button 
+            class="btn btn-success" 
+            @click="saveBooking"
+            :disabled="bookDetail.length == 0"
+        >
+        Pay
+        </button>
     </div>
 </template>
 
 <script>
 export default {
-    props:['bookDetail', 'total'],
+    props:[
+        'bookDetail', 
+        'total', 
+        'dateVisit', 
+        'userId', 
+        'searchSeat',
+        'clearData'
+    ],
 
     mounted() {
 
     },
 
     methods: {
+        saveBooking() {
+            var data = {
+                dateVisit: this.dateVisit,
+                bookDetail: this.bookDetail,
+                total: this.total,
+                userId: this.userId
+            }
+            axios.post('/api/booking', data)
+            .then(
+                response => {
+                    if(response.status == 200) {
+                        swal({
+                            icon: 'success',
+                            title: 'Booking Complete' 
+                        })
+                    }
+                }
+            )
 
+            this.clearData()
+            this.searchSeat()
+        }
     },
 
     filters: {
@@ -38,7 +72,9 @@ export default {
             return new Intl.NumberFormat("en-IN", {
                 maximumSignificantDigits: 3
             }).format(Price);
-        }
+        },
+
+       
     }
 }
 </script>

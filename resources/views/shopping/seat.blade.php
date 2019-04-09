@@ -3,6 +3,10 @@
 
 @section('content')
 <div id="vue">
-    <booking></booking>
+    @if(Auth::check())
+        <booking id="{{ Auth::user()->id }}"></booking>
+    @else
+        <booking id="0"></booking>
+    @endif
 </div>
 @endsection

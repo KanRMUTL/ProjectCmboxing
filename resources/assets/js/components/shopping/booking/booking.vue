@@ -1,39 +1,140 @@
 <template>
     <div>
         <h1 align="center">Booking</h1>
+
         <div class="col-md-3">
             <label for="dateSearch">Select Date</label>
             <input type="date" id="dateSearch" v-model="dateSearch" class="form-control">
             <button @click="searchSeat" class="btn btn-success">Search</button>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="seatRow">
-                    <button 
-                        v-for="(seat, index) in seats"
-                        :key="index"
-                        :title="seat.ticketName"
-                        :disabled="!seat.status"
-                        :class="{'btn btn-primary mr-1 mt-1': seat.status, 'btn btn-danger mr-1 mt-1': !seat.status || seat.booked}"
-                        @click="onBooked(index)"
-                    >
-                    {{ seat.seatName }}
-                    </button>
-                </div>
+
+        <div class="seatSelection col-md-12">
+            <div class="row">
+                    <div class="col-md-12">
+                        <div class="seatRow">
+                            <seat 
+                                v-for="(seat, index) in seats"
+                                v-if="index <= 79"
+                                :key="index"
+                                :limitRow="20"
+                                :seat="seat"
+                                :col="'col-md-12'"
+                                :onBooked="onBooked"
+                                :realIndex="index"
+                                :fakeIndex="index"
+                            />
+                        </div>
+                    </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-md-6">
+                        <div class="seatRow">
+                            <seat 
+                                v-for="(seat, index) in seats"
+                                v-if="index > 79 && index <= 109"
+                                :key="index"
+                                :limitRow="10"
+                                :seat="seat"
+                                :col="'col-md-12'"
+                                :onBooked="onBooked"
+                                :realIndex="index"
+                                :fakeIndex="index"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="seatRow">
+                            <seat 
+                                v-for="(seat, index) in seats"
+                                v-if="index > 109 && index <= 139"
+                                :key="index"
+                                :limitRow="10"
+                                :seat="seat"
+                                :col="'col-md-12'"
+                                :onBooked="onBooked"
+                                :realIndex="index"
+                                :fakeIndex="index"
+                            />
+                        </div>
+                    </div>
+            </div>
+            <br><br>
+            <div class="row">
+                    <div class="col-md-4">
+                        <div class="seatRow">
+                            <seat 
+                                v-for="(seat, index) in seats"
+                                v-if="index > 139 && index <= 184"
+                                :key="index"
+                                :limitRow="3"
+                                :seat="seat"
+                                :col="'col-md-12'"
+                                :onBooked="onBooked"
+                                :realIndex="index"
+                                :fakeIndex="index - 2"
+                            />
+                        </div>
+                    </div>
+
+            <div class="col-md-4">
+                <div style="background-color: aqua; width: 100%; height: 96%;"></div>
+            </div>
+
+                    <div class="col-md-4">
+                        <div class="seatRow">
+                            <seat 
+                                v-for="(seat, index) in seats"
+                                v-if="index > 184 && index <= 229"
+                                :key="index"
+                                :limitRow="3"
+                                :seat="seat"
+                                :col="'col-md-12'"
+                                :onBooked="onBooked"
+                                :realIndex="index"
+                                :fakeIndex="index - 2"
+                            />
+                        </div>
+                    </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-md-12">
+                        <div class="seatRow">
+                            <seat 
+                                v-for="(seat, index) in seats"
+                                v-if="index > 229 && index <= 259"
+                                :key="index"
+                                :limitRow="15"
+                                :seat="seat"
+                                :col="'col-md-12'"
+                                :onBooked="onBooked"
+                                :realIndex="index"
+                                :fakeIndex="index - 5"
+                            />
+                        </div>
+                    </div>
             </div>
         </div>
-         
         <booking-detail
+            v-if="id != 0"
             :bookDetail="bookDetails"
             :total="getTotal"
+            :dateVisit="dateSearch"
+            :userId="id"
+            :searchSeat="searchSeat"
+            :clearData="clearData"
         />
     </div>
 </template>
 
 <script>
 export default {
+    props:['id'],
     mounted() {
         this.getSeat();
+        console.log(this.id)
     },
 
     data() {
@@ -67,6 +168,7 @@ export default {
         }, 
 
         searchSeat() {
+            this.clearData()
             axios.post('/api/booking/search', {dateSearch: this.dateSearch})
             .then(
                 response => {
@@ -77,10 +179,22 @@ export default {
         },
 
         onBooked(index) {
-            var currentSeat = this.seats[index]
-            currentSeat.booked == 1? this.bookDetails.splice(this.bookDetails.indexOf(currentSeat), 1): this.bookDetails.push(this.seats[index])  
-            this.seats[index].booked = currentSeat.booked == 1? 0: 1;
+            if(this.id != 0) {
+                var currentSeat = this.seats[index]
+                currentSeat.booked == 1? this.bookDetails.splice(this.bookDetails.indexOf(currentSeat), 1): this.bookDetails.push(this.seats[index])  
+                this.seats[index].booked = currentSeat.booked == 1? 0: 1;
+            } else {
+                swal({
+                    icon: 'warning',
+                    title: 'Please login for booking'
+                })
+            }
         },
+
+        clearData() {
+            this.bookDetails = []
+            this.total = 0
+        }
         
     },
 
@@ -104,4 +218,57 @@ export default {
  .seatRow .btn{
      font-size: 75%;
  }
+
+ 
+.seatSelection {
+  text-align: center;
+  padding: 5px;
+	margin: 15px;}
+
+.seatsReceipt {text-align: center;}
+
+.seatNumber {
+	display: inline;
+	padding: 10px;
+	background-color: #5c86eb;
+	color: #FFF;
+	border-radius: 5px;
+	cursor: default;
+	height: 25px;
+	width: 25px;
+	line-height: 25px;
+	text-align: center;
+ }
+
+ .seatEndRow{
+     display: flex;
+     padding: 10px;
+	background-color: #5c86eb;
+	color: #FFF;
+	border-radius: 5px;
+	cursor: default;
+	height: 25px;
+	width: 25px;
+	line-height: 25px;
+	text-align: center;
+ }
+
+.seatRow {padding: 10px;}
+
+.seatSelected {
+	background-color: lightgreen;
+	color: black;
+ }
+
+.seatUnavailable {background-color: gray;}
+
+.seatRowNumber {
+	clear: none;
+	display: inline;
+ }
+
+.hidden {display: none;}
+
+.seatsAmount {max-width: 2em;}
+
 </style>

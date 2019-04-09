@@ -2,7 +2,8 @@
 <div>
     <courses 
         :courseSelect="courseSelect" 
-        :changeShowIndex="changeShowIndex" 
+        :changeShowIndex="changeShowIndex"
+        :userId="id" 
         v-show="showIndex" />
     <trainer 
         :trainers="trainers"

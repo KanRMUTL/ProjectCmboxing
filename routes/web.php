@@ -5,7 +5,6 @@ Route::auth();
 Route::get('/', 'shopping\ShoppingController@index');
 Route::get('/about', 'shopping\ShoppingController@about');
 Route::get('/seat', 'shopping\SeatController@index');
-Route::resource('/booking', 'shopping\BookingController');
 Route::get('/courses','shopping\CourseController@courses');
 
 Route::group(['middleware' =>['auth']], function() {

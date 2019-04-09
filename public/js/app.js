@@ -1488,6 +1488,7 @@ Vue.component('profile', __webpack_require__(58));
 
 // เว็บออนไลน์
 Vue.component('booking', __webpack_require__(61));
+Vue.component('seat', __webpack_require__(107));
 Vue.component('booking-detail', __webpack_require__(67));
 Vue.component('course', __webpack_require__(70));
 Vue.component('manage-trainer', __webpack_require__(73));
@@ -45695,7 +45696,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n.seatRow .btn{\n    font-size: 75%;\n}\n", ""]);
+exports.push([module.i, "\n.seatRow .btn{\n     font-size: 75%;\n}\n.seatSelection {\n  text-align: center;\n  padding: 5px;\n\tmargin: 15px;\n}\n.seatsReceipt {text-align: center;\n}\n.seatNumber {\n\tdisplay: inline;\n\tpadding: 10px;\n\tbackground-color: #5c86eb;\n\tcolor: #FFF;\n\tborder-radius: 5px;\n\tcursor: default;\n\theight: 25px;\n\twidth: 25px;\n\tline-height: 25px;\n\ttext-align: center;\n}\n.seatEndRow{\n     display: -webkit-box;\n     display: -ms-flexbox;\n     display: flex;\n     padding: 10px;\n\tbackground-color: #5c86eb;\n\tcolor: #FFF;\n\tborder-radius: 5px;\n\tcursor: default;\n\theight: 25px;\n\twidth: 25px;\n\tline-height: 25px;\n\ttext-align: center;\n}\n.seatRow {padding: 10px;\n}\n.seatSelected {\n\tbackground-color: lightgreen;\n\tcolor: black;\n}\n.seatUnavailable {background-color: gray;\n}\n.seatRowNumber {\n\tclear: none;\n\tdisplay: inline;\n}\n.hidden {display: none;\n}\n.seatsAmount {max-width: 2em;\n}\n\n", ""]);
 
 // exports
 
@@ -45771,10 +45772,111 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['id'],
     mounted: function mounted() {
         this.getSeat();
+        console.log(this.id);
     },
     data: function data() {
         return {
@@ -45808,15 +45910,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         searchSeat: function searchSeat() {
             var _this2 = this;
 
+            this.clearData();
             axios.post('/api/booking/search', { dateSearch: this.dateSearch }).then(function (response) {
                 _this2.seats = response.data.seat;
                 // console.log(response.data.date)
             });
         },
         onBooked: function onBooked(index) {
-            var currentSeat = this.seats[index];
-            currentSeat.booked == 1 ? this.bookDetails.splice(this.bookDetails.indexOf(currentSeat), 1) : this.bookDetails.push(this.seats[index]);
-            this.seats[index].booked = currentSeat.booked == 1 ? 0 : 1;
+            if (this.id != 0) {
+                var currentSeat = this.seats[index];
+                currentSeat.booked == 1 ? this.bookDetails.splice(this.bookDetails.indexOf(currentSeat), 1) : this.bookDetails.push(this.seats[index]);
+                this.seats[index].booked = currentSeat.booked == 1 ? 0 : 1;
+            } else {
+                swal({
+                    icon: 'warning',
+                    title: 'Please login for booking'
+                });
+            }
+        },
+        clearData: function clearData() {
+            this.bookDetails = [];
+            this.total = 0;
         }
     },
 
@@ -45878,48 +45992,185 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c(
-            "div",
-            { staticClass: "seatRow" },
-            _vm._l(_vm.seats, function(seat, index) {
-              return _c(
-                "button",
-                {
-                  key: index,
-                  class: {
-                    "btn btn-primary mr-1 mt-1": seat.status,
-                    "btn btn-danger mr-1 mt-1": !seat.status || seat.booked
-                  },
-                  attrs: { title: seat.ticketName, disabled: !seat.status },
-                  on: {
-                    click: function($event) {
-                      _vm.onBooked(index)
-                    }
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(seat.seatName) +
-                      "\n                "
-                  )
-                ]
-              )
-            })
-          )
+      _c("div", { staticClass: "seatSelection col-md-12" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c(
+              "div",
+              { staticClass: "seatRow" },
+              _vm._l(_vm.seats, function(seat, index) {
+                return index <= 79
+                  ? _c("seat", {
+                      key: index,
+                      attrs: {
+                        limitRow: 20,
+                        seat: seat,
+                        col: "col-md-12",
+                        onBooked: _vm.onBooked,
+                        realIndex: index,
+                        fakeIndex: index
+                      }
+                    })
+                  : _vm._e()
+              })
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c(
+              "div",
+              { staticClass: "seatRow" },
+              _vm._l(_vm.seats, function(seat, index) {
+                return index > 79 && index <= 109
+                  ? _c("seat", {
+                      key: index,
+                      attrs: {
+                        limitRow: 10,
+                        seat: seat,
+                        col: "col-md-12",
+                        onBooked: _vm.onBooked,
+                        realIndex: index,
+                        fakeIndex: index
+                      }
+                    })
+                  : _vm._e()
+              })
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c(
+              "div",
+              { staticClass: "seatRow" },
+              _vm._l(_vm.seats, function(seat, index) {
+                return index > 109 && index <= 139
+                  ? _c("seat", {
+                      key: index,
+                      attrs: {
+                        limitRow: 10,
+                        seat: seat,
+                        col: "col-md-12",
+                        onBooked: _vm.onBooked,
+                        realIndex: index,
+                        fakeIndex: index
+                      }
+                    })
+                  : _vm._e()
+              })
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _c("br"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-4" }, [
+            _c(
+              "div",
+              { staticClass: "seatRow" },
+              _vm._l(_vm.seats, function(seat, index) {
+                return index > 139 && index <= 184
+                  ? _c("seat", {
+                      key: index,
+                      attrs: {
+                        limitRow: 3,
+                        seat: seat,
+                        col: "col-md-12",
+                        onBooked: _vm.onBooked,
+                        realIndex: index,
+                        fakeIndex: index - 2
+                      }
+                    })
+                  : _vm._e()
+              })
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c(
+              "div",
+              { staticClass: "seatRow" },
+              _vm._l(_vm.seats, function(seat, index) {
+                return index > 184 && index <= 229
+                  ? _c("seat", {
+                      key: index,
+                      attrs: {
+                        limitRow: 3,
+                        seat: seat,
+                        col: "col-md-12",
+                        onBooked: _vm.onBooked,
+                        realIndex: index,
+                        fakeIndex: index - 2
+                      }
+                    })
+                  : _vm._e()
+              })
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c(
+              "div",
+              { staticClass: "seatRow" },
+              _vm._l(_vm.seats, function(seat, index) {
+                return index > 229 && index <= 259
+                  ? _c("seat", {
+                      key: index,
+                      attrs: {
+                        limitRow: 15,
+                        seat: seat,
+                        col: "col-md-12",
+                        onBooked: _vm.onBooked,
+                        realIndex: index,
+                        fakeIndex: index - 5
+                      }
+                    })
+                  : _vm._e()
+              })
+            )
+          ])
         ])
       ]),
       _vm._v(" "),
-      _c("booking-detail", {
-        attrs: { bookDetail: _vm.bookDetails, total: _vm.getTotal }
-      })
+      _vm.id != 0
+        ? _c("booking-detail", {
+            attrs: {
+              bookDetail: _vm.bookDetails,
+              total: _vm.getTotal,
+              dateVisit: _vm.dateSearch,
+              userId: _vm.id,
+              searchSeat: _vm.searchSeat,
+              clearData: _vm.clearData
+            }
+          })
+        : _vm._e()
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("div", {
+        staticStyle: {
+          "background-color": "aqua",
+          width: "100%",
+          height: "96%"
+        }
+      })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -46005,14 +46256,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['bookDetail', 'total'],
+    props: ['bookDetail', 'total', 'dateVisit', 'userId', 'searchSeat', 'clearData'],
 
     mounted: function mounted() {},
 
 
-    methods: {},
+    methods: {
+        saveBooking: function saveBooking() {
+            var data = {
+                dateVisit: this.dateVisit,
+                bookDetail: this.bookDetail,
+                total: this.total,
+                userId: this.userId
+            };
+            axios.post('/api/booking', data).then(function (response) {
+                if (response.status == 200) {
+                    swal({
+                        icon: 'success',
+                        title: 'Booking Complete'
+                    });
+                }
+            });
+
+            this.clearData();
+            this.searchSeat();
+        }
+    },
 
     filters: {
         moneyFormat: function moneyFormat(Price) {
@@ -46020,6 +46297,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 maximumSignificantDigits: 3
             }).format(Price);
         }
+
     }
 });
 
@@ -46085,7 +46363,15 @@ var render = function() {
       2
     ),
     _vm._v(" "),
-    _c("button", { staticClass: "btn btn-success" }, [_vm._v("Pay")])
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-success",
+        attrs: { disabled: _vm.bookDetail.length == 0 },
+        on: { click: _vm.saveBooking }
+      },
+      [_vm._v("\n    Pay\n    ")]
+    )
   ])
 }
 var staticRenderFns = []
@@ -46872,6 +47158,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id'],
@@ -46928,7 +47215,8 @@ var render = function() {
         ],
         attrs: {
           courseSelect: _vm.courseSelect,
-          changeShowIndex: _vm.changeShowIndex
+          changeShowIndex: _vm.changeShowIndex,
+          userId: _vm.id
         }
       }),
       _vm._v(" "),
@@ -47053,7 +47341,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['courseSelect', 'changeShowIndex'],
+    props: ['courseSelect', 'changeShowIndex', 'userId'],
 
     mounted: function mounted() {
         this.getAllCourse();
@@ -47080,8 +47368,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         onRegisterClick: function onRegisterClick(course) {
-            this.courseSelect(course);
-            this.changeShowIndex();
+            if (this.userId != 0) {
+                this.courseSelect(course);
+                this.changeShowIndex();
+            } else {
+                swal({
+                    icon: 'warning',
+                    title: 'Please login for register course'
+                });
+            }
         }
     },
 
@@ -47620,6 +47915,177 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(110)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(109)
+/* template */
+var __vue_template__ = __webpack_require__(108)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/shopping/booking/seat.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-77b7768a", Component.options)
+  } else {
+    hotAPI.reload("data-v-77b7768a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "root" }, [
+    _c(
+      "button",
+      {
+        class: {
+          "btn btn-primary mr-1 mt-1": _vm.seat.status,
+          "btn btn-danger mr-1 mt-1": !_vm.seat.status || _vm.seat.booked
+        },
+        attrs: { title: _vm.seat.ticketName, disabled: !_vm.seat.status },
+        on: {
+          click: function($event) {
+            _vm.onBooked(_vm.realIndex)
+          }
+        }
+      },
+      [_vm._v("\n        " + _vm._s(_vm.seat.seatName) + "\n    ")]
+    ),
+    _vm._v(" "),
+    (_vm.fakeIndex + 1) % _vm.limitRow == 0 ? _c("br") : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-77b7768a", module.exports)
+  }
+}
+
+/***/ }),
+/* 109 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['seat', 'limitRow', 'col', 'fakeIndex', 'realIndex', 'onBooked']
+});
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(111);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(13)("47d3401d", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-77b7768a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./seat.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-77b7768a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./seat.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(12)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.root {\n    display: inline;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
