@@ -59,6 +59,6 @@ Route::group(['middleware' =>['auth']], function() {
 });
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout
-Route::get('play', function() {
-    
+Route::get('/play', function() {
+    return view('shopping.login.login');
 });

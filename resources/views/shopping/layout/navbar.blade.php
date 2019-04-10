@@ -21,7 +21,7 @@
                 @if(Auth::check())
                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="/dashboard">{{ Auth::user()->firstname }}&emsp;{{ Auth::user()->lastname }}</a></li>
                 @else
-                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/" data-toggle="modal" data-target="#login-modal">Login or Register</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/login">Login</a></li>
                 @endif
             </ul>  
         </div>

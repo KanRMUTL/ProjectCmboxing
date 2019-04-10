@@ -29,11 +29,8 @@
   <body id="page-top">
 
     @include('shopping.layout.navbar')
-
-    @include('shopping.layout.login_modal')
     
     @yield('content')
-
     
     <script src="{{ asset('js/app.js') }}"></script>
 
