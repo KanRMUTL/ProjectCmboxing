@@ -4,8 +4,8 @@ Auth::routes();
 Route::auth();
 Route::get('/', 'shopping\ShoppingController@index');
 Route::get('/about', 'shopping\ShoppingController@about');
-Route::get('/seat', 'shopping\SeatController@index');
-Route::get('/courses','shopping\CourseController@courses');
+Route::resource('/booking', 'shopping\SeatController');
+Route::get('/courses','shopping\CourseController@index');
 
 Route::group(['middleware' =>['auth']], function() {
 

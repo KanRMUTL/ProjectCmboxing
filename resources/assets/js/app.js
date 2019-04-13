@@ -19,6 +19,10 @@ Vue.component('profile', require('./components/marketing/user/profile.vue'));
 Vue.component('booking', require('./components/shopping/booking/booking.vue'));
 Vue.component('seat', require('./components/shopping/booking/seat.vue'));
 Vue.component('booking-detail', require('./components/shopping/booking/booking-detail.vue'));
+
+Vue.component('ticket', require('./components/shopping/ticket/ticket.vue'));
+Vue.component('ticket-detail', require('./components/shopping/ticket/ticket-detail.vue'));
+
 Vue.component('course', require('./components/shopping/addmin/course/course.vue'));
 Vue.component('manage-trainer', require('./components/shopping/addmin/trainer/manage.vue'));
 

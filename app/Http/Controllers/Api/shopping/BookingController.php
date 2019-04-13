@@ -45,27 +45,47 @@ class BookingController extends StarterController
         foreach($request->bookDetail as $detail)
         {
             $seatRegister = new SeatRegister;
-            $saleTicketDetail = new SaleTicketDetail();
 
             $seatRegister->visit = $request->dateVisit;
             $seatRegister->sale_ticket_id = $saleTicket->id;
             $seatRegister->seat_id = $detail['seatId'];
             $seatRegister->save();
 
-            $saleTicketDetail->amount = 1;
-            $saleTicketDetail->total = $detail['price'];
-            $saleTicketDetail->ticket_id = $detail['ticketId'];
-            $saleTicketDetail->sale_ticket_id = $saleTicket->id;
-            $saleTicketDetail->save();
-
+           
         }
+
+        foreach($request->saleDetail as $saleDetail)
+        { 
+            if($saleDetail['amount'] > 0)
+            {
+                $saleTicketDetail = new SaleTicketDetail();
+                $saleTicketDetail->amount = $saleDetail['amount'];
+                $saleTicketDetail->total = $saleDetail['total'];
+                $saleTicketDetail->ticket_id = $saleDetail['ticketId'];
+                $saleTicketDetail->sale_ticket_id = $saleTicket->id;
+                $saleTicketDetail->save();
+            }
+            
+        }
+
         return response()->json();
     }
 
  
-    public function show($id)
+    public function show($userId)
     {
-        //
+        $tickets = Ticket::all();
+        $ticketDetails = SaleTicket::ticketDetail($userId)->get();
+        foreach($ticketDetails as $index => $ticketDetail) {
+            $visit = Carbon::createFromFormat('Y-m-d', $ticketDetail['visit']); // วันที่เข้ามาชม
+            $today = Carbon::today(); //วันนี้
+
+            $ticketDetails[$index]['status'] = $visit >= $today? true : false; // ถ้าวันที่เข้ามาชม มากกว่า วันนี้ให้สถานะเป็น true
+            
+            $ticketDetails[$index]['detail'] = SaleTicketDetail::myTicket($ticketDetail->id)->get();
+            $ticketDetails[$index]['seat'] = SeatRegister::RegisterDetail($ticketDetail->id)->get();
+        }
+        return response()->json(['ticketDetails' => $ticketDetails, 'tickets' => $tickets]);
     }
 
   

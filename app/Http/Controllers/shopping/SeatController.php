@@ -16,5 +16,10 @@ class SeatController extends StarterController
        return view('shopping.seat');
     }
 
+    function show($userId)
+    {
+        return view('shopping.user.ticket');
+    }
+
   
 }

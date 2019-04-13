@@ -38,15 +38,35 @@ export default {
         'clearData'
     ],
 
+    data() {
+        return{
+            saleDetail : {
+                ringside:{
+                    ticketId: 2,
+                    amount : 0,
+                    total: 0
+                },
+                vip:{
+                    ticketId: 3,
+                    amount : 0,
+                    total: 0
+                },
+        }
+        }
+        
+    },
+
     mounted() {
 
     },
 
     methods: {
         saveBooking() {
+            this.prepareSaleDetail()
             var data = {
                 dateVisit: this.dateVisit,
                 bookDetail: this.bookDetail,
+                saleDetail: this.saleDetail,
                 total: this.total,
                 userId: this.userId
             }
@@ -64,6 +84,22 @@ export default {
 
             this.clearData()
             this.searchSeat()
+        },
+
+        prepareSaleDetail()
+        {
+            for(var key in this.bookDetail)
+            {
+                // console.log(this.bookDetail[key])
+                if(this.bookDetail[key].ticketId == 2) { // Ringside
+                    this.saleDetail.ringside.amount += 1
+                    this.saleDetail.ringside.total += Number(this.bookDetail[key].price)
+                }
+                if(this.bookDetail[key].ticketId == 3) { // Ringside
+                    this.saleDetail.vip.amount += 1
+                    this.saleDetail.vip.total += Number(this.bookDetail[key].price)
+                }
+            }
         }
     },
 
@@ -73,8 +109,6 @@ export default {
                 maximumSignificantDigits: 3
             }).format(Price);
         },
-
-       
     }
 }
 </script>

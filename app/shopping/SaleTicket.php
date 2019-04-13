@@ -14,4 +14,18 @@ class SaleTicket extends Model
     {
         return $this->hasMany('App\shopping\SaleTicketDetail');
     }
+
+    public function scopeTicketDetail($query, $userId)
+    {
+        return $query
+                ->select(
+                    'id',
+                    'visit',
+                    'created_at'
+                )
+                ->where([
+                    ['sale_tickets.user_id', '=', $userId]
+                ])
+                ->orderBy('created_at', 'DESC');
+    }
 }

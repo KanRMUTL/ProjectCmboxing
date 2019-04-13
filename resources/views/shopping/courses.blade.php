@@ -2,7 +2,9 @@
 @section('title', 'Welcome to CM Boxing')
 
 @section('content')
+
 @include('shopping.layout.about_banner')
+
 <div id="vue">
     <div  class="container">
         @if(Auth::check())
