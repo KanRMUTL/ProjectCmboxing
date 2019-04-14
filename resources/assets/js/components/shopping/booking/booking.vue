@@ -134,7 +134,6 @@ export default {
     props:['id'],
     mounted() {
         this.getSeat();
-        console.log(this.id)
     },
 
     data() {

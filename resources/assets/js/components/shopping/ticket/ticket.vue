@@ -12,12 +12,20 @@
         </thead>
         <tbody>
           <tr 
-            v-for="(ticketDetail,index) in ticketDetails"
+            v-for="(ticketDetail, index) in ticketDetails"
             :class="{'table-info': index % 2 == 0}"
+            :key="index"
+            @click="sendDataToTicketDetail(ticketDetail)"
+            data-toggle="modal" 
+            data-target="#ticket-detail-modal"
           >
             <td>{{ ticketDetail.visit | formatDate }}</td>
             <td>
-              <span class="badge badge-primary" v-for="detail in ticketDetail.detail">
+              <span 
+                class="badge badge-primary" 
+                v-for="(detail, index) in ticketDetail.detail"
+                :key="index"
+              >
                 {{ detail.amount + " * " + detail.name }}
               </span>
             </td>
@@ -30,6 +38,13 @@
           </tr>
         </tbody>
       </table>
+
+      <ticket-detail 
+        :ticketDetail="ticketDetail" 
+        :tickets="tickets"
+        :seat="seat"
+      />
+
     </div>
 </template>
 
@@ -39,12 +54,21 @@ export default {
 
     mounted() {
         this.getAllTicket();
+
+        $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+})
     },
 
     data() {
         return {
             tickets: [],
-            ticketDetails: []
+            ticketDetails: [],
+            ticketDetail:[],
+            seat: {
+                ringside: [],
+                vip: []
+            },
         }
     },
 
@@ -57,6 +81,30 @@ export default {
                     this.ticketDetails = res.data.ticketDetails
                 }
             )
+        },
+
+        sendDataToTicketDetail(ticketDetail) {
+          this.clearSeat()
+          this.ticketDetail = ticketDetail;
+          this.setDataToSeat(ticketDetail)
+        },
+
+        setDataToSeat(ticketDetail) {
+            for(var key in ticketDetail.seat) {
+                if(ticketDetail.seat[key].ticketId == 2) {
+                    this.seat.ringside.push(ticketDetail.seat[key].seatName)
+                }
+                if(ticketDetail.seat[key].ticketId == 3) {
+                    this.seat.vip.push(ticketDetail.seat[key].seatName)
+                }
+            }
+        },
+
+        clearSeat() {
+          this.seat = {
+                ringside: [],
+                vip: []
+            }
         }
     },
 
