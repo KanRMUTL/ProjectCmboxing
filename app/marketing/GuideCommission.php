@@ -11,6 +11,8 @@ class GuideCommission extends Model
         'ticket_id'
     ];
 
+    public $timestamps = false;
+
     public function ticket()
     {
         return $this->belongsTo('App\marketing\Ticket');

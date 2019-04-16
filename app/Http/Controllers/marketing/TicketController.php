@@ -5,6 +5,7 @@ namespace App\Http\Controllers\marketing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\marketing\Ticket;
+use App\marketing\GuideCommission;
 
 class TicketController extends Controller
 {
@@ -12,7 +13,7 @@ class TicketController extends Controller
     public function index()
     {
         $data = [
-            'tickets' => Ticket::all()
+            'tickets' => Ticket::joinGuideCommission()->get()
         ];
         return view('marketing.admin.menu._ticket.index', $data);
     }
@@ -25,10 +26,16 @@ class TicketController extends Controller
         $public_path = 'shopping/img/ticket';
         $destination =  base_path() . '/public/'. $public_path;
         $file = $request->file('image')->move($destination, $image_name);
-        Ticket::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'img' => $image_name
+
+        $ticket = new Ticket();
+        $ticket->name = $request->name;
+        $ticket->price = $request->price;
+        $ticket->img =  $image_name;
+        $ticket->save();
+    
+        GuideCommission::create([
+            'commission' => $request->input('commission'),
+            'ticket_id' => $ticket->id
         ]);
         return redirect('/ticket');
     }
@@ -36,7 +43,7 @@ class TicketController extends Controller
     public function edit($id)
     {
         $data = [
-            'ticket' => Ticket::find($id)
+            'ticket' => Ticket::joinGuideCommission()->find($id)
         ];
         return view('marketing.admin.menu._ticket.edit',$data);
     }
@@ -44,6 +51,7 @@ class TicketController extends Controller
     public function update(Request $request, $id)
     {
         $ticket = Ticket::find($id);
+        // $guideCommission = GuideCommission::where('ticket_id', $id)->first();
         if($request->hasFile('image')){ 
             $oldImagePath =  'shopping\img\ticket\\'.$ticket->img;
             unlink(public_path($oldImagePath));
@@ -67,6 +75,7 @@ class TicketController extends Controller
                 ]
             );
         } 
+        GuideCommission::where('ticket_id', $id)->update(['commission' => $request->commission]);
         return redirect('/ticket');
     }
 

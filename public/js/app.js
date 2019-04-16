@@ -1477,7 +1477,6 @@ window.Vue = __webpack_require__(42);
 window.axios = __webpack_require__(7);
 
 //  คลังสินค้า
-Vue.component('example-component', __webpack_require__(43));
 Vue.component('saling', __webpack_require__(46));
 Vue.component('product', __webpack_require__(49));
 Vue.component('edit-product', __webpack_require__(52));
@@ -1486,21 +1485,25 @@ Vue.component('report', __webpack_require__(55));
 //ทั่วไป
 Vue.component('profile', __webpack_require__(58));
 
-// เว็บออนไลน์
+//  ============= เว็บออนไลน์ ==============
+// User
 Vue.component('booking', __webpack_require__(61));
 Vue.component('seat', __webpack_require__(67));
 Vue.component('booking-detail', __webpack_require__(72));
 
-Vue.component('ticket', __webpack_require__(75));
-Vue.component('ticket-detail', __webpack_require__(80));
+Vue.component('my-ticket', __webpack_require__(128));
+Vue.component('ticket-detail', __webpack_require__(125));
 
-Vue.component('course', __webpack_require__(83));
-Vue.component('manage-trainer', __webpack_require__(86));
+Vue.component('my-course', __webpack_require__(133));
 
 Vue.component('courses-index', __webpack_require__(89));
 Vue.component('courses', __webpack_require__(92));
 Vue.component('trainer', __webpack_require__(95));
 Vue.component('register-course', __webpack_require__(100));
+
+// Admin
+Vue.component('course', __webpack_require__(83));
+Vue.component('manage-trainer', __webpack_require__(86));
 
 var app = new Vue({
     el: '#vue'
@@ -43535,125 +43538,9 @@ module.exports = Vue;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(6).setImmediate))
 
 /***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(44)
-/* template */
-var __vue_template__ = __webpack_require__(45)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7168fb6a", Component.options)
-  } else {
-    hotAPI.reload("data-v-7168fb6a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 44 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
-});
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-          _c("div", { staticClass: "panel panel-default" }, [
-            _c("div", { staticClass: "panel-heading" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    I'm an example component!\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
-  }
-}
-
-/***/ }),
+/* 43 */,
+/* 44 */,
+/* 45 */,
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46575,644 +46462,14 @@ if (false) {
 }
 
 /***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(76)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(78)
-/* template */
-var __vue_template__ = __webpack_require__(79)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/shopping/ticket/ticket.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-073491df", Component.options)
-  } else {
-    hotAPI.reload("data-v-073491df", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(77);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(4)("60412883", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-073491df\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ticket.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-073491df\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ticket.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.badge {\n  margin-right: 5px;\n  font-size: 100%;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 78 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id'],
-
-    mounted: function mounted() {
-        this.getAllTicket();
-
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus');
-        });
-    },
-    data: function data() {
-        return {
-            tickets: [],
-            ticketDetails: [],
-            ticketDetail: [],
-            seat: {
-                ringside: [],
-                vip: []
-            }
-        };
-    },
-
-
-    methods: {
-        getAllTicket: function getAllTicket() {
-            var _this = this;
-
-            axios.get('/api/booking/' + this.id).then(function (res) {
-                _this.tickets = res.data.tickets;
-                _this.ticketDetails = res.data.ticketDetails;
-            });
-        },
-        sendDataToTicketDetail: function sendDataToTicketDetail(ticketDetail) {
-            this.clearSeat();
-            this.ticketDetail = ticketDetail;
-            this.setDataToSeat(ticketDetail);
-        },
-        setDataToSeat: function setDataToSeat(ticketDetail) {
-            for (var key in ticketDetail.seat) {
-                if (ticketDetail.seat[key].ticketId == 2) {
-                    this.seat.ringside.push(ticketDetail.seat[key].seatName);
-                }
-                if (ticketDetail.seat[key].ticketId == 3) {
-                    this.seat.vip.push(ticketDetail.seat[key].seatName);
-                }
-            }
-        },
-        clearSeat: function clearSeat() {
-            this.seat = {
-                ringside: [],
-                vip: []
-            };
-        }
-    },
-
-    filters: {
-        formatDate: function formatDate(value) {
-            var current_datetime = new Date(value);
-            var formatted_date = current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear();
-            return formatted_date;
-        }
-    }
-});
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h3", { attrs: { align: "center" } }, [_vm._v("My Ticket")]),
-      _vm._v(" "),
-      _c("table", { staticClass: "table table-hover" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.ticketDetails, function(ticketDetail, index) {
-            return _c(
-              "tr",
-              {
-                key: index,
-                class: { "table-info": index % 2 == 0 },
-                attrs: {
-                  "data-toggle": "modal",
-                  "data-target": "#ticket-detail-modal"
-                },
-                on: {
-                  click: function($event) {
-                    _vm.sendDataToTicketDetail(ticketDetail)
-                  }
-                }
-              },
-              [
-                _c("td", [
-                  _vm._v(_vm._s(_vm._f("formatDate")(ticketDetail.visit)))
-                ]),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  _vm._l(ticketDetail.detail, function(detail, index) {
-                    return _c(
-                      "span",
-                      { key: index, staticClass: "badge badge-primary" },
-                      [
-                        _vm._v(
-                          "\n            " +
-                            _vm._s(detail.amount + " * " + detail.name) +
-                            "\n          "
-                        )
-                      ]
-                    )
-                  })
-                ),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(_vm._s(_vm._f("formatDate")(ticketDetail.created_at)))
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  !ticketDetail.status
-                    ? _c("span", { staticClass: "badge badge-secondary" }, [
-                        _vm._v("Expire")
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  ticketDetail.status
-                    ? _c("span", { staticClass: "badge badge-success" }, [
-                        _vm._v("Active")
-                      ])
-                    : _vm._e()
-                ])
-              ]
-            )
-          })
-        )
-      ]),
-      _vm._v(" "),
-      _c("ticket-detail", {
-        attrs: {
-          ticketDetail: _vm.ticketDetail,
-          tickets: _vm.tickets,
-          seat: _vm.seat
-        }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", { staticClass: "bg-info text-white" }, [
-        _c("th", [_vm._v("Visit Day")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Detail")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Created")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Status")])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-073491df", module.exports)
-  }
-}
-
-/***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(81)
-/* template */
-var __vue_template__ = __webpack_require__(82)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/shopping/ticket/ticket-detail.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-122a592f", Component.options)
-  } else {
-    hotAPI.reload("data-v-122a592f", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 81 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['ticketDetail', 'tickets', 'seat'],
-
-    mounted: function mounted() {},
-    data: function data() {
-        return {};
-    },
-
-
-    methods: {},
-
-    filters: {
-        formatDate: function formatDate(value) {
-            var current_datetime = new Date(value);
-            var formatted_date = current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear();
-            return formatted_date;
-        }
-    },
-
-    computed: {}
-});
-
-/***/ }),
-/* 82 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "ticket-detail-modal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalCenterTitle",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "modal-dialog modal-dialog-centered",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("h5", [
-                  _vm._v(
-                    "Visit Day : " +
-                      _vm._s(_vm._f("formatDate")(_vm.ticketDetail.visit)) +
-                      " "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _c("h5", [_vm._v("Seat")]),
-                _vm._v(" "),
-                _vm.seat.ringside != null
-                  ? _c(
-                      "div",
-                      [
-                        _vm._v(
-                          "\n                Ringside: \n                "
-                        ),
-                        _vm._l(_vm.seat.ringside, function(ringside, index) {
-                          return _c(
-                            "span",
-                            {
-                              key: index,
-                              staticClass: "badge badge-primary mt-1"
-                            },
-                            [
-                              _vm._v(
-                                "\n                    " +
-                                  _vm._s(ringside) +
-                                  "\n                "
-                              )
-                            ]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.seat.vip != []
-                  ? _c(
-                      "div",
-                      [
-                        _vm._v("\n                VIP: \n                "),
-                        _vm._l(_vm.seat.vip, function(vip, index) {
-                          return _c(
-                            "span",
-                            {
-                              key: index,
-                              staticClass: "badge badge-primary mt-1"
-                            },
-                            [
-                              _vm._v(
-                                "\n                    " +
-                                  _vm._s(vip) +
-                                  "\n                "
-                              )
-                            ]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                !_vm.ticketDetail.status
-                  ? _c("span", { staticClass: "badge badge-secondary" }, [
-                      _vm._v("Expire")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.ticketDetail.status
-                  ? _c("span", { staticClass: "badge badge-success" }, [
-                      _vm._v("Active")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("hr")
-              ]),
-              _vm._v(" "),
-              _vm._m(1)
-            ])
-          ]
-        )
-      ]
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        {
-          staticClass: "modal-title",
-          attrs: { id: "exampleModalCenterTitle" }
-        },
-        [_vm._v("CM Boxing")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("OK")]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-122a592f", module.exports)
-  }
-}
-
-/***/ }),
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
 /* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48742,6 +47999,833 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(126)
+/* template */
+var __vue_template__ = __webpack_require__(127)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/shopping/myProduct/ticket/ticket-detail.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-31053a1b", Component.options)
+  } else {
+    hotAPI.reload("data-v-31053a1b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 126 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['ticketDetail', 'tickets', 'seat'],
+
+    mounted: function mounted() {},
+    data: function data() {
+        return {};
+    },
+
+
+    methods: {},
+
+    filters: {
+        formatDate: function formatDate(value) {
+            var current_datetime = new Date(value);
+            var formatted_date = current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear();
+            return formatted_date;
+        }
+    },
+
+    computed: {}
+});
+
+/***/ }),
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "ticket-detail-modal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("h5", [
+                  _vm._v(
+                    "Visit Day : " +
+                      _vm._s(_vm._f("formatDate")(_vm.ticketDetail.visit)) +
+                      " "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("h5", [_vm._v("Seat")]),
+                _vm._v(" "),
+                _vm.seat.ringside != null
+                  ? _c(
+                      "div",
+                      [
+                        _vm._v(
+                          "\n                Ringside: \n                "
+                        ),
+                        _vm._l(_vm.seat.ringside, function(ringside, index) {
+                          return _c(
+                            "span",
+                            {
+                              key: index,
+                              staticClass: "badge badge-primary mt-1"
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(ringside) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.seat.vip != []
+                  ? _c(
+                      "div",
+                      [
+                        _vm._v("\n                VIP: \n                "),
+                        _vm._l(_vm.seat.vip, function(vip, index) {
+                          return _c(
+                            "span",
+                            {
+                              key: index,
+                              staticClass: "badge badge-primary mt-1"
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(vip) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                !_vm.ticketDetail.status
+                  ? _c("span", { staticClass: "badge badge-secondary" }, [
+                      _vm._v("Expire")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.ticketDetail.status
+                  ? _c("span", { staticClass: "badge badge-success" }, [
+                      _vm._v("Active")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("hr")
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        {
+          staticClass: "modal-title",
+          attrs: { id: "exampleModalCenterTitle" }
+        },
+        [_vm._v("CM Boxing")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("OK")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-31053a1b", module.exports)
+  }
+}
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(129)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(131)
+/* template */
+var __vue_template__ = __webpack_require__(132)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/shopping/myProduct/ticket/My-Ticket.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-02b9e594", Component.options)
+  } else {
+    hotAPI.reload("data-v-02b9e594", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(130);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("5ed883a9", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-02b9e594\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./My-Ticket.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-02b9e594\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./My-Ticket.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 130 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.badge {\n  margin-right: 5px;\n  font-size: 100%;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 131 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['id'],
+
+    mounted: function mounted() {
+        this.getAllTicket();
+
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus');
+        });
+    },
+    data: function data() {
+        return {
+            tickets: [],
+            ticketDetails: [],
+            ticketDetail: [],
+            seat: {
+                ringside: [],
+                vip: []
+            }
+        };
+    },
+
+
+    methods: {
+        getAllTicket: function getAllTicket() {
+            var _this = this;
+
+            axios.get('/api/booking/' + this.id).then(function (res) {
+                _this.tickets = res.data.tickets;
+                _this.ticketDetails = res.data.ticketDetails;
+            });
+        },
+        sendDataToTicketDetail: function sendDataToTicketDetail(ticketDetail) {
+            this.clearSeat();
+            this.ticketDetail = ticketDetail;
+            this.setDataToSeat(ticketDetail);
+        },
+        setDataToSeat: function setDataToSeat(ticketDetail) {
+            for (var key in ticketDetail.seat) {
+                if (ticketDetail.seat[key].ticketId == 2) {
+                    this.seat.ringside.push(ticketDetail.seat[key].seatName);
+                }
+                if (ticketDetail.seat[key].ticketId == 3) {
+                    this.seat.vip.push(ticketDetail.seat[key].seatName);
+                }
+            }
+        },
+        clearSeat: function clearSeat() {
+            this.seat = {
+                ringside: [],
+                vip: []
+            };
+        }
+    },
+
+    filters: {
+        formatDate: function formatDate(value) {
+            var current_datetime = new Date(value);
+            var formatted_date = current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear();
+            return formatted_date;
+        }
+    }
+});
+
+/***/ }),
+/* 132 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("h3", { attrs: { align: "center" } }, [_vm._v("My Ticket")]),
+      _vm._v(" "),
+      _c("table", { staticClass: "table table-hover" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.ticketDetails, function(ticketDetail, index) {
+            return _c(
+              "tr",
+              {
+                key: index,
+                class: { "table-info": index % 2 == 0 },
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": "#ticket-detail-modal"
+                },
+                on: {
+                  click: function($event) {
+                    _vm.sendDataToTicketDetail(ticketDetail)
+                  }
+                }
+              },
+              [
+                _c("td", [
+                  _vm._v(_vm._s(_vm._f("formatDate")(ticketDetail.visit)))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  _vm._l(ticketDetail.detail, function(detail, index) {
+                    return _c(
+                      "span",
+                      { key: index, staticClass: "badge badge-primary" },
+                      [
+                        _vm._v(
+                          "\n            " +
+                            _vm._s(detail.amount + " * " + detail.name) +
+                            "\n          "
+                        )
+                      ]
+                    )
+                  })
+                ),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(_vm._s(_vm._f("formatDate")(ticketDetail.created_at)))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  !ticketDetail.status
+                    ? _c("span", { staticClass: "badge badge-secondary" }, [
+                        _vm._v("Expire")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  ticketDetail.status
+                    ? _c("span", { staticClass: "badge badge-success" }, [
+                        _vm._v("Active")
+                      ])
+                    : _vm._e()
+                ])
+              ]
+            )
+          })
+        )
+      ]),
+      _vm._v(" "),
+      _c("ticket-detail", {
+        attrs: {
+          ticketDetail: _vm.ticketDetail,
+          tickets: _vm.tickets,
+          seat: _vm.seat
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticClass: "bg-info text-white" }, [
+        _c("th", [_vm._v("Visit Day")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Detail")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Created")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-02b9e594", module.exports)
+  }
+}
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(135)
+/* template */
+var __vue_template__ = __webpack_require__(134)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/shopping/myProduct/course/My-Course.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c0595cd8", Component.options)
+  } else {
+    hotAPI.reload("data-v-c0595cd8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h1", [_vm._v("My Course")]),
+    _vm._v(" "),
+    _c("table", { staticClass: "table table-hover" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.courses, function(course, index) {
+          return _c(
+            "tr",
+            { key: index, class: { "table-info": index % 2 == 0 } },
+            [
+              _c("td", [_vm._v(_vm._s(course.start_course))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(course.courseName))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(course.trainerName))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(course.created_at))])
+            ]
+          )
+        })
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticClass: "bg-info text-white" }, [
+        _c("th", [_vm._v("Started When")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Course name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Trainer")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Register time")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c0595cd8", module.exports)
+  }
+}
+
+/***/ }),
+/* 135 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['id'],
+
+    mounted: function mounted() {
+        this.getMyCourse();
+    },
+    data: function data() {
+        return {
+            courses: []
+        };
+    },
+
+
+    methods: {
+        getMyCourse: function getMyCourse() {
+            var _this = this;
+
+            axios.get('/api/registerCourse/' + this.id).then(function (res) {
+                return _this.courses = res.data;
+            });
+        }
+    }
+});
 
 /***/ })
 /******/ ]);

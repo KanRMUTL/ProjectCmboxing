@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\shopping;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\shopping\Course;
+
 class CourseController extends Controller
 {
     public function index()

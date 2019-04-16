@@ -15,16 +15,20 @@
     {{ Form::token()}}
     <div class="modal-body">
         <div class="form-group">
-        <label for="name">ชื่อบัตร</label>
-        <input type="text" class="form-control" id="name" name="name">
+            <label for="name">ชื่อบัตร</label>
+            <input type="text" class="form-control" id="name" name="name">
         </div>
         <div class="form-group">
-        <label for="username">ราคา</label>
-        <input type="text" class="form-control" id="username" name="price">
+            <label for="username">ราคา</label>
+            <input type="number" class="form-control" id="username" name="price">
         </div>
         <div class="form-group">
-        <label for="image">รูปภาพ</label>
-        <input type="file" id="image" name="image">
+            <label for="commission">ค่าคอมมิชชั่นสำหรับไกด์</label>
+            <input type="number" class="form-control" id="commission" name="commission">
+        </div>
+        <div class="form-group">
+            <label for="image">รูปภาพ</label>
+            <input type="file" id="image" name="image">
         </div>
     </div>
     <div class="modal-footer form-group">

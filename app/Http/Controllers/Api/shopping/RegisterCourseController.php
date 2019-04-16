@@ -11,12 +11,7 @@ class RegisterCourseController extends Controller
 {
     public function index()
     {
-       
-    }
-
-    public function create()
-    {
-
+        
     }
 
     public function store(Request $request)
@@ -36,9 +31,10 @@ class RegisterCourseController extends Controller
         return response()->json(['sale' => $saleCourse, 'register' => $courseRegister]);
     }
 
-    public function show($id)
+    public function show($user_id)
     {
-        //
+        $saleCourse = SaleCourse::detail($user_id)->get();
+        return response()->json($saleCourse);
     }
 
     public function edit($id)

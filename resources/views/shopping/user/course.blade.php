@@ -1,8 +1,8 @@
 @extends('shopping.layout.master')
-@section('title', 'My Ticket')
+@section('title', 'My Course')
 @section('content')
 
 <div id="vue" class="container">
-    <my-ticket id="{{ Auth::user()->id }}" />
+    <my-course id="{{ Auth::user()->id }}" />
 </div>
 @endsection

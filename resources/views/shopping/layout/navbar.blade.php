@@ -27,6 +27,7 @@
                         </a> 
                         <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/booking/{{ Auth::user()->id }}">My Ticket</a>
+                            <a class="dropdown-item" href="/course/{{ Auth::user()->id }}">My Course</a>
                             <a class="dropdown-item" href="/dashboard">Dashboard</a>
                         </div>
                     </li>

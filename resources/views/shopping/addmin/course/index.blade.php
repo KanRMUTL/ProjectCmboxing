@@ -1,6 +1,6 @@
 @extends('layouts.adminlte')
-@section('title','จัดการสินค้า')
-@section('header','จัดการสินค้า')
+@section('title','จัดการคอร์สฝึกสอน')
+@section('header','จัดการคอร์สฝึกสอน')
 @section('content')
   <link rel="stylesheet" href="{{asset('css/pos/style.css')}}">
   <div>

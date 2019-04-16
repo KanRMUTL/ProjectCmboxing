@@ -14,6 +14,7 @@
             <tr align="center" style="text-align-last: center;">
               <th>ชื่อบัตร</th>
               <th>ราคา</th>
+              <th>ค่าคอมมิชชั่นไกด์</th>
               <th>แก้ไข</th>
               <th>ลบ</th>
             </tr>
@@ -27,6 +28,11 @@
                   {{ $ticket->price }}
                 </span>
               </td>
+              <td>
+                  <span class="label label-primary">
+                    {{ $ticket->commission }}
+                  <span>
+                </td>
               <td>
                 <a href="/ticket/{{ $ticket->id }}/edit" class="btn btn-warning">
                   <i class="fa fa-edit fa-lg"></i>

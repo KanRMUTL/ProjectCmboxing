@@ -25,5 +25,6 @@ Route::post('booking/search', 'Api\shopping\BookingController@search');
 Route::resource('course', 'Api\shopping\CourseController');
 Route::resource('trainer', 'Api\shopping\TrainerController');
 Route::resource('user', 'Api\UserController');
+Route::resource('courses', 'Api\shopping\CourseController');
 
 Route::resource('registerCourse', 'Api\shopping\RegisterCourseController');

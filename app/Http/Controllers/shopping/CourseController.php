@@ -10,6 +10,11 @@ class CourseController extends Controller
     
     public function index()
     {
+        return view('shopping.addmin.course.index');
+    }
+
+    public function courses()
+    {
         return view('shopping.courses');
     }
 
@@ -25,7 +30,7 @@ class CourseController extends Controller
 
     public function show($id)
     {
-        //
+        return view('shopping.user.course');
     }
 
     public function edit($id)

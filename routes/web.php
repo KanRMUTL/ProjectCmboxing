@@ -5,7 +5,7 @@ Route::auth();
 Route::get('/', 'shopping\ShoppingController@index');
 Route::get('/about', 'shopping\ShoppingController@about');
 Route::resource('/booking', 'shopping\SeatController');
-Route::get('/courses','shopping\CourseController@index');
+Route::get('/courses','shopping\CourseController@courses');
 
 Route::group(['middleware' =>['auth']], function() {
 
@@ -13,8 +13,8 @@ Route::group(['middleware' =>['auth']], function() {
     
     Route::resource('user', 'UserController');
     Route::resource('ticket', 'marketing\TicketController');
-    Route::resource('course', 'shopping\CourseController');
     Route::resource('trainer', 'shopping\TrainerController');
+    Route::resource('course', 'shopping\CourseController');
    
     // ข้อมูลการขายของพนักงานกับไกด์
     Route::prefix('sale')->group(function() {
