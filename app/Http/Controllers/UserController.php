@@ -17,6 +17,7 @@ class UserController extends Controller
     private $zones;
     private $roles;
     public $starter;
+
     public function __construct()
     {
         $starter = new StarterController();

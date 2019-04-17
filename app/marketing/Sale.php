@@ -117,14 +117,14 @@ class Sale extends Model
                     'user_id', 
                     DB::raw('SUM(amount) as amount'), 
                     'ticket_id',                      
-                    'created_at'
+                    DB::raw('DATE(created_at) as date_created_at')
                 )
                 ->where([
                     ['zone_id', '=', $zoneId],
                     ['sale_type', '=', $saleTypeId]
                 ])
                 ->whereBetween('created_at', [$before, $after])
-                ->groupBy('created_at', 'user_id', 'ticket_id')
+                ->groupBy('date_created_at', 'user_id', 'ticket_id')
                 ->orderByRaw('created_at DESC');
         }
         else if($this->roleId == 2) { // หัวหน้าฝ่ายการตลาด
@@ -273,6 +273,10 @@ class Sale extends Model
                 ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek]);                
         }
     }
+
+    // public function scopeSalingProfile($query, $user_id) {
+
+    // }
     /* =======  End Dashboard ======== */
 
 
@@ -283,5 +287,6 @@ class Sale extends Model
         $visit = Carbon::parse($value);
         return $visit->format('d/m/Y');
     }
+
 
 }

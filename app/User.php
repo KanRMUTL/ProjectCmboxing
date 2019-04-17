@@ -46,7 +46,6 @@ class User extends Authenticatable
     {
         if(Auth()->user()->role == 1)
         {   // Addmin
-             
             return $query
             ->join('employees','users.id', '=', 'employees.user_id')
             ->where('role','NOT LIKE', 1);

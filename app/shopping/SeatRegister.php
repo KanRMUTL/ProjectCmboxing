@@ -29,10 +29,10 @@ class SeatRegister extends Model
     {
         return $query 
                 ->select(
-                    DB::raw('seat_registers.visit'),
-                    DB::raw('seats.name as seatName'),
-                    DB::raw('tickets.id as ticketId'),
-                    DB::raw('tickets.name as ticketName')
+                    'seat_registers.visit',
+                    'seats.name as seatName',
+                    'tickets.id as ticketId',
+                    'tickets.name as ticketName'
                 )
                 ->join('sale_tickets', 'seat_registers.sale_ticket_id', '=', 'sale_tickets.id')
                 ->join('seats', 'seat_registers.seat_id', '=', 'seats.id')

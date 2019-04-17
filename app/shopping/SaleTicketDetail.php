@@ -26,7 +26,7 @@ class SaleTicketDetail extends Model
         return $query   
                 ->select(
                     'amount',
-                    DB::raw('tickets.name as name')
+                    'tickets.name as name'
                 )
                 ->join('tickets', 'sale_ticket_details.ticket_id', '=', 'tickets.id')
                 ->where('sale_ticket_id', '=', $saleTicketId);

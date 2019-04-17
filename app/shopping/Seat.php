@@ -25,11 +25,11 @@ class Seat extends Model
     {
         return $query
                 ->select([
-                    DB::raw('seats.name as seatName'),
-                    DB::raw('seats.id as seatId'),
-                    DB::raw('tickets.id as ticketId'),
-                    DB::raw('tickets.name as ticketName'),
-                    DB::raw('tickets.price as price')
+                    'seats.name as seatName',
+                    'seats.id as seatId',
+                    'tickets.id as ticketId',
+                    'tickets.name as ticketName',
+                    'tickets.price as price'
                 ])
                 ->join('tickets', 'seats.ticket_id', '=', 'tickets.id');
     }
