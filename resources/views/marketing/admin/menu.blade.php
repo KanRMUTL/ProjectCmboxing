@@ -1,13 +1,10 @@
 <ul class="sidebar-menu" data-widget="tree">
     <li class="header">Menu</li>
-    <li class="active"><a href="{{ url('/dashboard') }}">
+    <li><a href="{{ url('/dashboard') }}">
       <i class="fa fa-dashboard fa-lg"></i>
        <span>แดชบอร์ด</span></a>
     </li>
-  <li class="active"><a href="{{ url('/user') }}">
-    <i class="fa fa-users fa-lg"></i>
-     <span>ผู้ใช้งาน</span></a>
-  </li>
+  
   <!--treeview  -->
   <li class="treeview">
     <a href="#">
@@ -43,15 +40,25 @@
     </ul>
   </li>
 
-  <!--treeview  -->
-  <li class="active"><a href="{{ url('/ticket') }}">
-    <i class="fa fa-edit fa-lg"></i>
-     <span>จัดการบัตร</span></a>
-  </li>
+  <li class="treeview">
+    <a href="#">
+      <i class="fa fa-barcode fa-lg"></i>
+      <span>คลังสินค้า</span>
+      <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+    </a>
+    <ul class="treeview-menu">
+      <li><a href="{{ url('/stock/sale') }}"><i class="fa fa-circle-o"></i>ขายสินค้า</a></li>
+      <li><a href="{{ url('/stock/product') }}"><i class="fa fa-circle-o"></i>จัดการคลังสินค้า</a></li>
+      <li><a href="{{ url('/stock/report') }}"><i class="fa fa-circle-o"></i>รายงานการขาย</a></li>
+    </ul>
+  </li>  
+  
 
   <li class="treeview">
     <a href="#">
-      <i class="fa fa-usd fa-lg"></i> <span>คอร์สสอนมวยไทย</span>
+      <i class="fa fa-tasks fa-lg"></i> <span>คอร์สสอนมวยไทย</span>
       <span class="pull-right-container">
         <i class="fa fa-angle-left pull-right"></i>
       </span>
@@ -68,30 +75,26 @@
     </ul>
   </li>
 
-  <li class="active"><a href="{{ url('/chart') }}">
+  <li><a href="{{ url('/chart') }}">
     <i class="fa fa-flag fa-lg" style="color: #eaffff"></i>
      <span>รายงานการขาย</span></a>
   </li>
-  <li class="active"><a href="{{ url('/income') }}">
+  <li><a href="{{ url('/income') }}">
     <i class="fa fa-usd fa-lg"></i>
     <span>รายได้เข้าสนาม</span></a>
   </li>
 
-  <li class="treeview">
-    <a href="#">
-      <i class="fa fa-barcode fa-lg"></i>
-      <span>คลังสินค้า</span>
-      <span class="pull-right-container">
-        <i class="fa fa-angle-left pull-right"></i>
-      </span>
-    </a>
-    <ul class="treeview-menu">
-      <li><a href="{{ url('/stock/sale') }}"><i class="fa fa-circle-o"></i>ขายสินค้า</a></li>
-      <li><a href="{{ url('/stock/product') }}"><i class="fa fa-circle-o"></i>จัดการคลังสินค้า</a></li>
-      <li><a href="{{ url('/stock/report') }}"><i class="fa fa-circle-o"></i>รายงานการขาย</a></li>
-    </ul>
-  </li>  
-  
+    <!--treeview  -->
+    <li><a href="{{ url('/ticket') }}">
+      <i class="fa fa-edit fa-lg"></i>
+       <span>จัดการบัตร</span></a>
+    </li>
+ 
+  <li><a href="{{ url('/user') }}">
+    <i class="fa fa-users fa-lg"></i>
+     <span>ผู้ใช้งาน</span></a>
+  </li>
+
   <li class="treeview">
     <a href="#">
       <i class="fa fa-user fa-lg"></i>

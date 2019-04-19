@@ -2,131 +2,141 @@
     <div>
         <h1 align="center">Booking</h1>
 
-        <div class="col-md-3">
-            <label for="dateSearch">Select Date</label>
-            <input type="date" id="dateSearch" v-model="dateSearch" class="form-control">
-            <button @click="searchSeat" class="btn btn-success">Search</button>
-        </div>
-
-        <div class="seatSelection col-md-12">
-            <div class="row">
-                    <div class="col-md-12">
-                        <div class="seatRow">
-                            <seat 
-                                v-for="(seat, index) in seats"
-                                v-if="index <= 79"
-                                :key="index"
-                                :limitRow="20"
-                                :seat="seat"
-                                :col="'col-md-12'"
-                                :onBooked="onBooked"
-                                :realIndex="index"
-                                :fakeIndex="index"
-                            />
-                        </div>
+        <div :class="{'col-md-9': id != 0, 'col-md-12': id == 0}">
+            <div class="row justify-content-center">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <div class="input-group-addon">Select Date</div>
+                        <input type="date" v-model="dateSearch" class="form-control" id="inlineFormInputGroup">
+                        <div class="input-group-addon" @click="searchSeat"><i class="fa fa-search"></i></div>
                     </div>
-            </div>
-
-            <div class="row">
-                    <div class="col-md-6">
-                        <div class="seatRow">
-                            <seat 
-                                v-for="(seat, index) in seats"
-                                v-if="index > 79 && index <= 109"
-                                :key="index"
-                                :limitRow="10"
-                                :seat="seat"
-                                :col="'col-md-12'"
-                                :onBooked="onBooked"
-                                :realIndex="index"
-                                :fakeIndex="index"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="seatRow">
-                            <seat 
-                                v-for="(seat, index) in seats"
-                                v-if="index > 109 && index <= 139"
-                                :key="index"
-                                :limitRow="10"
-                                :seat="seat"
-                                :col="'col-md-12'"
-                                :onBooked="onBooked"
-                                :realIndex="index"
-                                :fakeIndex="index"
-                            />
-                        </div>
-                    </div>
-            </div>
-            <br><br>
-            <div class="row">
-                    <div class="col-md-4">
-                        <div class="seatRow">
-                            <seat 
-                                v-for="(seat, index) in seats"
-                                v-if="index > 139 && index <= 184"
-                                :key="index"
-                                :limitRow="3"
-                                :seat="seat"
-                                :col="'col-md-12'"
-                                :onBooked="onBooked"
-                                :realIndex="index"
-                                :fakeIndex="index - 2"
-                            />
-                        </div>
-                    </div>
-
-            <div class="col-md-4">
-                <div style="background-color: aqua; width: 100%; height: 96%;"></div>
-            </div>
-
-                    <div class="col-md-4">
-                        <div class="seatRow">
-                            <seat 
-                                v-for="(seat, index) in seats"
-                                v-if="index > 184 && index <= 229"
-                                :key="index"
-                                :limitRow="3"
-                                :seat="seat"
-                                :col="'col-md-12'"
-                                :onBooked="onBooked"
-                                :realIndex="index"
-                                :fakeIndex="index - 2"
-                            />
-                        </div>
-                    </div>
-            </div>
-
-            <div class="row">
-                    <div class="col-md-12">
-                        <div class="seatRow">
-                            <seat 
-                                v-for="(seat, index) in seats"
-                                v-if="index > 229 && index <= 259"
-                                :key="index"
-                                :limitRow="15"
-                                :seat="seat"
-                                :col="'col-md-12'"
-                                :onBooked="onBooked"
-                                :realIndex="index"
-                                :fakeIndex="index - 5"
-                            />
-                        </div>
-                    </div>
+                </div>
             </div>
         </div>
-        <booking-detail
-            v-if="id != 0"
-            :bookDetail="bookDetails"
-            :total="getTotal"
-            :dateVisit="dateSearch"
-            :userId="id"
-            :searchSeat="searchSeat"
-            :clearData="clearData"
-        />
+
+        <div class="row">
+            <div :class="{'seatSelection col-md-9': id != 0, 'seatSelection col-md-12': id == 0}">
+                <div class="row">
+                        <div class="col-md-12">
+                            <div class="seatRow">
+                                <seat 
+                                    v-for="(seat, index) in seats"
+                                    v-if="index <= 79"
+                                    :key="index"
+                                    :limitRow="20"
+                                    :seat="seat"
+                                    :col="'col-md-12'"
+                                    :onBooked="onBooked"
+                                    :realIndex="index"
+                                    :fakeIndex="index"
+                                />
+                            </div>
+                        </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-md-6">
+                            <div class="seatRow">
+                                <seat 
+                                    v-for="(seat, index) in seats"
+                                    v-if="index > 79 && index <= 109"
+                                    :key="index"
+                                    :limitRow="10"
+                                    :seat="seat"
+                                    :col="'col-md-12'"
+                                    :onBooked="onBooked"
+                                    :realIndex="index"
+                                    :fakeIndex="index"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="seatRow">
+                                <seat 
+                                    v-for="(seat, index) in seats"
+                                    v-if="index > 109 && index <= 139"
+                                    :key="index"
+                                    :limitRow="10"
+                                    :seat="seat"
+                                    :col="'col-md-12'"
+                                    :onBooked="onBooked"
+                                    :realIndex="index"
+                                    :fakeIndex="index"
+                                />
+                            </div>
+                        </div>
+                </div>
+                <br><br>
+                <div class="row">
+                        <div class="col-md-4">
+                            <div class="seatRow">
+                                <seat 
+                                    v-for="(seat, index) in seats"
+                                    v-if="index > 139 && index <= 184"
+                                    :key="index"
+                                    :limitRow="3"
+                                    :seat="seat"
+                                    :col="'col-md-12'"
+                                    :onBooked="onBooked"
+                                    :realIndex="index"
+                                    :fakeIndex="index - 2"
+                                />
+                            </div>
+                        </div>
+
+                <div class="col-md-4">
+                    <div style="background-color: aqua; width: 100%; height: 96%;"></div>
+                </div>
+
+                        <div class="col-md-4">
+                            <div class="seatRow">
+                                <seat 
+                                    v-for="(seat, index) in seats"
+                                    v-if="index > 184 && index <= 229"
+                                    :key="index"
+                                    :limitRow="3"
+                                    :seat="seat"
+                                    :col="'col-md-12'"
+                                    :onBooked="onBooked"
+                                    :realIndex="index"
+                                    :fakeIndex="index - 2"
+                                />
+                            </div>
+                        </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-md-12">
+                            <div class="seatRow">
+                                <seat 
+                                    v-for="(seat, index) in seats"
+                                    v-if="index > 229 && index <= 259"
+                                    :key="index"
+                                    :limitRow="15"
+                                    :seat="seat"
+                                    :col="'col-md-12'"
+                                    :onBooked="onBooked"
+                                    :realIndex="index"
+                                    :fakeIndex="index - 5"
+                                />
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <booking-detail
+                    v-if="id != 0"
+                    :bookDetail="bookDetails"
+                    :total="getTotal"
+                    :dateVisit="dateSearch"
+                    :userId="id"
+                    :searchSeat="searchSeat"
+                    :clearData="clearData"
+                />
+            </div>
     </div>
+</div>
 </template>
 
 <script>

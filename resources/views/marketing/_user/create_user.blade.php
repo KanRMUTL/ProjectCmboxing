@@ -2,6 +2,8 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
   <i class="fa fa-lg fa-user-plus"></i> เพิ่มผู้ใช้
 </button>
+<br>
+<br>
 @foreach ($errors->all() as $message)
 <p class="text-red"> {{ $message }}</p>
 @endforeach

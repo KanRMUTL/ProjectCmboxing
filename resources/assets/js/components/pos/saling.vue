@@ -1,48 +1,53 @@
 <template>
   <div>
     <div class="row">
-      <div class="form-group col-md-3">
-        <label for="exampleInputEmail1">บาร์โค้ด</label>
-        <input type="text" class="form-control" id="barcode" v-model="barcode">
-      </div>
-      <div class="col-md-3">
-        <a id="confirm" class="btn btn-success" v-on:click="showProduct()">OK</a>
-      </div>
-    </div>
-    <div class="box">
-      <div class="box-body no-padding">
-        <table class="table table-striped" style="text-align:center;">
-          <tbody style="text-align:center;">
-            <tr style="text-align:center;">
-              <td>รหัสสินค้า</td>
-              <td>ชื่อสินค้า</td>
-              <td>ราคา</td>
-              <td style="widtd: 15%;">จำนวน</td>
-              <td>รวม</td>
-              <td>ลบ</td>
-            </tr>
-            <tr v-for="(product, index) in products" :key="product.id">
-              <td>{{product.id}}</td>
-              <td>{{product.name}}</td>
-              <td>{{product.price}}</td>
-              <td>
-                <button v-on:click="reduceAmount(index)">-</button>
-                {{product.cart}}
-                <button v-on:click="addAmount(index)">+</button>
-              </td>
-              <td>{{ product.total | moneyFormat }}</td>
-              <td>
-                <button class="btn btn-danger" @click="deleteProduct(index)">ลบ</button>
-              </td>
-              <!-- {{ sumTotal += product.total }} -->
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-md-3 mb-5">
+        <div class="input-group">
+          <span class="input-group-addon">บาร์โค้ดสินค้า</span>
+          <input type="text" class="form-control" id="barcode" placeholder="บาร์โค้ดสินค้า" v-model="barcode">
+          <span class="input-group-addon" v-on:click="showProduct()" v-show="barcode.length > 0"><i class="fa fa-search"></i></span>
+        </div>
       </div>
     </div>
-    <h1 id="total">รวมทั้งสิ้น {{ SumTotal | moneyFormat }} บาท</h1>
-    <br>
-    <a class="btn btn-primary" id="sale" @click="saleProduct()">ขาย</a>
+    
+    <br/>
+
+      <div class="box box-info">
+        <div class="box-body table-responsive">
+          <table class="table table-striped" style="text-align:center;">
+            <tbody style="text-align:center;">
+              <tr style="text-align:center;">
+                <td>รหัสสินค้า</td>
+                <td>ชื่อสินค้า</td>
+                <td>ราคา</td>
+                <td style="widtd: 15%;">จำนวน</td>
+                <td>รวม</td>
+                <td>ลบ</td>
+              </tr>
+              <tr v-for="(product, index) in products" :key="product.id">
+                <td>{{product.id}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td>
+                  <button v-on:click="reduceAmount(index)" :disabled="product.cart==0" class="btn btn-primary cart">-</button>
+                  {{product.cart}}
+                  <button v-on:click="addAmount(index)" class="btn btn-primary cart">+</button>
+                </td>
+                <td>{{ product.total | moneyFormat }}</td>
+                <td>
+                  <button class="btn btn-danger" @click="deleteProduct(index)">ลบ</button>
+                </td>
+                <!-- {{ sumTotal += product.total }} -->
+              </tr>
+              <tr v-show="SumTotal > 0">
+                <td colspan="4"></td>
+                <td class="total">รวมทั้งสิ้น {{ SumTotal | moneyFormat }} บาท</td>
+                <td><a class="btn btn-success" id="sale" @click="saleProduct()">ขาย</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -51,7 +56,6 @@ export default {
   props: ["id"],
   mounted() {
     console.log("Saling Component mounted.");
-    this.getAllProduct();
   },
   data() {
     return {
@@ -67,34 +71,41 @@ export default {
     };
   },
   methods: {
-    getAllProduct() {
-      axios.get("/api/saling").then(response => {
-        console.log(response.data);
-      });
-    },
+   
 
     showProduct() {
-      axios.get("/api/saling/" + this.barcode).then(response => {
-        var add = true; // ตัวแปรเช็คว่าจะให้เพิ่มหรือไม่
-        var product = response.data[0];
-        console.log(product)
-        if (this.checkAmount(product)) {
-          //ถ้าสินค้าเหลือ
-          for (var i = 0; i < this.products.length; i++) {
-            if (this.products[i].id == product.id) {
-              // ถ้ามีสินค้าอยู่แล้วให้เพิ่มจำนวนไม่ต้องเพิ่มรายการ
-              this.addAmount(i);
-              add = false;
+      var product;
+      var add = true; // ตัวแปรเช็คว่าจะให้เพิ่มหรือไม่
+
+      axios.get("/api/saling/" + this.barcode)
+      .then(response => {
+        product = response.data[0];
+
+        if(product != undefined) { // ถ้ามีสินค้า
+          if (this.checkAmount(product)) {
+            //ถ้าสินค้าเหลือ
+            for (var i = 0; i < this.products.length; i++) {
+              if (this.products[i].id == product.id) {
+                // ถ้ามีสินค้าอยู่แล้วให้เพิ่มจำนวนไม่ต้องเพิ่มรายการ
+                this.addAmount(i);
+                add = false;
+              }
             }
-          }
-          if (add) {
-            product.cart = 1;
-            this.products.push(product);
+            if (add) {
+              product.cart = 1;
+              this.products.push(product);
+            }
+          } else {
+            swal("สินค้าไม่เพียงพอ", "", "warning");
           }
         } else {
-          swal("สินค้าไม่เพียงพอ", "", "warning");
+          swal({
+            'icon': 'warning',
+            'title': 'ไม่มีสินค้าในระบบ'
+          })
         }
       });
+      this.barcode = '';
     },
 
     saleProduct() {
@@ -193,3 +204,20 @@ export default {
     }
 };
 </script>
+
+<style>
+  td {
+    width: 16.66%;
+  }
+  .cart {
+    font-weight: 600;
+    font-size: 80%;
+    padding: 3px 6px
+  }
+
+  .total {
+      color: #2d64cf;
+      font-size: 24px;
+      font-weight: 600;
+  }
+</style>

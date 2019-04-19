@@ -1,29 +1,49 @@
 <template>
-    <div>
-        <div class="list-group col-md-4">
-            <button type="button" class="list-group-item list-group-item-action active">
+    <div class="row justify-content-center" style="margin-top: 20px">
+        <div class="card" style="width:100%;">
+            <div class="card-header total">
                 Booking Detail
-            </button>
+            </div>
+            <ul class="list-group list-group-flush">
+            
+
+            <li class="list-group-item detail" v-if="bookDetail.length > 0">
+                Ringside: 
+                <span 
+                    class="badge badge-pill badge-primary mr-1 mb-1"
+                    style="font-size: 90%"
+                    v-for="(detail, index) in bookDetail"
+                    v-if="detail.ticketId == 2"
+                    :key="index"
+                >{{ detail.seatName}} </span>
+            </li>
+
+            <li class="list-group-item detail" v-if="bookDetail.length > 0">
+                VIP: 
+                <span 
+                    class="badge badge-pill badge-primary mr-1 mb-1"
+                    style="font-size: 90%; background-color: #ecbc18;"
+                    v-for="(detail, index) in bookDetail"
+                    v-if="detail.ticketId == 3"
+                    :key="index"
+                >{{ detail.seatName}} </span>
+            </li>
+
+            <li class="list-group-item total">
+               Total : {{ total | moneyFormat }} ฿
+            </li>
+            </ul>
+            
+        </div>
+        <div class="input-group mt-2">
             <button 
-                type="button" 
-                class="list-group-item list-group-item-action"
-                v-for="(detail, index) in bookDetail"
-                :key="index"
+                class="btn btn-success btn-block" 
+                @click="saveBooking"
+                :disabled="bookDetail.length == 0"
             >
-                {{ detail.ticketName +  '&emsp;Seat : ' + detail.seatName + '&emsp;Price&emsp;'}}
-                {{ detail.price | moneyFormat }}
-            </button>
-            <button type="button" class="list-group-item list-group-item-action active">
-               Total is {{ total | moneyFormat }} ฿
+            Checkout
             </button>
         </div>
-        <button 
-            class="btn btn-success" 
-            @click="saveBooking"
-            :disabled="bookDetail.length == 0"
-        >
-        Pay
-        </button>
     </div>
 </template>
 
@@ -112,3 +132,20 @@ export default {
     }
 }
 </script>
+
+<style>
+    .total {
+        color: #2d15e4;
+        font-size: 125%;
+        font-weight: 600;
+        line-height: 1;
+        text-align: center;
+    }
+    .detail {
+        color:#2d15e4;
+        font-size: 110%;
+        font-weight: 600;
+        line-height: 1;
+    }
+    
+</style>

@@ -3,35 +3,38 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" @click="clearData">
             เพิ่มสินค้า
         </button>
+        <p></p>
        <div class="row">
-           <div class="box col-md-12">
-                <div class="box-body no-padding">
-                    <table class="table table-striped" style="text-align:center;">
-                        <tbody style="text-align:center;">
-                        <tr style="text-align:center;">
-                            <td>ชื่อสินค้า</td>
-                            <td>ราคา</td>
-                            <td>บาร์โค้ด</td>
-                            <td>คงเหลือ</td>
-                            <td>จัดการ</td>
-                        </tr>
-                        <tr v-for="(product, index) in products" :key="index">
-                            <td v-text="product.name"></td>
-                            <td v-text="product.price"></td>
-                            <td v-text="product.barcode"></td>
-                            <td v-text="product.amount +' '+ product.unit"></td>
-                            <td>
-                                <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#modal" @click="getProductDetail(product)">
-                                    แก้ไข
-                                </button>
-                                <button type="button" class="btn btn-danger"  @click="deleteProduct(product.id)">
-                                    ลบ
-                                </button>
-                            </td>
-                        </tr> 
-                        
-                        </tbody>
-                    </table>
+           <div class=" col-md-12">
+               <div class="box box-info">
+                    <div class="box-body table-responsive">
+                        <table class="table table-striped" style="text-align:center;">
+                            <tbody style="text-align:center;">
+                            <tr style="text-align:center;">
+                                <td>ชื่อสินค้า</td>
+                                <td>ราคา</td>
+                                <td>บาร์โค้ด</td>
+                                <td>คงเหลือ</td>
+                                <td>จัดการ</td>
+                            </tr>
+                            <tr v-for="(product, index) in products" :key="index">
+                                <td v-text="product.name"></td>
+                                <td v-text="product.price"></td>
+                                <td v-text="product.barcode"></td>
+                                <td v-text="product.amount +' '+ product.unit"></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#modal" @click="getProductDetail(product)">
+                                        แก้ไข
+                                    </button>
+                                    <button type="button" class="btn btn-danger"  @click="deleteProduct(product.id)">
+                                        ลบ
+                                    </button>
+                                </td>
+                            </tr> 
+                            
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <!-- <div id="edit-product"> -->

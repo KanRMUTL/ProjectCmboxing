@@ -10,7 +10,7 @@
                 <div class="slide-1"></div>
                   <div class="hero ">
                     <hgroup class="wow fadeInUp">
-                        <h1>Chiangmai Boxing Staduim <span >
+                        <h1>Chiangmai Boxing Stadium <span >
                           <span class="wrap"></span></a></span> </h1>        
                         <h3>Every Mon / Tue / Wed / Thu / Fri / Sat </h3>
                         <h3>Start 09:00 AM - 11:30 PM</h3>

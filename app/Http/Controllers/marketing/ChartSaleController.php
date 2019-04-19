@@ -22,7 +22,7 @@ class ChartSaleController extends StarterController
             'start' => $this->start,
             'end' => $this->end
         ];
-        return view('_sale.chart', $data);
+        return view('marketing._sale.chart', $data);
     }
 
     public function apiZoneTotal(Request $request) // สำหรับ Admin เท่านั้น

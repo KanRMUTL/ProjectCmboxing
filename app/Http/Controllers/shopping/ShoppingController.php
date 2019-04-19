@@ -14,7 +14,8 @@ class ShoppingController extends StarterController
     function index()
     {
         $data = [
-            'tickets' => $this->tickets
+            'tickets' => $this->tickets,
+            'webdetail' => WebDetail::find(1)
         ];
         return view('shopping/index', $data);
     }

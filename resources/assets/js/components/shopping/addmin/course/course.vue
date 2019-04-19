@@ -3,10 +3,12 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" @click="clearCourse()">
             เพิ่มคอร์ส
         </button>
+        <br><br>
        <div class="row">
-           <div class="box col-md-12">
-                <div class="box-body no-padding">
-                    <table class="table table-striped" style="text-align:center;">
+           <div class="col-md-12">
+               <div class="box box-info">
+                <div class="box-body table-responsive">
+                    <table class="table table-striped table-hover" style="text-align:center;">
                         <tbody style="text-align:center;">
                         <tr style="text-align:center;">
                             <td>ชื่อคอร์ส</td>
@@ -30,6 +32,7 @@
                     </table>
                 </div>
             </div>
+           </div>
         </div>
 
         <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

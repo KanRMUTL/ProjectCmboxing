@@ -20,7 +20,7 @@
   
   <div class="row">
     <div class="col-xs-12">
-      <div class="box box box-info">
+      <div class="box box-info">
         <!-- /.box-header -->
         <div class="box-body table-responsive">
           <table style="font-size: 120%" class="table table-hover">
