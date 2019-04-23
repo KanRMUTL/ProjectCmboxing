@@ -25,43 +25,44 @@
         <div class="box-body table-responsive">
           <table style="font-size: 120%" class="table table-hover">
             <tr>
-              <th>ชื่อลูกค้า</th>
-              <th>เบอร์โทร</th>
-              <th>หมายเลขห้อง</th>
-              <th>เกสเฮาท์</th>
-              <th>บัตร</th>
-              <th>จำนวน</th>
-              <th>ยอดรวม</th>
-              <th>วันที่เข้ามาชมมวย</th>
-              <th>ขายโดย...</th>
-              <th>วันที่ขาย</th>
+              <th class="center">ชื่อลูกค้า</th>
+              <th class="center">เบอร์โทร</th>
+              <th class="center">หมายเลขห้อง</th>
+              <th class="center">เกสเฮาท์</th>
+              <th class="center">บัตร</th>
+              <th class="center">จำนวน</th>
+              
+              <th class="center">วันที่เข้ามาชมมวย</th>
+              <th class="center">ขายโดย...</th>
+              <th class="center">วันที่ขาย</th>
+              <th class="right money">ยอดรวม</th>
               <th>แก้ไข</th>
               <th>ลบ</th>
             </tr>
             @foreach ($sales as $sale)
             <tr>
                 <td>{{ $sale->customer_name }}</td>
-                <td>{{ $sale->customer_phone }}</td>
-                <td>{{ $sale->customer_room }}</td>
-                <td>{{ $sale->guesthouse->name }}</td>
-                <td>
+                <td class="center">{{ $sale->customer_phone }}</td>
+                <td class="center">{{ $sale->customer_room }}</td>
+                <td class="center">{{ $sale->guesthouse->name }}</td>
+                <td class="center">
                   <span class="label label-success">
                     {{ $sale->ticket->name }}
                   </span>
                 </td>
-                <td>
+                <td class="center">
                     <span class="label label-primary">
                       {{ $sale->amount }}
                     </span>
                 </td>
-                <td>
+                <td class="center">{{ $sale->visit }}</td>
+                <td>{{ $sale->user->firstname }}&emsp;{{ $sale->user->lastname }}</td> 
+                <td class="center">{{ date('d/m/Y', strtotime($sale->created_at)) }}</td>
+                <td class="right money">
                   <span class="label label-danger">
                     {{ number_format($sale->total, 2, '.',',') }}
                   </span>
                 </td>
-                <td>{{ $sale->visit }}</td>
-                <td>{{ $sale->user->firstname }}&emsp;{{ $sale->user->lastname }}</td>
-                <td>{{ date('d/m/Y', strtotime($sale->created_at)) }}</td>
                 <td>
                     @if (Auth::user()->id == $sale->user_id || Auth::user()->role == 1)  
                     <a href="/sale/{{ $sale->id }}/edit" class="btn btn-warning">

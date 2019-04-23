@@ -13,8 +13,8 @@
         <table style="font-size: 120%" class="table table-striped table-hover" >
           <thead>
             <tr align="center" style="text-align-last: center;">
-              <th>ชื่อครูสอน</th>
-              <th>รายละเอียด</th>
+              <th style="width: 30%;">ชื่อครูสอน</th>
+              <th style="width: 35%;">รายละเอียด</th>
               <th style="width:10%;">รูปประจำตัว</th>
               <th>แก้ไข</th>
               <th>ลบ</th>

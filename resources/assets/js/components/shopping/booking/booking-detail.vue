@@ -32,10 +32,11 @@
             <li class="list-group-item total">
                Total : {{ total | moneyFormat }} ฿
             </li>
+
             </ul>
             
         </div>
-        <div class="input-group mt-2">
+        <!-- <div class="input-group mt-2">
             <button 
                 class="btn btn-success btn-block" 
                 @click="saveBooking"
@@ -43,7 +44,14 @@
             >
             Checkout
             </button>
-        </div>
+        </div> -->
+         <div class="input-group-item mt-2" v-if="total > 0">
+            <paypal-button 
+                :url="'/api/booking'" 
+                :saveBooking="saveBooking" 
+                :total="total"
+            ></paypal-button>
+         </div> 
     </div>
 </template>
 
@@ -70,7 +78,8 @@ export default {
                     ticketId: 3,
                     amount : 0,
                     total: 0
-                },
+            },
+            confirmCheckout: false
         }
         }
         
@@ -104,6 +113,10 @@ export default {
 
             this.clearData()
             this.searchSeat()
+        },
+
+        changePaypal() {
+            this.confirmCheckout = true;
         },
 
         prepareSaleDetail()

@@ -1,12 +1,21 @@
 <template>
     <div>
-        <h1>Training Muay Thai</h1>
-        Our MuayThai Course
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h2>Training Muay Thai</h2>
+  <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
+</div>
+        <h3 class="center">Our MuayThai Course</h3>
         <div class="row justify-content-md-center">
             <div class="card col-md-3 m-4 p-0" v-for="(course, index) in courses" :key="index">
                 <div class="card-header">
-                    <h4>{{ course.name }}</h4>
-                    <span class="badge badge-success">{{ course.price | coursePrice }}฿</span>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4>{{ course.name }}</h4>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="badge badge-success">{{ course.price | coursePrice }}฿</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <p class="card-text">{{ course.detail }}</p>
@@ -80,4 +89,13 @@ export default {
 
 }
 </script>
+
+<style>
+    .badge {
+        font-size: 80%;
+    }
+    .center{ 
+        text-align: center;
+    }
+</style>
 

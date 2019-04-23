@@ -20,9 +20,10 @@ Vue.component('booking', require('./components/shopping/booking/booking.vue'));
 Vue.component('seat', require('./components/shopping/booking/seat.vue'));
 Vue.component('booking-detail', require('./components/shopping/booking/booking-detail.vue'));
 
+Vue.component('paypal-button', require('./components/Paypal/paypal-button.vue'));
+
 Vue.component('my-ticket', require('./components/shopping/myProduct/ticket/My-Ticket.vue'));
 Vue.component('ticket-detail', require('./components/shopping/myProduct/ticket/ticket-detail.vue'));
-
 Vue.component('my-course', require('./components/shopping/myProduct/course/My-Course.vue'));
 
 

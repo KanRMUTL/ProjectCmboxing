@@ -30,7 +30,7 @@ class Sale extends Model
 
     public function __construct()
     {
-        $this->roleId = Auth::user()->role;
+        // Auth::user()->role = Auth::user()->role;
         $this->now = Carbon::now();
         $this->startOfWeek =  $this->now->startOfWeek()->format('Y-m-d');
         $this->endOfWeek = $this->now->endOfWeek()->format('Y-m-d');
@@ -67,7 +67,7 @@ class Sale extends Model
 
     public function scopeSaleDetail($query, $before, $after, $zoneId = null, $saleType = null)
     {
-        if($this->roleId == 1)
+        if(Auth::user()->role == 1)
         {   
             // แอดมิน
             return $query
@@ -80,7 +80,7 @@ class Sale extends Model
                 ->whereBetween('created_at', [$before, $after])
                 ->orderByRaw('created_at DESC');
         }
-        else if($this->roleId == 2)
+        else if(Auth::user()->role == 2)
         {   
             // หัวหน้าฝ่ายการตลาด
             return $query
@@ -93,7 +93,7 @@ class Sale extends Model
                 ->whereBetween('created_at', [$before, $after])
                 ->orderByRaw('created_at DESC');
         }
-        else if($this->roleId == 3)
+        else if(Auth::user()->role == 3)
         {   
             // พนักงานการตลาด
             return $query
@@ -111,7 +111,7 @@ class Sale extends Model
 
     public function scopeCommission($query, $before, $after, $zoneId = null, $saleTypeId)
     {
-        if($this->roleId == 1){ // แอดมิน
+        if(Auth::user()->role == 1){ // แอดมิน
             return $query
                 ->select(
                     'user_id', 
@@ -127,7 +127,7 @@ class Sale extends Model
                 ->groupBy('date_created_at', 'user_id', 'ticket_id')
                 ->orderByRaw('created_at DESC');
         }
-        else if($this->roleId == 2) { // หัวหน้าฝ่ายการตลาด
+        else if(Auth::user()->role == 2) { // หัวหน้าฝ่ายการตลาด
             return $query
                 ->select(
                     'user_id', 
@@ -143,7 +143,7 @@ class Sale extends Model
                 ->groupBy('user_id','created_at', 'ticket_id')
                 ->orderByRaw('created_at DESC');
         }
-        else if($this->roleId == 3){ // พนักงาน
+        else if(Auth::user()->role == 3){ // พนักงาน
             return $query
                 ->select(
                     'user_id', 

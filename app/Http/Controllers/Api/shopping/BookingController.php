@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use Carbon\Carbon;
+use App\Paypal\GetOrder;
 use App\shopping\Seat;
 use App\marketing\Ticket;
 use App\shopping\WebDetail;
@@ -34,41 +35,43 @@ class BookingController extends StarterController
   
     public function store(Request $request)
     {
-        $saleTicket = new SaleTicket();
-        
-        
-        $saleTicket->visit = $request->dateVisit;
-        $saleTicket->total = $request->total;
-        $saleTicket->user_id = $request->userId;
-        $saleTicket->save();
-        
-        foreach($request->bookDetail as $detail)
-        {
-            $seatRegister = new SeatRegister;
+        try{
+            $saleTicket = new SaleTicket();
 
-            $seatRegister->visit = $request->dateVisit;
-            $seatRegister->sale_ticket_id = $saleTicket->id;
-            $seatRegister->seat_id = $detail['seatId'];
-            $seatRegister->save();
-
-           
-        }
-
-        foreach($request->saleDetail as $saleDetail)
-        { 
-            if($saleDetail['amount'] > 0)
-            {
-                $saleTicketDetail = new SaleTicketDetail();
-                $saleTicketDetail->amount = $saleDetail['amount'];
-                $saleTicketDetail->total = $saleDetail['total'];
-                $saleTicketDetail->ticket_id = $saleDetail['ticketId'];
-                $saleTicketDetail->sale_ticket_id = $saleTicket->id;
-                $saleTicketDetail->save();
-            }
+            $saleTicket->visit = $request->dateVisit;
+            $saleTicket->total = $request->total;
+            $saleTicket->user_id = $request->userId;
+            $saleTicket->save();
             
-        }
+            foreach($request->bookDetail as $detail)
+            {
+                $seatRegister = new SeatRegister;
 
-        return response()->json();
+                $seatRegister->visit = $request->dateVisit;
+                $seatRegister->sale_ticket_id = $saleTicket->id;
+                $seatRegister->seat_id = $detail['seatId'];
+                $seatRegister->save();           
+            }
+
+            foreach($request->saleDetail as $saleDetail)
+            { 
+                if($saleDetail['amount'] > 0)
+                {
+                    $saleTicketDetail = new SaleTicketDetail();
+                    $saleTicketDetail->amount = $saleDetail['amount'];
+                    $saleTicketDetail->total = $saleDetail['total'];
+                    $saleTicketDetail->ticket_id = $saleDetail['ticketId'];
+                    $saleTicketDetail->sale_ticket_id = $saleTicket->id;
+                    $saleTicketDetail->save();
+                }
+                
+            }
+
+            return response()->json(['status' => 'Booking Complete']);
+        } catch(Exception $e) {
+            return response()->json($e);
+        }
+        
     }
 
  
@@ -127,5 +130,18 @@ class BookingController extends StarterController
         $seat = Seat::forBooking()->get();
         $data['seat'] = $this->addAttribute($seat, $request->dateSearch);
         return response()->json($data); return response()->json($data);
+    }
+
+    public function payment(Request $request)
+    {
+        try{
+            $getOrder = GetOrder::getOrder($request->orderID, true);
+        }
+        catch(Exception $e) {
+            echo $e;
+        }
+        finally {
+            return response()->json($getOrder);
+        }
     }
 }

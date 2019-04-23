@@ -25,18 +25,32 @@ class SaleProfile extends Sale
     public function scopeCommissionProfile($query, $user_id, $start, $end, $sale_type) {
         return $query   
                 ->select(
-                    'user_id', 
                     DB::raw('SUM(amount) as amount'),  
-                    DB::raw('DATE(created_at) as dateCreated_at'),
-                    'ticket_id',                      
-                    DB::raw('DATE(created_at)')
+                    DB::raw('DATE(created_at) as dateCreatedAt'),
+                    'ticket_id'     
                 )
                 ->where([
                     ['user_id', '=', $user_id],
                     ['sale_type', '=', $sale_type]    
                 ])
                 ->whereBetween('created_at', [$start, $end])
-                ->groupBy('dateCreated_at', 'created_at', 'ticket_id')
+                ->groupBy('dateCreatedAt', 'ticket_id')
+                ->orderByRaw('created_at DESC');
+    }
+
+    public function scopeIncomeProfile($query, $user_id, $start, $end) 
+    {
+        return $query  
+                ->select(
+                    DB::raw('SUM(amount) AS amount'), 
+                    'ticket_id', 
+                    DB::raw('SUM(total) AS sumTotal'), 
+                    'sale_type',
+                    DB::raw('DATE(created_at) as dateCreatedAt')
+                )
+                ->where(['user_id' => $user_id]) 
+                ->whereBetween('created_at', [$start, $end])
+                ->groupBy('dateCreatedAt', 'ticket_id', 'sale_type', 'created_at')
                 ->orderByRaw('created_at DESC');
     }
 }

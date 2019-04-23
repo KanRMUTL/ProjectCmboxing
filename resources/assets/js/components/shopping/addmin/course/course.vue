@@ -8,9 +8,9 @@
            <div class="col-md-12">
                <div class="box box-info">
                 <div class="box-body table-responsive">
-                    <table class="table table-striped table-hover" style="text-align:center;">
-                        <tbody style="text-align:center;">
-                        <tr style="text-align:center;">
+                    <table class="table table-striped table-hover center">
+                        <tbody >
+                        <tr >
                             <td>ชื่อคอร์ส</td>
                             <td>ราคา</td>
                             <td>รายละเอียด</td>

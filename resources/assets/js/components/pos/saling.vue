@@ -14,9 +14,9 @@
 
       <div class="box box-info">
         <div class="box-body table-responsive">
-          <table class="table table-striped" style="text-align:center;">
-            <tbody style="text-align:center;">
-              <tr style="text-align:center;">
+          <table class="table table-striped center">
+            <tbody>
+              <tr>
                 <td>รหัสสินค้า</td>
                 <td>ชื่อสินค้า</td>
                 <td>ราคา</td>

@@ -40,17 +40,26 @@ class SaleController extends CommissionController
         $data['customer'] = SaleProfile::ticketSaling($user_id)->get();
         
         $data['commission']['emp'] = SaleProfile::CommissionProfile($user_id, $this->start, $this->end, 0)->get();
+        $data['commission']['empTotal'] = 0;
         $data['commission']['guide'] = SaleProfile::CommissionProfile($user_id, $this->start, $this->end, 1)->get();
-        // $data['commission']['guide'] = SaleProfile::
+        $data['commission']['guideTotal'] = 0;
+        $data['income']['data'] = SaleProfile::incomeProfile($user_id, $this->start, $this->end)->get();
+        $data['income']['incomeTotal'] = 0;
+        
         foreach($data['commission']['emp'] as $index => $item) {
             $data['commission']['emp'][$index]['total'] = $this->calEmpCommission($item->ticket_id, $item->amount);
+            $data['commission']['empTotal'] += $this->calEmpCommission($item->ticket_id, $item->amount);
         }
 
         foreach($data['commission']['guide'] as $index => $item) {
             $data['commission']['guide'][$index]['total'] = $this->calGuideCommission($item->ticket_id, $item->amount);
+            $data['commission']['guideTotal'] += $this->calGuideCommission($item->ticket_id, $item->amount);
         }
 
-        
+        foreach($data['income']['data'] as $index => $item) {
+            $data['income']['data'][$index]['income'] = $item['sumTotal'] - $this->calEmpCommission($item['ticket_id'], $item['amount']);
+            $data['income']['incomeTotal'] += $data['income']['data'][$index]['income'];
+        }
 
         return response()->json($data);
     }

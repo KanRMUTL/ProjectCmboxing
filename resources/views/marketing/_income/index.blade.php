@@ -18,15 +18,15 @@
       <div class="box box box-info">
         <!-- /.box-header -->
         <div class="box-body table-responsive">
-          <table style="font-size: 120%" class="table table-hover">
+          <table style="font-size: 120%" class="table table-hover center">
             <tr>
-              <th>ผู้ขาย</th>
-              <th>ประเภทบัตร</th>
-              <th>จำนวน</th>
-              <th>ประเภทการขาย</th>
-              <th>ยอดรวม</th>
-              <th>นำเข้าสนามมวย</th>
-              <th>วันที่</th>
+              <th class="center">ผู้ขาย</th>
+              <th class="center">ประเภทบัตร</th>
+              <th class="center">จำนวนบัตร</th>
+              <th  class="center">ประเภทการขาย</th>
+              <th class="right" style="width: 10%;">ยอดรวม</th>
+              <th class="right" style="width: 10%;">นำเข้าสนามมวย</th>
+              <th class="center">วันที่</th>
             </tr>
             @foreach ($incomes as $income)
             <tr>
@@ -34,9 +34,9 @@
               <td>{{ $income->ticket->name }}</td>
               <td>{{ $income->amount }}</td>
               <td>{{ $income->sale_type_name }}</td>
-              <th>{{ $income->total }}</th>
-              <th>{{ $income->income }}</th>
-              <td>{{ date('d/m/Y', strtotime($income->created_at)) }}</td>
+              <th class="right">{{ number_format($income->total, 2, '.',',') }}</th>
+              <th class="right">{{ number_format($income->income, 2, '.',',') }}</th>
+              <td class="center">{{ date('d/m/Y', strtotime($income->created_at)) }}</td>
             </tr>
             @endforeach
           </table>

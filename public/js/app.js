@@ -1458,7 +1458,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(107);
+module.exports = __webpack_require__(109);
 
 
 /***/ }),
@@ -1491,19 +1491,20 @@ Vue.component('booking', __webpack_require__(61));
 Vue.component('seat', __webpack_require__(66));
 Vue.component('booking-detail', __webpack_require__(71));
 
+Vue.component('paypal-button', __webpack_require__(126));
+
 Vue.component('my-ticket', __webpack_require__(76));
 Vue.component('ticket-detail', __webpack_require__(81));
-
 Vue.component('my-course', __webpack_require__(84));
 
 Vue.component('courses-index', __webpack_require__(87));
 Vue.component('courses', __webpack_require__(90));
-Vue.component('trainer', __webpack_require__(93));
-Vue.component('register-course', __webpack_require__(98));
+Vue.component('trainer', __webpack_require__(95));
+Vue.component('register-course', __webpack_require__(100));
 
 // Admin
-Vue.component('course', __webpack_require__(101));
-Vue.component('manage-trainer', __webpack_require__(104));
+Vue.component('course', __webpack_require__(103));
+Vue.component('manage-trainer', __webpack_require__(106));
 
 var app = new Vue({
     el: '#vue'
@@ -43924,126 +43925,118 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "box box-info" }, [
       _c("div", { staticClass: "box-body table-responsive" }, [
-        _c(
-          "table",
-          {
-            staticClass: "table table-striped",
-            staticStyle: { "text-align": "center" }
-          },
-          [
-            _c(
-              "tbody",
-              { staticStyle: { "text-align": "center" } },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._l(_vm.products, function(product, index) {
-                  return _c("tr", { key: product.id }, [
-                    _c("td", [_vm._v(_vm._s(product.id))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(product.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(product.price))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary cart",
-                          attrs: { disabled: product.cart == 0 },
-                          on: {
-                            click: function($event) {
-                              _vm.reduceAmount(index)
-                            }
-                          }
-                        },
-                        [_vm._v("-")]
-                      ),
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(product.cart) +
-                          "\n                "
-                      ),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary cart",
-                          on: {
-                            click: function($event) {
-                              _vm.addAmount(index)
-                            }
-                          }
-                        },
-                        [_vm._v("+")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(_vm._s(_vm._f("moneyFormat")(product.total)))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          on: {
-                            click: function($event) {
-                              _vm.deleteProduct(index)
-                            }
-                          }
-                        },
-                        [_vm._v("ลบ")]
-                      )
-                    ])
-                  ])
-                }),
-                _vm._v(" "),
-                _c(
-                  "tr",
-                  {
-                    directives: [
+        _c("table", { staticClass: "table table-striped center" }, [
+          _c(
+            "tbody",
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._l(_vm.products, function(product, index) {
+                return _c("tr", { key: product.id }, [
+                  _c("td", [_vm._v(_vm._s(product.id))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(product.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(product.price))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
                       {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.SumTotal > 0,
-                        expression: "SumTotal > 0"
-                      }
-                    ]
-                  },
-                  [
-                    _c("td", { attrs: { colspan: "4" } }),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "total" }, [
-                      _vm._v(
-                        "รวมทั้งสิ้น " +
-                          _vm._s(_vm._f("moneyFormat")(_vm.SumTotal)) +
-                          " บาท"
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-success",
-                          attrs: { id: "sale" },
-                          on: {
-                            click: function($event) {
-                              _vm.saleProduct()
-                            }
+                        staticClass: "btn btn-primary cart",
+                        attrs: { disabled: product.cart == 0 },
+                        on: {
+                          click: function($event) {
+                            _vm.reduceAmount(index)
                           }
-                        },
-                        [_vm._v("ขาย")]
-                      )
-                    ])
+                        }
+                      },
+                      [_vm._v("-")]
+                    ),
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(product.cart) +
+                        "\n                "
+                    ),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary cart",
+                        on: {
+                          click: function($event) {
+                            _vm.addAmount(index)
+                          }
+                        }
+                      },
+                      [_vm._v("+")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm._f("moneyFormat")(product.total)))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: {
+                          click: function($event) {
+                            _vm.deleteProduct(index)
+                          }
+                        }
+                      },
+                      [_vm._v("ลบ")]
+                    )
+                  ])
+                ])
+              }),
+              _vm._v(" "),
+              _c(
+                "tr",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.SumTotal > 0,
+                      expression: "SumTotal > 0"
+                    }
                   ]
-                )
-              ],
-              2
-            )
-          ]
-        )
+                },
+                [
+                  _c("td", { attrs: { colspan: "4" } }),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "total" }, [
+                    _vm._v(
+                      "รวมทั้งสิ้น " +
+                        _vm._s(_vm._f("moneyFormat")(_vm.SumTotal)) +
+                        " บาท"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { id: "sale" },
+                        on: {
+                          click: function($event) {
+                            _vm.saleProduct()
+                          }
+                        }
+                      },
+                      [_vm._v("ขาย")]
+                    )
+                  ])
+                ]
+              )
+            ],
+            2
+          )
+        ])
       ])
     ])
   ])
@@ -44053,7 +44046,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", { staticStyle: { "text-align": "center" } }, [
+    return _c("tr", [
       _c("td", [_vm._v("รหัสสินค้า")]),
       _vm._v(" "),
       _c("td", [_vm._v("ชื่อสินค้า")]),
@@ -44281,89 +44274,82 @@ var render = function() {
         _c("div", { staticClass: " col-md-12" }, [
           _c("div", { staticClass: "box box-info" }, [
             _c("div", { staticClass: "box-body table-responsive" }, [
-              _c(
-                "table",
-                {
-                  staticClass: "table table-striped",
-                  staticStyle: { "text-align": "center" }
-                },
-                [
-                  _c(
-                    "tbody",
-                    { staticStyle: { "text-align": "center" } },
-                    [
-                      _vm._m(0),
-                      _vm._v(" "),
-                      _vm._l(_vm.products, function(product, index) {
-                        return _c("tr", { key: index }, [
-                          _c("td", {
-                            domProps: { textContent: _vm._s(product.name) }
-                          }),
-                          _vm._v(" "),
-                          _c("td", {
-                            domProps: { textContent: _vm._s(product.price) }
-                          }),
-                          _vm._v(" "),
-                          _c("td", {
-                            domProps: { textContent: _vm._s(product.barcode) }
-                          }),
-                          _vm._v(" "),
-                          _c("td", {
-                            domProps: {
-                              textContent: _vm._s(
-                                product.amount + " " + product.unit
-                              )
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary",
-                                attrs: {
-                                  type: "button",
-                                  "data-toggle": "modal",
-                                  "data-target": "#modal"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.getProductDetail(product)
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    แก้ไข\n                                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.deleteProduct(product.id)
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    ลบ\n                                "
-                                )
-                              ]
+              _c("table", { staticClass: "table table-striped center" }, [
+                _c(
+                  "tbody",
+                  { staticClass: "center" },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _vm._l(_vm.products, function(product, index) {
+                      return _c("tr", { key: index }, [
+                        _c("td", {
+                          domProps: { textContent: _vm._s(product.name) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(product.price) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(product.barcode) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: {
+                            textContent: _vm._s(
+                              product.amount + " " + product.unit
                             )
-                          ])
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: {
+                                type: "button",
+                                "data-toggle": "modal",
+                                "data-target": "#modal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.getProductDetail(product)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    แก้ไข\n                                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.deleteProduct(product.id)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    ลบ\n                                "
+                              )
+                            ]
+                          )
                         ])
-                      })
-                    ],
-                    2
-                  )
-                ]
-              )
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
             ])
           ])
         ]),
@@ -44381,7 +44367,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", { staticStyle: { "text-align": "center" } }, [
+    return _c("tr", { staticClass: "center" }, [
       _c("td", [_vm._v("ชื่อสินค้า")]),
       _vm._v(" "),
       _c("td", [_vm._v("ราคา")]),
@@ -45004,64 +44990,54 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "box-body no-padding" }, [
-      _c(
-        "table",
-        {
-          staticClass: "table table-striped",
-          staticStyle: { "text-align": "center" }
-        },
-        [
-          _c(
-            "tbody",
-            { staticStyle: { "text-align": "center" } },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._l(_vm.bills, function(bill) {
-                return _c("tr", { key: bill.id }, [
-                  _c("td", { domProps: { textContent: _vm._s(bill.id) } }),
-                  _vm._v(" "),
-                  _c("td", {
-                    domProps: {
-                      textContent: _vm._s(_vm.moneyFormat(bill.total))
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("td", {
-                    domProps: {
-                      textContent: _vm._s(_vm.showDateTime(bill.created_at))
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("td", {
-                    domProps: { textContent: _vm._s(_vm.fullname(bill)) }
-                  }),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: {
-                          "data-toggle": "modal",
-                          "data-target": ".bd-example-modal-lg"
-                        },
-                        on: {
-                          click: function($event) {
-                            _vm.getSaleDetail(bill)
-                          }
-                        }
+      _c("table", { staticClass: "table table-striped center" }, [
+        _c(
+          "tbody",
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._l(_vm.bills, function(bill) {
+              return _c("tr", { key: bill.id }, [
+                _c("td", { domProps: { textContent: _vm._s(bill.id) } }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(_vm.moneyFormat(bill.total)) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: {
+                    textContent: _vm._s(_vm.showDateTime(bill.created_at))
+                  }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(_vm.fullname(bill)) }
+                }),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: {
+                        "data-toggle": "modal",
+                        "data-target": ".bd-example-modal-lg"
                       },
-                      [_vm._v("รายละเอียด")]
-                    )
-                  ])
+                      on: {
+                        click: function($event) {
+                          _vm.getSaleDetail(bill)
+                        }
+                      }
+                    },
+                    [_vm._v("รายละเอียด")]
+                  )
                 ])
-              })
-            ],
-            2
-          )
-        ]
-      ),
+              ])
+            })
+          ],
+          2
+        )
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -45154,7 +45130,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", { staticStyle: { "text-align": "center" } }, [
+    return _c("tr", [
       _c("td", [_vm._v("รหัสการขาย")]),
       _vm._v(" "),
       _c("td", [_vm._v("ยอดรวม")]),
@@ -45724,6 +45700,7 @@ exports.push([module.i, "\n.seatRow .btn{\n     font-size: 75%;\n}\n.seatSelecti
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -46503,6 +46480,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['bookDetail', 'total', 'dateVisit', 'userId', 'searchSeat', 'clearData'],
@@ -46519,7 +46504,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     ticketId: 3,
                     amount: 0,
                     total: 0
-                }
+                },
+                confirmCheckout: false
             }
         };
     },
@@ -46547,6 +46533,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.clearData();
             this.searchSeat();
+        },
+        changePaypal: function changePaypal() {
+            this.confirmCheckout = true;
         },
         prepareSaleDetail: function prepareSaleDetail() {
             for (var key in this.bookDetail) {
@@ -46658,17 +46647,22 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "input-group mt-2" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-success btn-block",
-            attrs: { disabled: _vm.bookDetail.length == 0 },
-            on: { click: _vm.saveBooking }
-          },
-          [_vm._v("\n        Checkout\n        ")]
-        )
-      ])
+      _vm.total > 0
+        ? _c(
+            "div",
+            { staticClass: "input-group-item mt-2" },
+            [
+              _c("paypal-button", {
+                attrs: {
+                  url: "/api/booking",
+                  saveBooking: _vm.saveBooking,
+                  total: _vm.total
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e()
     ]
   )
 }
@@ -47666,15 +47660,19 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(91)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(91)
+var __vue_script__ = __webpack_require__(93)
 /* template */
-var __vue_template__ = __webpack_require__(92)
+var __vue_template__ = __webpack_require__(94)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -47710,10 +47708,59 @@ module.exports = Component.exports
 
 /***/ }),
 /* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(92);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("caaf7130", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5088fe04\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./courses.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5088fe04\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./courses.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.badge {\n    font-size: 80%;\n}\n.center{ \n    text-align: center;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 93 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47791,7 +47838,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 92 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47799,18 +47846,26 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Training Muay Thai")]),
-    _vm._v("\n    Our MuayThai Course\n    "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("h3", { staticClass: "center" }, [_vm._v("Our MuayThai Course")]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row justify-content-md-center" },
       _vm._l(_vm.courses, function(course, index) {
         return _c("div", { key: index, staticClass: "card col-md-3 m-4 p-0" }, [
           _c("div", { staticClass: "card-header" }, [
-            _c("h4", [_vm._v(_vm._s(course.name))]),
-            _vm._v(" "),
-            _c("span", { staticClass: "badge badge-success" }, [
-              _vm._v(_vm._s(_vm._f("coursePrice")(course.price)) + "฿")
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-9" }, [
+                _c("h4", [_vm._v(_vm._s(course.name))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-2" }, [
+                _c("span", { staticClass: "badge badge-success" }, [
+                  _vm._v(_vm._s(_vm._f("coursePrice")(course.price)) + "฿")
+                ])
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -47832,7 +47887,7 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\n                    Register Course\n                "
+                  "\n                        Register Course\n                    "
                 )
               ]
             )
@@ -47842,7 +47897,29 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"
+      },
+      [
+        _c("h2", [_vm._v("Training Muay Thai")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "lead" }, [
+          _vm._v(
+            "Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization."
+          )
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -47853,19 +47930,19 @@ if (false) {
 }
 
 /***/ }),
-/* 93 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(94)
+  __webpack_require__(96)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(96)
+var __vue_script__ = __webpack_require__(98)
 /* template */
-var __vue_template__ = __webpack_require__(97)
+var __vue_template__ = __webpack_require__(99)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47904,13 +47981,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 94 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(95);
+var content = __webpack_require__(97);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -47930,7 +48007,7 @@ if(false) {
 }
 
 /***/ }),
-/* 95 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -47938,17 +48015,20 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Chart.js */\n@-webkit-keyframes chartjs-render-animation{\nfrom{opacity:0.99\n}\nto{opacity:1\n}\n}\n@keyframes chartjs-render-animation{\nfrom{opacity:0.99\n}\nto{opacity:1\n}\n}\n.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;\n}", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Chart.js */\n@-webkit-keyframes chartjs-render-animation{\nfrom{opacity:0.99\n}\nto{opacity:1\n}\n}\n@keyframes chartjs-render-animation{\nfrom{opacity:0.99\n}\nto{opacity:1\n}\n}\n.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;\n}\n.center{\r\n    text-align: center;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 96 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -47984,7 +48064,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 97 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -48012,12 +48092,14 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
-                _c("h5", { staticClass: "card-title" }, [
+                _c("h5", { staticClass: "card-title center" }, [
                   _vm._v(_vm._s(trainer.name))
                 ]),
                 _vm._v(" "),
-                _c("p", { staticClass: "card-text" }, [
-                  _vm._v(_vm._s(trainer.detail))
+                _c("hr"),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-text detail" }, [
+                  _vm._v(" " + _vm._s(trainer.detail))
                 ])
               ])
             ])
@@ -48033,8 +48115,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("h3", [_vm._v("Our trainer")])
+    return _c("div", { staticClass: "col-md-12 mt-4" }, [
+      _c("h3", { staticClass: "center" }, [_vm._v("Our trainer")])
     ])
   }
 ]
@@ -48048,15 +48130,15 @@ if (false) {
 }
 
 /***/ }),
-/* 98 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(99)
+var __vue_script__ = __webpack_require__(101)
 /* template */
-var __vue_template__ = __webpack_require__(100)
+var __vue_template__ = __webpack_require__(102)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48095,7 +48177,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 99 */
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48181,7 +48263,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -48310,15 +48392,15 @@ if (false) {
 }
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(102)
+var __vue_script__ = __webpack_require__(104)
 /* template */
-var __vue_template__ = __webpack_require__(103)
+var __vue_template__ = __webpack_require__(105)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48357,7 +48439,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48520,7 +48602,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -48555,14 +48637,10 @@ var render = function() {
           _c("div", { staticClass: "box-body table-responsive" }, [
             _c(
               "table",
-              {
-                staticClass: "table table-striped table-hover",
-                staticStyle: { "text-align": "center" }
-              },
+              { staticClass: "table table-striped table-hover center" },
               [
                 _c(
                   "tbody",
-                  { staticStyle: { "text-align": "center" } },
                   [
                     _vm._m(0),
                     _vm._v(" "),
@@ -48766,7 +48844,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", { staticStyle: { "text-align": "center" } }, [
+    return _c("tr", [
       _c("td", [_vm._v("ชื่อคอร์ส")]),
       _vm._v(" "),
       _c("td", [_vm._v("ราคา")]),
@@ -48814,15 +48892,15 @@ if (false) {
 }
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(105)
+var __vue_script__ = __webpack_require__(107)
 /* template */
-var __vue_template__ = __webpack_require__(106)
+var __vue_template__ = __webpack_require__(108)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48861,7 +48939,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48925,7 +49003,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49022,10 +49100,186 @@ if (false) {
 }
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(127)
+/* template */
+var __vue_template__ = __webpack_require__(128)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Paypal/paypal-button.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a4ff9832", Component.options)
+  } else {
+    hotAPI.reload("data-v-a4ff9832", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 127 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+        props: ['url', 'saveBooking', 'total'],
+        data: function data() {
+                return {
+                        isConfirm: true
+                };
+        },
+        mounted: function mounted() {
+                // var csrf = document.getElementsByTagName('meta')[1].getAttribute('content')
+                // this.renderPaypalBtn()
+
+        },
+
+
+        methods: {
+                createOrder: function createOrder(total, saveBooking) {
+                        this.isConfirm = false;
+                        paypal.Buttons({
+                                createOrder: function createOrder(data, actions) {
+                                        // Set up the transaction
+                                        return actions.order.create({
+                                                purchase_units: [{
+                                                        amount: {
+                                                                value: total
+                                                        }
+                                                }]
+                                        });
+                                },
+                                onApprove: function onApprove(data, actions) {
+                                        // console.table(data)
+                                        return actions.order.capture().then(function (details) {
+                                                try {
+                                                        return fetch('/api/payment', {
+                                                                method: 'post',
+                                                                headers: {
+                                                                        'content-type': 'application/json'
+                                                                        // 'X-CSRF-TOKEN': csrf
+                                                                },
+                                                                body: JSON.stringify({
+                                                                        orderID: data.orderID
+                                                                })
+                                                        }).then(function (data) {
+                                                                saveBooking();
+                                                        });
+                                                } catch (e) {
+                                                        // console.log(e)
+                                                }
+                                        });
+                                }
+                        }).render('#paypal-button-container');
+                }
+        }
+
+});
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "button",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isConfirm,
+            expression: "isConfirm"
+          }
+        ],
+        staticClass: "btn btn-success btn-block",
+        on: {
+          click: function($event) {
+            _vm.createOrder(_vm.total, _vm.saveBooking)
+          }
+        }
+      },
+      [_vm._v("Confirm Checkout")]
+    ),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "paypal-button-container" } })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a4ff9832", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
