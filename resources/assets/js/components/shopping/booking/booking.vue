@@ -205,7 +205,7 @@ export default {
             this.bookDetails = []
             this.total = 0
         }
-        
+
     },
 
     computed: {
