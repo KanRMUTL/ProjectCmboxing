@@ -65,102 +65,6 @@ class Sale extends Model
         return $this->belongsTo('App\marketing\SaleType');
     }
 
-    public function scopeSaleDetail($query, $before, $after, $zoneId = null, $saleType = null)
-    {
-        if(Auth::user()->role == 1)
-        {   
-            // แอดมิน
-            return $query
-                ->where(
-                    [
-                        ['zone_id', '=', $zoneId], 
-                        ['sale_type', '=', $saleType]
-                    ]
-                )
-                ->whereBetween('created_at', [$before, $after])
-                ->orderByRaw('created_at DESC');
-        }
-        else if(Auth::user()->role == 2)
-        {   
-            // หัวหน้าฝ่ายการตลาด
-            return $query
-                ->where(
-                    [
-                        ['zone_id', '=', $zoneId], 
-                        ['sale_type', '=', $saleType]
-                    ]
-                )
-                ->whereBetween('created_at', [$before, $after])
-                ->orderByRaw('created_at DESC');
-        }
-        else if(Auth::user()->role == 3)
-        {   
-            // พนักงานการตลาด
-            return $query
-                ->where(
-                    [
-                        ['zone_id', '=', $zoneId], 
-                        ['sale_type', '=', $saleType],
-                        ['user_id', '=', Auth::user()->id]
-                    ]
-                )
-                ->whereBetween('created_at', [$before, $after])
-                ->orderByRaw('created_at DESC');
-        }
-    }
-
-    public function scopeCommission($query, $before, $after, $zoneId = null, $saleTypeId)
-    {
-        if(Auth::user()->role == 1){ // แอดมิน
-            return $query
-                ->select(
-                    'user_id', 
-                    DB::raw('SUM(amount) as amount'), 
-                    'ticket_id',                      
-                    DB::raw('DATE(created_at) as date_created_at')
-                )
-                ->where([
-                    ['zone_id', '=', $zoneId],
-                    ['sale_type', '=', $saleTypeId]
-                ])
-                ->whereBetween('created_at', [$before, $after])
-                ->groupBy('date_created_at', 'user_id', 'ticket_id')
-                ->orderByRaw('created_at DESC');
-        }
-        else if(Auth::user()->role == 2) { // หัวหน้าฝ่ายการตลาด
-            return $query
-                ->select(
-                    'user_id', 
-                    DB::raw('SUM(amount) as amount'), 
-                    'ticket_id',
-                    'created_at'                        
-                )
-                ->where([
-                    ['zone_id', '=',  Auth::user()->employee->zone_id],
-                    ['sale_type', '=', $saleId]    
-                ])
-                ->whereBetween('created_at', [$before, $after])
-                ->groupBy('user_id','created_at', 'ticket_id')
-                ->orderByRaw('created_at DESC');
-        }
-        else if(Auth::user()->role == 3){ // พนักงาน
-            return $query
-                ->select(
-                    'user_id', 
-                    DB::raw('SUM(amount) as amount'), 
-                    'ticket_id',                      
-                    'created_at'
-                )
-                ->where([
-                    ['user_id', '=', Auth::user()->id],
-                    ['sale_type', '=', $saleId]    
-                ])
-                ->whereBetween('created_at', [$before, $after])
-                ->groupBy('user_id','created_at', 'ticket_id')
-                ->orderByRaw('created_at DESC');
-        }
-    }
-
     public function scopeIncome($query, $zoneId, $before, $after)
     {
         if(Auth::user()->role == 1)
@@ -210,6 +114,7 @@ class Sale extends Model
         }
     }
 
+    
     /* ======= Dasboard ======== */
     public function scopeAmountTicket($query, $startOfWeek, $endOfWeek)
     {
@@ -274,13 +179,7 @@ class Sale extends Model
         }
     }
 
-    // public function scopeSalingProfile($query, $user_id) {
-
-    // }
     /* =======  End Dashboard ======== */
-
-
-    /* ======= Commission ======== */
 
     public function getVisitAttribute($value)
     {

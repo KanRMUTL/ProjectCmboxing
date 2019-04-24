@@ -14,6 +14,7 @@ use App\marketing\SaleType;
 use Carbon\Carbon;
 use App\Http\Controllers\marketing\StarterController;
 use Mpdf\Mpdf;
+use App\MyClass\SaleClass;
 
 class SaleController extends StarterController
 {
@@ -26,7 +27,8 @@ class SaleController extends StarterController
         $dataForSaleType = $this->setDataForSaleType($saleTypeName);
         $saleTypeId = $this->saleTypeUrl[$saleTypeName];
         $userZone = Auth::user()->employee->zone_id;
-        $sales = Sale::saleDetail($this->start, $this->end, $userZone, $saleTypeId)->get();
+        $sales = new SaleClass($this->start, $this->end, $userZone, $saleTypeId);
+        
         $data = [
             'tickets' => $this->tickets,
             'guesthouses' => Guesthouse::forSale()->get(),
@@ -34,11 +36,12 @@ class SaleController extends StarterController
             'saleTypes' => $this->saleTypes,
             'saleTypeName' => $saleTypeName,
             'zoneSelected' => $userZone,
-            'sales' => $sales,
             'range' => $this->range,
             'url' => $dataForSaleType['url'],
             'header' => $dataForSaleType['header'],
         ];
+        $data['sales'] = $sales->SearchSale();
+
         return view('marketing._sale.index', $data);
     }
         
@@ -113,20 +116,21 @@ class SaleController extends StarterController
     {
         $dataForSaleType = $this->setDataForSaleType($saleTypeName);
         $saleTypeId = $this->saleTypeUrl[$saleTypeName];
-        $sales = Sale::saleDetail($request->start, $request->end, $request->zoneId, $saleTypeId)->get();
-
+        $sales = new SaleClass($request->start, $request->end, $request->zoneId, $saleTypeId);
+ 
         $data = [
             'tickets' => $this->tickets,
             'guesthouses' => Guesthouse::forSale()->get(),
             'zones' => $this->zones,
             'saleTypes' => $this->saleTypes,
             'saleTypeName' => $saleTypeName,
-            'sales' => $sales,
             'range' => ['start' => $request->start, 'end' => $request->end],
             'url' => $dataForSaleType['url'],
             'header' => $dataForSaleType['header'],
             'zoneSelected' => $request->zoneId 
         ];
+        $data['sales'] = $sales->SearchSale();
+        
         return view('marketing._sale.index', $data);
     }
 

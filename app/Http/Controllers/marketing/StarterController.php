@@ -22,7 +22,7 @@ class StarterController extends Controller
     protected $now;
     protected $start;
     protected $end;
-    protected $saleTypeUrl;
+    public $saleTypeUrl;
 
     public function __construct() {
         $this->tickets = Ticket::all();
