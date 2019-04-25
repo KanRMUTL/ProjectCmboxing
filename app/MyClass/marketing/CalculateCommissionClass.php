@@ -1,35 +1,35 @@
 <?php
 
-namespace App\MyClass;
+namespace App\MyClass\marketing;
 
 use App\marketing\GuideCommission;
 
 class CalculateCommissionClass {
 
-    public function calEmpCommission($ticketId, $amount)
+    public static function calEmpCommission($ticketId, $amount)
     {
         $total = 0;
-        
+        $self = new CalculateCommissionClass();
         if($amount <= 10){  // คิดค่าคอมมิชชั่นการขายบัตร 1-10 ใบ
-            $total += $this->calFirst($ticketId, $amount);
+            $total += $self->calFirst($ticketId, $amount);
         }
         else if($amount <= 20){  // คิดค่าคอมมิชชั่นการขายบัตร 1-20 ใบ
             $realAmount = $amount - 10;
-            $total += $this->calSecond($ticketId, $realAmount);
-            $total += $this->calFirst($ticketId, 10);
+            $total += $self->calSecond($ticketId, $realAmount);
+            $total += $self->calFirst($ticketId, 10);
         }
         else if($amount <= 30){ // คิดค่าคอมมิชชั่นการขายบัตร 1-30 ใบ
             $realAmount = $amount - 20;
-            $total += $this->calThird($ticketId, $realAmount);
-            $total += $this->calSecond($ticketId, 10);
-            $total += $this->calFirst($ticketId, 10);
+            $total += $self->calThird($ticketId, $realAmount);
+            $total += $self->calSecond($ticketId, 10);
+            $total += $self->calFirst($ticketId, 10);
         }
         else if($amount > 30){  // คิดค่าคอมมิชชั่นการขายบัตรมากกว่า 30 ใบ
             $realAmount = $amount - 30;
-            $total += $this->calFour($ticketId, $realAmount);
-            $total += $this->calThird($ticketId, 10);
-            $total += $this->calSecond($ticketId, 10);
-            $total += $this->calFirst($ticketId, 10);
+            $total += $self->calFour($ticketId, $realAmount);
+            $total += $self->calThird($ticketId, 10);
+            $total += $self->calSecond($ticketId, 10);
+            $total += $self->calFirst($ticketId, 10);
         }
         return $total;
     }

@@ -14,7 +14,7 @@ use App\marketing\SaleType;
 use Carbon\Carbon;
 use App\Http\Controllers\marketing\StarterController;
 use Mpdf\Mpdf;
-use App\MyClass\SaleClass;
+use App\MyClass\marketing\SaleClass;
 
 class SaleController extends StarterController
 {
@@ -40,6 +40,7 @@ class SaleController extends StarterController
             'url' => $dataForSaleType['url'],
             'header' => $dataForSaleType['header'],
         ];
+        // dd($sales->SearchSale());
         $data['sales'] = $sales->SearchSale();
 
         return view('marketing._sale.index', $data);
@@ -95,10 +96,11 @@ class SaleController extends StarterController
             'visit' => $request->visitDay,
             'guesthouse_id' => $request->guesthouseId,
             'ticket_id' => $request->ticketId,
-            'sale_type' => $request->input('saleType'),
+            'sale_type' => $request->saleType,
             'user_id' => $request->userId,
         ];
-        Sale::find($id)->update($data);
+        $sale = Sale::find($id);
+        $sale->update($data);
         $url = $this->changeRedirect($data['sale_type']);
         return redirect($url);
     }

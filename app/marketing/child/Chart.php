@@ -46,10 +46,10 @@ class Chart extends Sale
         if($this->roleId == 1) 
         {
             return $query
-                ->select('ticket_id',DB::raw('SUM(amount) as total'))
+                ->select('ticket_id',  DB::raw('COUNT(amount) as total'))
                 ->whereBetween('created_at', [$before, $after])
-                ->groupBy('ticket_id')
-                ->orderBy(DB::raw('SUM(amount)'),'ADSC');
+                ->orderBy(DB::raw('COUNT(amount)'),'ADSC')
+                ->groupBy('ticket_id');
         }
         else if($this->roleId == 2)
         {

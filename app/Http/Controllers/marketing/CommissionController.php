@@ -5,7 +5,7 @@ namespace App\Http\Controllers\marketing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\marketing\StarterController;
-use App\MyClass\CommissionClass;
+use App\MyClass\marketing\CommissionClass;
 use App\marketing\Zone;
 use Auth;
 

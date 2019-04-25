@@ -1,12 +1,12 @@
 <?php 
 
-namespace App\MyClass;
+namespace App\MyClass\marketing;
 
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\marketing\Sale;
-use App\MyClass\CalculateCommissionClass;
+use App\MyClass\marketing\CalculateCommissionClass;
 
 class CommissionClass extends CalculateCommissionClass {
 
@@ -40,7 +40,7 @@ class CommissionClass extends CalculateCommissionClass {
     {
         $data = $this->Commission();
         foreach ($data as $index => $item) {  
-            $data[$index]['commission'] = $this->calEmpCommission($item->ticket_id, $item->amount);
+            $data[$index]['commission'] = parent::calEmpCommission($item->ticket_id, $item->amount);
             $data[$index]['date_formated'] = Carbon::parse($item->created_at)->format('d/m/Y');
         }
         return $data;
@@ -48,7 +48,8 @@ class CommissionClass extends CalculateCommissionClass {
 
     public function CommissionForAdmin() {
         return Sale::
-                select(
+                join('users', 'sales.user_id', '=', 'users.id')
+                ->select(
                     'user_id', 
                     DB::raw('SUM(amount) as amount'), 
                     'ticket_id',                      
@@ -66,36 +67,38 @@ class CommissionClass extends CalculateCommissionClass {
 
     public function CommissionForHead() {
         return Sale::
-                select(
+                join('users', 'sales.user_id', '=', 'users.id')
+                ->select(
                     'user_id', 
                     DB::raw('SUM(amount) as amount'), 
-                    'ticket_id',
-                    'created_at'                        
+                    'ticket_id',                      
+                    DB::raw('DATE(created_at) as date_created_at')
                 )
                 ->where([
                     ['zone_id', '=',  Auth::user()->employee->zone_id],
                     ['sale_type', '=', $this->saleTypeId]    
                 ])
                 ->whereBetween('created_at', [$this->start, $this->end])
-                ->groupBy('user_id','created_at', 'ticket_id')
+                ->groupBy('date_created_at', 'user_id', 'ticket_id')
                 ->orderByRaw('created_at DESC')
                 ->get();
     }
 
     public function CommissionForEmployee() {
-        return $query
+        return Sale::
+                join('users', 'sales.user_id', '=', 'users.id')
                 ->select(
                     'user_id', 
                     DB::raw('SUM(amount) as amount'), 
                     'ticket_id',                      
-                    'created_at'
+                    DB::raw('DATE(created_at) as date_created_at')
                 )
                 ->where([
                     ['user_id', '=', Auth::user()->id],
                     ['sale_type', '=', $this->saleTypeId]    
                 ])
                 ->whereBetween('created_at', [$this->start, $this->end])
-                ->groupBy('user_id','created_at', 'ticket_id')
+                ->groupBy('date_created_at', 'user_id', 'ticket_id')
                 ->orderByRaw('created_at DESC')
                 ->get();
     }
@@ -114,7 +117,7 @@ class CommissionClass extends CalculateCommissionClass {
     {
         $data = $this->Commission();
         foreach($data as $index => $item){
-            $data[$index]['commission'] = $this->calGuideCommission($item->ticket_id, $item->amount);
+            $data[$index]['commission'] = parent::calGuideCommission($item->ticket_id, $item->amount);
             $data[$index]['date_formated'] = Carbon::parse($item->created_at)->format('d/m/Y');
         }
         return $data;

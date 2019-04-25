@@ -2,20 +2,14 @@
 
 namespace App\Http\Controllers\marketing\report;
 
+use Auth;
+use App\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-use App\Users;
-use Auth;
-use App\marketing\Sale;
-use App\marketing\Zone;
-use App\marketing\Ticket;
-use App\marketing\Guesthouse;
-use App\marketing\SaleType;
-use App\marketing\GuideCommission;
+use App\MyClass\marketing\SaleClass;
+use App\MyClass\marketing\CommissionClass;
 use Carbon\Carbon;
 use App\Http\Controllers\marketing\StarterController;
-use App\Http\Controllers\marketing\CommissionController;
 use Mpdf\Mpdf;
 
 class ReportController extends StarterController
@@ -48,7 +42,8 @@ class ReportController extends StarterController
     {
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
         $saleTypeId = $this->saleTypeUrl[$request->saleTypeName];
-        $sales = Sale::saleDetail($request->start, $request->end, $request->zoneId, $saleTypeId)->get();
+        $objSale = new SaleClass($request->start, $request->end, $request->zoneId, $saleTypeId);
+        $sales = $objSale->SearchSale();
         $html = "
         <div class='content center'>"
         .$this->ReportTitle().
@@ -98,8 +93,8 @@ class ReportController extends StarterController
     public function EmpCommissionReport(Request $request)
     {
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8']);
-        $objCommission = new CommissionController();
-        $commissions = $objCommission->getCommissionOfEmp($request->start,$request->end, $request->zoneId);
+        $objCommission = new CommissionClass($request->start,$request->end, $request->zoneId, 0);
+        $commissions = $objCommission->getCommissionOfEmp();
         $html = "
             <style> th { width: 20%; font-size: 135%; padding: 1.5%;} td { font-size: 125%; } </style>
             <div class='content center'>"
@@ -143,8 +138,8 @@ class ReportController extends StarterController
     public function guideCommissionReport(Request $request)
     {
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8',]);
-        $objCommission = new CommissionController();
-        $commissions = $objCommission->getCommissionOfGuide($request->start, $request->end, $request->zoneId);
+        $objCommission = new CommissionClass($request->start, $request->end, $request->zoneId, 1);
+        $commissions = $objCommission->getCommissionOfGuide();
         $html = "
         <style> th { width: 20%; font-size: 135%; padding: 1.5%;} td { font-size: 125%; }</style>
         <div class='content center'>"

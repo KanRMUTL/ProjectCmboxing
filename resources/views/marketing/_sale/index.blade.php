@@ -56,7 +56,7 @@
                     </span>
                 </td>
                 <td class="center">{{ $sale->visit }}</td>
-                <td>{{ $sale->user->firstname }}&emsp;{{ $sale->user->lastname }}</td> 
+                <td>{{ $sale->firstname }}&emsp;{{ $sale->lastname }}</td> 
                 <td class="center">{{ date('d/m/Y', strtotime($sale->created_at)) }}</td>
                 <td class="right money">
                   <span class="label label-danger">
@@ -64,14 +64,14 @@
                   </span>
                 </td>
                 <td>
-                    @if (Auth::user()->id == $sale->user_id || Auth::user()->role == 1)  
+                    @if (Auth::user()->id == $sale->userId || Auth::user()->role == 1)  
                     <a href="/sale/{{ $sale->id }}/edit" class="btn btn-warning">
                       <i class="fa fa-edit fa-lg"></i>
                     </a>
                     @endif
                 </td>
                 <td>
-                    @if (Auth::user()->id == $sale->user_id  || Auth::user()->role == 1)  
+                    @if (Auth::user()->id == $sale->userId  || Auth::user()->role == 1)  
                     {!! Form::open(['action' => ['marketing\SaleController@destroy', $sale->id]]) !!}
                       {{ csrf_field() }}
                     {{ Form::hidden('_method','DELETE') }}

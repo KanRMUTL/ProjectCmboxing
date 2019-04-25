@@ -53,9 +53,7 @@ class ChartSaleController extends StarterController
 
     public function apiTicket(Request $request)
     {
-        $before = $request->before;
-        $after  = $request->after; 
-        $sale = Chart::saleTicket($before, $after)->get();
+        $sale = Chart::saleTicket($request->before, $request->after)->get();
         
         foreach ($sale as $index => $item) {  
             $sale[$index]['label'] = $item->ticket->name;

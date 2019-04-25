@@ -52,26 +52,25 @@ class StarterController extends Controller
 
     public function setDataForSaleType($saleTypeName)
     {
-        $data = [];
+        
         if($saleTypeName == 'employee'){
-            $data = [
+            return [
                 'url' => '/sale/employee',
                 'header' => 'ข้อมูลการขายบัตรของพนักงาน',
-                'saleTypeId' => 1
+                'saleTypeId' => 0
             ];
         } else if($saleTypeName == 'guide') {
-            $data = [
+            return [
                 'url' => '/sale/guide',
                 'header' => 'ข้อมูลการขายบัตรของไกด์',
-                'saleTypeId' => 2
+                'saleTypeId' => 1
             ];
         } else if($saleTypeName == 'office') {
-            $data = [
+            return [
                 'url' => '/sale/office',
                 'header' => 'ข้อมูลการขายหน้า Office',
-                'saleTypeId' => 3
+                'saleTypeId' => 2
             ];
         }
-        return $data;
     }
 }

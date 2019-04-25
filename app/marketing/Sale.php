@@ -19,6 +19,7 @@ class Sale extends Model
         'visit',
         'ticket_id',
         'user_id',
+        'sale_type',
         'zone_id',
         'guesthouse_id',
     ];
@@ -43,7 +44,7 @@ class Sale extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
     public function incomes()
@@ -64,56 +65,6 @@ class Sale extends Model
     {
         return $this->belongsTo('App\marketing\SaleType');
     }
-
-    public function scopeIncome($query, $zoneId, $before, $after)
-    {
-        if(Auth::user()->role == 1)
-        {
-             return $query  
-                ->select(
-                    'user_id',
-                    DB::raw('SUM(amount) AS amount'), 
-                    'ticket_id', 
-                    DB::raw('SUM(total) AS total'), 
-                    'sale_type',
-                    'created_at')
-                ->groupBy('user_id', 'ticket_id', 'sale_type', 'created_at')
-                ->orderByRaw('created_at DESC')
-                ->where(['zone_id' => $zoneId])
-                ->whereBetween('created_at', [$before, $after]);
-        }
-        else if(Auth::user()->role == 2)
-        {
-            return $query  
-                ->select(
-                    'user_id',
-                    DB::raw('SUM(amount) AS amount'), 
-                    'ticket_id', 
-                    DB::raw('SUM(total) AS total'), 
-                    'sale_type',
-                    'created_at')
-                ->groupBy('user_id', 'ticket_id', 'sale_type', 'created_at')
-                ->where(['zone_id' => $zoneId])
-                ->whereBetween('created_at', [$before, $after])
-                ->orderByRaw('created_at DESC');
-        }
-        else if(Auth::user()->role == 3)
-        {
-            return $query  
-                ->select(
-                    'user_id',
-                    DB::raw('SUM(amount) AS amount'), 
-                    'ticket_id', 
-                    DB::raw('SUM(total) AS total'), 
-                    'sale_type',
-                    'created_at')
-                ->groupBy('user_id', 'ticket_id', 'sale_type', 'created_at')
-                ->where(['user_id' => Auth::user()->id])
-                ->whereBetween('created_at', [$before, $after])
-                ->orderByRaw('created_at DESC');;
-        }
-    }
-
     
     /* ======= Dasboard ======== */
     public function scopeAmountTicket($query, $startOfWeek, $endOfWeek)
