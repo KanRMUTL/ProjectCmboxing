@@ -44943,6 +44943,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(133)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(60)
@@ -44951,7 +44955,7 @@ var __vue_template__ = __webpack_require__(61)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -44991,6 +44995,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -45219,6 +45225,15 @@ var render = function() {
                               domProps: { textContent: _vm._s(saleDetail.name) }
                             }),
                             _vm._v(" "),
+                            _c("td", [
+                              _c("img", {
+                                attrs: {
+                                  src: "/pos/product/" + saleDetail.img,
+                                  alt: ""
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
                             _c("td", {
                               domProps: {
                                 textContent: _vm._s(
@@ -45246,7 +45261,7 @@ var render = function() {
                         _c("tr", { staticClass: "table-success" }, [
                           _c(
                             "th",
-                            { attrs: { colspan: "3", align: "center" } },
+                            { attrs: { colspan: "4", align: "center" } },
                             [_vm._v("ทั้งหมด")]
                           ),
                           _vm._v(" "),
@@ -45313,6 +45328,8 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("สินค้า")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "img-col" }, [_vm._v("รูปภาพ")]),
         _vm._v(" "),
         _c("th", [_vm._v("ราคา")]),
         _vm._v(" "),
@@ -49424,6 +49441,62 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(134);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("04cfd53b", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-deb181b4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./report.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-deb181b4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./report.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.img-col {\n     width: 15%;\n     padding: 0 5% 0 5%;\n}\nth { width: 20%;\n}\nimg {\n     width: 100%;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

@@ -13,6 +13,18 @@ ___
 2. run **npm install**
 
 
+3. If you don't have database please create Database for project
+     else if you have Database
+
+          php artisan db::seed
+
+3. When you created database for project please run this command
+     
+          php artisan migrate:refresh --seed
+
+     
+
+     
 3. run **php artisan serve** 
 
 

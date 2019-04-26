@@ -40,6 +40,7 @@
                          <thead>
                              <tr>
                                  <th>สินค้า</th>
+                                 <th class="img-col">รูปภาพ</th>
                                  <th>ราคา</th>
                                  <th>จำนวน</th>
                                  <th>รวม</th>
@@ -48,12 +49,13 @@
                          <tbody>
                              <tr v-for="saleDetail in saleDetails" :key="saleDetail.id">
                                  <td v-text="saleDetail.name"></td>
+                                 <td><img :src="'/pos/product/'+saleDetail.img" alt=""></td>
                                  <td v-text="moneyFormat(saleDetail.price)"></td>
                                  <td v-text="saleDetail.amount"></td>
                                  <td v-text="moneyFormat(saleDetail.total)"></td>
                              </tr>
                              <tr class="table-success">
-                                <th colspan="3" align="center">ทั้งหมด</th>
+                                <th colspan="4" align="center">ทั้งหมด</th>
                                 <th v-text="moneyFormat(saleDetailsTotal)"></th>
                              </tr>
                          </tbody>
@@ -140,3 +142,13 @@ export default {
     },
 }
 </script>
+<style>
+ .img-col {
+     width: 15%;
+     padding: 0 5% 0 5%;
+ }
+th { width: 20%; }
+ img {
+     width: 100%;
+ }
+</style>
