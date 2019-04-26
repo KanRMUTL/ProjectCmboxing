@@ -9,24 +9,27 @@ class ProductTableSeeder extends Seeder
     {
         $data = [
             [
-                'barcode' => '803AZ123456',
+                'barcode' => '80378123456',
                 'name' => 'กางเกงนักมวย',
+                'img' => '',
                 'price' => 600,
                 'unit' => 'ตัว',
                 'amount' => 104,
             ],
             [
-                'barcode' => '803AZ123457',
+                'barcode' => '80378123457',
                 'name' => 'เสื้อยืดลายมวยไทย',
+                'img' => '',
                 'price' => 300,
                 'unit' => 'ผืน',
                 'amount' => 300,
             ],
             [
-                'barcode' => '803AZ123456',
+                'barcode' => '80378123456',
                 'name' => 'นวมชกมวย',
+                'img' => '',
                 'price' => 600,
-                'unit' => 'อัน',
+                'unit' => 'คู่',
                 'amount' => 133,
             ],
         ];

@@ -8,10 +8,11 @@
            <div class=" col-md-12">
                <div class="box box-info">
                     <div class="box-body table-responsive">
-                        <table class="table table-striped center">
+                        <table class="table table-striped table-hover center">
                             <tbody class="center">
                             <tr class="center">
                                 <td>ชื่อสินค้า</td>
+                                <td class="img-col">รูปภาพ</td>
                                 <td>ราคา</td>
                                 <td>บาร์โค้ด</td>
                                 <td>คงเหลือ</td>
@@ -19,6 +20,7 @@
                             </tr>
                             <tr v-for="(product, index) in products" :key="index">
                                 <td v-text="product.name"></td>
+                                <td><img :src="'/pos/product/' + product.img"></td>
                                 <td v-text="product.price"></td>
                                 <td v-text="product.barcode"></td>
                                 <td v-text="product.amount +' '+ product.unit"></td>
@@ -58,12 +60,13 @@ export default {
             product: {
                 id: '',
                 name: '',
+                img: '',
                 price: '',
                 barcode: '',
                 amount: '',
                 unit: '',
-                modalStatus: 1
-                
+                modalStatus: 1,
+                img: ''                
             },
            
         }
@@ -88,14 +91,19 @@ export default {
                 })
                 .then((willDelete) => {
                 if (willDelete) {
-                    axios.delete('/api/product/'+id);
+                    axios.delete('/api/product/'+id)
+                    .then(function(){ 
+                            swal({
+                                title: "ลบสินค้าเรียบร้อย", 
+                                icon: "success",
+                            });
+                    })
+                    .catch(function(e) {console.log(e)});
                     this.getAllProduct();
-                    swal("ลบสินค้าเรียบร้อย", {
-                    icon: "success",
-                    });
                 }
             });
         },
+        
         clearData() {
             this.product.id = 0;
             this.product.name = '';
@@ -118,3 +126,13 @@ export default {
     },
 }
 </script>
+
+<style>
+ .img-col {
+     width: 10%;
+ }
+
+ img {
+     width: 100%;
+ }
+</style>

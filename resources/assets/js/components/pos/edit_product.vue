@@ -35,6 +35,11 @@
                                     <label for="price">ราคา</label>
                                     <input type="number" class="form-control" id="price" v-model="product.price">
                                 </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="price">รูปสินค้า</label>
+                                    <input type="file" class="form-control" id="file" ref="file" v-on:change="handleFileUpload()">
+                                </div>
                             </div>
                         </div>  <!-- End Body -->
                         <div class="modal-footer">
@@ -55,61 +60,76 @@ export default {
 
     data() {
         return {
+            file: ''
         }
     },
 
     methods: {
         addProduct() {
-            var data = {
-                name: this.product.name,
-                price: this.product.price,
-                barcode: this.product.barcode,
-                amount: this.product.amount,
-                unit: this.product.unit,
-            }
-            console.log(data);
-            axios.post('/api/product',data).then(response=>{
-                this.getAllProduct();
-                this.clearInput();
+            let formData = new FormData();
+
+            formData.append('name', this.product.name);
+            formData.append('price', this.product.price);
+            formData.append('file', this.file);
+            formData.append('barcode', this.product.barcode);
+            formData.append('amount', this.product.amount);
+            formData.append('unit', this.product.unit);
+            
+            axios.post( '/api/product',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                }
+              }
+            )
+            .then( res => {  
+                this.refresh()
+                this.clearData()
             })
+            .catch(function(e){
+                console.log(e);
+            });
+
         },
 
-        addProduct() {
-            var data = {
-                    name: this.product.name,
-                    price: this.product.price,
-                    barcode: this.product.barcode,
-                    amount: this.product.amount,
-                    unit: this.product.unit
-            }
-            axios.post('/api/product',data).then(response=>{
-                this.clearData();
-            })
+        handleFileUpload(){
+             try { this.file = this.$refs.file.files[0]; }
+             catch (e) {}
         },
 
         updateProduct() {
-            var data = {
-                    name: this.product.name,
-                    price: this.product.price,
-                    barcode: this.product.barcode,
-                    amount: this.product.amount,
-                    unit: this.product.unit
-            }
-            axios.put('/api/product/' + this.product.id, data).then(response=>{
-               this.clearData();
+            let formData = new FormData();
+
+            formData.append('name', this.product.name);
+            formData.append('price', this.product.price);
+            formData.append('file', this.file);
+            formData.append('barcode', this.product.barcode);
+            formData.append('amount', this.product.amount);
+            formData.append('unit', this.product.unit);
+            
+            axios.post('/api/product/' + this.product.id,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                }
+            }) 
+            .then(res => { 
+                this.clearData() 
+                this.refresh()
             })
+            .catch(function(e) {console.log(e)})
         },
 
         save() {
             if(this.product.modalStatus == 1)
             {
                 this.addProduct();
-                console.log('add product')
             }
             else
             {
                 this.updateProduct();
-                console.log('update product')
             }
             this.refresh();
             swal("บันทึกข้อมูลสินค้าเรียบร้อย", "", "success");
@@ -122,6 +142,7 @@ export default {
             this.product.barcode = '';
             this.product.amount = '';
             this.product.unit = '';
+            document.getElementById('file').value = '';
         },
 
     }

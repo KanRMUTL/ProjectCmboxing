@@ -5,7 +5,7 @@
         </div>
        <div class="card-group col-md-3 m-4 p-0" v-for="(trainer, index) in trainers" :key="index">
         <div class="card">
-            <img class="card-img-top" :src="'/shopping/img/trainer/'+trainer.img" alt="Card image cap">
+            <img class="card-img-top" :src="'/shopping/img/trainer/'+trainer.img">
             <div class="card-body">
             <h5 class="card-title center">{{trainer.name}}</h5>
             <hr>

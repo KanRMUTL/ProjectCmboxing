@@ -19,6 +19,7 @@
               <tr>
                 <td>รหัสสินค้า</td>
                 <td>ชื่อสินค้า</td>
+                <td class="img-col">รูปภาพ</td>
                 <td>ราคา</td>
                 <td style="widtd: 15%;">จำนวน</td>
                 <td>รวม</td>
@@ -27,6 +28,7 @@
               <tr v-for="(product, index) in products" :key="product.id">
                 <td>{{product.id}}</td>
                 <td>{{product.name}}</td>
+                <td><img :src="product.img"></td>
                 <td>{{product.price}}</td>
                 <td>
                   <button v-on:click="reduceAmount(index)" :disabled="product.cart==0" class="btn btn-primary cart">-</button>
@@ -40,7 +42,7 @@
                 <!-- {{ sumTotal += product.total }} -->
               </tr>
               <tr v-show="SumTotal > 0">
-                <td colspan="4"></td>
+                <td colspan="5"></td>
                 <td class="total">รวมทั้งสิ้น {{ SumTotal | moneyFormat }} บาท</td>
                 <td><a class="btn btn-success" id="sale" @click="saleProduct()">ขาย</a></td>
               </tr>
@@ -65,6 +67,7 @@ export default {
         id: 0,
         barcode: "",
         name: "",
+        img:"",
         price: 0
       },
       sumTotal: 0
@@ -220,4 +223,13 @@ export default {
       font-size: 24px;
       font-weight: 600;
   }
+</style>
+<style>
+ .img-col {
+     width: 10%;
+ }
+
+ img {
+     width: 100%;
+ }
 </style>

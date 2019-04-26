@@ -42,17 +42,13 @@ class StarterController extends Controller
 
     public function changeRedirect($saleTypeId)
     {
-        if($saleTypeId == 0)
-             return '/sale/employee';
-        else if($saleTypeId == 1)
-            return 'sale/guide';
-        else
-            return 'sale/office';
+        if($saleTypeId == 0) return '/sale/employee';
+        else if($saleTypeId == 1) return 'sale/guide';
+        else return 'sale/office';
     }
 
     public function setDataForSaleType($saleTypeName)
     {
-        
         if($saleTypeName == 'employee'){
             return [
                 'url' => '/sale/employee',

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\marketing\Ticket;
 use App\marketing\GuideCommission;
+use App\MyClass\pos\ImageClass;
 
 class TicketController extends Controller
 {
@@ -18,19 +19,15 @@ class TicketController extends Controller
         return view('marketing.admin.menu._ticket.index', $data);
     }
 
-  
     public function store(Request $request)
-    {
-        $image_filename = $request->file('image')->getClientOriginalName();      
-        $image_name = date('Ymd-His-').$image_filename;       
-        $public_path = 'shopping/img/ticket';
-        $destination =  base_path() . '/public/'. $public_path;
-        $file = $request->file('image')->move($destination, $image_name);
+    {        
+        $objImage = new ImageClass('ticket', $request->file('image'));
+        $objImage->uploadImage();
 
         $ticket = new Ticket();
         $ticket->name = $request->name;
         $ticket->price = $request->price;
-        $ticket->img =  $image_name;
+        $ticket->img =  $objImage->imageName;
         $ticket->save();
     
         GuideCommission::create([
@@ -51,19 +48,15 @@ class TicketController extends Controller
     public function update(Request $request, $id)
     {
         $ticket = Ticket::find($id);
-        // $guideCommission = GuideCommission::where('ticket_id', $id)->first();
+        
         if($request->hasFile('image')){ 
-            $oldImagePath =  'shopping\img\ticket\\'.$ticket->img;
-            unlink(public_path($oldImagePath));
-            $image_filename = $request->file('image')->getClientOriginalName();       
-            $image_name = date('Ymd-His-').$image_filename;       
-            $public_path = 'shopping/img/ticket';       
-            $destination = base_path() . "/public/" . $public_path;      
-            $request->file('image')->move($destination, $image_name); 
+            $objImage = new ImageClass('ticket', $request->file('image'));
+            $objImage->originalName = $ticket->img;
+            $objImage->updateImage();
             $ticket->update([
                 'name' => $request->name,
                 'price' => $request->price,
-                'img' => $image_name
+                'img' => $objImage->imageName
             ]);
         }
         else 

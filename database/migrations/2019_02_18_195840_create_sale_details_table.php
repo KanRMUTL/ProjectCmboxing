@@ -13,7 +13,7 @@ class CreateSaleDetailsTable extends Migration
             $table->integer('amount');
             $table->decimal('total', 8, 2);
             $table->integer('product_id');
-            $table->integer('sale_id');
+            $table->integer('bill_id');
         });
     }
 

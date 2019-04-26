@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="box-body no-padding">
-        <table class="table table-striped center">
+        <table class="table table-striped table-hover  center">
           <tbody>
             <tr>
               <td>รหัสการขาย</td>
@@ -10,13 +10,19 @@
               <td>ผู้ขาย</td>
               <td>รายละเอียด</td>
             </tr>
-            <tr v-for="bill in bills" :key="bill.id">
+            <tr 
+                v-for="bill in bills" 
+                :key="bill.id" 
+                @click="getSaleDetail(bill)"
+                data-toggle="modal" 
+                data-target=".bd-example-modal-lg" 
+            >
                 <td v-text="bill.id"></td>
                 <td v-text="moneyFormat(bill.total)"></td>
                 <td v-text="showDateTime(bill.created_at)"></td>
                 <td v-text="fullname(bill)"></td>
                 <td>
-                    <button class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" @click="getSaleDetail(bill)">รายละเอียด</button>
+                    <button class="btn btn-primary" >รายละเอียด</button>
                 </td>
             </tr>
           </tbody>
@@ -40,7 +46,7 @@
                              </tr>
                          </thead>
                          <tbody>
-                             <tr v-for="saleDetail in saleDetails">
+                             <tr v-for="saleDetail in saleDetails" :key="saleDetail.id">
                                  <td v-text="saleDetail.name"></td>
                                  <td v-text="moneyFormat(saleDetail.price)"></td>
                                  <td v-text="saleDetail.amount"></td>

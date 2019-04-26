@@ -51,13 +51,10 @@ Route::group(['middleware' =>['auth']], function() {
         Route::post('/commissionOfGuide', 'marketing\CommissionController@searchguide')->name('guidecommission.search');
 
     Route::prefix('stock')->group(function() {
-        Route::get('sale', 'pos\SaleController@index');
-        Route::resource('product', 'pos\ProductController');
-        Route::resource('report', 'pos\ReportController');
+        Route::get('sale', 'pos\PosController@sale');
+        Route::get('product', 'pos\PosController@product');
+        Route::get('report', 'pos\PosController@saleReport');
     });
 });
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout
-Route::get('/play', function() {
-    return view('shopping.login.login');
-});

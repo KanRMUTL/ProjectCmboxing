@@ -30,14 +30,7 @@ class PageController extends Controller
             'customerAmount' => $customerAmount[0]->amount,
             'income' =>  $income[0]->total
         ];
-        // if( Auth::user()->role== 1){
             return view('marketing.admin.index',$data);
-        // }
-        // else if( Auth::user()->role == 2){
-        //     return view('marketing.head.index',$data);
-        // }
-        // else if( Auth::user()->role == 3){
-        //     return view('marketing.employee.index',$data);
-        // }
+
     }
 }

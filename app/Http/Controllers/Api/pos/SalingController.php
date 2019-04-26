@@ -39,7 +39,7 @@ class SalingController extends Controller
             $saleDetail->amount = $item['amount'];
             $saleDetail->total = $item['total'];
             $saleDetail->product_id = $item['id'];
-            $saleDetail->sale_id = $bill->id;
+            $saleDetail->bill_id = $bill->id;
             $saleDetail->save();
             
             //อัพเดทจำนวนสินค้า
@@ -53,7 +53,7 @@ class SalingController extends Controller
     public function show($barcode)
     {
         //ตอนที่สแกนบาร์โค้ด
-        $product = Product::select('id','name','barcode','price', 'amount',  DB::raw('(price) as total'))->where('barcode', $barcode)->get();
+        $product = Product::select('id','name', 'img','barcode','price', 'amount',  DB::raw('(price) as total'))->where('barcode', $barcode)->get();
         return response()->json($product);
     }
     

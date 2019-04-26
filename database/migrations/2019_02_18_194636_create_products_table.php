@@ -12,6 +12,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('barcode', 20);
             $table->string('name', 30);
+            $table->string('img', 100);
             $table->decimal('price', 8, 2);
             $table->string('unit', 30);
             $table->integer('amount');

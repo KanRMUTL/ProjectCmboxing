@@ -47,11 +47,6 @@ class Sale extends Model
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
-    public function incomes()
-    {
-        return $this->hasMany('App\marketing\Income');
-    }
-
     public function guesthouse()
     {
         return $this->belongsTo('App\marketing\Guesthouse');

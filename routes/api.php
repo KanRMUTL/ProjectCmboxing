@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('saling', 'Api\pos\SalingController');
 Route::resource('product', 'Api\pos\ProductController');
+Route::post('product/{id}', 'Api\pos\ProductController@updateProduct');
 Route::resource('report', 'Api\pos\ReportController');
 Route::resource('booking', 'Api\shopping\BookingController');
 Route::post('/payment', 'Api\shopping\BookingController@payment');
