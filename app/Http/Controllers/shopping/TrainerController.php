@@ -5,6 +5,7 @@ namespace App\Http\Controllers\shopping;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\shopping\Trainer;
+use App\MyClass\pos\ImageClass;
 class TrainerController extends Controller
 {
     
@@ -22,16 +23,13 @@ class TrainerController extends Controller
     public function store(Request $request)
     {
         try{
-            $image_filename = $request->file('img')->getClientOriginalName();      
-            $image_name = date('Ymd-His-').$image_filename;       
-            $public_path = 'shopping/img/trainer';
-            $destination =  base_path() . '/public/'. $public_path;
-            $file = $request->file('img')->move($destination, $image_name);
+            $objImage = new ImageClass('trainer', $request->file('img'));
+            $objImage->uploadImage();
 
             $trainer = new Trainer();
             $trainer->name = $request->name;
             $trainer->detail = $request->detail;
-            $trainer->img = $image_name;
+            $trainer->img = $objImage->imageName;
             $trainer->save();
         }
         catch(Exception $ex){
@@ -55,18 +53,14 @@ class TrainerController extends Controller
     {
         $trainer = Trainer::find($id);
         if($request->hasFile('img')){ 
-            $oldImagePath =  'shopping\img\trainer\\'.$trainer->img;
-            unlink(public_path($oldImagePath));
-            $image_filename = $request->file('img')->getClientOriginalName();       
-            $image_name = date('Ymd-His-').$image_filename;       
-            $public_path = 'shopping/img/trainer';       
-            $destination = base_path() . "/public/" . $public_path;      
-            $request->file('img')->move($destination, $image_name); 
-            $trainer->update([
-                'name' => $request->name,
-                'detail' => $request->detail,
-                'img' => $image_name
-            ]);
+                $objImage = new ImageClass('trainer', $request->file('img'));
+                $objImage->originalName = $trainer->img;
+                $objImage->updateImage();
+                $trainer->update([
+                    'name' => $request->name,
+                    'detail' => $request->detail,
+                    'img' => $objImage->imageName
+                ]);
         }
         else 
         {
@@ -83,7 +77,9 @@ class TrainerController extends Controller
   
     public function destroy($id)
     {
+        $imagePath =  'shopping\img\trainer\\';
         $trainer = Trainer::find($id);
+        unlink(public_path($imagePath.$trainer->img));
         $trainer->delete();
         return redirect('/trainer');
     }

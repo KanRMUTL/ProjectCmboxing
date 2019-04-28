@@ -13,7 +13,7 @@ class CreateTrainersTable extends Migration
             $table->increments('id');
             $table->string('name', 30);
             $table->text('detail');
-            $table->string('img', 30);
+            $table->string('img', 100);
         });
     }
 

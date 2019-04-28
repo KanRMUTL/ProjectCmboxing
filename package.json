@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "admin-lte": "^2.4.10",
+        "moment": "^2.24.0",
         "sweetalert": "^2.1.2"
     }
 }

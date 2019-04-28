@@ -31,3 +31,5 @@ Route::resource('courses', 'Api\shopping\CourseController');
 
 Route::resource('registerCourse', 'Api\shopping\RegisterCourseController');
 Route::resource('userProfile', 'Api\marketing\SaleController');
+
+Route::get('getTicket', 'Api\shopping\ShoppingController@ticket');

@@ -28,7 +28,7 @@
               <tr v-for="(product, index) in products" :key="product.id">
                 <td>{{product.id}}</td>
                 <td>{{product.name}}</td>
-                <td><img :src="product.img"></td>
+                <td><img :src="'/pos/product/' + product.img"></td>
                 <td>{{product.price}}</td>
                 <td>
                   <button v-on:click="reduceAmount(index)" :disabled="product.cart==0" class="btn btn-primary cart">-</button>
@@ -61,7 +61,7 @@ export default {
   },
   data() {
     return {
-      barcode: "123456789123",
+      barcode: "",
       products: [],
       product: {
         id: 0,

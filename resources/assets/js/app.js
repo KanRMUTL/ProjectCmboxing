@@ -2,6 +2,7 @@
 require('./bootstrap');
 import swal from 'sweetalert';
 
+
 window.Vue = require('vue');
 window.axios = require('axios');
 
@@ -26,6 +27,8 @@ Vue.component('my-ticket', require('./components/shopping/myProduct/ticket/My-Ti
 Vue.component('ticket-detail', require('./components/shopping/myProduct/ticket/ticket-detail.vue'));
 Vue.component('my-course', require('./components/shopping/myProduct/course/My-Course.vue'));
 
+Vue.component('ticket', require('./components/shopping/pages/ticket/ticket.vue'));
+Vue.component('paypal-button-ticket', require('./components/shopping/pages/ticket/paypal-button-ticket.vue'));
 
 Vue.component('courses-index', require('./components/shopping/course/index.vue'));
 Vue.component('courses', require('./components/shopping/course/courses.vue'));

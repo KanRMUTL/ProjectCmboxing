@@ -28,7 +28,12 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-       
+        $bills = Bill::
+                join('users', 'bills.user_id', '=', 'users.id')
+                ->select('bills.id', 'total', 'created_at', 'users.firstname', 'users.lastname')
+                ->whereBetween(DB::raw('DATE(bills.created_at)'), [DB::raw(DATE($request->start)), DB::raw(DATE($request->end))])
+                ->get();
+        return response()->json($bills);
     }
 
     public function show($id)

@@ -5,22 +5,23 @@ ___
 
 
 
-###💻To do:exclamation::exclamation: when you cloned ProjectCmboxing :speech_balloon:
+###💻To do:exclamation::exclamation: When you cloned ProjectCmboxing :speech_balloon:
 
-1. run **composer update** 
-
-
-2. run **npm install**
+1.       👉 composer update
 
 
-3. If you don't have database please create Database for project
-     else if you have Database
+2.        👉 npm install
 
-          php artisan db::seed
 
-3. When you created database for project please run this command
+3. **If** you don't have database please **Create Database for Project**
      
-          php artisan migrate:refresh --seed
+     **Else if** you have Database please **run this command**
+
+          php artisan db::seed 🌱
+
+3. When you created database for project please **run this command**
+     
+         php artisan migrate:refresh --seed 🌱
 
      
 
@@ -28,7 +29,7 @@ ___
 3. run **php artisan serve** 
 
 
-4. let's go to url [127.0.0.1:8000](http:://127.0.0.1:8000)
+4. let's go to url 👉 [127.0.0.1:8000](http:://127.0.0.1:8000) 👈
 
 
 5. done:heavy_exclamation_mark::heavy_exclamation_mark:
@@ -36,5 +37,5 @@ ___
 ___
 
 
-####:+1:Development By [Kiadtisak Lowongsa](https://www.facebook.com/Kanty.co.th):+1:
+####Development By 👉[Kiadtisak Lowongsa](https://www.facebook.com/Kanty.co.th)👈
 
