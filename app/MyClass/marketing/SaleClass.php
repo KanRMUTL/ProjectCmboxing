@@ -4,8 +4,8 @@ namespace App\MyClass\marketing;
 
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\marketing\Sale as SaleModel;
-use App\Http\Controllers\marketing\Guesthouse;
 
 class SaleClass {
 
@@ -52,7 +52,7 @@ class SaleClass {
                         ['sale_type', '=', $this->saleTypeId]
                     ]
                 )
-                ->whereBetween('created_at', [$this->start, $this->end])
+                ->whereBetween(DB::raw('DATE(created_at)'), [DB::raw(DATE($this->start)), DB::raw(DATE($this->end))])
                 ->orderByRaw('created_at DESC')
                 ->get();
      }
@@ -81,7 +81,7 @@ class SaleClass {
                         ['sale_type', '=', $this->saleTypeId]
                     ]
                 )
-                ->whereBetween('created_at', [$this->start, $this->end])
+                ->whereBetween(DB::raw('DATE(created_at)'), [DB::raw(DATE($this->start)), DB::raw(DATE($this->end))])
                 ->orderByRaw('created_at DESC')
                 ->get();
      }
@@ -106,12 +106,11 @@ class SaleClass {
                 ->join('users', 'sales.user_id', '=', 'users.id')
                 ->where(
                     [
-                        ['zone_id', '=', $this->zoneId], 
                         ['sale_type', '=', $this->saleTypeId],
                         ['user_id', '=', Auth::user()->id]
                     ]
                 )
-                ->whereBetween('created_at', [$this->start, $this->end])
+                ->whereBetween(DB::raw('DATE(created_at)'), [DB::raw(DATE($this->start)), DB::raw(DATE($this->end))])
                 ->orderByRaw('created_at DESC')
                 ->get();
      }

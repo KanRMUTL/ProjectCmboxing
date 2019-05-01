@@ -93,7 +93,7 @@ class ReportController extends StarterController
     public function EmpCommissionReport(Request $request)
     {
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8']);
-        $objCommission = new CommissionClass($request->start,$request->end, $request->zoneId, 0);
+        $objCommission = new CommissionClass($request->start,$request->end, $request->zoneId, 0, Auth::user()->id);
         $commissions = $objCommission->getCommissionOfEmp();
         $html = "
             <style> th { width: 20%; font-size: 135%; padding: 1.5%;} td { font-size: 125%; } </style>
@@ -138,7 +138,7 @@ class ReportController extends StarterController
     public function guideCommissionReport(Request $request)
     {
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8',]);
-        $objCommission = new CommissionClass($request->start, $request->end, $request->zoneId, 1);
+        $objCommission = new CommissionClass($request->start, $request->end, $request->zoneId, 1, Auth::user()->id);
         $commissions = $objCommission->getCommissionOfGuide();
         $html = "
         <style> th { width: 20%; font-size: 135%; padding: 1.5%;} td { font-size: 125%; }</style>

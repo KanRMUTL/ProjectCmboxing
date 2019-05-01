@@ -24,7 +24,7 @@ class IncomeClass {
      public function getIncome() {
           if(Auth::user()->role == 1) { return $this->IncomeForAdmin(); }
           else if(Auth::user()->role == 2) { return $this->IncomeForHead(); }
-          else if(Auth::user()->role == 3) { return $this->IncomeForEmployee(); }
+          else if(Auth::user()->role == 3) { return $this->IncomeForEmployee(Auth::user()->id); }
      }
 
      public function IncomeForAdmin() {
@@ -37,7 +37,7 @@ class IncomeClass {
                          'sale_type',
                          'created_at'
                     )
-                    ->groupBy('user_id', 'ticket_id', 'sale_type', 'created_at')
+                    ->groupBy('user_id', 'ticket_id', 'sale_type', DB::raw('DATE(created_at)'))
                     ->orderByRaw('created_at DESC')
                     ->where(['zone_id' => $this->zoneId])
                     ->whereBetween('created_at', [$this->start, $this->end])
@@ -54,14 +54,14 @@ class IncomeClass {
                          'sale_type',
                          'created_at'
                     )
-                    ->groupBy('user_id', 'ticket_id', 'sale_type', 'created_at')
+                    ->groupBy('user_id', 'ticket_id', 'sale_type', DB::raw('DATE(created_at)'))
                     ->where(['zone_id' => $this->zoneId])
                     ->whereBetween('created_at', [$this->start, $this->end])
                     ->orderByRaw('created_at DESC')
                     ->get();
      }
 
-     public function IncomeForEmployee() {
+     public function IncomeForEmployee($user_id) {
           return Sale::
                     select(
                          'user_id',
@@ -71,8 +71,8 @@ class IncomeClass {
                          'sale_type',
                          'created_at'
                     )
-                    ->groupBy('user_id', 'ticket_id', 'sale_type', 'created_at')
-                    ->where(['user_id' => Auth::user()->id])
+                    ->groupBy('user_id', 'ticket_id', 'sale_type', DB::raw('DATE(created_at)'))
+                    ->where(['user_id' => $user_id])
                     ->whereBetween('created_at', [$this->start, $this->end])
                     ->orderByRaw('created_at DESC')
                     ->get();

@@ -1,10 +1,12 @@
 
 require('./bootstrap');
 import swal from 'sweetalert';
+// import moment from 'moment';
 
 
 window.Vue = require('vue');
 window.axios = require('axios');
+window.moment = require('moment');
 
 //  คลังสินค้า
 Vue.component('saling', require('./components/pos/saling.vue'));
@@ -14,6 +16,11 @@ Vue.component('report', require('./components/pos/report.vue'));
 
 //ทั่วไป
 Vue.component('profile', require('./components/marketing/user/profile.vue'));
+Vue.component('personal-profile', require('./components/marketing/employeeProfile/personal-profile.vue'));
+Vue.component('saling-profile', require('./components/marketing/employeeProfile/saling-profile.vue'));
+Vue.component('commission', require('./components/marketing/employeeProfile/commission.vue'));
+Vue.component('income', require('./components/marketing/employeeProfile/income.vue'));
+Vue.component('saling-detail', require('./components/marketing/employeeProfile/saling-detail.vue'));
 
 //  ============= เว็บออนไลน์ ==============
 // User

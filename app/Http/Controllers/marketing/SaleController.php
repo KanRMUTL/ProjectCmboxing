@@ -63,7 +63,6 @@ class SaleController extends StarterController
         $sale->total =  $ticket['price'] * $request->amount;
         $sale->created_at = now();
         $sale->save();
-
         $url = $this->changeRedirect($sale->sale_type);
         return redirect($url);
     }
@@ -136,5 +135,8 @@ class SaleController extends StarterController
         return view('marketing._sale.index', $data);
     }
 
-
+    public function employeeProfile($id) {
+        $data['id'] = $id;
+        return view('marketing._profile.index', $data);
+    }
 }

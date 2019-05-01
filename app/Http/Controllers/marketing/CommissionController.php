@@ -19,7 +19,7 @@ class CommissionController extends StarterController
     public function empCommission()
     {
         $userZone =  Auth::user()->employee->zone_id;
-        $objCommission = new CommissionClass($this->start, $this->end, $userZone, 0);
+        $objCommission = new CommissionClass($this->start, $this->end, $userZone, 0, Auth::user()->id);
         $data['commission'] = $objCommission->getCommissionOfEmp();
         $data['range'] = $this->range;
         $data['zones'] = $this->zones;
@@ -30,7 +30,7 @@ class CommissionController extends StarterController
     public function searchEmp(Request $request)
     {   
         $data['range'] = ['start' => $request->start,'end' => $request->end];
-        $objCommission = new CommissionClass($request->start, $request->end, $request->zoneId, 0);
+        $objCommission = new CommissionClass($request->start, $request->end, $request->zoneId, 0, Auth::user()->id);
         $data['commission'] = $objCommission->getCommissionOfEmp();
         $data['zones'] = $this->zones;
         $data['zoneSelected'] = $request->zoneId;
@@ -43,7 +43,7 @@ class CommissionController extends StarterController
         $end = $request->end;
         $zoneId = $request->zoneId;
        
-        $objCommission = new CommissionClass($start, $end, $zoneId, 1);
+        $objCommission = new CommissionClass($start, $end, $zoneId, 1, Auth::user()->id);
         $data['range'] = ['start' => $request->start, 'end' => $request->end];
         $data['commission'] = $objCommission->getCommissionOfGuide();
         $data['zoneSelected'] = $request->zoneId;
@@ -54,7 +54,7 @@ class CommissionController extends StarterController
     public function guideCommission()
     {
         $userZone =  Auth::user()->employee->zone_id;
-        $objCommission = new CommissionClass($this->start, $this->end, $userZone, 1);
+        $objCommission = new CommissionClass($this->start, $this->end, $userZone, 1, Auth::user()->id);
         $data['commission'] = $objCommission->getCommissionOfGuide();
         $data['range'] = $this->range;
         $data['zones'] = $this->zones;

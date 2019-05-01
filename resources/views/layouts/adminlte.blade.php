@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title> @yield('title')</title>
 
   <link rel="shortcut icon" href="{{ asset('shopping/img/logo.png') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/marketing/custom.css') }}">
-   <!-- CSRF Token -->
-   <meta name="csrf-token" content="{{ csrf_token() }}">
+  
+  @yield('custom-stylesheet')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper" id="app">
@@ -55,7 +55,7 @@
         </div>
         <div class="pull-left info">
         <p>
-          <a href="/user/{{Auth::user()->id}}">
+          <a href="/employeeProfile/{{Auth::user()->id}}">
             {{ Auth::user()->firstname }}
           </a>
         </p>

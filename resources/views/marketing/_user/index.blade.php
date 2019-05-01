@@ -29,7 +29,7 @@
       <tbody>
        @foreach ($users as $user)
            <tr align="center">
-            <td>{{ $user->firstname }}&emsp;{{ $user->lastname }}</td>
+            <td><a href="employeeProfile/{{$user->id}}">{{ $user->firstname }}&emsp;{{ $user->lastname }}</a></td>
             <td>{{ $user->username }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $roles[$user->role - 1] }}</td>

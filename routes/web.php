@@ -9,6 +9,7 @@ Route::get('/courses','shopping\CourseController@courses');
 Route::group(['middleware' =>['auth']], function() {
 
     Route::get('/dashboard', 'PageController@index');
+    Route::get('/employeeProfile/{id}', 'marketing\SaleController@employeeProfile');
     
     Route::resource('user', 'UserController');
     Route::resource('ticket', 'marketing\TicketController');
