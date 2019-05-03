@@ -27,7 +27,7 @@
   </head>
 
   <body id="page-top">
-
+    <script src="https://www.paypal.com/sdk/js?client-id=AdeKmKTa4nB9aWe7oZbheexKhuDFwXkfJIwjf8qcbdVlek869ZnqJ34TvF-rUvJcjVSRcXh26ff7VdDk&currency=THB"></script>
     @include('shopping.layout.navbar')
     
     @yield('content')

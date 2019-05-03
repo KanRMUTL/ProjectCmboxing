@@ -13,12 +13,7 @@ class CourseController extends Controller
         $courses = Course::all();
         return response()->json($courses);
     }
-
-    public function create()
-    {
-        //
-    }
-
+    
     public function store(Request $request)
     {
         $course = new Course();
@@ -27,16 +22,6 @@ class CourseController extends Controller
         $course->detail = $request->detail;
         $course->save();
         return response()->json($course);
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
     }
 
     public function update(Request $request, $id)

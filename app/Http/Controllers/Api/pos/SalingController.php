@@ -36,7 +36,7 @@ class SalingController extends Controller
             $product = Product::find($item['id']);
             
             // บันทึกรายการขาย
-            $saleDetail->amount = $item['amount'];
+            $saleDetail->amount = $item['cart'];
             $saleDetail->total = $item['total'];
             $saleDetail->product_id = $item['id'];
             $saleDetail->bill_id = $bill->id;

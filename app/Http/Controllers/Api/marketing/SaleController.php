@@ -13,20 +13,6 @@ use App\MyClass\marketing\SalingProfile;
 
 class SaleController extends StarterController
 {
-    public function index()
-    {
-        //
-    }
-   
-    public function create()
-    {
-        //
-    }
-   
-    public function store(Request $request)
-    {
-        //
-    }
    
     public function show(Request $request, $user_id)
     {
@@ -51,18 +37,4 @@ class SaleController extends StarterController
         return response()->json($data);
     }
    
-    public function edit($id)
-    {
-        //
-    }
-   
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
 }

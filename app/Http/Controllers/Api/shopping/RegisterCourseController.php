@@ -9,11 +9,6 @@ use App\shopping\CourseRegister;
 
 class RegisterCourseController extends Controller
 {
-    public function index()
-    {
-        
-    }
-
     public function store(Request $request)
     {
        $saleCourse = new SaleCourse();
@@ -35,20 +30,5 @@ class RegisterCourseController extends Controller
     {
         $saleCourse = SaleCourse::detail($user_id)->get();
         return response()->json($saleCourse);
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        
-    }
-
-    public function destroy($id)
-    {
-       
     }
 }

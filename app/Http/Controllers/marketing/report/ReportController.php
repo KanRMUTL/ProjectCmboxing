@@ -78,7 +78,7 @@ class ReportController extends StarterController
                     <td class='center'>".$sale->amount."</td>
                     <td class='right'>".number_format($sale->total, 2, '.',',')."</td>
                     <td class='center'>".$sale->visit."</td>
-                    <td>".$sale->user->firstname."&emsp;".$sale->user->lastname."</td>
+                    <td>".$sale->firstname."&emsp;".$sale->lastname."</td>
                     <td class='center'>".date('d/m/Y', strtotime($sale->created_at))."</td>
                 </tr>
             ";

@@ -13,9 +13,18 @@ Route::group(['middleware' =>['auth']], function() {
     
     Route::resource('user', 'UserController');
     Route::resource('ticket', 'marketing\TicketController');
-    Route::resource('trainer', 'shopping\TrainerController');
-    Route::resource('course', 'shopping\CourseController');
+    Route::get('course', 'shopping\CourseController@index'); // หน้าจัดการคอร์สของแอดมิน
+    Route::get('course/{user_id}', 'shopping\CourseController@show'); // ลูกค้าดูรายละเอียดการซื้อคอร์ส
    
+    // ครูสอนมวยไทย
+    Route::get('trainer', 'shopping\TrainerController@index');
+    Route::post('trainer', 'shopping\TrainerController@store');
+    Route::get('trainer/{id}/edit', 'shopping\TrainerController@edit');
+    Route::put('trainer/{id}', 'shopping\TrainerController@update');
+    Route::delete('trainer/{id}', 'shopping\TrainerController@destroy');
+
+
+
     // ข้อมูลการขายของพนักงานกับไกด์
     Route::prefix('sale')->group(function() {
         Route::get('/{saleTypeName}', 'marketing\SaleController@index')->name('sale.index'); 

@@ -16,10 +16,10 @@
                     :key="index"
                     :class="{'table-info': index % 2 == 0}"
                 >   
-                <td>{{course.start_course}}</td>
+                <td>{{course.start_course | dateFormat}}</td>
                 <td>{{course.courseName}}</td>
                 <td>{{course.trainerName}}</td>
-                <td>{{course.created_at}}</td>
+                <td>{{course.created_at | dateFormat}}</td>
                 </tr>
             </tbody>
         </table>
@@ -45,7 +45,13 @@ export default {
             axios.get('/api/registerCourse/' + this.id)
             .then(res => this.courses = res.data)
         }
-    }
+    },
+
+    filters: {
+      dateFormat: function(value) {
+          return moment(value).format('DD/MM/YYYY');
+      }
+  }
 }
 </script>
 

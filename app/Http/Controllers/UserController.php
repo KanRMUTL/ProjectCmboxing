@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\AddUser;
 use App\Http\Controllers\marketing\StarterController;
+use App\MyClass\pos\ImageClass;
 use App\User;
 use App\marketing\Employee;
 use App\marketing\Role;
@@ -35,6 +36,9 @@ class UserController extends Controller
      
     public function store(Request $request)
     {
+        $objImage = new ImageClass('user', $request->file('img'));
+        $objImage->uploadImage();
+
         $user = User::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
@@ -42,6 +46,7 @@ class UserController extends Controller
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'address' => $request->address,
+            'img' =>  $objImage->imageName,
             'password' => bcrypt($request->password),
             'role' => $request->role,
         ]);
@@ -73,7 +78,7 @@ class UserController extends Controller
             $data = [
                     'user' => $user,
                     'zones' => $zones,
-                    'roles' => ['แอดมิน','หัวหน้าฝ่ายการตลาด', 'พนักงานฝ่ายการตลาด']
+                    'roles' => ['2' => 'หัวหน้าฝ่ายการตลาด', '3' => 'พนักงานฝ่ายการตลาด']
                 ];
                 return view('marketing._user.edit',$data);
         } 
@@ -85,14 +90,21 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = [
+        $user = User::find($request->user_id);
+        $data = [ 
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'phone_number' => $request->phone_number,
             'address' => $request->address,
             'email' => $request->email,
-            'role' => $request->role,
+            'role' => $request->role
         ];
+        if($request->hasFile('img')){ 
+            $objImage = new ImageClass('user', $request->file('img'));
+            $objImage->originalName = $user->img;
+            $objImage->updateImage();
+            $data['img'] = $objImage->imageName;
+        }
 
         $employee = [
             'id_card' => $request->id_card,
@@ -100,9 +112,9 @@ class UserController extends Controller
         ];
 
         if($request->password != null){
-           $user['password'] = bcrypt($request->password);
-         }
-        User::find($request->user_id)->update($user);
+           $data['password'] = bcrypt($request->password);
+         } 
+        $user->update($data);
         Employee::where('user_id', '=', $request->user_id)->update($employee);
         return redirect('user');
 

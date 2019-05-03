@@ -3,7 +3,6 @@
 @section('content')
     
 @include('shopping.layout.default_banner')  
-<script src="https://www.paypal.com/sdk/js?client-id=AdeKmKTa4nB9aWe7oZbheexKhuDFwXkfJIwjf8qcbdVlek869ZnqJ34TvF-rUvJcjVSRcXh26ff7VdDk&currency=THB"></script>
 
 <section class="about">     
 <div class="container">

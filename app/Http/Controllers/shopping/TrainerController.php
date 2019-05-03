@@ -67,7 +67,7 @@ class TrainerController extends Controller
             $trainer->update(
                 [
                     'name' => $request->name,
-                    'price' => $request->price
+                    'detail' => $request->detail,
                 ]
             );
         } 

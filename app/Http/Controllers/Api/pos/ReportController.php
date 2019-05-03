@@ -39,7 +39,8 @@ class ReportController extends Controller
     public function show($id)
     {
         $saleDetail = Bill::
-                            join('sale_details', 'bills.id', '=', 'sale_details.bill_id')
+                            select('sale_details.amount', 'products.name', 'products.img', 'products.price', 'sale_details.total')
+                            ->join('sale_details', 'bills.id', '=', 'sale_details.bill_id')
                             ->join('products', 'sale_details.product_id', '=', 'products.id')
                             ->where('bills.id', '=', $id)
                             ->get();

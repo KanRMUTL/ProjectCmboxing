@@ -15,7 +15,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">ผู้ใช้ใหม่</h4>
       </div>
-      {!! Form::open(['route' => 'user.store', 'method' => 'POST']) !!}
+      {!! Form::open(['route' => 'user.store', 'method' => 'POST', 'files' => true]) !!}
       {{ Form::token()}}
       <div class="modal-body">
         <div class="row">
@@ -102,6 +102,12 @@
             <input type="hidden" name="zone" value="{{  Auth::user()->employee->zone_id }}">
             <input type="hidden" name="role" value="3">
             @endif
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="img">รูปประจำตัว</label>
+              <input type="file" id="img" name="img" class="form-control">
+            </div>
           </div>
         </div>
         <div class="form-group">

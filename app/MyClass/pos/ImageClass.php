@@ -14,7 +14,8 @@ class ImageClass {
           $this->destinationArray = [
                'ticket' => 'shopping\img\ticket\\',
                'product' => 'pos\product\\',
-               'trainer' => 'shopping\img\trainer\\'
+               'trainer' => 'shopping\img\trainer\\',
+               'user' => 'images\userImg\\'
           ];
           $this->destinationPath = $this->destinationArray[$type];
           $this->imgFile = $imgFile;
@@ -28,20 +29,7 @@ class ImageClass {
      }
 
      public function updateImage() {
-          $oldImagePath =  $this->oldImagePath();
-          unlink(public_path($oldImagePath));
+          unlink(public_path($this->destinationPath.$this->originalName));
           $this->uploadImage();
      }
-
-     public function deleteImage() {
-
-     }
-     private function oldImagePath(){
-          if($this->destinationPath == $this->destinationArray['ticket']) { return 'shopping\img\ticket\\'.$this->originalName; }
-          else if($this->destinationPath == $this->destinationArray['product']) { return 'pos\product\\'.$this->originalName; }
-          else if($this->destinationPath == $this->destinationArray['trainer']) { return 'shopping\img\trainer\\'.$this->originalName; };
-     }
-
-
-
 }

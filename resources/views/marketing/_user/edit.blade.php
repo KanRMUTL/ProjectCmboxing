@@ -8,11 +8,22 @@
    <div class="box-header with-border">
       <h3 class="box-title">ผู้ใช้ : {{ $user->firstname }}&emsp;{{ $user->lastname }}</h3>
    </div>
-   {!! Form::open(['action' => ['UserController@update', $user->id], 'method' => 'PUT']) !!}
+   {!! Form::open(['action' => ['UserController@update', $user->id], 'method' => 'PUT', 'files' => true]) !!}
    {{ Form::token()}}
    <input type="hidden" name="user_id" value="{{ $user->id}}">
    <div class="box-body">
       <div class="row">
+         <div class="row">
+            <div class="col-md-12">
+                  <figure>
+                     <img
+                        src="{{asset('/images/userImg/'.$user->img)}}"
+                        class="img-circle img-responsive"
+                        style="margin: 0 auto;"
+                     >
+                  </figure>
+            </div>
+         </div>
          <div class="col-md-6">
             <div class="input-group">
                <span class="input-group-addon">ชื่อ</span>
@@ -53,17 +64,21 @@
          <div class="col-md-6">
             <div class="input-group">
                <span class="input-group-addon">รหัสผ่าน</span>
-               <input type="password" class="form-control" placeholder="รหัสผ่านใหม่(ไม่จำเป็น)" name="password">
+               <input type="password" class="form-control" placeholder="รหัสผ่านใหม่(สามารถละเว้นได้)" name="password">
             </div>
          </div>
       </div>
       <br>
       <div class="row">
-         <div class="col-md-12">
+         <div class="col-md-6">
             <div class="input-group">
                <label>ที่อยู่</label>
                <textarea class="form-control" rows="3" cols="100" placeholder="ที่อยู่" name="address">{{ $user->address }}</textarea>
             </div>
+         </div>
+         <div class="col-md-6">
+            <label for="img">รูปประจำตัว</label>
+            <input type="file" id="img" name="img" class="form-control">
          </div>
       </div>
       <br>
@@ -74,10 +89,10 @@
                <select class="form-control" id="role" name="role">
                   @foreach ($roles as $key => $role)
                      @if($user->role == $key)
-                        <option value="{{ $key+1 }}" selected>{{ $role }}</option>           
+                        <option value="{{ $key }}" selected>{{ $role }}</option>           
                         @continue       
                      @endif
-                        <option value="{{ $key+1 }}" >{{ $role }}</option>                  
+                        <option value="{{ $key }}" >{{ $role }}</option>                  
 
                   @endforeach
                </select>

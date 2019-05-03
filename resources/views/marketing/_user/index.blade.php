@@ -29,7 +29,14 @@
       <tbody>
        @foreach ($users as $user)
            <tr align="center">
-            <td><a href="employeeProfile/{{$user->id}}">{{ $user->firstname }}&emsp;{{ $user->lastname }}</a></td>
+            <td>
+                    <img
+                       src="{{asset('/images/userImg/'.$user->img)}}"
+                       class="img-circle img-responsive"
+                       style="width: 48px"
+                    >
+              <a href="employeeProfile/{{$user->id}}">{{ $user->firstname }}&emsp;{{ $user->lastname }}</a>
+            </td>
             <td>{{ $user->username }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $roles[$user->role - 1] }}</td>

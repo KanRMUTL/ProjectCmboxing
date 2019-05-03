@@ -45,7 +45,6 @@ export default {
             axios.get('/api/trainer').then(
                 response => {
                     this.trainers = response.data;
-                    console.log(this.trainers)
                 }
             )
         }, 
