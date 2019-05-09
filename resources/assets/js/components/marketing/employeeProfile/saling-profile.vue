@@ -51,9 +51,9 @@
       </div>
     </div>
     <div class="col-md-12">
-      <commission :commissionDetail="commissionDetail" v-show="detail=='commission'"/>
-      <income :incomeDetail="incomes.list" v-show="detail=='income'"/>
-      <saling-detail :salingDetail="salingDetail" v-show="detail=='saling'"/>
+        <commission :commissionDetail="commissionDetail" :header="header" v-show="detail=='commission'"/>
+        <income :incomeDetail="incomes.list" :header="'ข้อมูลรายได้นำเข้าสนาม'" v-show="detail=='income'"/>
+        <saling-detail :salingDetail="salingDetail" :header="'ข้อมูลการขายของพนักงาน'" v-show="detail=='saling'"/>
     </div>
   </div>
   </div>
@@ -77,7 +77,8 @@ export default {
       guideCommission: [],
       commissionDetail: [],
       salingDetail: [],
-      countTicket: 0
+      countTicket: 0,
+      header: ''
     };
   },
 
@@ -110,11 +111,13 @@ export default {
     setEmpCommission() {
       this.commissionDetail = this.empCommission.list;
       this.detail = 'commission'
+      this.header = 'ข้อมูลค่าคอมมิชชั่นของพนักงาน'
     }, 
 
     setGuideCommission() {
       this.commissionDetail = this.guideCommission.list;
       this.detail = 'commission'
+      this.header = 'ข้อมูลค่าคอมมิชชั่นไกด์'
     },
 
     setIncomeDetail() {
@@ -141,5 +144,8 @@ export default {
   .search-box{
     margin : 5px 5px;
   }
+  .box-title{
+       text-align: center;
+     }
 </style>
 

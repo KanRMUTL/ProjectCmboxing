@@ -1,5 +1,6 @@
 <template>
 <div class="row">
+  <h3 class="box-title">{{ header }}</h3>
   <div class="box-body">
     <table class="table table-striped table-hover center mt-2">
       <tbody>
@@ -23,7 +24,7 @@
 
 <script>
 export default {
-  props: ["commissionDetail"]
+  props: ["commissionDetail", "header"]
 };
 </script>
 
@@ -31,5 +32,6 @@ export default {
      .box-body{
           margin-top: 2%;
      }
+     
 </style>
 

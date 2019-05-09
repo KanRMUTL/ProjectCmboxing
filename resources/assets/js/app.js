@@ -8,6 +8,7 @@ window.Vue = require('vue');
 window.axios = require('axios');
 window.moment = require('moment');
 
+Vue.component('profile-img', require('./components/profile-img.vue'));
 //  คลังสินค้า
 Vue.component('saling', require('./components/pos/saling.vue'));
 Vue.component('product', require('./components/pos/product.vue'));
@@ -21,6 +22,7 @@ Vue.component('saling-profile', require('./components/marketing/employeeProfile/
 Vue.component('commission', require('./components/marketing/employeeProfile/commission.vue'));
 Vue.component('income', require('./components/marketing/employeeProfile/income.vue'));
 Vue.component('saling-detail', require('./components/marketing/employeeProfile/saling-detail.vue'));
+Vue.component('chart', require('./components/marketing/chart/chart.vue'));
 
 //  ============= เว็บออนไลน์ ==============
 // User
@@ -49,3 +51,7 @@ Vue.component('manage-trainer', require('./components/shopping/addmin/trainer/ma
 const app = new Vue({
     el: '#vue'
 });
+
+const nav = new Vue({
+    el: '#nav'
+})

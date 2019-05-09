@@ -133,5 +133,74 @@ class Sale extends Model
         return $visit->format('d/m/Y');
     }
 
+    // ========== Chart ==========
+    public function scopeZoneSaling($query, $start, $end) {
+        return $query
+                ->select('zones.name as labels', DB::raw('SUM(total) as total'))
+                ->join('zones', 'sales.zone_id', 'zones.id')
+                ->groupBy('zone_id')
+                ->orderBy('total')
+                ->whereBetween(DB::raw('DATE(created_at)'),  [DB::raw(DATE($start)), DB::raw(DATE($end))])
+                ->get();
+   }
 
+   public function scopeTicketSaling($query, $start, $end, $user) {
+       if($user->role == 1) {
+           return $query
+                ->select('tickets.name as labels', DB::raw('SUM(total) as total'))
+                ->join('tickets', 'sales.ticket_id', 'tickets.id')
+                ->groupBy('ticket_id')
+                ->orderBy('total')
+                ->whereBetween(DB::raw('DATE(created_at)'),  [DB::raw(DATE($start)), DB::raw(DATE($end))])
+                ->get();
+       } else if($user->role == 2) {
+        return $query
+                ->select('tickets.name as labels', DB::raw('SUM(total) as total'))
+                ->join('tickets', 'sales.ticket_id', 'tickets.id')
+                ->groupBy('ticket_id')
+                ->orderBy('total')
+                ->where('zone_id', '=', $user->employee->zone_id)
+                ->whereBetween(DB::raw('DATE(created_at)'),  [DB::raw(DATE($start)), DB::raw(DATE($end))])
+                ->get();
+       }  else if($user->role == 3) {
+        return $query
+                ->select('tickets.name as labels', DB::raw('SUM(total) as total'))
+                ->join('tickets', 'sales.ticket_id', 'tickets.id')
+                ->groupBy('ticket_id')
+                ->orderBy('total')
+                ->where('user_id', '=', $user->id)
+                ->whereBetween(DB::raw('DATE(created_at)'),  [DB::raw(DATE($start)), DB::raw(DATE($end))])
+                ->get();
+       } 
+   }
+
+   public function scopeTicketAmountSaling($query, $start, $end, $user) {
+       if($user->role == 1) {
+        return $query 
+                ->select('tickets.name as labels', DB::raw('SUM(amount) as total'))
+                ->join('tickets', 'sales.ticket_id', 'tickets.id')
+                ->groupBy('ticket_id')
+                ->orderBy('total')
+                ->whereBetween(DB::raw('DATE(created_at)'),  [DB::raw(DATE($start)), DB::raw(DATE($end))])
+                ->get();
+       } else if ($user->role == 2) {
+        return $query 
+                ->select('tickets.name as labels', DB::raw('SUM(amount) as total'))
+                ->join('tickets', 'sales.ticket_id', 'tickets.id')
+                ->groupBy('ticket_id')
+                ->orderBy('total')
+                ->where('zone_id', '=', $user->employee->zone_id)
+                ->whereBetween(DB::raw('DATE(created_at)'),  [DB::raw(DATE($start)), DB::raw(DATE($end))])
+                ->get();    
+        } else if ($user->role == 3) {
+            return $query 
+                    ->select('tickets.name as labels', DB::raw('SUM(amount) as total'))
+                    ->join('tickets', 'sales.ticket_id', 'tickets.id')
+                    ->groupBy('ticket_id')
+                    ->orderBy('total')
+                    ->where('user_id', '=', $user->id)
+                    ->whereBetween(DB::raw('DATE(created_at)'),  [DB::raw(DATE($start)), DB::raw(DATE($end))])
+                    ->get();    
+        }
+   }
 }

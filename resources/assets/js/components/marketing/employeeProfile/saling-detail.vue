@@ -1,5 +1,6 @@
 <template>
   <div class="row">
+    <h3 class="box-title">{{ header }}</h3>
     <div class="box-body">
       <table class="table table-striped table-hover center mt-2">
         <tbody>
@@ -26,7 +27,7 @@
 
 <script>
 export default {
-     props: ['salingDetail'],
+     props: ['salingDetail', 'header'],
 
       filters: {
       dateFormat: function(value) {

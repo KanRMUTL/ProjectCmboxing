@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="col-md-12 m-4 p-0">
-        <h5>2. Started whern</h5>
+        <h5>2. Started when</h5>
         <input
           type="date"
           class="form-control"

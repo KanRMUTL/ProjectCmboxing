@@ -38,7 +38,7 @@ class UserController extends Controller
     {
         $objImage = new ImageClass('user', $request->file('img'));
         $objImage->uploadImage();
-
+        
         $user = User::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
@@ -50,17 +50,13 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
             'role' => $request->role,
         ]);
-        
-        try{
-            $employee = Employee::create([
+       
+        $employee = Employee::create([
             'user_id' => $user->id,
             'id_card' => $request->id_card,
             'zone_id' => $request->zone,
         ]);
-        }
-        catch(Exception $e){
-            echo $e->getMessage();
-        }
+       
         return redirect('/user');
     }
 

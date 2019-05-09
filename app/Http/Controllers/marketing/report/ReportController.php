@@ -24,7 +24,7 @@ class ReportController extends StarterController
         .right { text-align: right; }
         .left { text-align: left; }
         .center { text-align: center; }
-        .th { width: 15%; font-size: 15pt; }
+        th { color: #1a2cb2; background-color: #d9dae2; }
         .logo{ width: 8.5%; }
     </style>
     ";
