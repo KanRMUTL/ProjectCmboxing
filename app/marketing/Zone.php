@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Zone extends Model
 {
     protected $fillable = [
-        'zone_id',
         'name',
         'img',
         'latitude',
@@ -27,5 +26,10 @@ class Zone extends Model
     public function employees()
     {
         return $this->hasMany('App\marketing\Employee');
+    }
+
+    public function sale()
+    {
+        return $this->hasMany('App\marketing\Sale', 'zone_id', 'id');
     }
 }

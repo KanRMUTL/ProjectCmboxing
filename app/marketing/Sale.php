@@ -53,7 +53,7 @@ class Sale extends Model
     }
     public function zone()
     {
-        return $this->belongsTo('App\marketing\Zone');
+        return $this->belongsTo('App\marketing\Zone', 'zone_id',  'id');
     }
 
     public function saleType()

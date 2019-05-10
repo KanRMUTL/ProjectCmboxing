@@ -42,6 +42,7 @@ Route::group(['middleware' =>['auth']], function() {
 
     Route::get('/income', 'marketing\IncomeController@income')->name('income.income');
     Route::post('/income', 'marketing\IncomeController@searchIncome')->name('income.searchIncome');
+    Route::post('/incomeReport', 'marketing\report\ReportController@incomeReport');
 
     Route::get('/commissionOfEmp', 'marketing\CommissionController@empCommission')->name('empCommission');
     Route::post('/commissionOfEmp', 'marketing\CommissionController@searchEmp')->name('empCommission.search');

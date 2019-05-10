@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\MyClass\marketing\SaleClass;
 use App\MyClass\marketing\CommissionClass;
+use App\MyClass\marketing\IncomeClass;
+use App\marketing\Zone;
 use Carbon\Carbon;
 use App\Http\Controllers\marketing\StarterController;
 use Mpdf\Mpdf;
@@ -17,7 +19,7 @@ class ReportController extends StarterController
     public $ReportStyle = "
     <style>
         .body{ padding: 0; }
-        .content, table { font-family: 'Garuda'; font-size: 10pt; }
+        .content, table,.bottom-left, .top-right{ font-family: 'Garuda'; font-size: 10pt; }
         .title { font-size: 12pt; width: 100%; padding: 3px; line-height: 1pt;}
         table { border-collapse: collapse; width: 100%; }
         table, tr, td, th { border: 1px solid #000; padding: 4px 6px; },
@@ -26,6 +28,19 @@ class ReportController extends StarterController
         .center { text-align: center; }
         th { color: #1a2cb2; background-color: #d9dae2; }
         .logo{ width: 8.5%; }
+        .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+            font-size: 18px;
+        }
+        .top-right {
+            position: absolute;
+            top: 8px;
+            right: 16px;
+            font-size: 16px;
+            color: #7e838c;
+        }
     </style>
     ";
 
@@ -175,6 +190,55 @@ class ReportController extends StarterController
         }
 
         $html .= '</table></div>';
+        $html = $this->ReportStyle.$html;
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+    }
+
+    public function incomeReport(Request $request) {
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
+        $objIncome = new IncomeClass( $request->start, $request->end, $request->zoneId);
+        $incomes =  $objIncome->CalculateIncome();
+        $name = Auth::user()->firstname."   ".Auth::user()->lastname;
+        $zoneName = Zone::find( $request->zoneId)->name;
+        $html = "
+            <style> th { width: 14.28%; font-size: 130%; padding: 1%;} td { font-size: 130%; padding: 0.4%}</style>
+            <div class='top-right'>โซน ". $zoneName ."</div>
+            <div class='content center'>"
+            .$this->ReportTitle().
+            "<p class='title'>
+                    รายได้นำเข้าสนาม
+                    วันที่ ".date('d/m/Y', strtotime($request->start))." 
+                    ถึงวันที่ ".date('d/m/Y', strtotime($request->end))." 
+                </p>
+                        <table cellspacing='1'>
+                            <tr>
+                                <th class='center'>ผู้ขาย</th>
+                                <th class='center'>ประเภทบัตร</th>
+                                <th class='center'>จำนวนบัตร</th>
+                                <th  class='center'>ประเภทการขาย</th>
+                                <th class='center'>ยอดรวม</th>
+                                <th class='center'>นำเข้าสนามมวย</th>
+                                <th class='center'>วันที่</th>
+                            </tr>
+        ";
+
+        foreach($incomes as $income) {
+            $html .="
+                <tr>
+                    <td class='center' style='width: 25%'>".$income->user->firstname."&emsp;". $income->user->lastname ."</td>
+                    <td class='center'>". $income->ticket->name ."</td>
+                    <td class='center'>". $income->amount ."</td>
+                    <td class='center' style='width: 15%'>". $this->saleTypes[$income->sale_type] ."</td>
+                    <td class='right' >". number_format($income->total, 2, '.',',') ."</td>
+                    <td class='right' style='width: 16%'>". number_format($income->income, 2, '.',',') ."</td>
+                    <td class='center'>". date('d/m/Y', strtotime($income->created_at))  ."</td>
+                </tr>
+            ";
+        }
+        
+        $html .= '</table></div>';
+        $html .= '<div class="bottom-left">ออกรายงานโดย: '. $name .'</div>';
         $html = $this->ReportStyle.$html;
         $mpdf->WriteHTML($html);
         $mpdf->Output();

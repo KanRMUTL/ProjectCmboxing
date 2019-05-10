@@ -40,7 +40,15 @@
             </tr>
             @endforeach
           </table>
-          
+          <div class="col-md-12 mt-3">
+            <form action="/incomeReport" method="POST">
+              {{@csrf_field()}}
+              <input type="hidden" value="{{ $range['start'] }}" name="start">
+              <input type="hidden" value="{{ $range['end'] }}" name="end">
+              <input type="hidden" value="{{ $zoneSelected }}" name="zoneId">
+              <input type="submit" class="btn btn-success btn-block" value="ออกรายงาน">
+            </form>
+          </div>
         </div>
         <!-- /.box-body -->
       </div>
