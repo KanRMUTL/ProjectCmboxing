@@ -7,7 +7,7 @@
                 <div class="col-md-3">
                     <div class="input-group">
                         <div class="input-group-addon">Select Date</div>
-                        <input type="date" v-model="dateSearch" class="form-control" id="inlineFormInputGroup">
+                        <input type="date" v-model="dateSearch" class="form-control" id="inlineFormInputGroup" :min="dateSearch">
                         <div class="input-group-addon" @click="searchSeat"><i class="fa fa-search"></i></div>
                     </div>
                 </div>

@@ -28,4 +28,8 @@ class ShoppingController extends StarterController
         
         return view('shopping/about', $data);
     }
+
+    public function saleTicket($id) {
+        return view('shopping/sale_ticket', ['id' => $id]);
+    }
 }

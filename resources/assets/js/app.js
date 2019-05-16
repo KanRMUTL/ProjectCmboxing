@@ -37,6 +37,7 @@ Vue.component('ticket-detail', require('./components/shopping/myProduct/ticket/t
 Vue.component('my-course', require('./components/shopping/myProduct/course/My-Course.vue'));
 
 Vue.component('ticket', require('./components/shopping/pages/ticket/ticket.vue'));
+Vue.component('single-ticket', require('./components/shopping/pages/ticket/single-ticket.vue'));
 Vue.component('paypal-button-ticket', require('./components/shopping/pages/ticket/paypal-button-ticket.vue'));
 
 Vue.component('courses-index', require('./components/shopping/course/index.vue'));

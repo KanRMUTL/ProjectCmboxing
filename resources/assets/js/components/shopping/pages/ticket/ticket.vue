@@ -1,32 +1,25 @@
 <template>
 
   <div class="row">
-    <div
-      v-for="ticket in tickets"
-      :key="ticket.id"
-      class="col-md-4 col-sm-6 desc-comp-offer wow fadeInUp"
-      data-wow-delay="0.4s"
-    >
-      <div class="desc-comp-offer-cont">
-        <div class="thumbnail-blogs">
-          <img
-            :src="'/shopping/img/ticket/' + ticket.img"
-            class="img-fluid"
-          >
-        </div>
-        <h3>{{ ticket.name }}</h3>
 
-        <div class="col-md-10">
-          <p>{{ ticket.price }} ฿</p>
+    <div class="card col-md-4"  v-for="ticket in tickets" :key="ticket.id">
+      <a href="#"><img
+          class="card-img-top"
+          :src="'/shopping/img/ticket/' + ticket.img"
+          alt=""
+        ></a>
+      <div class="card-body text-center">
+        <div class="card-title">
+          {{ ticket.name }}
         </div>
-        <div class="col-md-2">
-          <paypal-button-ticket
-               :id="'ticket' + ticket.name"
-               :total="ticket.price"
-          />
-        </div>
+        <strong>{{ ticket.price }} ฿</strong>
+        <br>
+        <button class="btn btn-general btn-white" role="button" @click="goToBuy(ticket)">
+          <i class="fa fa-cart-pay"></i> Buy Ticket
+        </button>
       </div>
     </div>
+    
   </div>
 
 </template>
@@ -45,7 +38,8 @@ export default {
         img: "",
         name: "",
         price: ""
-      }
+      },
+      ticketSelected: []
     };
   },
 
@@ -53,15 +47,16 @@ export default {
     getTickets() {
       axios
         .get("/api/getTicket")
-          //  .then(res => {
-          //    console.log(res);
-          //  })
         .then(res => {
           this.tickets = res.data.tickets;
         })
         .catch(function(e) {
           console.log(e);
         });
+    },
+
+    goToBuy(ticket) {
+      window.location.href = "/saleticket/" + ticket.id;
     }
   }
 };

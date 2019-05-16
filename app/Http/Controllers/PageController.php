@@ -31,6 +31,5 @@ class PageController extends Controller
             'income' =>  $income[0]->total
         ];
             return view('marketing.admin.index',$data);
-
     }
 }

@@ -36,21 +36,12 @@
             </ul>
             
         </div>
-        <!-- <div class="input-group mt-2">
-            <button 
-                class="btn btn-success btn-block" 
-                @click="saveBooking"
-                :disabled="bookDetail.length == 0"
-            >
-            Checkout
-            </button>
-        </div> -->
          <div class="input-group-item mt-2" v-if="total > 0">
             <paypal-button 
                 :url="'/api/booking'" 
                 :saveBooking="saveBooking" 
                 :total="total"
-            ></paypal-button>
+            />
          </div> 
     </div>
 </template>
@@ -106,6 +97,8 @@ export default {
                         swal({
                             icon: 'success',
                             title: 'Booking Complete' 
+                        }).then(function() {
+                            window.location = "/booking/1"
                         })
                     }
                 }

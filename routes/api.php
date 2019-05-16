@@ -27,6 +27,7 @@ Route::get('userProfile/{user_id}', 'Api\marketing\SaleController@show');
 Route::post('userProfile/{id}', 'Api\marketing\SaleController@show');
 
 Route::get('getTicket', 'Api\shopping\ShoppingController@ticket');
+Route::get('showTicket/{id}', 'Api\shopping\ShoppingController@showTicket');
 Route::post('zoneSalingChart', 'Api\marketing\ChartController@zoneSaling');
 Route::post('ticketSalingChart', 'Api\marketing\ChartController@ticketSaling');
 Route::post('ticketSalingChart', 'Api\marketing\ChartController@ticketSaling');

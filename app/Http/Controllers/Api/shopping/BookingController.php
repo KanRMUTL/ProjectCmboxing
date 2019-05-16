@@ -35,6 +35,7 @@ class BookingController extends StarterController
   
     public function store(Request $request)
     {
+        // return response()->json($request);
         try{
             $saleTicket = new SaleTicket();
 
@@ -43,14 +44,16 @@ class BookingController extends StarterController
             $saleTicket->user_id = $request->userId;
             $saleTicket->save();
             
-            foreach($request->bookDetail as $detail)
-            {
-                $seatRegister = new SeatRegister;
+            if($request->has('bookDetail')) { // ถ้ามีการจองที่นั่ง
+                foreach($request->bookDetail as $detail)
+                {
+                    $seatRegister = new SeatRegister;
 
-                $seatRegister->visit = $request->dateVisit;
-                $seatRegister->sale_ticket_id = $saleTicket->id;
-                $seatRegister->seat_id = $detail['seatId'];
-                $seatRegister->save();           
+                    $seatRegister->visit = $request->dateVisit;
+                    $seatRegister->sale_ticket_id = $saleTicket->id;
+                    $seatRegister->seat_id = $detail['seatId'];
+                    $seatRegister->save();           
+                }
             }
 
             foreach($request->saleDetail as $saleDetail)
@@ -74,7 +77,6 @@ class BookingController extends StarterController
         
     }
 
- 
     public function show($userId)
     {
         $tickets = Ticket::all();
@@ -84,7 +86,6 @@ class BookingController extends StarterController
             $today = Carbon::today(); //วันนี้
 
             $ticketDetails[$index]['status'] = $visit >= $today? true : false; // ถ้าวันที่เข้ามาชม มากกว่า วันนี้ให้สถานะเป็น true
-            
             $ticketDetails[$index]['detail'] = SaleTicketDetail::myTicket($ticketDetail->id)->get();
             $ticketDetails[$index]['seat'] = SeatRegister::RegisterDetail($ticketDetail->id)->get();
         }

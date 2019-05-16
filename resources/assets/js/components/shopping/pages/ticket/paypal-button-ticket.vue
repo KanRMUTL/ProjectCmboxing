@@ -1,23 +1,39 @@
 <template>
   <div>
-    <div :id="id"></div>
+    <button
+      class="btn btn-general btn-white btn-block"
+      role="button"
+      @click="confirmed()"
+      v-show="!confirm"
+    >
+      <i class="fa fa-paypal"></i> Confirm
+    </button>
+    <div id="paypal-button" v-show="confirm"></div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["total", "id"],
+  props: ["total", "saveBooking"],
+
   data() {
     return {
-      
+      confirm: false
     };
   },
+
   mounted() {
-    this.createOrder(this.total, this.id)
+    
   },
 
   methods: {
-    createOrder(total, id) {
+
+    confirmed() {
+      this.confirm = true;
+      this.createOrder(this.total, this.id, this.saveBooking);
+    },
+
+    createOrder(total, id, saveBooking) {
       paypal
         .Buttons({
           createOrder: function(data, actions) {
@@ -33,27 +49,26 @@ export default {
           },
           onApprove: function(data, actions) {
             // console.table(data)
-            return actions.order.capture().then(
-               function(details) {
-                    try {
-                         return fetch("/api/payment", {
-                              method: "post",
-                              headers: {
-                                   "content-type": "application/json"
-                              },
-                              body: JSON.stringify({
-                                   orderID: data.orderID
-                              })
-                         }).then(data => {
-                         //    saveOrder();
-                         });
-                    } catch (e) {
-                         // console.log(e)
-                    }
-               });
+            return actions.order.capture().then(function(details) {
+              try {
+                return fetch("/api/payment", {
+                  method: "post",
+                  headers: {
+                    "content-type": "application/json"
+                  },
+                  body: JSON.stringify({
+                    orderID: data.orderID
+                  })
+                }).then(data => {
+                  saveBooking();
+                });
+              } catch (e) {
+                // console.log(e)
+              }
+            });
           }
         })
-        .render('#'+id);
+        .render("#paypal-button");
     }
   }
 };

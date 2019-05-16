@@ -21,6 +21,8 @@ class SaleCourse extends Model
                     'courses.name as courseName',
                     'course_registers.start_course',
                     'trainers.name as trainerName',
+                    'trainers.img as trainerImg',
+                    'trainers.detail as trainerDetail',
                     'created_at'
                 )
                 ->join('course_registers', 'sale_courses.id', '=', 'course_registers.sale_course_id')

@@ -7,6 +7,8 @@ Route::get('/about', 'shopping\ShoppingController@about');
 Route::resource('/booking', 'shopping\SeatController');
 Route::get('/courses','shopping\CourseController@courses');
 Route::group(['middleware' =>['auth']], function() {
+    
+    Route::get('/saleticket/{id}', 'shopping\ShoppingController@saleTicket');
 
     Route::get('/dashboard', 'PageController@index');
     Route::get('/employeeProfile/{id}', 'marketing\SaleController@employeeProfile');

@@ -17,6 +17,10 @@ class ShoppingController extends StarterController
         return response()->json($data);
     }
 
+    function showTicket($id) {
+        return response()->json(['ticket' => Ticket::find($id)]);
+    }
+
     function about()
     {
         $data['webdetail'] = WebDetail::find(1);        
