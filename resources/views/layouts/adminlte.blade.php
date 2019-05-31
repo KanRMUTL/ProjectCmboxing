@@ -10,7 +10,14 @@
   <link rel="shortcut icon" href="{{ asset('shopping/img/logo.png') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/marketing/custom.css') }}">
-  
+  <style>
+  .invalid-feedback{
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 90%;
+    color: #dc3545;
+  }
+  </style>
   @yield('custom-stylesheet')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">

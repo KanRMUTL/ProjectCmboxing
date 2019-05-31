@@ -13,6 +13,7 @@ use App\marketing\Guesthouse;
 use App\marketing\SaleType;
 use Carbon\Carbon;
 use App\Http\Controllers\marketing\StarterController;
+use App\Http\Requests\marketing\TicketRequest;
 use Mpdf\Mpdf;
 use App\MyClass\marketing\SaleClass;
 
@@ -46,7 +47,7 @@ class SaleController extends StarterController
         return view('marketing._sale.index', $data);
     }
         
-    public function store(Request $request)
+    public function store(TicketRequest $request)
     {
         $ticket = Ticket::find($request->ticketId);
         $sale = new Sale;
@@ -82,7 +83,7 @@ class SaleController extends StarterController
     }
 
    
-    public function update(Request $request, $id)
+    public function update(TicketRequest $request, $id)
     {
     
         $ticket = Ticket::find($request->ticketId); // เอาไว้คำนวณราคาสุทธิ total
@@ -95,7 +96,7 @@ class SaleController extends StarterController
             'visit' => $request->visitDay,
             'guesthouse_id' => $request->guesthouseId,
             'ticket_id' => $request->ticketId,
-            'sale_type' => $request->saleType,
+            'sale_type' => $request->saleTypeId,
             'user_id' => $request->userId,
         ];
         $sale = Sale::find($id);
