@@ -40,6 +40,8 @@ Vue.component('ticket', require('./components/shopping/pages/ticket/ticket.vue')
 Vue.component('single-ticket', require('./components/shopping/pages/ticket/single-ticket.vue'));
 Vue.component('paypal-button-ticket', require('./components/shopping/pages/ticket/paypal-button-ticket.vue'));
 
+Vue.component('web-footer', require('./components/shopping/pages/footer/footer.vue'));
+
 Vue.component('courses-index', require('./components/shopping/course/index.vue'));
 Vue.component('courses', require('./components/shopping/course/courses.vue'));
 Vue.component('trainer', require('./components/shopping/course/trainer.vue'));

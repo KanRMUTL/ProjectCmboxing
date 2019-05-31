@@ -20,14 +20,15 @@
     <link rel="stylesheet" href="{{ asset('shopping/css/owl-carousel/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('shopping/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/shopping/seat.css') }}">
-    <link  href="{{ asset('shopping/css/custom/index.css') }}">
+    <link  href="{{ asset('shopping/css/custom/shopping.css') }}">
 
-    <!-- Paypal -->
-    {{-- <script src="https://www.paypalobjects.com/api/checkout.js"></script> --}}
+    @yield('custom-css')
+    
   </head>
 
   <body id="page-top">
     <script src="https://www.paypal.com/sdk/js?client-id=AdeKmKTa4nB9aWe7oZbheexKhuDFwXkfJIwjf8qcbdVlek869ZnqJ34TvF-rUvJcjVSRcXh26ff7VdDk&currency=THB"></script>
+    
     @include('shopping.layout.navbar')
     
     @yield('content')
@@ -45,7 +46,8 @@
     <script src="{{ asset('shopping/js/jquery-easing/jquery.easing.min.js') }}"></script> 
     <script src="{{ asset('shopping/js/custom.js') }}"></script> 
 
-    {{-- <script src="shopping/js/custom/booking.js"></script> --}}
+    @yield('custom-script')
+
   </body>
 
 </html>

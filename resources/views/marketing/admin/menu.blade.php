@@ -51,7 +51,7 @@
     <ul class="treeview-menu">
       <li><a href="{{ url('/stock/sale') }}"><i class="fa fa-circle-o"></i>ขายสินค้า</a></li>
       <li><a href="{{ url('/stock/product') }}"><i class="fa fa-circle-o"></i>จัดการคลังสินค้า</a></li>
-      <li><a href="{{ url('/stock/report') }}"><i class="fa fa-circle-o"></i>รายงานการขาย</a></li>
+      <li><a href="{{ url('/stock/report') }}"><i class="fa fa-circle-o"></i>สรุปการขายสินค้า</a></li>
     </ul>
   </li>
 

@@ -59,7 +59,10 @@ class ReportController extends StarterController
         $saleTypeId = $this->saleTypeUrl[$request->saleTypeName];
         $objSale = new SaleClass($request->start, $request->end, $request->zoneId, $saleTypeId);
         $sales = $objSale->SearchSale();
+        $name = Auth::user()->firstname."   ".Auth::user()->lastname;
+        $zoneName = Zone::find( $request->zoneId)->name;
         $html = "
+        <div class='top-right'>โซน ". $zoneName ."</div>
         <div class='content center'>"
         .$this->ReportTitle().
         "<p class='title'>
@@ -100,6 +103,7 @@ class ReportController extends StarterController
         }
 
         $html .= '</table></div>';
+        $html .= '<div class="bottom-left">ออกรายงานโดย: '. $name .'</div>';
         $html = $this->ReportStyle.$html;
         $mpdf->WriteHTML($html);
         $mpdf->Output();
@@ -110,8 +114,11 @@ class ReportController extends StarterController
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8']);
         $objCommission = new CommissionClass($request->start,$request->end, $request->zoneId, 0, Auth::user()->id);
         $commissions = $objCommission->getCommissionOfEmp();
+        $name = Auth::user()->firstname."   ".Auth::user()->lastname;
+        $zoneName = Zone::find( $request->zoneId)->name;
         $html = "
             <style> th { width: 20%; font-size: 135%; padding: 1.5%;} td { font-size: 125%; } </style>
+            <div class='top-right'>โซน ". $zoneName ."</div>
             <div class='content center'>"
             .$this->ReportTitle().
             "
@@ -145,6 +152,7 @@ class ReportController extends StarterController
         }
 
         $html .= '</table></div>';
+        $html .= '<div class="bottom-left">ออกรายงานโดย: '. $name .'</div>';
         $html = $this->ReportStyle.$html;
         $mpdf->WriteHTML($html);
         $mpdf->Output();
@@ -155,8 +163,11 @@ class ReportController extends StarterController
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8',]);
         $objCommission = new CommissionClass($request->start, $request->end, $request->zoneId, 1, Auth::user()->id);
         $commissions = $objCommission->getCommissionOfGuide();
+        $name = Auth::user()->firstname."   ".Auth::user()->lastname;
+        $zoneName = Zone::find( $request->zoneId)->name;
         $html = "
         <style> th { width: 20%; font-size: 135%; padding: 1.5%;} td { font-size: 125%; }</style>
+        <div class='top-right'>โซน ". $zoneName ."</div>
         <div class='content center'>"
         .$this->ReportTitle().
         "<p class='title'>
@@ -190,6 +201,7 @@ class ReportController extends StarterController
         }
 
         $html .= '</table></div>';
+        $html .= '<div class="bottom-left">ออกรายงานโดย: '. $name .'</div>';
         $html = $this->ReportStyle.$html;
         $mpdf->WriteHTML($html);
         $mpdf->Output();

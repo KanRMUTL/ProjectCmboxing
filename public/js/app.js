@@ -18293,7 +18293,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(144);
-module.exports = __webpack_require__(289);
+module.exports = __webpack_require__(292);
 
 
 /***/ }),
@@ -18346,14 +18346,16 @@ Vue.component('ticket', __webpack_require__(254));
 Vue.component('single-ticket', __webpack_require__(257));
 Vue.component('paypal-button-ticket', __webpack_require__(262));
 
-Vue.component('courses-index', __webpack_require__(265));
-Vue.component('courses', __webpack_require__(268));
-Vue.component('trainer', __webpack_require__(273));
-Vue.component('register-course', __webpack_require__(278));
+Vue.component('web-footer', __webpack_require__(265));
+
+Vue.component('courses-index', __webpack_require__(268));
+Vue.component('courses', __webpack_require__(271));
+Vue.component('trainer', __webpack_require__(276));
+Vue.component('register-course', __webpack_require__(281));
 
 // Admin
-Vue.component('course', __webpack_require__(283));
-Vue.component('manage-trainer', __webpack_require__(286));
+Vue.component('course', __webpack_require__(286));
+Vue.component('manage-trainer', __webpack_require__(289));
 
 var app = new Vue({
     el: '#vue'
@@ -64965,7 +64967,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.seatRow .btn{\n     font-size: 75%;\n}\n.seatSelection {\n  text-align: center;\n  padding: 5px;\n\tmargin: 15px;\n}\n.seatsReceipt {text-align: center;\n}\n.seatNumber {\n\tdisplay: inline;\n\tpadding: 10px;\n\tbackground-color: #5c86eb;\n\tcolor: #FFF;\n\tborder-radius: 5px;\n\tcursor: default;\n\theight: 25px;\n\twidth: 25px;\n\tline-height: 25px;\n\ttext-align: center;\n}\n.seatEndRow{\n     display: -webkit-box;\n     display: -ms-flexbox;\n     display: flex;\n     padding: 10px;\n\tbackground-color: #5c86eb;\n\tcolor: #FFF;\n\tborder-radius: 5px;\n\tcursor: default;\n\theight: 25px;\n\twidth: 25px;\n\tline-height: 25px;\n\ttext-align: center;\n}\n.seatRow {padding: 10px;\n}\n.seatSelected {\n\tbackground-color: lightgreen;\n\tcolor: black;\n}\n.seatUnavailable {background-color: gray;\n}\n.seatRowNumber {\n\tclear: none;\n\tdisplay: inline;\n}\n.hidden {display: none;\n}\n.seatsAmount {max-width: 2em;\n}\n\n", ""]);
+exports.push([module.i, "\n.seatRow .btn {\r\n  font-size: 75%;\n}\n.seatSelection {\r\n  text-align: center;\r\n  padding: 5px;\r\n  margin: 15px;\n}\n.seatsReceipt {\r\n  text-align: center;\n}\n.seatNumber {\r\n  display: inline;\r\n  padding: 10px;\r\n  background-color: #5c86eb;\r\n  color: #fff;\r\n  border-radius: 5px;\r\n  cursor: default;\r\n  height: 25px;\r\n  width: 25px;\r\n  line-height: 25px;\r\n  text-align: center;\n}\n.seatEndRow {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  padding: 10px;\r\n  background-color: #5c86eb;\r\n  color: #fff;\r\n  border-radius: 5px;\r\n  cursor: default;\r\n  height: 25px;\r\n  width: 25px;\r\n  line-height: 25px;\r\n  text-align: center;\n}\n.seatRow {\r\n  padding: 10px;\n}\n.seatSelected {\r\n  background-color: lightgreen;\r\n  color: black;\n}\n.seatUnavailable {\r\n  background-color: gray;\n}\n.seatRowNumber {\r\n  clear: none;\r\n  display: inline;\n}\n.hidden {\r\n  display: none;\n}\n.seatsAmount {\r\n  max-width: 2em;\n}\r\n", ""]);
 
 // exports
 
@@ -65118,79 +65120,96 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id'],
-    mounted: function mounted() {
-        this.getSeat();
+  props: ["id"],
+  mounted: function mounted() {
+    this.getSeat();
+  },
+  data: function data() {
+    return {
+      dateSearch: this.today(),
+      seats: [],
+      bookDetails: [],
+      total: 0
+    };
+  },
+
+
+  methods: {
+    today: function today() {
+      // หา วัน เดือน ปี แล้วเอามาต่อ string
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+      var yyyy = today.getFullYear();
+
+      today = yyyy + "-" + mm + "-" + dd;
+      return today;
     },
-    data: function data() {
-        return {
-            dateSearch: this.today(),
-            seats: [],
-            bookDetails: [],
-            total: 0
-        };
+    getSeat: function getSeat() {
+      var _this = this;
+
+      axios.get("/api/booking").then(function (response) {
+        _this.seats = response.data.seat;
+        // console.log(response.data)
+      });
     },
+    searchSeat: function searchSeat() {
+      var _this2 = this;
 
-
-    methods: {
-        today: function today() {
-            // หา วัน เดือน ปี แล้วเอามาต่อ string
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            var yyyy = today.getFullYear();
-
-            today = yyyy + '-' + mm + '-' + dd;
-            return today;
-        },
-        getSeat: function getSeat() {
-            var _this = this;
-
-            axios.get('/api/booking').then(function (response) {
-                _this.seats = response.data.seat;
-                // console.log(response.data)
-            });
-        },
-        searchSeat: function searchSeat() {
-            var _this2 = this;
-
-            this.clearData();
-            axios.post('/api/booking/search', { dateSearch: this.dateSearch }).then(function (response) {
-                _this2.seats = response.data.seat;
-                // console.log(response.data.date)
-            });
-        },
-        onBooked: function onBooked(index) {
-            if (this.id != 0) {
-                var currentSeat = this.seats[index];
-                currentSeat.booked == 1 ? this.bookDetails.splice(this.bookDetails.indexOf(currentSeat), 1) : this.bookDetails.push(this.seats[index]);
-                this.seats[index].booked = currentSeat.booked == 1 ? 0 : 1;
-            } else {
-                swal({
-                    icon: 'warning',
-                    title: 'Please login for booking'
-                });
-            }
-        },
-        clearData: function clearData() {
-            this.bookDetails = [];
-            this.total = 0;
-        }
+      this.clearData();
+      axios.post("/api/booking/search", { dateSearch: this.dateSearch }).then(function (response) {
+        _this2.seats = response.data.seat;
+        // console.log(response.data.date)
+      });
     },
-
-    computed: {
-        getTotal: function getTotal() {
-            var total = 0;
-            if (this.bookDetails.length > 0) {
-                for (var i = 0; i < this.bookDetails.length; i++) {
-                    total += parseInt(this.bookDetails[i].price);
-                }
-            }
-            return this.total = total;
-        }
+    onBooked: function onBooked(index) {
+      if (this.id != 0) {
+        var currentSeat = this.seats[index];
+        currentSeat.booked == 1 ? this.bookDetails.splice(this.bookDetails.indexOf(currentSeat), 1) : this.bookDetails.push(this.seats[index]);
+        this.seats[index].booked = currentSeat.booked == 1 ? 0 : 1;
+      } else {
+        swal({
+          icon: "warning",
+          title: "Please login for booking"
+        });
+      }
+    },
+    clearData: function clearData() {
+      this.bookDetails = [];
+      this.total = 0;
     }
+  },
+
+  computed: {
+    getTotal: function getTotal() {
+      var total = 0;
+      if (this.bookDetails.length > 0) {
+        for (var i = 0; i < this.bookDetails.length; i++) {
+          total += parseInt(this.bookDetails[i].price);
+        }
+      }
+      return this.total = total;
+    }
+  }
 });
 
 /***/ }),
@@ -65202,7 +65221,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", { attrs: { align: "center" } }, [_vm._v("Booking")]),
+    _vm._m(0),
     _vm._v(" "),
     _c(
       "div",
@@ -65361,7 +65380,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(0),
+            _vm._m(1),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-4" }, [
               _c(
@@ -65435,6 +65454,33 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "row title-bar", staticStyle: { padding: "0px" } },
+      [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c(
+            "h1",
+            {
+              staticClass: "wow fadeInUp",
+              staticStyle: {
+                visibility: "visible",
+                "animation-name": "fadeInUp",
+                "font-size": "200%"
+              }
+            },
+            [_vm._v("\n          Booking\n          ")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "heading-border" })
+        ])
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -67923,6 +67969,346 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources/assets/js/components/shopping/pages/footer/footer.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-69e77b74", Component.options)
+  } else {
+    hotAPI.reload("data-v-69e77b74", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 266 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      webDetail: []
+    };
+  },
+
+
+  methods: {
+    getWebdetail: function getWebdetail() {
+      var _this = this;
+
+      axios.get("/api/webdetail").then(function (res) {
+        _this.webDetail = res.data;
+      });
+    }
+  },
+
+  mounted: function mounted() {
+    this.getWebdetail();
+  }
+});
+
+/***/ }),
+/* 267 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "footer" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4 col-sm-6 " }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("ul", { staticClass: "list-unstyled thumb-list" }, [
+            _c("li", [
+              _c("div", { staticClass: "overflow-h" }, [
+                _c("div", { staticClass: "row" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-10" }, [
+                    _c("a", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.webDetail.phone) +
+                          "\n                  "
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-10" }, [
+                    _c("a", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.webDetail.email) +
+                          "\n                  "
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-10" }, [
+                    _c("a", { attrs: { href: _vm.webDetail.facebook } }, [
+                      _vm._v(
+                        "\n                    Chiangmai Boxing Stadium Offcial\n                  "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(5)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 col-sm-6 " }, [
+      _c("div", { staticClass: "heading-footer" }, [
+        _c("h2", [_vm._v("Useful Links")])
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "list-unstyled link-list" }, [
+        _c("li", [
+          _c("a", { attrs: { href: "/" } }, [_vm._v("Home")]),
+          _c("i", { staticClass: "fa fa-angle-right" })
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "/about" } }, [_vm._v("About us")]),
+          _c("i", { staticClass: "fa fa-angle-right" })
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "/booking" } }, [_vm._v("Booking")]),
+          _c("i", { staticClass: "fa fa-angle-right" })
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "/courses" } }, [
+            _vm._v("Training Muaythai")
+          ]),
+          _c("i", { staticClass: "fa fa-angle-right" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "heading-footer" }, [
+      _c("h2", [_vm._v("Contact Us")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-1" }, [
+      _c("a", { attrs: { href: "#", target: "_empty" } }, [
+        _c("i", { staticClass: "fa top-social fa-phone" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-1" }, [
+      _c("a", { attrs: { href: "#", target: "_empty" } }, [
+        _c("i", { staticClass: "fa top-social fa-envelope" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-1" }, [
+      _c("a", { attrs: { href: "#", target: "_empty" } }, [
+        _c("i", { staticClass: "fa top-social fa-facebook" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 col-sm-6" }, [
+      _c("div", { staticClass: "card map p-2" }, [
+        _c("iframe", {
+          staticStyle: { border: "0", height: "200px" },
+          attrs: {
+            src:
+              "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3776.9180670916057!2d98.98038551538194!3d18.801804365418594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30da3a93abd71e55%3A0x43c8fac502001a10!2sChiangmai+Boxing+Stadium!5e0!3m2!1sth!2sth!4v1558955967888!5m2!1sth!2sth",
+            frameborder: "0",
+            allowfullscreen: ""
+          }
+        })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-69e77b74", module.exports)
+  }
+}
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(269)
+/* template */
+var __vue_template__ = __webpack_require__(270)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources/assets/js/components/shopping/course/index.vue"
 
 /* hot reload */
@@ -67945,7 +68331,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 266 */
+/* 269 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68002,7 +68388,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 267 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68070,19 +68456,19 @@ if (false) {
 }
 
 /***/ }),
-/* 268 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(269)
+  __webpack_require__(272)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(271)
+var __vue_script__ = __webpack_require__(274)
 /* template */
-var __vue_template__ = __webpack_require__(272)
+var __vue_template__ = __webpack_require__(275)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68121,13 +68507,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 269 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(270);
+var content = __webpack_require__(273);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -68147,7 +68533,7 @@ if(false) {
 }
 
 /***/ }),
-/* 270 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -68155,13 +68541,13 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.badge {\n    font-size: 80%;\n}\n.center{ \n    text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.badge {\r\n  font-size: 80%;\n}\n.center {\r\n  text-align: center;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 271 */
+/* 274 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68200,59 +68586,71 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['courseSelect', 'changeShowIndex', 'userId'],
+  props: ["courseSelect", "changeShowIndex", "userId"],
 
-    mounted: function mounted() {
-        this.getAllCourse();
+  mounted: function mounted() {
+    this.getAllCourse();
+  },
+  data: function data() {
+    return {
+      courses: [],
+      course: {
+        id: "",
+        name: "",
+        price: "",
+        detail: ""
+      }
+    };
+  },
+
+  methods: {
+    getAllCourse: function getAllCourse() {
+      var _this = this;
+
+      axios.get("/api/course").then(function (response) {
+        _this.courses = response.data;
+      });
     },
-    data: function data() {
-        return {
-            courses: [],
-            course: {
-                id: '',
-                name: '',
-                price: '',
-                detail: ''
-            }
-
-        };
-    },
-
-    methods: {
-        getAllCourse: function getAllCourse() {
-            var _this = this;
-
-            axios.get('/api/course').then(function (response) {
-                _this.courses = response.data;
-            });
-        },
-        onRegisterClick: function onRegisterClick(course) {
-            if (this.userId != 0) {
-                this.courseSelect(course);
-                this.changeShowIndex();
-            } else {
-                swal({
-                    icon: 'warning',
-                    title: 'Please login for register course'
-                });
-            }
-        }
-    },
-
-    filters: {
-        coursePrice: function coursePrice(value) {
-            return new Intl.NumberFormat("en-IN", {
-                maximumSignificantDigits: 3
-            }).format(value);
-        }
+    onRegisterClick: function onRegisterClick(course) {
+      if (this.userId != 0) {
+        this.courseSelect(course);
+        this.changeShowIndex();
+      } else {
+        swal({
+          icon: "warning",
+          title: "Please login for register course"
+        });
+      }
     }
+  },
 
+  filters: {
+    coursePrice: function coursePrice(value) {
+      return new Intl.NumberFormat("en-IN", {
+        maximumSignificantDigits: 3
+      }).format(value);
+    }
+  }
 });
 
 /***/ }),
-/* 272 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68262,7 +68660,7 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c("h3", { staticClass: "center" }, [_vm._v("Our MuayThai Course")]),
+    _c("h3", { staticClass: "center" }),
     _vm._v(" "),
     _c(
       "div",
@@ -68299,11 +68697,7 @@ var render = function() {
                   }
                 }
               },
-              [
-                _vm._v(
-                  "\n                        Register Course\n                    "
-                )
-              ]
+              [_vm._v("\n          Register Course\n        ")]
             )
           ])
         ])
@@ -68318,16 +68712,20 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      {
-        staticClass:
-          "pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"
-      },
+      { staticClass: "row title-bar", staticStyle: { padding: "0px" } },
       [
-        _c("h2", [_vm._v("Training Muay Thai")]),
-        _vm._v(" "),
-        _c("p", { staticClass: "lead" }, [
-          _vm._v(
-            "Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization."
+        _c("div", { staticClass: "col-md-12" }, [
+          _c(
+            "h1",
+            {
+              staticClass: "wow fadeInUp",
+              staticStyle: {
+                visibility: "visible",
+                "animation-name": "fadeInUp",
+                "font-size": "200%"
+              }
+            },
+            [_vm._v("\n        Our MuayThai Course\n      ")]
           )
         ])
       ]
@@ -68344,19 +68742,19 @@ if (false) {
 }
 
 /***/ }),
-/* 273 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(274)
+  __webpack_require__(277)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(276)
+var __vue_script__ = __webpack_require__(279)
 /* template */
-var __vue_template__ = __webpack_require__(277)
+var __vue_template__ = __webpack_require__(280)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68395,13 +68793,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 274 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(275);
+var content = __webpack_require__(278);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -68421,7 +68819,7 @@ if(false) {
 }
 
 /***/ }),
-/* 275 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -68435,7 +68833,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 276 */
+/* 279 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68478,7 +68876,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 277 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68541,19 +68939,19 @@ if (false) {
 }
 
 /***/ }),
-/* 278 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(279)
+  __webpack_require__(282)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(281)
+var __vue_script__ = __webpack_require__(284)
 /* template */
-var __vue_template__ = __webpack_require__(282)
+var __vue_template__ = __webpack_require__(285)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68592,13 +68990,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 279 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(280);
+var content = __webpack_require__(283);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -68618,7 +69016,7 @@ if(false) {
 }
 
 /***/ }),
-/* 280 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -68626,17 +69024,18 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* The radio */\n.radio {\r\n  display: block;\r\n  position: relative;\r\n  padding-left: 30px;\r\n  margin-bottom: 12px;\r\n  cursor: pointer;\r\n  font-size: 20px;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\n}\r\n\r\n/* Hide the browser's default radio button */\n.radio input {\r\n  position: absolute;\r\n  opacity: 0;\r\n  cursor: pointer;\n}\r\n\r\n/* Create a custom radio button */\n.checkround {\r\n  position: absolute;\r\n  top: 6px;\r\n  left: 0;\r\n  height: 20px;\r\n  width: 20px;\r\n  background-color: #fff;\r\n  border-color: #1d79f1;\r\n  border-style: solid;\r\n  border-width: 2px;\r\n  border-radius: 50%;\n}\r\n\r\n/* When the radio button is checked, add a blue background */\n.radio input:checked ~ .checkround {\r\n  background-color: #fff;\n}\r\n\r\n/* Create the indicator (the dot/circle - hidden when not checked) */\n.checkround:after {\r\n  content: \"\";\r\n  position: absolute;\r\n  display: none;\n}\r\n\r\n/* Show the indicator (dot/circle) when checked */\n.radio input:checked ~ .checkround:after {\r\n  display: block;\n}\r\n\r\n/* Style the indicator (dot/circle) */\n.radio .checkround:after {\r\n  left: 2px;\r\n  top: 2px;\r\n  width: 12px;\r\n  height: 12px;\r\n  border-radius: 50%;\r\n  background: #1d79f1;\n}\r\n\r\n/* The check */\n.check {\r\n  display: block;\r\n  position: relative;\r\n  padding-left: 25px;\r\n  margin-bottom: 12px;\r\n  padding-right: 15px;\r\n  cursor: pointer;\r\n  font-size: 18px;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\n}\r\n\r\n/* Hide the browser's default checkbox */\n.check input {\r\n  position: absolute;\r\n  opacity: 0;\r\n  cursor: pointer;\n}\r\n\r\n/* Create a custom checkbox */\n.checkmark {\r\n  position: absolute;\r\n  top: 3px;\r\n  left: 0;\r\n  height: 18px;\r\n  width: 18px;\r\n  background-color: #fff;\r\n  border-color: #1d79f1;\r\n  border-style: solid;\r\n  border-width: 2px;\n}\r\n\r\n/* When the checkbox is checked, add a blue background */\n.check input:checked ~ .checkmark {\r\n  background-color: #fff;\n}\r\n\r\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark:after {\r\n  content: \"\";\r\n  position: absolute;\r\n  display: none;\n}\r\n\r\n/* Show the checkmark when checked */\n.check input:checked ~ .checkmark:after {\r\n  display: block;\n}\r\n\r\n/* Style the checkmark/indicator */\n.check .checkmark:after {\r\n  left: 5px;\r\n  top: 1px;\r\n  width: 5px;\r\n  height: 10px;\r\n  border: solid;\r\n  border-color: #1d79f1;\r\n  border-width: 0 3px 3px 0;\r\n  -webkit-transform: rotate(45deg);\r\n  transform: rotate(45deg);\n}\n.cust-btn {\r\n  margin-bottom: 10px;\r\n  background-color: #1d79f1;\r\n  border-width: 2px;\r\n  border-color: #1d79f1;\r\n  color: #fff;\n}\n.cust-btn:hover {\r\n  border-color: #1d79f1;\r\n  background-color: #fff;\r\n  color: #1d79f1;\r\n  border-radius: 20px;\r\n  -webkit-transform-style: 2s;\r\n          transform-style: 2s;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* The radio */\n.radio {\r\n  display: block;\r\n  position: relative;\r\n  padding-left: 30px;\r\n  margin-bottom: 12px;\r\n  cursor: pointer;\r\n  font-size: 20px;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\n}\r\n\r\n/* Hide the browser's default radio button */\n.radio input {\r\n  position: absolute;\r\n  opacity: 0;\r\n  cursor: pointer;\n}\r\n\r\n/* Create a custom radio button */\n.checkround {\r\n  position: absolute;\r\n  top: 6px;\r\n  left: 0;\r\n  height: 20px;\r\n  width: 20px;\r\n  background-color: #fff;\r\n  border-color: #1d79f1;\r\n  border-style: solid;\r\n  border-width: 2px;\r\n  border-radius: 50%;\n}\r\n\r\n/* When the radio button is checked, add a blue background */\n.radio input:checked ~ .checkround {\r\n  background-color: #fff;\n}\r\n\r\n/* Create the indicator (the dot/circle - hidden when not checked) */\n.checkround:after {\r\n  content: \"\";\r\n  position: absolute;\r\n  display: none;\n}\r\n\r\n/* Show the indicator (dot/circle) when checked */\n.radio input:checked ~ .checkround:after {\r\n  display: block;\n}\r\n\r\n/* Style the indicator (dot/circle) */\n.radio .checkround:after {\r\n  left: 2px;\r\n  top: 2px;\r\n  width: 12px;\r\n  height: 12px;\r\n  border-radius: 50%;\r\n  background: #1d79f1;\n}\r\n\r\n/* The check */\n.check {\r\n  display: block;\r\n  position: relative;\r\n  padding-left: 25px;\r\n  margin-bottom: 12px;\r\n  padding-right: 15px;\r\n  cursor: pointer;\r\n  font-size: 18px;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\n}\r\n\r\n/* Hide the browser's default checkbox */\n.check input {\r\n  position: absolute;\r\n  opacity: 0;\r\n  cursor: pointer;\n}\r\n\r\n/* Create a custom checkbox */\n.checkmark {\r\n  position: absolute;\r\n  top: 3px;\r\n  left: 0;\r\n  height: 18px;\r\n  width: 18px;\r\n  background-color: #fff;\r\n  border-color: #1d79f1;\r\n  border-style: solid;\r\n  border-width: 2px;\n}\r\n\r\n/* When the checkbox is checked, add a blue background */\n.check input:checked ~ .checkmark {\r\n  background-color: #fff;\n}\r\n\r\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark:after {\r\n  content: \"\";\r\n  position: absolute;\r\n  display: none;\n}\r\n\r\n/* Show the checkmark when checked */\n.check input:checked ~ .checkmark:after {\r\n  display: block;\n}\r\n\r\n/* Style the checkmark/indicator */\n.check .checkmark:after {\r\n  left: 5px;\r\n  top: 1px;\r\n  width: 5px;\r\n  height: 10px;\r\n  border: solid;\r\n  border-color: #1d79f1;\r\n  border-width: 0 3px 3px 0;\r\n  -webkit-transform: rotate(45deg);\r\n  transform: rotate(45deg);\n}\n.cust-btn {\r\n  margin-bottom: 10px;\r\n  background-color: #1d79f1;\r\n  border-width: 2px;\r\n  border-color: #1d79f1;\r\n  color: #fff;\n}\n.cust-btn:hover {\r\n  border-color: #1d79f1;\r\n  background-color: #fff;\r\n  color: #1d79f1;\r\n  border-radius: 20px;\r\n  -webkit-transform-style: 2s;\r\n          transform-style: 2s;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 281 */
+/* 284 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -68729,7 +69128,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       trainerSelected: [],
-      startCourse: "",
+      startCourse: moment().format('YYYY-MM-DD'),
       showCheckoutBtn: true
     };
   },
@@ -68791,7 +69190,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 282 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68800,7 +69199,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12 m-4 p-0" }, [
+      _c("div", { staticClass: "col-md-6 m-4 p-0" }, [
         _c("h5", [_vm._v("1. Your Course")]),
         _vm._v(" "),
         _c("div", { staticClass: "card" }, [
@@ -68816,7 +69215,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-12 m-4 p-0" }, [
+      _c("div", { staticClass: "col-md-6 m-4 p-0" }, [
         _c("h5", [_vm._v("2. Started when")]),
         _vm._v(" "),
         _c("input", {
@@ -68829,7 +69228,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "date" },
+          attrs: { type: "date", min: _vm.startCourse },
           domProps: { value: _vm.startCourse },
           on: {
             input: function($event) {
@@ -68957,15 +69356,15 @@ if (false) {
 }
 
 /***/ }),
-/* 283 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(284)
+var __vue_script__ = __webpack_require__(287)
 /* template */
-var __vue_template__ = __webpack_require__(285)
+var __vue_template__ = __webpack_require__(288)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69004,7 +69403,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 284 */
+/* 287 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69167,7 +69566,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 285 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -69457,15 +69856,15 @@ if (false) {
 }
 
 /***/ }),
-/* 286 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(287)
+var __vue_script__ = __webpack_require__(290)
 /* template */
-var __vue_template__ = __webpack_require__(288)
+var __vue_template__ = __webpack_require__(291)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69504,7 +69903,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 287 */
+/* 290 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69568,7 +69967,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 288 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -69665,7 +70064,7 @@ if (false) {
 }
 
 /***/ }),
-/* 289 */
+/* 292 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

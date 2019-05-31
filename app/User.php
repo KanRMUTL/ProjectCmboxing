@@ -49,7 +49,7 @@ class User extends Authenticatable
         {   // Addmin
             return $query
             ->join('employees','users.id', '=', 'employees.user_id')
-            ->where('role','NOT LIKE', 1);
+            ->where([['role','NOT LIKE', 1], ['role','NOT LIKE', 4]]);
         }
         else
         {   // Marketing Head

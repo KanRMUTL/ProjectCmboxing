@@ -2,7 +2,7 @@
   <div>
 
     <div class="row">
-      <div class="col-md-12 m-4 p-0">
+      <div class="col-md-6 m-4 p-0">
         <h5>1. Your Course</h5>
         <div class="card">
           <div class="card-header">
@@ -13,10 +13,11 @@
           </div>
         </div>
       </div>
-      <div class="col-md-12 m-4 p-0">
+      <div class="col-md-6 m-4 p-0">
         <h5>2. Started when</h5>
         <input
           type="date"
+          :min="startCourse"
           class="form-control"
           v-model="startCourse"
         >
@@ -91,7 +92,7 @@ export default {
   data() {
     return {
       trainerSelected: [],
-      startCourse: "",
+      startCourse: moment().format('YYYY-MM-DD'),
       showCheckoutBtn: true
     };
   },

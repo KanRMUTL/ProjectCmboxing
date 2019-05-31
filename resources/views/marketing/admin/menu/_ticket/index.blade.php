@@ -3,7 +3,7 @@
 @section('header','จัดการข้อมูลบัตร')
 @section('content')
 
-@include('marketing.admin.menu._ticket.create')
+{{-- @include('marketing.admin.menu._ticket.create') --}}
 
 <div class="row">
   <div class="col-xs-12 col-md-12 col-sm-12">
@@ -16,7 +16,7 @@
               <th>ราคา</th>
               <th>ค่าคอมมิชชั่นไกด์</th>
               <th>แก้ไข</th>
-              <th>ลบ</th>
+              {{-- <th>ลบ</th> --}}
             </tr>
           </thead>
           <tbody>
@@ -38,13 +38,13 @@
                   <i class="fa fa-edit fa-lg"></i>
                 </a>
               </td>
-              <td>
+              {{-- <td>
                 {!! Form::open(['action' => ['marketing\TicketController@destroy', $ticket->id]]) !!}
                 {{ csrf_field() }}
                 {{ Form::hidden('_method','DELETE') }}
                 <button type="submit" class="btn btn-danger"><i class="fa fa-trash fa-lg"></i></button>
                 {{ Form::close() }}
-              </td>
+              </td> --}}
             </tr>
             @endforeach
           </tbody>
