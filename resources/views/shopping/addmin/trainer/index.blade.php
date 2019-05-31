@@ -50,3 +50,7 @@
 </div><!-- box-body -->
 
 @endsection
+
+@section('script')
+  @include('layouts.component.errorMessage', ['title' => 'กรุณาลองใหม่อีกครั้ง','message' => 'ไม่สามารถเพิ่มข้อมูลครูฝึกสอนมวยไทยได้'])
+@endsection

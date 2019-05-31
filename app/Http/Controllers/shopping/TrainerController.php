@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\shopping\Trainer;
 use App\MyClass\pos\ImageClass;
+use App\Http\Requests\shopping\TrainerRequest;
 class TrainerController extends Controller
 {
     
@@ -15,12 +16,7 @@ class TrainerController extends Controller
         return view('shopping.addmin.trainer.index', $data);
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
+    public function store(TrainerRequest $request)
     {
         try{
             $objImage = new ImageClass('trainer', $request->file('img'));
@@ -38,18 +34,13 @@ class TrainerController extends Controller
         return redirect('/trainer');
     }
 
-    public function show($id)
-    {
-        
-    }
-
     public function edit($id)
     {
         $data['trainer'] = Trainer::find($id);
         return view('shopping.addmin.trainer.edit', $data);
     }
 
-    public function update(Request $request, $id)
+    public function update(TrainerRequest $request, $id)
     {
         $trainer = Trainer::find($id);
         if($request->hasFile('img')){ 

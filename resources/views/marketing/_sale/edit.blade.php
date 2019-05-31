@@ -106,9 +106,13 @@
 </div>
 <!-- /.box -->
 {!! Form::close() !!}
-@if($errors->any())
-  @foreach($errors->all() as $error)
-  <p>{{$error}}</p>
-  @endforeach
-@endif
-@stop()
+  @if($errors->any())
+    @foreach($errors->all() as $error)
+    <p>{{$error}}</p>
+    @endforeach
+  @endif
+@endsection
+
+@section('script')
+  @include('layouts.component.errorMessage', ['title' => 'กรุณาป้อนข้อมูลการขายบัตรให้ถูกต้อง','message' => 'ไม่สามารถแก้ไขข้อมูลการขายบัตรได้'])
+@endsection

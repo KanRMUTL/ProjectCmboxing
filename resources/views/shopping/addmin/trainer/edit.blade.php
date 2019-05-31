@@ -22,15 +22,18 @@
   <div class="modal-body">
     <div class="form-group">
       <label for="name">ชื่อบัตร</label>
-      <input type="text" class="form-control" id="name" name="name" value="{{ $trainer->name }}">
+      <input type="text" class="form-control" id="name" name="name"  required value="{{ $errors->has('name') ? old('name') : $trainer->name }}">
+      @include('layouts.component.invalidFeedback', ['input' => 'name'])
     </div>
     <div class="form-group">
       <label for="detail">รายละเอียด</label>
-      <textarea class="form-control" id="detail" name="detail">{{ $trainer->detail }}</textarea>
+      <textarea class="form-control" id="detail" name="detail" required> {{ $errors->has('detail') ? old('detail') : $trainer->detail }}</textarea>
+      @include('layouts.component.invalidFeedback', ['input' => 'detail'])
     </div>
     <div class="form-group">
       <label for="img">รูปภาพ</label>
       <input type="file" id="img" name="img" class="form-control-file">
+      @include('layouts.component.invalidFeedback', ['input' => 'img'])
     </div>
   </div>
   <div class="modal-footer">
@@ -39,4 +42,8 @@
   </div>
 </div>
 {!! Form::close() !!}
-@stop()
+@endsection
+
+@section('script')
+  @include('layouts.component.errorMessage', ['title' => 'กรุณาลองใหม่อีกครั้ง','message' => 'ไม่สามารถแก้ไขข้อมูลครูฝึกสอนมวยไทยได้'])
+@endsection

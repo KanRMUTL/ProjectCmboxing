@@ -16,22 +16,25 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="name">ชื่อครูสอน</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+            @include('layouts.component.invalidFeedback', ['input' => 'name'])
           </div>
           <div class="form-group">
             <label for="detail">รายละเอียด</label>
-            <textarea type="text" class="form-control" id="detail" name="detail"></textarea>
+            <textarea type="text" class="form-control" id="detail" name="detail" required>{{ old('name') }}</textarea>
+            @include('layouts.component.invalidFeedback', ['input' => 'detail'])
           </div>
           <div class="form-group">
             <label for="img">รูปภาพ</label>
-            <input type="file" id="img" name="img">
+            <input type="file" id="img" name="img" value="{{ old('img') }}" required>
+            @include('layouts.component.invalidFeedback', ['input' => 'img'])
           </div>
         </div>
         <div class="modal-footer form-group">
-          <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
           <button type="submit" class="btn btn-primary">บันทึก</button>
           {!! Form::close() !!}
         </div>
       </div>
     </div>
   </div><!-- Modal -->
+ 

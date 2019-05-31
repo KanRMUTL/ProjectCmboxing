@@ -101,3 +101,6 @@
 
   @endsection()
 
+@section('script')
+  @include('layouts.component.errorMessage', ['title' => 'กรุณาป้อนข้อมูลการขายบัตรให้ถูกต้อง','message' => 'ไม่สามารถบันทึกข้อมูลการขายบัตรได้'])
+@endsection
