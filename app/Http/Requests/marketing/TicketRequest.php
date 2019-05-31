@@ -25,7 +25,6 @@ class TicketRequest extends FormRequest
     {
         return [
             'userId' => 'required',
-            'zoneId' => 'required',
             'customerName' => 'required|min:1|max:30',
             'customerPhone' => 'required|min:9|max:10',
             'customerRoom' => 'required|min:1|max:10',
