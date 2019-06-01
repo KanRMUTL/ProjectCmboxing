@@ -17,11 +17,6 @@ class Zone extends Model
     {
         return $this->hasMany('App\marketing\Guesthouse');
     }
-
-    public function users()
-    {
-        return $this->hasMany('App\User');
-    }
     
     public function employees()
     {

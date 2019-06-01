@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\AddUser;
+use App\Http\Requests\marketing\EmployeeStoreRequest;
+use App\Http\Requests\marketing\EmployeeUpdateRequest;
 use App\Http\Controllers\marketing\StarterController;
 use App\MyClass\pos\ImageClass;
 use App\User;
@@ -27,14 +28,15 @@ class UserController extends Controller
     }
 
     public function index()
-    {
+    {  
         $data['users'] = User::getUsers()->get();
         $data['zones'] =$this->zones;
         $data['roles'] = ['แอดมิน','หัวหน้าฝ่ายการตลาด', 'พนักงานฝ่ายการตลาด'];
+        // return $data;
         return view('marketing._user.index',$data);
     }
      
-    public function store(Request $request)
+    public function store(EmployeeStoreRequest $request)
     {
         $objImage = new ImageClass('user', $request->file('img'));
         $objImage->uploadImage();
@@ -54,10 +56,10 @@ class UserController extends Controller
         $employee = Employee::create([
             'user_id' => $user->id,
             'id_card' => $request->id_card,
-            'zone_id' => $request->zone,
+            'zone_id' => $request->zone_id,
         ]);
        
-        return redirect('/user');
+        return back();
     }
 
     public function show($id)
@@ -84,7 +86,7 @@ class UserController extends Controller
         } 
     }
 
-    public function update(Request $request, $id)
+    public function update(EmployeeUpdateRequest $request, $id)
     {
         $user = User::find($request->user_id);
         $data = [ 
@@ -107,8 +109,8 @@ class UserController extends Controller
             'zone_id' => $request->zone,   
         ];
 
-        if($request->password != null){
-           $data['password'] = bcrypt($request->password);
+        if($request->new_password != null){
+           $data['password'] = bcrypt($request->new_password);
          } 
         $user->update($data);
         Employee::where('user_id', '=', $request->user_id)->update($employee);
@@ -118,8 +120,9 @@ class UserController extends Controller
   
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-        return redirect('/user');
+        User::find($id)->delete();
+        Employee::where('user_id', $id)->delete();
+
+        return back();
     }
 }

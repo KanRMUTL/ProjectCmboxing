@@ -54,7 +54,7 @@
               {!! Form::open(['action' => ['UserController@destroy', $user->id]]) !!}
               {{ csrf_field() }}
               {{ Form::hidden('_method','DELETE') }}
-              <button type="submit" class="btn btn-danger"><i class="fa fa-trash fa-lg"></i></button>
+              <button type="submit" class="btn btn-danger" onclick="return confirm('ต้องการลบผู้ใช้งานดังกล่าวหรือไม่')"><i class="fa fa-trash fa-lg"></i></button>
               {{ Form::close() }}
             </td>
            </tr>
@@ -68,3 +68,7 @@
 
 
   @endsection()
+
+@section('script')
+  @include('layouts.component.errorMessage', ['title' => 'กรุณาลองใหม่อีกครั้ง','message' => 'ไม่สามารถบันทึกข้อผู้ใช้งานได้'])
+@endsection

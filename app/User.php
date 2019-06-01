@@ -30,7 +30,7 @@ class User extends Authenticatable
     
     public function employee()
     {
-        return $this->hasOne('App\marketing\Employee');
+        return $this->hasOne('App\marketing\Employee'); // hasOne อ่ะถูกแล้ว อย่าเปลี่ยนไม่งั้นเจ๊ง!!
     }
 
     public function sales()
@@ -48,13 +48,13 @@ class User extends Authenticatable
         if(Auth()->user()->role == 1)
         {   // Addmin
             return $query
-            ->join('employees','users.id', '=', 'employees.user_id')
             ->where([['role','NOT LIKE', 1], ['role','NOT LIKE', 4]]);
         }
         else
         {   // Marketing Head
             return $query
-                ->join('employees','users.id', '=', 'employees.user_id')
+                ->select('users.id', 'firstname', 'lastname', 'username', 'email', 'phone_number', 'address', 'img', 'role')
+                ->join('employees', 'users.id', '=', 'employees.user_id')
                 ->where([
                     ['employees.zone_id','=',  Auth::user()->employee->zone_id],
                     ['role','=', 3]
