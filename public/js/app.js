@@ -18293,7 +18293,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(144);
-module.exports = __webpack_require__(292);
+module.exports = __webpack_require__(293);
 
 
 /***/ }),
@@ -18308,8 +18308,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__(145);
 
 // import moment from 'moment';
-
-
 window.Vue = __webpack_require__(170);
 window.axios = __webpack_require__(9);
 window.moment = __webpack_require__(0);
@@ -18355,7 +18353,7 @@ Vue.component('register-course', __webpack_require__(281));
 
 // Admin
 Vue.component('course', __webpack_require__(286));
-Vue.component('manage-trainer', __webpack_require__(289));
+Vue.component('manage-trainer', __webpack_require__(290));
 
 var app = new Vue({
     el: '#vue'
@@ -69364,7 +69362,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(287)
 /* template */
-var __vue_template__ = __webpack_require__(288)
+var __vue_template__ = __webpack_require__(289)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69408,6 +69406,16 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin__ = __webpack_require__(288);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -69482,7 +69490,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin__["a" /* default */]],
     mounted: function mounted() {
         this.getAllCourse();
         $('#myModal').on('shown.bs.modal', function () {
@@ -69498,7 +69508,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 price: '',
                 detail: ''
             },
-            modalStatus: 1
+            modalStatus: 1 // จะเท่ากับ 0 เมื่อกดแก้ไข
         };
     },
 
@@ -69512,11 +69522,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         getCourseDetail: function getCourseDetail(course) {
+            this.errors.clear();
             this.course.id = course.id;
             this.course.name = course.name;
             this.course.price = course.price;
             this.course.detail = course.detail;
             this.modalStatus = 0;
+        },
+        checkModalStatus: function checkModalStatus() {
+            this.modalStatus == 0 ? this.clearCourse() : '';
         },
         save: function save() {
             if (this.modalStatus) {
@@ -69527,21 +69541,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.getAllCourse();
         },
         addCourse: function addCourse() {
-            axios.post('/api/course', {
-                name: this.course.name,
-                price: this.course.price,
-                detail: this.course.detail
+            var _this2 = this;
+
+            axios.post('/api/course', this.course).then(function (res) {
+                _this2.clearCourse();
+            }).catch(function (error) {
+                _this2.errors.record(error.response.data);
+                _this2.errors.warning('ไม่สามารถบันทึกคอร์สฝึกสอนได้', 'กรุณาลองใหม่อีกครั้ง');
             });
         },
         updateCourse: function updateCourse() {
-            axios.put('/api/course/' + this.course.id, {
-                name: this.course.name,
-                price: this.course.price,
-                detail: this.course.detail
+            var _this3 = this;
+
+            axios.put('/api/course/' + this.course.id, this.course).then(function (res) {
+                _this3.clearCourse();
+            }).catch(function (error) {
+                _this3.errors.warning('ไม่สามารถแก้ไขคอร์สฝึกสอนได้', 'กรุณาลองใหม่อีกครั้ง');
             });
         },
         deleteCourse: function deleteCourse(id) {
-            var _this2 = this;
+            var _this4 = this;
 
             swal({
                 title: "ยืนยัน",
@@ -69552,7 +69571,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (willDelete) {
                 if (willDelete) {
                     axios.delete('/api/course/' + id);
-                    _this2.getAllCourse();
+                    _this4.getAllCourse();
                     swal("ลบคอร์สเรียบร้อย", {
                         icon: "success"
                     });
@@ -69561,12 +69580,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         clearCourse: function clearCourse() {
             this.course.id = 0, this.course.name = '', this.course.price = '', this.course.detail = '';
+            this.modalStatus = 1; // เตรียมพร้อมสำหรับเพิ่มคอร์ส
         }
     }
 });
 
 /***/ }),
 /* 288 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Error = function () {
+    function Error() {
+        _classCallCheck(this, Error);
+
+        this.errors = {};
+    }
+
+    _createClass(Error, [{
+        key: 'get',
+        value: function get(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            }
+        }
+    }, {
+        key: 'record',
+        value: function record(errors) {
+            this.errors = errors.errors;
+        }
+    }, {
+        key: 'warning',
+        value: function warning(title, message) {
+            swal(title, message, 'warning');
+        }
+    }, {
+        key: 'clear',
+        value: function clear() {
+            this.errors = {};
+        }
+    }]);
+
+    return Error;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    data: function data() {
+        return {
+            errors: new Error()
+        };
+    }
+});
+
+/***/ }),
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -69583,11 +69654,7 @@ var render = function() {
           "data-toggle": "modal",
           "data-target": "#modal"
         },
-        on: {
-          click: function($event) {
-            _vm.clearCourse()
-          }
-        }
+        on: { click: _vm.checkModalStatus }
       },
       [_vm._v("\n        เพิ่มคอร์ส\n    ")]
     ),
@@ -69709,7 +69776,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text", id: "name" },
+                        attrs: { type: "text", id: "name", required: "" },
                         domProps: { value: _vm.course.name },
                         on: {
                           input: function($event) {
@@ -69719,7 +69786,17 @@ var render = function() {
                             _vm.$set(_vm.course, "name", $event.target.value)
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.modalStatus == 1
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.errors.get("name")) +
+                                "\n                                    "
+                            )
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group col-md-6" }, [
@@ -69737,7 +69814,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "number", id: "price" },
+                        attrs: { type: "number", id: "price", required: "" },
                         domProps: { value: _vm.course.price },
                         on: {
                           input: function($event) {
@@ -69747,7 +69824,17 @@ var render = function() {
                             _vm.$set(_vm.course, "price", $event.target.value)
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.modalStatus == 1
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.errors.get("price")) +
+                                "\n                                    "
+                            )
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group col-md-12" }, [
@@ -69765,7 +69852,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text", id: "detail" },
+                        attrs: { type: "text", id: "detail", required: "" },
                         domProps: { value: _vm.course.detail },
                         on: {
                           input: function($event) {
@@ -69775,25 +69862,31 @@ var render = function() {
                             _vm.$set(_vm.course, "detail", $event.target.value)
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.modalStatus == 1
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.errors.get("detail")) +
+                                "\n                                    "
+                            )
+                          ])
+                        : _vm._e()
                     ])
                   ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-footer" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button", "data-dismiss": "modal" },
-                      on: {
-                        click: function($event) {
-                          _vm.save()
-                        }
-                      }
+                  _c("input", {
+                    staticClass: "btn btn-primary",
+                    attrs: {
+                      type: "submit",
+                      "data-dismiss": "modal",
+                      value: "บันทึก"
                     },
-                    [_vm._v("บันทึก")]
-                  )
+                    on: { click: _vm.save }
+                  })
                 ])
               ]
             )
@@ -69856,15 +69949,15 @@ if (false) {
 }
 
 /***/ }),
-/* 289 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(290)
+var __vue_script__ = __webpack_require__(291)
 /* template */
-var __vue_template__ = __webpack_require__(291)
+var __vue_template__ = __webpack_require__(292)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69903,7 +69996,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 290 */
+/* 291 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69967,7 +70060,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 291 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -70064,7 +70157,7 @@ if (false) {
 }
 
 /***/ }),
-/* 292 */
+/* 293 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

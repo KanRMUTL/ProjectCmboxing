@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\shopping;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\shopping\CourseRequest;
 use App\shopping\Course;
 
 class CourseController extends Controller
@@ -14,7 +15,7 @@ class CourseController extends Controller
         return response()->json($courses);
     }
     
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {
         $course = new Course();
         $course->name = $request->name;
@@ -24,7 +25,7 @@ class CourseController extends Controller
         return response()->json($course);
     }
 
-    public function update(Request $request, $id)
+    public function update(CourseRequest $request, $id)
     {
         $course = Course::find($id);
         $course->name = $request->name;

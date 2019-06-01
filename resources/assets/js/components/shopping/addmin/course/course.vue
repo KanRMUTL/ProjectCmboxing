@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" @click="clearCourse()">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" @click="checkModalStatus">
             เพิ่มคอร์ส
         </button>
         <br><br>
@@ -47,23 +47,32 @@
                         </div><!-- End Header -->
                         <!-- Body -->
                         <div class="modal-body">
-                            <div class="row">
-                                <div class="form-group col-md-6">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
                                         <label for="name">ชื่อคอร์ส</label>
-                                        <input type="text" class="form-control" id="name" v-model="course.name">
+                                        <input type="text" class="form-control" id="name" v-model="course.name" required>
+                                        <div class="invalid-feedback" v-if="modalStatus == 1">
+                                            {{ errors.get('name') }}
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="price">ราคา</label>
-                                        <input type="number" class="form-control" id="price" v-model="course.price">
+                                        <input type="number" class="form-control" id="price" v-model="course.price" required>
+                                        <div class="invalid-feedback" v-if="modalStatus == 1">
+                                            {{ errors.get('price') }}
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="detail">รายละเอียด</label>
-                                        <textarea type="text" class="form-control" id="detail" v-model="course.detail"></textarea>
+                                        <textarea type="text" class="form-control" id="detail" v-model="course.detail" required></textarea>
+                                        <div class="invalid-feedback" v-if="modalStatus == 1">
+                                            {{ errors.get('detail') }}
+                                        </div>
                                     </div>
                                 </div>
                         </div>  <!-- End Body -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" @click="save()">บันทึก</button>
+                            <input type="submit" class="btn btn-primary" data-dismiss="modal" @click="save" value="บันทึก">
                         </div>
                     </div>
                 </div>
@@ -72,7 +81,9 @@
 </template>
 
 <script>
+import mixin from '../../../mixin'
 export default {
+    mixins: [mixin],
     mounted() {
         this.getAllCourse();
         $('#myModal').on('shown.bs.modal', function () {
@@ -89,7 +100,7 @@ export default {
                 price: '',
                 detail: ''
             },
-            modalStatus: 1
+            modalStatus: 1 // จะเท่ากับ 0 เมื่อกดแก้ไข
         }
      
     },
@@ -97,20 +108,24 @@ export default {
     methods: {
         getAllCourse()
         {
-            axios.get('/api/course').then(
-                response => {
-                    this.courses = response.data;
-                }
-            )
+            axios.get('/api/course')
+            .then( response => {
+                this.courses = response.data;
+            })
         }, 
 
         getCourseDetail(course)
         {
+            this.errors.clear()
             this.course.id = course.id;
             this.course.name = course.name;
             this.course.price = course.price;
             this.course.detail = course.detail;
             this.modalStatus = 0;
+        },
+
+        checkModalStatus() {
+            this.modalStatus == 0 ?  this.clearCourse() : ''
         },
 
         save()
@@ -128,21 +143,27 @@ export default {
 
         addCourse()
         {
-            axios.post('/api/course', {
-                name: this.course.name,
-                price: this.course.price,
-                detail: this.course.detail
+            axios.post('/api/course', this.course)
+            .then( res => {
+                this.clearCourse()
+            })
+            .catch(error => {
+                this.errors.record(error.response.data)
+                this.errors.warning('ไม่สามารถบันทึกคอร์สฝึกสอนได้', 'กรุณาลองใหม่อีกครั้ง')
             })
         },
 
         updateCourse()
         {
-            axios.put('/api/course/'+this.course.id, {
-                name: this.course.name,
-                price: this.course.price,
-                detail: this.course.detail
+            axios.put('/api/course/'+this.course.id, this.course)
+            .then( res => {
+                this.clearCourse()
+            })
+            .catch(error => {
+                this.errors.warning('ไม่สามารถแก้ไขคอร์สฝึกสอนได้', 'กรุณาลองใหม่อีกครั้ง')
             })
         },
+
         deleteCourse(id)
         {
             swal({
@@ -168,6 +189,7 @@ export default {
             this.course.name = '',
             this.course.price = '',
             this.course.detail = ''
+            this.modalStatus = 1 // เตรียมพร้อมสำหรับเพิ่มคอร์ส
         }
         
     },

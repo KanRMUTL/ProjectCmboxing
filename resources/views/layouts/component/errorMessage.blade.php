@@ -3,7 +3,7 @@
                swal({
                     title:  '{{$title}}',
                     text:  '{{$message}}',
-                    icon: 'error'
+                    icon: 'warning'
                })
           </script>
 @endif

@@ -2,8 +2,6 @@
 require('./bootstrap');
 import swal from 'sweetalert';
 // import moment from 'moment';
-
-
 window.Vue = require('vue');
 window.axios = require('axios');
 window.moment = require('moment');
@@ -58,3 +56,4 @@ const app = new Vue({
 const nav = new Vue({
     el: '#nav'
 })
+
