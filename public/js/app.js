@@ -61536,6 +61536,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }
             });
         },
+        showModal: function showModal() {
+            if (!this.product.modalStatus) {
+                this.product.modalStatus = 1;
+                this.clearData();
+            }
+        },
         clearData: function clearData() {
             this.product.id = 0;
             this.product.name = '';
@@ -61545,13 +61551,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.product.unit = '';
         },
         getProductDetail: function getProductDetail(product) {
+            this.product.modalStatus = 0;
             this.product.id = product.id;
             this.product.name = product.name;
             this.product.price = product.price;
             this.product.barcode = product.barcode;
             this.product.amount = product.amount;
             this.product.unit = product.unit;
-            this.product.modalStatus = 0;
         }
     }
 });
@@ -61574,7 +61580,7 @@ var render = function() {
           "data-toggle": "modal",
           "data-target": "#modal"
         },
-        on: { click: _vm.clearData }
+        on: { click: _vm.showModal }
       },
       [_vm._v("\n        เพิ่มสินค้า\n    ")]
     ),
@@ -61768,6 +61774,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin__ = __webpack_require__(288);
 //
 //
 //
@@ -61821,11 +61828,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin__["a" /* default */]],
+
     props: ['product', 'refresh'],
 
-    mounted: function mounted() {},
     data: function data() {
         return {
             file: ''
@@ -61851,10 +61881,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(function (res) {
+                swal("บันทึกข้อมูลสินค้าเรียบร้อย", "", "success");
                 _this.refresh();
                 _this.clearData();
-            }).catch(function (e) {
-                console.log(e);
+            }).catch(function (error) {
+                _this.errors.record(error.response.data);
+                _this.errors.warning('ไม่สามารถเพิ่มข้อมูลสินค้าได้', 'กรุณาลองใหม่อีกครั้ง');
             });
         },
         handleFileUpload: function handleFileUpload() {
@@ -61879,20 +61911,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(function (res) {
+                swal("บันทึกข้อมูลสินค้าเรียบร้อย", "", "success");
                 _this2.clearData();
                 _this2.refresh();
-            }).catch(function (e) {
-                console.log(e);
+            }).catch(function (error) {
+                _this2.errors.warning('ไม่สามารถแก้ไขข้อมูลสินค้าได้', 'กรุณาลองใหม่อีกครั้ง');
             });
         },
-        save: function save() {
+        save: function save(e) {
+            e.preventDefault();
+            $('#modal').modal('hide');
             if (this.product.modalStatus == 1) {
                 this.addProduct();
             } else {
                 this.updateProduct();
             }
             this.refresh();
-            swal("บันทึกข้อมูลสินค้าเรียบร้อย", "", "success");
         },
         clearData: function clearData() {
             this.product.id = 0;
@@ -61935,179 +61969,233 @@ var render = function() {
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(0),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "form-group col-md-6" }, [
-                    _c("label", { attrs: { for: "name" } }, [
-                      _vm._v("ชื่อสินค้า")
+              _c("form", { on: { submit: _vm.save } }, [
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "form-group col-md-6" }, [
+                      _c("label", { attrs: { for: "name" } }, [
+                        _vm._v("ชื่อสินค้า")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.product.name,
+                            expression: "product.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "name", required: "" },
+                        domProps: { value: _vm.product.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.product, "name", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.product.modalStatus
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.errors.get("name")) +
+                                "\n                                "
+                            )
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.product.name,
-                          expression: "product.name"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", id: "name" },
-                      domProps: { value: _vm.product.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                    _c("div", { staticClass: "form-group col-md-6" }, [
+                      _c("label", { attrs: { for: "barcode" } }, [
+                        _vm._v("บาร์โค้ด")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.product.barcode,
+                            expression: "product.barcode"
                           }
-                          _vm.$set(_vm.product, "name", $event.target.value)
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", id: "barcode", required: "" },
+                        domProps: { value: _vm.product.barcode },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.product,
+                              "barcode",
+                              $event.target.value
+                            )
+                          }
                         }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-6" }, [
-                    _c("label", { attrs: { for: "barcode" } }, [
-                      _vm._v("บาร์โค้ด")
+                      }),
+                      _vm._v(" "),
+                      _vm.product.modalStatus
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.errors.get("barcode")) +
+                                "\n                                "
+                            )
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.product.barcode,
-                          expression: "product.barcode"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "number", id: "barcode" },
-                      domProps: { value: _vm.product.barcode },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                    _c("div", { staticClass: "form-group col-md-6" }, [
+                      _c("label", { attrs: { for: "unit" } }, [
+                        _vm._v("หน่วยเรียก")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.product.unit,
+                            expression: "product.unit"
                           }
-                          _vm.$set(_vm.product, "barcode", $event.target.value)
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "unit", required: "" },
+                        domProps: { value: _vm.product.unit },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.product, "unit", $event.target.value)
+                          }
                         }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-6" }, [
-                    _c("label", { attrs: { for: "unit" } }, [
-                      _vm._v("หน่วยเรียก")
+                      }),
+                      _vm._v(" "),
+                      _vm.product.modalStatus
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.errors.get("unit")) +
+                                "\n                                "
+                            )
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.product.unit,
-                          expression: "product.unit"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", id: "unit" },
-                      domProps: { value: _vm.product.unit },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                    _c("div", { staticClass: "form-group col-md-6" }, [
+                      _c("label", { attrs: { for: "amount" } }, [
+                        _vm._v("จำนวนคงเหลือ")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.product.amount,
+                            expression: "product.amount"
                           }
-                          _vm.$set(_vm.product, "unit", $event.target.value)
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", id: "amount", required: "" },
+                        domProps: { value: _vm.product.amount },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.product, "amount", $event.target.value)
+                          }
                         }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-6" }, [
-                    _c("label", { attrs: { for: "amount" } }, [
-                      _vm._v("จำนวนคงเหลือ")
+                      }),
+                      _vm._v(" "),
+                      _vm.product.modalStatus
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.errors.get("amount")) +
+                                "\n                                "
+                            )
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.product.amount,
-                          expression: "product.amount"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "number", id: "amount" },
-                      domProps: { value: _vm.product.amount },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                    _c("div", { staticClass: "form-group col-md-6" }, [
+                      _c("label", { attrs: { for: "price" } }, [
+                        _vm._v("ราคา")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.product.price,
+                            expression: "product.price"
                           }
-                          _vm.$set(_vm.product, "amount", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-6" }, [
-                    _c("label", { attrs: { for: "price" } }, [_vm._v("ราคา")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.product.price,
-                          expression: "product.price"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "number", id: "price" },
-                      domProps: { value: _vm.product.price },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", id: "price", required: "" },
+                        domProps: { value: _vm.product.price },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.product, "price", $event.target.value)
                           }
-                          _vm.$set(_vm.product, "price", $event.target.value)
                         }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-6" }, [
-                    _c("label", { attrs: { for: "price" } }, [
-                      _vm._v("รูปสินค้า")
+                      }),
+                      _vm._v(" "),
+                      _vm.product.modalStatus
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.errors.get("price")) +
+                                "\n                                "
+                            )
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      ref: "file",
-                      staticClass: "form-control",
-                      attrs: { type: "file", id: "file" },
-                      on: {
-                        change: function($event) {
-                          _vm.handleFileUpload()
+                    _c("div", { staticClass: "form-group col-md-6" }, [
+                      _c("label", { attrs: { for: "price" } }, [
+                        _vm._v("รูปสินค้า")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        ref: "file",
+                        staticClass: "form-control",
+                        attrs: { type: "file", id: "file" },
+                        on: {
+                          change: function($event) {
+                            _vm.handleFileUpload()
+                          }
                         }
-                      }
-                    })
+                      }),
+                      _vm._v(" "),
+                      _vm.product.modalStatus
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.errors.get("file")) +
+                                "\n                                "
+                            )
+                          ])
+                        : _vm._e()
+                    ])
                   ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button", "data-dismiss": "modal" },
-                    on: {
-                      click: function($event) {
-                        _vm.save()
-                      }
-                    }
-                  },
-                  [_vm._v("บันทึก")]
-                )
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
               ])
             ])
           ]
@@ -62139,6 +62227,18 @@ var staticRenderFns = [
         "h3",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
         [_vm._v("จัดการสินค้า")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("บันทึก")]
       )
     ])
   }

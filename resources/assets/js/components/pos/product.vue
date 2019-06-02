@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" @click="clearData">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" @click="showModal">
             เพิ่มสินค้า
         </button>
         <p></p>
@@ -54,6 +54,7 @@ export default {
             $('#myInput').trigger('focus')
         })
     },
+
     data() {
         return {
             products: [],
@@ -104,6 +105,13 @@ export default {
             });
         },
         
+        showModal() {
+            if(!this.product.modalStatus) {
+                this.product.modalStatus = 1
+                this.clearData() 
+            }
+        },
+
         clearData() {
             this.product.id = 0;
             this.product.name = '';
@@ -114,13 +122,13 @@ export default {
         },
 
         getProductDetail(product){
+            this.product.modalStatus = 0;
             this.product.id = product.id;
             this.product.name = product.name;
             this.product.price = product.price;
             this.product.barcode = product.barcode;
             this.product.amount = product.amount;
             this.product.unit = product.unit;
-            this.product.modalStatus = 0;
         },
 
     },

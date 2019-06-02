@@ -10,41 +10,61 @@
                             </button>
                             <h3 class="modal-title" id="exampleModalLabel">จัดการสินค้า</h3>
                         </div><!-- End Header -->
+                        <form @submit="save">
                         <!-- Body -->
                         <div class="modal-body">
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="name">ชื่อสินค้า</label>
-                                    <input type="text" class="form-control" id="name" v-model="product.name">
+                                    <input type="text" class="form-control" id="name" v-model="product.name" required>
+                                    <div class="invalid-feedback" v-if="product.modalStatus">
+                                        {{ errors.get('name')}}
+                                    </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="barcode">บาร์โค้ด</label>
-                                    <input type="number" class="form-control" id="barcode" v-model="product.barcode">
+                                    <input type="number" class="form-control" id="barcode" v-model="product.barcode" required>
+                                    <div class="invalid-feedback" v-if="product.modalStatus">
+                                        {{ errors.get('barcode')}}
+                                    </div>
                                 </div>
                                 
                                 <div class="form-group col-md-6">
                                     <label for="unit">หน่วยเรียก</label>
-                                    <input type="text" class="form-control" id="unit" v-model="product.unit">
+                                    <input type="text" class="form-control" id="unit" v-model="product.unit" required>
+                                    <div class="invalid-feedback" v-if="product.modalStatus">
+                                        {{ errors.get('unit')}}
+                                    </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="amount">จำนวนคงเหลือ</label>
-                                    <input type="number" class="form-control" id="amount" v-model="product.amount">
+                                    <input type="number" class="form-control" id="amount" v-model="product.amount" required>
+                                    <div class="invalid-feedback" v-if="product.modalStatus">
+                                        {{ errors.get('amount')}}
+                                    </div>
                                 </div>
                                 
                                 <div class="form-group col-md-6">
                                     <label for="price">ราคา</label>
-                                    <input type="number" class="form-control" id="price" v-model="product.price">
+                                    <input type="number" class="form-control" id="price" v-model="product.price" required>
+                                    <div class="invalid-feedback" v-if="product.modalStatus">
+                                        {{ errors.get('price')}}
+                                    </div>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label for="price">รูปสินค้า</label>
                                     <input type="file" class="form-control" id="file" ref="file" v-on:change="handleFileUpload()">
+                                    <div class="invalid-feedback" v-if="product.modalStatus">
+                                        {{ errors.get('file')}}
+                                    </div>
                                 </div>
                             </div>
                         </div>  <!-- End Body -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" @click="save()">บันทึก</button>
+                            <button type="submit" class="btn btn-primary">บันทึก</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>  <!-- End Modal -->
@@ -52,11 +72,12 @@
 </template>
 
 <script>
+import mixin from '../mixin'
+
 export default {
+    mixins: [mixin],
+
     props:['product','refresh'],
-    
-    mounted() {
-    },
 
     data() {
         return {
@@ -75,20 +96,19 @@ export default {
             formData.append('amount', this.product.amount);
             formData.append('unit', this.product.unit);
             
-            axios.post( '/api/product',
-                formData,
-                {
+            axios.post( '/api/product', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                 }
-              }
-            )
+              })
             .then( res => {  
+                swal("บันทึกข้อมูลสินค้าเรียบร้อย", "", "success");
                 this.refresh()
                 this.clearData()
             })
-            .catch(function(e){
-                console.log(e);
+            .catch(error => {
+                this.errors.record(error.response.data)
+                this.errors.warning('ไม่สามารถเพิ่มข้อมูลสินค้าได้', 'กรุณาลองใหม่อีกครั้ง')
             });
 
         },
@@ -108,21 +128,24 @@ export default {
             formData.append('amount', this.product.amount);
             formData.append('unit', this.product.unit);
             
-            axios.post('/api/product/' + this.product.id,
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
+            axios.post('/api/product/' + this.product.id, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
                 }
             }) 
             .then(res => { 
+                swal("บันทึกข้อมูลสินค้าเรียบร้อย", "", "success");
                 this.clearData() 
                 this.refresh()
             })
-            .catch(function(e) {console.log(e)})
+            .catch(error => {
+                this.errors.warning('ไม่สามารถแก้ไขข้อมูลสินค้าได้', 'กรุณาลองใหม่อีกครั้ง')
+            });
         },
 
-        save() {
+        save(e) {
+            e.preventDefault()
+             $('#modal').modal('hide')
             if(this.product.modalStatus == 1)
             {
                 this.addProduct();
@@ -132,7 +155,7 @@ export default {
                 this.updateProduct();
             }
             this.refresh();
-            swal("บันทึกข้อมูลสินค้าเรียบร้อย", "", "success");
+            
         },
 
            clearData() {

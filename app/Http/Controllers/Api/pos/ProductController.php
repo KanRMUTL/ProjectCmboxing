@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\pos;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\shopping\ProductRequest;
 use Illuminate\Support\Facades\DB;
 use App\pos\Bill;
 use App\pos\Product;
@@ -25,7 +26,7 @@ class ProductController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $product = new Product();
         $objImage = new ImageClass('product', $request->file('file'));
@@ -52,7 +53,7 @@ class ProductController extends Controller
         //
     }
 
-    public function updateProduct(Request $request, $id)
+    public function updateProduct(ProductRequest $request, $id)
     {
         $product = Product::find($id);
 
