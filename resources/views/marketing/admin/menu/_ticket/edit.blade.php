@@ -17,17 +17,20 @@
   <div class="box-body">
     <div class="form-group">
       <label for="name">ชื่อบัตร</label>
-      <input type="text" class="form-control" id="name" name="name" value="{{ $ticket->name }}">
+      <input type="text" class="form-control" id="name" name="name" value="{{ $errors->has('name')? old('name') : $ticket->name }}">
+      @include('layouts.component.invalidFeedback', ['input' => 'name'])
     </div>
    
     <div class="form-group">
       <label for="price">ราคา</label>
-      <input type="number" class="form-control" id="price" name="price" value="{{ $ticket->price }}" >
+      <input type="number" class="form-control" id="price" name="price" value="{{ $errors->has('price')? old('price') : $ticket->price }}" >
+       @include('layouts.component.invalidFeedback', ['input' => 'price'])
     </div>
 
     <div class="form-group">
       <label for="commission">ค่าคอมมิชชั่นสำหรับไกด์</label>
-      <input type="number" class="form-control" id="commission" name="commission" value="{{ $ticket->commission }}" >
+      <input type="number" class="form-control" id="commission" name="commission" value="{{ $errors->has('commission')? old('commission') : $ticket->commission }}" >
+      @include('layouts.component.invalidFeedback', ['input' => 'commission'])
     </div>
 
     <div class="form-group">

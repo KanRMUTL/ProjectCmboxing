@@ -146,19 +146,11 @@ export default {
         save(e) {
             e.preventDefault()
              $('#modal').modal('hide')
-            if(this.product.modalStatus == 1)
-            {
-                this.addProduct();
-            }
-            else
-            {
-                this.updateProduct();
-            }
+            this.product.modalStatus ? this.addProduct() : this.updateProduct();
             this.refresh();
-            
         },
 
-           clearData() {
+        clearData() {
             this.product.id = 0;
             this.product.name = '';
             this.product.price = '';

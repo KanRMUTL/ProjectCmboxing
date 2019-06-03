@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\marketing\Ticket;
 use App\marketing\GuideCommission;
 use App\MyClass\pos\ImageClass;
+use App\Http\Requests\marketing\TicketMuayThaiRequest;
 
 class TicketController extends Controller
 {
@@ -45,7 +46,7 @@ class TicketController extends Controller
         return view('marketing.admin.menu._ticket.edit',$data);
     }
   
-    public function update(Request $request, $id)
+    public function update(TicketMuayThaiRequest $request, $id)
     {
         $ticket = Ticket::find($id);
         
