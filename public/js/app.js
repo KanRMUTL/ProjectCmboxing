@@ -5438,45 +5438,61 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Error = function () {
-    function Error() {
-        _classCallCheck(this, Error);
+  function Error() {
+    _classCallCheck(this, Error);
 
-        this.errors = {};
+    this.errors = {};
+  }
+
+  _createClass(Error, [{
+    key: "get",
+    value: function get(field) {
+      if (this.errors[field]) {
+        return this.errors[field][0];
+      }
     }
+  }, {
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors.errors;
+    }
+  }, {
+    key: "warning",
+    value: function warning(title, message) {
+      swal(title, message, "warning");
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      this.errors = {};
+    }
+  }]);
 
-    _createClass(Error, [{
-        key: 'get',
-        value: function get(field) {
-            if (this.errors[field]) {
-                return this.errors[field][0];
-            }
-        }
-    }, {
-        key: 'record',
-        value: function record(errors) {
-            this.errors = errors.errors;
-        }
-    }, {
-        key: 'warning',
-        value: function warning(title, message) {
-            swal(title, message, 'warning');
-        }
-    }, {
-        key: 'clear',
-        value: function clear() {
-            this.errors = {};
-        }
-    }]);
-
-    return Error;
+  return Error;
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    data: function data() {
-        return {
-            errors: new Error()
-        };
+  data: function data() {
+    return {
+      errors: new Error()
+    };
+  },
+
+  methods: {
+    moneyFormat: function moneyFormat(Price) {
+      return new Intl.NumberFormat("en-IN", {
+        maximumSignificantDigits: 3
+      }).format(Price);
     }
+  },
+  filters: {
+    moneyFormat: function moneyFormat(Price) {
+      return new Intl.NumberFormat("en-IN", {
+        maximumSignificantDigits: 3
+      }).format(Price);
+    }
+  }
+
 });
 
 /***/ }),
@@ -60889,7 +60905,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\ntd {\n  width: 16.66%;\n}\n.cart {\n  font-weight: 600;\n  font-size: 80%;\n  padding: 3px 6px\n}\n.total {\n    color: #2d64cf;\n    font-size: 24px;\n    font-weight: 600;\n}\n", ""]);
+exports.push([module.i, "\ntd {\n  width: 16.66%;\n}\n.cart {\n  font-weight: 600;\n  font-size: 80%;\n  padding: 3px 6px;\n}\n.total {\n  color: #2d64cf;\n  font-size: 24px;\n  font-weight: 600;\n}\n", ""]);
 
 // exports
 
@@ -60962,7 +60978,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.img-col {\n    width: 10%;\n}\nimg {\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.img-col {\n  width: 10%;\n}\nimg {\n  width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -60973,6 +60989,34 @@ exports.push([module.i, "\n.img-col {\n    width: 10%;\n}\nimg {\n    width: 100
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin__ = __webpack_require__(6);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -61029,8 +61073,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin__["a" /* default */]],
+
   props: ["id"],
+
   mounted: function mounted() {
     console.log("Saling Component mounted.");
   },
@@ -61079,12 +61128,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           }
         } else {
           swal({
-            'icon': 'warning',
-            'title': 'ไม่มีสินค้าในระบบ'
+            icon: "warning",
+            title: "ไม่มีสินค้าในระบบ"
           });
         }
       });
-      this.barcode = '';
+      this.barcode = "";
     },
     saleProduct: function saleProduct() {
       var _this2 = this;
@@ -61133,11 +61182,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     caltotal: function caltotal(index) {
       this.products[index].total = this.products[index].price * this.products[index].cart;
     },
-    moneyFormat: function moneyFormat(money) {
-      return new Intl.NumberFormat("en-IN", {
-        maximumSignificantDigits: 3
-      }).format(money);
-    },
     deleteProduct: function deleteProduct(index) {
       this.products.splice(index, 1);
     }
@@ -61151,14 +61195,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.sumTotal += parseInt(this.products[this.i].total);
       }
       return this.sumTotal;
-    }
-  },
-
-  filters: {
-    moneyFormat: function moneyFormat(Price) {
-      return new Intl.NumberFormat("en-IN", {
-        maximumSignificantDigits: 3
-      }).format(Price);
     }
   }
 });
@@ -61266,9 +61302,9 @@ var render = function() {
                       [_vm._v("-")]
                     ),
                     _vm._v(
-                      "\n                " +
+                      "\n              " +
                         _vm._s(product.cart) +
-                        "\n                "
+                        "\n              "
                     ),
                     _c(
                       "button",
@@ -62397,6 +62433,7 @@ exports.push([module.i, "\n.img-col {\r\n  width: 15%;\r\n  padding: 0 5% 0 5%;\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin__ = __webpack_require__(6);
 //
 //
 //
@@ -62524,8 +62561,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin__["a" /* default */]],
 
+  mounted: function mounted() {
     this.getBills();
 
     $("#myModal").on("shown.bs.modal", function () {
@@ -62586,11 +62624,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var minutes = d.getMinutes();
       var sec = d.getSeconds();
       return day + "/" + m + "/" + y + " " + h + ":" + minutes + ":" + sec;
-    },
-    moneyFormat: function moneyFormat(money) {
-      return new Intl.NumberFormat("en-IN", {
-        maximumSignificantDigits: 3
-      }).format(money);
     },
     fullname: function fullname(bill) {
       return bill.firstname + "    " + bill.lastname;
@@ -62721,11 +62754,9 @@ var render = function() {
                   [
                     _c("td", { domProps: { textContent: _vm._s(bill.id) } }),
                     _vm._v(" "),
-                    _c("td", {
-                      domProps: {
-                        textContent: _vm._s(_vm.moneyFormat(bill.total))
-                      }
-                    }),
+                    _c("td", [
+                      _vm._v(_vm._s(_vm._f("moneyFormat")(bill.total)))
+                    ]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(_vm._s(_vm._f("dateTimeFormat")(bill.created_at)))
@@ -62789,7 +62820,7 @@ var render = function() {
                             _c("td", {
                               domProps: {
                                 textContent: _vm._s(
-                                  _vm.moneyFormat(saleDetail.price)
+                                  saleDetail.price | _vm.moneyFormat
                                 )
                               }
                             }),
@@ -62800,13 +62831,11 @@ var render = function() {
                               }
                             }),
                             _vm._v(" "),
-                            _c("td", {
-                              domProps: {
-                                textContent: _vm._s(
-                                  _vm.moneyFormat(saleDetail.total)
-                                )
-                              }
-                            })
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(_vm._f("moneyFormat")(saleDetail.total))
+                              )
+                            ])
                           ])
                         }),
                         _vm._v(" "),
@@ -62817,13 +62846,13 @@ var render = function() {
                             [_vm._v("ทั้งหมด")]
                           ),
                           _vm._v(" "),
-                          _c("th", {
-                            domProps: {
-                              textContent: _vm._s(
-                                _vm.moneyFormat(_vm.saleDetailsTotal)
+                          _c("th", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("moneyFormat")(_vm.saleDetailsTotal)
                               )
-                            }
-                          })
+                            )
+                          ])
                         ])
                       ],
                       2
@@ -64065,6 +64094,7 @@ exports.push([module.i, "\n.search-box{\n  margin : 5px 5px;\n}\n.box-title{\n  
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin__ = __webpack_require__(6);
 //
 //
 //
@@ -64127,7 +64157,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin__["a" /* default */]],
+
   props: ["id"],
 
   mounted: function mounted() {
@@ -64193,15 +64226,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     setSalingDetail: function setSalingDetail() {
       this.detail = 'saling';
     }
-  },
-
-  filters: {
-    moneyFormat: function moneyFormat(Price) {
-      return new Intl.NumberFormat("en-IN", {
-        maximumSignificantDigits: 3
-      }).format(Price);
-    }
   }
+
 });
 
 /***/ }),
@@ -66282,6 +66308,7 @@ exports.push([module.i, "\n.total {\n    color: #2d15e4;\n    font-size: 125%;\n
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin__ = __webpack_require__(6);
 //
 //
 //
@@ -66331,7 +66358,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin__["a" /* default */]],
+
     props: ['bookDetail', 'total', 'dateVisit', 'userId', 'searchSeat', 'clearData'],
 
     data: function data() {
@@ -66396,15 +66427,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }
         }
-    },
-
-    filters: {
-        moneyFormat: function moneyFormat(Price) {
-            return new Intl.NumberFormat("en-IN", {
-                maximumSignificantDigits: 3
-            }).format(Price);
-        }
     }
+
 });
 
 /***/ }),
@@ -67778,6 +67802,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin__ = __webpack_require__(6);
 //
 //
 //
@@ -67805,7 +67830,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin__["a" /* default */]],
+
   mounted: function mounted() {
     this.getTickets();
   },
@@ -67836,6 +67865,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     goToBuy: function goToBuy(ticket) {
       window.location.href = "/saleticket/" + ticket.id;
     }
+  },
+
+  computed: {
+    name: function name() {
+      return this.data;
+    }
   }
 });
 
@@ -67864,7 +67899,9 @@ var render = function() {
             _vm._v("\n        " + _vm._s(ticket.name) + "\n      ")
           ]),
           _vm._v(" "),
-          _c("strong", [_vm._v(_vm._s(ticket.price) + " ฿")]),
+          _c("strong", [
+            _vm._v(_vm._s(_vm._f("moneyFormat")(ticket.price)) + " ฿")
+          ]),
           _vm._v(" "),
           _c("br"),
           _vm._v(" "),
@@ -67996,6 +68033,7 @@ exports.push([module.i, "\n.input-group {\r\n  padding: 1% 0 1% 0;\n}\r\n", ""])
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin__ = __webpack_require__(6);
 //
 //
 //
@@ -68060,7 +68098,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin__["a" /* default */]],
+
   props: ["id", "title"],
 
   mounted: function mounted() {
@@ -68091,11 +68133,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.ticket = res.data.ticket;
         _this.total = Number(_this.ticket.price);
       });
-    },
-    moneyFormat: function moneyFormat(value) {
-      return new Intl.NumberFormat("en-IN", {
-        maximumSignificantDigits: 3
-      }).format(value);
     },
     saveBooking: function saveBooking() {
       this.prepareSaleDetail();

@@ -49,7 +49,7 @@
             data-target=".bd-example-modal-lg"
           >
             <td v-text="bill.id"></td>
-            <td v-text="moneyFormat(bill.total)"></td>
+            <td>{{bill.total | moneyFormat}}</td>
             <td>{{bill.created_at | dateTimeFormat}}</td>
             <td v-text="fullname(bill)"></td>
             <td>
@@ -93,16 +93,16 @@
                         :src="'/pos/product/'+saleDetail.img"
                         alt=""
                       ></td>
-                    <td v-text="moneyFormat(saleDetail.price)"></td>
+                    <td v-text="saleDetail.price | moneyFormat"></td>
                     <td v-text="saleDetail.amount"></td>
-                    <td v-text="moneyFormat(saleDetail.total)"></td>
+                    <td>{{saleDetail.total | moneyFormat}}</td>
                   </tr>
                   <tr class="table-success">
                     <th
                       colspan="4"
                       align="center"
                     >ทั้งหมด</th>
-                    <th v-text="moneyFormat(saleDetailsTotal)"></th>
+                    <th>{{saleDetailsTotal | moneyFormat}}</th>
                   </tr>
                 </tbody>
               </table>
@@ -123,16 +123,18 @@
 </template>
 
 <script>
-
+import mixin from '../mixin'
 export default {
+  mixins: [mixin],
+
   mounted() {
-      
     this.getBills();
 
     $("#myModal").on("shown.bs.modal", function() {
       $("#myInput").trigger("focus");
     });
   },
+
   data() {
     return {
         start: '',
@@ -180,12 +182,6 @@ export default {
       var minutes = d.getMinutes();
       var sec = d.getSeconds();
       return day + "/" + m + "/" + y + " " + h + ":" + minutes + ":" + sec;
-    },
-
-    moneyFormat(money) {
-      return new Intl.NumberFormat("en-IN", {
-        maximumSignificantDigits: 3
-      }).format(money);
     },
 
     fullname(bill) {

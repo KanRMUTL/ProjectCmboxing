@@ -12,7 +12,7 @@
         <div class="card-title">
           {{ ticket.name }}
         </div>
-        <strong>{{ ticket.price }} ฿</strong>
+        <strong>{{ ticket.price | moneyFormat }} ฿</strong>
         <br>
         <button class="btn btn-general btn-white" role="button" @click="goToBuy(ticket)">
           <i class="fa fa-cart-pay"></i> Buy Ticket
@@ -25,7 +25,11 @@
 </template>
 
 <script>
+import mixin from '../../../mixin'
+
 export default {
+  mixins: [mixin],
+
   mounted() {
     this.getTickets();
   },
@@ -58,7 +62,13 @@ export default {
     goToBuy(ticket) {
       window.location.href = "/saleticket/" + ticket.id;
     }
-  }
+  },
+
+  computed: {
+    name() {
+      return this.data 
+    }
+  },
 };
 </script>
 
