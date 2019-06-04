@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 
 class User extends Authenticatable
@@ -26,6 +27,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    protected $guarded = [];
 
     
     public function employee()
@@ -60,5 +62,10 @@ class User extends Authenticatable
                     ['role','=', 3]
                 ]);
         }               
+    }
+
+    public function checkPass($password) 
+    {
+        return Hash::check($password, $this->password) ? true : false;
     }
 }

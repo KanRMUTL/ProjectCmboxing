@@ -65,7 +65,7 @@
     </a>
     <ul class="treeview-menu">
       <li><a href="{{ url('/user/'.Auth::user()->id) }}"><i class="fa fa-circle-o"></i>แก้ไขข้อมูลส่วนตัว</a></li>
-      <li><a href="{{ url('/stock/product') }}"><i class="fa fa-circle-o"></i>เปลี่ยนรหัสผ่าน</a></li>
+      <li><a href="{{ url('/resetpassword') }}"><i class="fa fa-circle-o"></i>เปลี่ยนรหัสผ่าน</a></li>
     </ul>
   </li>
 

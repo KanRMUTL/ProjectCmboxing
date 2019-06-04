@@ -15,20 +15,21 @@ Route::group(['middleware' =>['auth']], function() {
     Route::get('/dashboard', 'PageController@index');
     Route::get('/employeeProfile/{id}', 'marketing\SaleController@employeeProfile');
     
-    Route::resource('user', 'UserController');
-    Route::resource('ticket', 'marketing\TicketController');
-    Route::get('course', 'shopping\CourseController@index'); // หน้าจัดการคอร์สของแอดมิน
-    Route::get('course/{user_id}', 'shopping\CourseController@show'); // ลูกค้าดูรายละเอียดการซื้อคอร์ส
+    Route::get('/resetpassword', 'UserController@resetPassword');
+    Route::resource('/user', 'UserController');
+    Route::resource('/ticket', 'marketing\TicketController');
+    Route::get('/course', 'shopping\CourseController@index'); // หน้าจัดการคอร์สของแอดมิน
+    Route::get('/course/{user_id}', 'shopping\CourseController@show'); // ลูกค้าดูรายละเอียดการซื้อคอร์ส
    
     // ครูสอนมวยไทย
-    Route::get('trainer', 'shopping\TrainerController@index');
-    Route::post('trainer', 'shopping\TrainerController@store');
-    Route::get('trainer/{id}/edit', 'shopping\TrainerController@edit');
-    Route::put('trainer/{id}', 'shopping\TrainerController@update');
-    Route::delete('trainer/{id}', 'shopping\TrainerController@destroy');
+    Route::get('/trainer', 'shopping\TrainerController@index');
+    Route::post('/trainer', 'shopping\TrainerController@store');
+    Route::get('/trainer/{id}/edit', 'shopping\TrainerController@edit');
+    Route::put('/trainer/{id}', 'shopping\TrainerController@update');
+    Route::delete('/trainer/{id}', 'shopping\TrainerController@destroy');
 
     // ข้อมูลการขายของพนักงานกับไกด์
-    Route::prefix('sale')->group(function() {
+    Route::prefix('/sale')->group(function() {
         Route::get('/{saleTypeName}', 'marketing\SaleController@index')->name('sale.index'); 
         Route::post('/{saleTypeName}', 'marketing\SaleController@search')->name('sale.search'); // ค้นหา
         Route::post('/', 'marketing\SaleController@store')->name('sale.store');
@@ -37,10 +38,10 @@ Route::group(['middleware' =>['auth']], function() {
         Route::get('/{id}/edit', 'marketing\SaleController@edit')->name('sale.edit');
     });
     
-    Route::post('saleReport', 'marketing\report\ReportController@saleReport')->name('report.sale');
-    Route::post('EmpCommissionReport', 'marketing\report\ReportController@EmpCommissionReport')->name('report.empCommission');
-    Route::post('guideCommissionReport', 'marketing\report\ReportController@guideCommissionReport')->name('report.guideCommission');
-    Route::get('salingReport','marketing\report\ReportController@sampleRreport');
+    Route::post('/saleReport', 'marketing\report\ReportController@saleReport')->name('report.sale');
+    Route::post('/EmpCommissionReport', 'marketing\report\ReportController@EmpCommissionReport')->name('report.empCommission');
+    Route::post('/guideCommissionReport', 'marketing\report\ReportController@guideCommissionReport')->name('report.guideCommission');
+    Route::get('/salingReport','marketing\report\ReportController@sampleRreport');
 
     Route::get('/chart', 'marketing\ChartSaleController@index');
 
@@ -53,10 +54,10 @@ Route::group(['middleware' =>['auth']], function() {
     Route::get('/commissionOfGuide', 'marketing\CommissionController@guideCommission')->name('guideCommission');
     Route::post('/commissionOfGuide', 'marketing\CommissionController@searchguide')->name('guidecommission.search');
 
-    Route::prefix('stock')->group(function() {
-        Route::get('sale', 'pos\PosController@sale');
-        Route::get('product', 'pos\PosController@product');
-        Route::get('report', 'pos\PosController@saleReport');
+    Route::prefix('/stock')->group(function() {
+        Route::get('/sale', 'pos\PosController@sale');
+        Route::get('/product', 'pos\PosController@product');
+        Route::get('/report', 'pos\PosController@saleReport');
     });
 });
 
