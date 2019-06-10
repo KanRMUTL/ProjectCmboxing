@@ -62,7 +62,11 @@
 </template>
 
 <script>
+import mixin from '../../../mixin'
+
 export default {
+  mixins: [mixin],
+  
   props: ["id", "title"],
 
   mounted() {
@@ -91,12 +95,6 @@ export default {
         this.ticket = res.data.ticket;
         this.total = Number(this.ticket.price);
       });
-    },
-
-    moneyFormat(value) {
-      return new Intl.NumberFormat("en-IN", {
-        maximumSignificantDigits: 3
-      }).format(value);
     },
 
     saveBooking() {

@@ -4,61 +4,94 @@
       <div class="col-md-3 mb-5">
         <div class="input-group">
           <span class="input-group-addon">บาร์โค้ดสินค้า</span>
-          <input type="text" class="form-control" id="barcode" placeholder="บาร์โค้ดสินค้า" v-model="barcode">
-          <span class="input-group-addon" v-on:click="showProduct()" v-show="barcode.length > 0"><i class="fa fa-search"></i></span>
+          <input
+            type="text"
+            class="form-control"
+            id="barcode"
+            placeholder="บาร์โค้ดสินค้า"
+            v-model="barcode"
+          >
+          <span
+            class="input-group-addon"
+            v-on:click="showProduct()"
+            v-show="barcode.length > 0"
+          ><i class="fa fa-search"></i></span>
         </div>
       </div>
     </div>
-    
-    <br/>
 
-      <div class="box box-info">
-        <div class="box-body table-responsive">
-          <table class="table table-striped center">
-            <tbody>
-              <tr>
-                <td>รหัสสินค้า</td>
-                <td>ชื่อสินค้า</td>
-                <td class="img-col">รูปภาพ</td>
-                <td>ราคา</td>
-                <td style="widtd: 15%;">จำนวน</td>
-                <td>รวม</td>
-                <td>ลบ</td>
-              </tr>
-              <tr v-for="(product, index) in products" :key="product.id">
-                <td>{{product.id}}</td>
-                <td>{{product.name}}</td>
-                <td><img :src="'/pos/product/' + product.img"></td>
-                <td>{{product.price}}</td>
-                <td>
-                  <button v-on:click="reduceAmount(index)" :disabled="product.cart==0" class="btn btn-primary cart">-</button>
-                  {{product.cart}}
-                  <button v-on:click="addAmount(index)" class="btn btn-primary cart">+</button>
-                </td>
-                <td>{{ product.total | moneyFormat }}</td>
-                <td>
-                  <button class="btn btn-danger" @click="deleteProduct(index)">ลบ</button>
-                </td>
-                <!-- {{ sumTotal += product.total }} -->
-              </tr>
-              <tr v-show="SumTotal > 0">
-                <td colspan="5"></td>
-                <td class="total">รวมทั้งสิ้น {{ SumTotal | moneyFormat }} บาท</td>
-                <td><a class="btn btn-success" id="sale" @click="saleProduct()">ขาย</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <br />
+
+    <div class="box box-info">
+      <div class="box-body table-responsive">
+        <table class="table table-striped center">
+          <tbody>
+            <tr>
+              <td>รหัสสินค้า</td>
+              <td>ชื่อสินค้า</td>
+              <td class="img-col">รูปภาพ</td>
+              <td>ราคา</td>
+              <td style="widtd: 15%;">จำนวน</td>
+              <td>รวม</td>
+              <td>ลบ</td>
+            </tr>
+            <tr
+              v-for="(product, index) in products"
+              :key="product.id"
+            >
+              <td>{{product.id}}</td>
+              <td>{{product.name}}</td>
+              <td><img :src="'/pos/product/' + product.img"></td>
+              <td>{{product.price}}</td>
+              <td>
+                <button
+                  v-on:click="reduceAmount(index)"
+                  :disabled="product.cart==0"
+                  class="btn btn-primary cart"
+                >-</button>
+                {{product.cart}}
+                <button
+                  v-on:click="addAmount(index)"
+                  class="btn btn-primary cart"
+                >+</button>
+              </td>
+              <td>{{ product.total | moneyFormat }}</td>
+              <td>
+                <button
+                  class="btn btn-danger"
+                  @click="deleteProduct(index)"
+                >ลบ</button>
+              </td>
+              <!-- {{ sumTotal += product.total }} -->
+            </tr>
+            <tr v-show="SumTotal > 0">
+              <td colspan="5"></td>
+              <td class="total">รวมทั้งสิ้น {{ SumTotal | moneyFormat }} บาท</td>
+              <td><a
+                  class="btn btn-success"
+                  id="sale"
+                  @click="saleProduct()"
+                >ขาย</a></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
   </div>
 </template>
 
 <script>
+import mixin from "../mixin";
+
 export default {
+  mixins: [mixin],
+
   props: ["id"],
+
   mounted() {
     console.log("Saling Component mounted.");
   },
+
   data() {
     return {
       barcode: "",
@@ -67,24 +100,22 @@ export default {
         id: 0,
         barcode: "",
         name: "",
-        img:"",
+        img: "",
         price: 0
       },
       sumTotal: 0
     };
   },
   methods: {
-   
-
     showProduct() {
       var product;
       var add = true; // ตัวแปรเช็คว่าจะให้เพิ่มหรือไม่
 
-      axios.get("/api/saling/" + this.barcode)
-      .then(response => {
+      axios.get("/api/saling/" + this.barcode).then(response => {
         product = response.data[0];
 
-        if(product != undefined) { // ถ้ามีสินค้า
+        if (product != undefined) {
+          // ถ้ามีสินค้า
           if (this.checkAmount(product)) {
             //ถ้าสินค้าเหลือ
             for (var i = 0; i < this.products.length; i++) {
@@ -103,12 +134,12 @@ export default {
           }
         } else {
           swal({
-            'icon': 'warning',
-            'title': 'ไม่มีสินค้าในระบบ'
-          })
+            icon: "warning",
+            title: "ไม่มีสินค้าในระบบ"
+          });
         }
       });
-      this.barcode = '';
+      this.barcode = "";
     },
 
     saleProduct() {
@@ -122,7 +153,7 @@ export default {
           .then(response => {
             swal(
               "บันทึกการขายสินค้าสำเร็จ",
-              "ราคาทั้งหมด " + this.moneyFormat(this.sumTotal)   + " บาท",
+              "ราคาทั้งหมด " + this.moneyFormat(this.sumTotal) + " บาท",
               "success"
             );
             this.clearProduct();
@@ -156,12 +187,9 @@ export default {
     addAmount(index) {
       var cart = this.products[index].cart;
       var amount = this.products[index].amount;
-      if(cart == amount || amount == 0)
-      {
+      if (cart == amount || amount == 0) {
         swal("สินค้าไม่เพียงพอ", "", "warning");
-      }
-      else
-      {
+      } else {
         this.products[index].cart++;
         this.caltotal(index);
       }
@@ -173,13 +201,8 @@ export default {
     },
 
     caltotal(index) {
-      this.products[index].total = this.products[index].price * this.products[index].cart;
-    },
-
-    moneyFormat(money) {
-      return new Intl.NumberFormat("en-IN", {
-        maximumSignificantDigits: 3
-      }).format(money);
+      this.products[index].total =
+        this.products[index].price * this.products[index].cart;
     },
 
     deleteProduct(index) {
@@ -195,41 +218,33 @@ export default {
         this.sumTotal += parseInt(this.products[this.i].total);
       }
       return this.sumTotal;
-    },
-  },
-
-  filters: {
-        moneyFormat: function(Price) {
-            return new Intl.NumberFormat("en-IN", {
-                maximumSignificantDigits: 3
-            }).format(Price);
-        }
     }
+  }
 };
 </script>
 
 <style>
-  td {
-    width: 16.66%;
-  }
-  .cart {
-    font-weight: 600;
-    font-size: 80%;
-    padding: 3px 6px
-  }
+td {
+  width: 16.66%;
+}
+.cart {
+  font-weight: 600;
+  font-size: 80%;
+  padding: 3px 6px;
+}
 
-  .total {
-      color: #2d64cf;
-      font-size: 24px;
-      font-weight: 600;
-  }
+.total {
+  color: #2d64cf;
+  font-size: 24px;
+  font-weight: 600;
+}
 </style>
 <style>
- .img-col {
-     width: 10%;
- }
+.img-col {
+  width: 10%;
+}
 
- img {
-     width: 100%;
- }
+img {
+  width: 100%;
+}
 </style>

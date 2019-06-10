@@ -60,7 +60,10 @@
 </template>
 
 <script>
+import mixin from '../../mixin'
 export default {
+  mixins: [mixin],
+
   props: ["id"],
 
   mounted() {
@@ -129,13 +132,6 @@ export default {
     }
   },
 
-  filters: {
-    moneyFormat: function(Price) {
-      return new Intl.NumberFormat("en-IN", {
-        maximumSignificantDigits: 3
-      }).format(Price);
-    }
-  }
 };
 </script>
 

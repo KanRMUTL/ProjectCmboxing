@@ -125,4 +125,11 @@ class UserController extends Controller
 
         return back();
     }
+
+    public function resetpassword()
+    {
+        return view('marketing._profile.reset_password');
+    }
+
+    
 }

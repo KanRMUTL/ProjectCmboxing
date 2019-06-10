@@ -15,6 +15,7 @@ Vue.component('report', require('./components/pos/report.vue'));
 
 //ทั่วไป
 Vue.component('profile', require('./components/marketing/user/profile.vue'));
+Vue.component('password-reset', require('./components/marketing/user/passwordReset.vue'));
 Vue.component('personal-profile', require('./components/marketing/employeeProfile/personal-profile.vue'));
 Vue.component('saling-profile', require('./components/marketing/employeeProfile/saling-profile.vue'));
 Vue.component('commission', require('./components/marketing/employeeProfile/commission.vue'));

@@ -30,9 +30,7 @@ class EmployeeUpdateRequest extends FormRequest
             'email' => 'required|max:30',
             'phone_number' => 'required|min:9|max:10',
             'address' => 'required',
-            'role' => 'required',
             'address' => 'required',
-            'img' => 'image',
         ];
     }
 
