@@ -59,6 +59,9 @@ Route::group(['middleware' =>['auth']], function() {
         Route::get('/product', 'pos\PosController@product');
         Route::get('/report', 'pos\PosController@saleReport');
     });
+
+    Route::get('/userprofile','shopping\ShoppingController@profile');
+    Route::get('/customer_resetpassword', 'shopping\ShoppingController@resetpassword');
 });
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout

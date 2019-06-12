@@ -58,4 +58,14 @@ class ShoppingController extends StarterController
         
         return redirect('/login');
     }
+
+    public function profile()
+    {
+        return view('shopping.user.profile');
+    }
+
+    public function resetpassword()
+    {
+        return view('shopping.user.resetpassword');
+    }
 }

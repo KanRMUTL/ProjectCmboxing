@@ -14,8 +14,7 @@
             <div class="form-group">
               <label for="img" class="cols-sm-2 control-label">Profile Image</label>
               <div class="cols-sm-10">
-                <input type="file" name="img" id="img"
-                  class="form-control {{ $errors->has('img') ? 'is-invalid' : '' }}">
+                <input type="file" name="img" id="img" class="form-control {{ $errors->has('img') ? 'is-invalid' : '' }}">
 
                 @if($errors->has('img'))
                 <div class="invalid-feedback">
@@ -29,8 +28,7 @@
             <div class="form-group">
               <label for="username" class="cols-sm-2 control-label">Username</label>
               <div class="cols-sm-10">
-                <input type="text" name="username" id="username"
-                  class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}" value="{{ old('username') }}">
+                <input type="text" name="username" id="username" class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}" value="{{ old('username') }}">
 
                 @if($errors->has('img'))
                   <div class="invalid-feedback">

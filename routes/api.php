@@ -20,6 +20,9 @@ Route::resource('/course', 'Api\shopping\CourseController');
 Route::get('/trainer', 'Api\shopping\TrainerController@index');
 Route::post('/user/{user_id}', 'Api\UserController@store'); // อัพเดทโปรไฟล์
 Route::get('/user/{user_id}', 'Api\UserController@show'); // แก้ไขโปรไฟล์
+Route::get('/customer/{user_id}', 'Api\UserController@showCustomer'); // แก้ไขโปรไฟล์
+Route::post('/customer/{user_id}', 'Api\UserController@updateCustomer'); // แก้ไขโปรไฟล์
+
 Route::resource('/courses', 'Api\shopping\CourseController');
 Route::get('/webdetail', 'Api\Shopping\WebdetailController@index');
 Route::PATCH('/webdetail/{id}', 'Api\Shopping\WebdetailController@update');

@@ -29,12 +29,12 @@ class PasswordResetRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'required' => 'คุณยังไม่ได้ป้อนข้อมูล',
-            'password.min' => 'รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร',
-            'password.confirmed' => 'รหัสผ่านไม่ตรงกัน'
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'required' => 'คุณยังไม่ได้ป้อนข้อมูล',
+    //         'password.min' => 'รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร',
+    //         'password.confirmed' => 'รหัสผ่านไม่ตรงกัน'
+    //     ];
+    // }
 }

@@ -27,7 +27,15 @@
                         <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/booking/{{ Auth::user()->id }}">My Ticket</a>
                             <a class="dropdown-item" href="/course/{{ Auth::user()->id }}">My Course</a>
-                            <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                            
+                            @if(Auth::user()->role != 4)  {{-- ไม่ใช่ user ทั่วไป --}}
+                                <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                            @else {{-- ไม่ใช่ user ทั่วไป (ลูกค้า) --}}
+                                <a class="dropdown-item" href="/userprofile">Profile</a>
+                                <a class="dropdown-item" href="/customer_resetpassword">Reset password</a>
+                            @endif
+
+                            <a class="dropdown-item" href="/logout">logout</a>
                         </div>
                     </li>
 

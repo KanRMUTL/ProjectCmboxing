@@ -46,9 +46,12 @@ Vue.component('courses', require('./components/shopping/course/courses.vue'));
 Vue.component('trainer', require('./components/shopping/course/trainer.vue'));
 Vue.component('register-course', require('./components/shopping/course/register-course.vue'));
 
+Vue.component('user-profile', require('./components/shopping/profile/user-profile.vue'));
+Vue.component('customer-resetpassword', require('./components/shopping/profile/reset-password.vue'));
 // Admin
 Vue.component('course', require('./components/shopping/addmin/course/course.vue'));
 Vue.component('manage-trainer', require('./components/shopping/addmin/trainer/manage.vue'));
+
 
 const app = new Vue({
     el: '#vue'
