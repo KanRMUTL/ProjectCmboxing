@@ -29,6 +29,7 @@ class PasswordResetRequest extends FormRequest
         ];
     }
 
+
     // public function messages()
     // {
     //     return [
@@ -37,4 +38,5 @@ class PasswordResetRequest extends FormRequest
     //         'password.confirmed' => 'รหัสผ่านไม่ตรงกัน'
     //     ];
     // }
+
 }
