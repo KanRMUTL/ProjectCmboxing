@@ -72,6 +72,10 @@
           <i class="fa fa-circle-o"></i>
           <span>ครูฝึก</span></a>
       </li>
+      <li><a href="{{ url('/course_report') }}">
+          <i class="fa fa-circle-o"></i>
+          <span>รายงานการขายคอร์ส</span></a>
+      </li>
     </ul>
   </li>
 

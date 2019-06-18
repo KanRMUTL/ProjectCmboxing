@@ -50,6 +50,7 @@ Vue.component('user-profile', require('./components/shopping/profile/user-profil
 Vue.component('customer-resetpassword', require('./components/shopping/profile/reset-password.vue'));
 // Admin
 Vue.component('course', require('./components/shopping/addmin/course/course.vue'));
+Vue.component('report-course', require('./components/shopping/addmin/course/report-course.vue'));
 Vue.component('manage-trainer', require('./components/shopping/addmin/trainer/manage.vue'));
 
 

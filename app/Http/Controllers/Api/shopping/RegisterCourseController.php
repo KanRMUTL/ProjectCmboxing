@@ -31,4 +31,17 @@ class RegisterCourseController extends Controller
         $saleCourse = SaleCourse::detail($user_id)->get();
         return response()->json($saleCourse);
     }
+
+    public function report(Request $request)
+    {   
+        if($request->isMethod('get'))
+        {
+            $report = CourseRegister::report()->get();
+        } 
+        else 
+        {
+            $report = CourseRegister::report($request->start, $request->end)->get();
+        }
+        return response()->json($report);
+    }
 }

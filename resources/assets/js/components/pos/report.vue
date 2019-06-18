@@ -27,11 +27,14 @@
         </div>
 
         <div class="col-md-2 offset-md-2">
-            <button class="btn btn-primary" @click="searchBills()">ค้นหา</button>
+          <button
+            class="btn btn-primary"
+            @click="searchBills()"
+          >ค้นหา</button>
         </div>
 
       </div>
-        <p></p>
+      <p></p>
       <table class="table table-striped table-hover center mt-2">
         <tbody>
           <tr>
@@ -123,7 +126,7 @@
 </template>
 
 <script>
-import mixin from '../mixin'
+import mixin from "../mixin";
 export default {
   mixins: [mixin],
 
@@ -137,8 +140,8 @@ export default {
 
   data() {
     return {
-        start: '',
-        end: '',
+      start: "",
+      end: "",
       bills: [],
       saleDetails: [],
       saleDetailsTotal: 0,
@@ -160,12 +163,13 @@ export default {
     },
 
     searchBills() {
-        var data = {
-            'start' : this.start,
-            'end': this.end
-        }
-        axios.post("/api/report", data)
-        .then( res => { this.bills = res.data;})
+      var data = {
+        start: this.start,
+        end: this.end
+      };
+      axios.post("/api/report", data).then(res => {
+        this.bills = res.data;
+      });
     },
     getSaleDetail(bill) {
       axios.get("/api/report/" + bill.id).then(res => {
@@ -190,11 +194,10 @@ export default {
   },
 
   filters: {
-      dateTimeFormat: function(value) {
-          return moment(value).format('DD/MM/YYYY  h:mm:ss');
-      }
+    dateTimeFormat: function(value) {
+      return moment(value).format("DD/MM/YYYY  h:mm:ss");
+    }
   }
-
 };
 </script>
 <style>

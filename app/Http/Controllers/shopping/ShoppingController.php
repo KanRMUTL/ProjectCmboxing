@@ -59,6 +59,11 @@ class ShoppingController extends StarterController
         return redirect('/login');
     }
 
+    public function reportCourse()
+    {
+        return view('shopping.addmin.course.report');
+    }
+
     public function profile()
     {
         return view('shopping.user.profile');

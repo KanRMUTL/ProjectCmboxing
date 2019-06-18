@@ -29,6 +29,8 @@ Route::get('/webdetail', 'Api\Shopping\WebdetailController@index');
 Route::PATCH('/webdetail/{id}', 'Api\Shopping\WebdetailController@update');
 
 Route::resource('/registerCourse', 'Api\shopping\RegisterCourseController');
+Route::get('/report_registerCourse', 'Api\shopping\RegisterCourseController@report');
+Route::post('/report_registerCourse', 'Api\shopping\RegisterCourseController@report');
 Route::get('/userProfile/{user_id}', 'Api\marketing\SaleController@show');
 Route::post('/userProfile/{id}', 'Api\marketing\SaleController@show');
 Route::post('/passwordreset/{id}', 'Api\UserController@passwordReseted');

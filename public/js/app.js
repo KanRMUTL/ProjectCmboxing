@@ -18423,6 +18423,7 @@ Vue.component('user-profile', __webpack_require__(290));
 Vue.component('customer-resetpassword', __webpack_require__(295));
 // Admin
 Vue.component('course', __webpack_require__(300));
+Vue.component('report-course', __webpack_require__(323));
 Vue.component('manage-trainer', __webpack_require__(303));
 
 var app = new Vue({
@@ -62560,6 +62561,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -62574,8 +62578,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
-      start: '',
-      end: '',
+      start: "",
+      end: "",
       bills: [],
       saleDetails: [],
       saleDetailsTotal: 0,
@@ -62602,8 +62606,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       var data = {
-        'start': this.start,
-        'end': this.end
+        start: this.start,
+        end: this.end
       };
       axios.post("/api/report", data).then(function (res) {
         _this2.bills = res.data;
@@ -62634,10 +62638,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   filters: {
     dateTimeFormat: function dateTimeFormat(value) {
-      return moment(value).format('DD/MM/YYYY  h:mm:ss');
+      return moment(value).format("DD/MM/YYYY  h:mm:ss");
     }
   }
-
 });
 
 /***/ }),
@@ -71880,6 +71883,344 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(324)
+/* template */
+var __vue_template__ = __webpack_require__(325)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/shopping/addmin/course/report-course.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5255320e", Component.options)
+  } else {
+    hotAPI.reload("data-v-5255320e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 324 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.searchCourse();
+  },
+  data: function data() {
+    return {
+      start: moment().startOf("week").add("d", 1).format("YYYY-MM-DD"),
+      end: moment().endOf("week").add("d", 1).format("YYYY-MM-DD"),
+      courses: []
+    };
+  },
+
+
+  methods: {
+    searchCourse: function searchCourse() {
+      var _this = this;
+
+      var data = {
+        start: this.start,
+        end: this.end
+      };
+      axios.post("/api/report_registerCourse", data).then(function (res) {
+        res.data.forEach(function (item) {
+          item.userFullname = item.user_firstname + "  " + item.user_lastname;
+          _this.courses.push(item);
+        });
+        _this.courses = res.data;
+      });
+    }
+  },
+
+  filters: {
+    dateFormat: function dateFormat(value) {
+      return moment(value).format("DD/MM/YYYY");
+    }
+  }
+});
+
+/***/ }),
+/* 325 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-2" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _c("span", { staticClass: "input-group-addon" }, [
+            _vm._v("เริ่มต้น")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.start,
+                expression: "start"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "date" },
+            domProps: { value: _vm.start },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.start = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-2 offset-md-2" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _c("span", { staticClass: "input-group-addon" }, [_vm._v("สิ้นสุด")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.end,
+                expression: "end"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "date" },
+            domProps: { value: _vm.end },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.end = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-2 offset-md-2" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", on: { click: _vm.searchCourse } },
+          [_vm._v("ค้นหา")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "box box-info" }, [
+          _c("div", { staticClass: "box-body table-responsive" }, [
+            _c(
+              "table",
+              { staticClass: "table table-striped table-hover center" },
+              [
+                _c(
+                  "tbody",
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _vm._l(_vm.courses, function(course, index) {
+                      return _c("tr", { key: index }, [
+                        _c("td", {
+                          domProps: { textContent: _vm._s(course.course_name) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(course.userFullname) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(course.phone_number) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(course.trainer_name) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(_vm._f("dateFormat")(course.created_at))
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(_vm._f("dateFormat")(course.start_course))
+                          )
+                        ])
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", [_vm._v("ชื่อคอร์ส")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("ชื่อลูกค้า")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("เบอร์โทรศัพท์ลูกค้า")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("ชื่อครูฝึก")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("วันที่ลงทะเบียน")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("วันที่เริ่มเรียน")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5255320e", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

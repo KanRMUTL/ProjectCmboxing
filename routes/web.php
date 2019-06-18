@@ -20,6 +20,7 @@ Route::group(['middleware' =>['auth']], function() {
     Route::resource('/ticket', 'marketing\TicketController');
     Route::get('/course', 'shopping\CourseController@index'); // หน้าจัดการคอร์สของแอดมิน
     Route::get('/course/{user_id}', 'shopping\CourseController@show'); // ลูกค้าดูรายละเอียดการซื้อคอร์ส
+    Route::get('/course_report', 'shopping\ShoppingController@reportCourse'); // ลูกค้าดูรายละเอียดการซื้อคอร์ส
    
     // ครูสอนมวยไทย
     Route::get('/trainer', 'shopping\TrainerController@index');
