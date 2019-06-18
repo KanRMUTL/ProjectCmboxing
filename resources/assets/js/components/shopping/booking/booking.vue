@@ -103,7 +103,7 @@
           </div>
 
           <div class="col-md-4">
-            <div style="background-color: aqua; width: 100%; height: 96%;"></div>
+            <img src="/shopping/img/topview.jpg" style="width: 100%; height: 96%;"/>
           </div>
 
           <div class="col-md-4">

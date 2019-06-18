@@ -18360,7 +18360,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(145);
-module.exports = __webpack_require__(306);
+module.exports = __webpack_require__(309);
 
 
 /***/ }),
@@ -18423,8 +18423,8 @@ Vue.component('user-profile', __webpack_require__(290));
 Vue.component('customer-resetpassword', __webpack_require__(295));
 // Admin
 Vue.component('course', __webpack_require__(300));
-Vue.component('report-course', __webpack_require__(323));
-Vue.component('manage-trainer', __webpack_require__(303));
+Vue.component('report-course', __webpack_require__(303));
+Vue.component('manage-trainer', __webpack_require__(306));
 
 var app = new Vue({
     el: '#vue'
@@ -66065,12 +66065,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-4" }, [
-      _c("div", {
-        staticStyle: {
-          "background-color": "aqua",
-          width: "100%",
-          height: "96%"
-        }
+      _c("img", {
+        staticStyle: { width: "100%", height: "96%" },
+        attrs: { src: "/shopping/img/topview.jpg" }
       })
     ])
   }
@@ -71696,236 +71693,6 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/shopping/addmin/trainer/manage.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-63f1832d", Component.options)
-  } else {
-    hotAPI.reload("data-v-63f1832d", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 304 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            trainer: {
-                name: '',
-                img: '',
-                detail: ''
-            }
-        };
-    },
-
-
-    methods: {
-        onFileSelected: function onFileSelected(event) {
-            this.trainer.img = event.target.files[0];
-        },
-        save: function save() {
-            this.insertTrainer();
-        },
-        insertTrainer: function insertTrainer() {
-            var fd = new FormData();
-            fd.append('image', this.trainer.img, this.trainer.img.name);
-            var data = {
-                name: this.trainer.name,
-                img: this.trainer.img,
-                detail: this.trainer.detail
-            };
-            axios.post('/api/trainer', data).then(function (res) {
-                console.log(res);
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 305 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("form", { staticClass: "was-validated" }, [
-      _c("div", { staticClass: "row mt-4" }, [
-        _c("div", { staticClass: "col-md-6 form-group" }, [
-          _c("label", { attrs: { for: "name" } }, [_vm._v("ชื่อครูสอนมวยไทย")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.trainer.name,
-                expression: "trainer.name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", id: "name" },
-            domProps: { value: _vm.trainer.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.trainer, "name", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6 form-group" }, [
-          _c("label", { attrs: { for: "img" } }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "file", id: "img" },
-            on: { change: _vm.onFileSelected }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-12 form-group" }, [
-          _c("label", { attrs: { for: "detail" } }, [_vm._v("รายละเอียด")]),
-          _vm._v(" "),
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.trainer.detail,
-                expression: "trainer.detail"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { id: "detail" },
-            domProps: { value: _vm.trainer.detail },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.trainer, "detail", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-offset-4 col-md-6" }, [
-          _c(
-            "span",
-            {
-              staticClass: "btn btn-primary btn-block",
-              on: { click: _vm.save }
-            },
-            [_vm._v("บันทึก")]
-          )
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-63f1832d", module.exports)
-  }
-}
-
-/***/ }),
-/* 306 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 307 */,
-/* 308 */,
-/* 309 */,
-/* 310 */,
-/* 311 */,
-/* 312 */,
-/* 313 */,
-/* 314 */,
-/* 315 */,
-/* 316 */,
-/* 317 */,
-/* 318 */,
-/* 319 */,
-/* 320 */,
-/* 321 */,
-/* 322 */,
-/* 323 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(324)
-/* template */
-var __vue_template__ = __webpack_require__(325)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
 Component.options.__file = "resources/assets/js/components/shopping/addmin/course/report-course.vue"
 
 /* hot reload */
@@ -71948,7 +71715,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 324 */
+/* 304 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72062,7 +71829,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 325 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -72221,6 +71988,220 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-5255320e", module.exports)
   }
 }
+
+/***/ }),
+/* 306 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(307)
+/* template */
+var __vue_template__ = __webpack_require__(308)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/shopping/addmin/trainer/manage.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-63f1832d", Component.options)
+  } else {
+    hotAPI.reload("data-v-63f1832d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 307 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            trainer: {
+                name: '',
+                img: '',
+                detail: ''
+            }
+        };
+    },
+
+
+    methods: {
+        onFileSelected: function onFileSelected(event) {
+            this.trainer.img = event.target.files[0];
+        },
+        save: function save() {
+            this.insertTrainer();
+        },
+        insertTrainer: function insertTrainer() {
+            var fd = new FormData();
+            fd.append('image', this.trainer.img, this.trainer.img.name);
+            var data = {
+                name: this.trainer.name,
+                img: this.trainer.img,
+                detail: this.trainer.detail
+            };
+            axios.post('/api/trainer', data).then(function (res) {
+                console.log(res);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 308 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("form", { staticClass: "was-validated" }, [
+      _c("div", { staticClass: "row mt-4" }, [
+        _c("div", { staticClass: "col-md-6 form-group" }, [
+          _c("label", { attrs: { for: "name" } }, [_vm._v("ชื่อครูสอนมวยไทย")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.trainer.name,
+                expression: "trainer.name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", id: "name" },
+            domProps: { value: _vm.trainer.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.trainer, "name", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6 form-group" }, [
+          _c("label", { attrs: { for: "img" } }),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "file", id: "img" },
+            on: { change: _vm.onFileSelected }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-12 form-group" }, [
+          _c("label", { attrs: { for: "detail" } }, [_vm._v("รายละเอียด")]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.trainer.detail,
+                expression: "trainer.detail"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { id: "detail" },
+            domProps: { value: _vm.trainer.detail },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.trainer, "detail", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-offset-4 col-md-6" }, [
+          _c(
+            "span",
+            {
+              staticClass: "btn btn-primary btn-block",
+              on: { click: _vm.save }
+            },
+            [_vm._v("บันทึก")]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-63f1832d", module.exports)
+  }
+}
+
+/***/ }),
+/* 309 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
