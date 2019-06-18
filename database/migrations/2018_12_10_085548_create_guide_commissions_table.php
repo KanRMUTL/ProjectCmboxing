@@ -14,9 +14,10 @@ class CreateGuideCommissionsTable extends Migration
     public function up()
     {
         Schema::create('guide_commissions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->decimal('commission',8,2);
-            $table->smallInteger('ticket_id');
+            $table->increments('id');  // int(10)
+            $table->decimal('commission',8,2); // decimal(8,2)
+            // $table->smallInteger('ticket_id'); // smallInt(6)
+            $table->integer('ticket_id'); // int(11)
         });
     }
 

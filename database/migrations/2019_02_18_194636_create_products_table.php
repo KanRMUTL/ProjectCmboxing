@@ -9,13 +9,13 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('barcode', 20);
-            $table->string('name', 30);
-            $table->string('img', 100);
-            $table->decimal('price', 8, 2);
-            $table->string('unit', 30);
-            $table->integer('amount');
+            $table->increments('id');  // int(10)
+            $table->char('barcode', 13); // char(13)
+            $table->string('name', 30); // varchar(30)
+            $table->string('img', 100); // varchar(100)
+            $table->decimal('price', 8, 2); // decimal(8,2)
+            $table->string('unit', 30); // varchar(30)
+            $table->integer('amount'); // int(11)
         });
     }
 

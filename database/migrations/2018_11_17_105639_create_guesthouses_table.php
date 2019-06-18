@@ -13,11 +13,9 @@ class CreateGuesthousesTable extends Migration
     public function up()
     {
         Schema::create('guesthouses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id'); // int(10)
             $table->string('name',50);
-            $table->integer('zone_id');
-
-           
+            $table->integer('zone_id'); // int(11)
         });
     }
 

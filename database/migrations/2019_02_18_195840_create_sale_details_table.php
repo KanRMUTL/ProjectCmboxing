@@ -10,10 +10,10 @@ class CreateSaleDetailsTable extends Migration
     {
         Schema::create('sale_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('amount');
-            $table->decimal('total', 8, 2);
-            $table->integer('product_id');
-            $table->integer('bill_id');
+            $table->integer('amount'); // int(11)
+            $table->decimal('total', 8, 2); // decimal(8,2)
+            $table->integer('product_id'); // int(11)
+            $table->integer('bill_id'); // int(11)
         });
     }
 

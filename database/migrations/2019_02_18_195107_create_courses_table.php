@@ -9,10 +9,10 @@ class CreateCoursesTable extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 30);
-            $table->decimal('price', 8, 2);
-            $table->text('detail');
+            $table->increments('id'); // int(10)
+            $table->string('name', 30); //varchar(30)
+            $table->decimal('price', 8, 2); // decimal(8,2)
+            $table->text('detail'); // text
         });
     }
 

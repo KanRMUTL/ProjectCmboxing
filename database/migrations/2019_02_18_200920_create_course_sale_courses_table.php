@@ -10,10 +10,10 @@ class CreateCourseSaleCoursesTable extends Migration
     public function up()
     {
         Schema::create('sale_courses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-            $table->integer('user_id');
-            $table->integer('course_id');
+            $table->increments('id'); // int(10)
+            $table->timestamps(); // timestamp
+            $table->integer('user_id'); // int(11)
+            $table->integer('course_id'); // int(11)
         });
     }
 

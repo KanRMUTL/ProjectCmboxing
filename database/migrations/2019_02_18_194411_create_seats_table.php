@@ -10,9 +10,9 @@ class CreateSeatsTable extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 30);
-            $table->integer('group');
-            $table->integer('ticket_id');
+            $table->string('name', 30); // varchar(30)
+            $table->integer('group'); // int(11)
+            $table->integer('ticket_id'); // int(11)
         });
     }
 
