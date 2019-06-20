@@ -21,7 +21,7 @@ Route::group(['middleware' =>['auth']], function() {
     Route::get('/course', 'shopping\CourseController@index'); // หน้าจัดการคอร์สของแอดมิน
     Route::get('/course/{user_id}', 'shopping\CourseController@show'); // ลูกค้าดูรายละเอียดการซื้อคอร์ส
     Route::get('/course_report', 'shopping\ShoppingController@reportCourse'); // ลูกค้าดูรายละเอียดการซื้อคอร์ส
-   
+    Route::get('/course/{start}/{end}', 'shopping\report\ReportController@courseRegister');
     // ครูสอนมวยไทย
     Route::get('/trainer', 'shopping\TrainerController@index');
     Route::post('/trainer', 'shopping\TrainerController@store');

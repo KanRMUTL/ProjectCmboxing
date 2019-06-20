@@ -12,7 +12,7 @@ class CreateBillsTable extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->increments('id'); //int(10)
             $table->decimal('total', 8, 2); //decimal(8,2)
-            $table->timestamp('created_at'); // timestamp
+            $table->timestamp('created_at'); // dateTime
             $table->integer('user_id'); // int(11)
         });
     }

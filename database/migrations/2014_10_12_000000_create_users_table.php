@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
             $table->string('email',30)->unique();
             $table->string('phone_number', 10);
             $table->text('address');
+            $table->string('img',100);
             $table->string('password'); // varchar(191)
             $table->tinyInteger('role'); // 1.admin 2.หัวหน้าฝ่ายการตลาด 3.พนักงานฝ่ายการตลาด 4.สมาชิก  tinyInt(4)
             $table->rememberToken(); //varchar(100)

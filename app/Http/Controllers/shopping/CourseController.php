@@ -18,34 +18,9 @@ class CourseController extends Controller
         return view('shopping.courses');
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
     public function show($id)
     {
         return view('shopping.user.course');
     }
 
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-  
-    public function destroy($id)
-    {
-        //
-    }
 }

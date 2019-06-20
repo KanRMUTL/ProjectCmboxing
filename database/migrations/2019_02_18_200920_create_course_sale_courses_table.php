@@ -11,7 +11,7 @@ class CreateCourseSaleCoursesTable extends Migration
     {
         Schema::create('sale_courses', function (Blueprint $table) {
             $table->increments('id'); // int(10)
-            $table->timestamps(); // timestamp
+            $table->timestamp('created_at'); // timestamp
             $table->integer('user_id'); // int(11)
             $table->integer('course_id'); // int(11)
         });
