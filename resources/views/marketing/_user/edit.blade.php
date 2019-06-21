@@ -1,7 +1,6 @@
 @extends('layouts.adminlte')
-@section('title','Edit User')
-@section('header','แก้ไขผู้ใช้')
-@section('description','สำหรับแก้ไขข้อมูลผู้ใช้')
+@section('title','แก้ไขข้อมูลพนักงาน')
+@section('header','แก้ไขข้อมูลพนักงาน')
 
 @section('content')
 <div class="box box-info">

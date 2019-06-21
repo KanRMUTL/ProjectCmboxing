@@ -96,7 +96,7 @@
 
   <li><a href="{{ url('/user') }}">
       <i class="fa fa-users fa-lg"></i>
-      <span>ผู้ใช้งาน</span></a>
+      <span>พนักงาน</span></a>
   </li>
 
   <li class="treeview">

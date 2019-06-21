@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  <i class="fa fa-lg fa-user-plus"></i> เพิ่มผู้ใช้
+  <i class="fa fa-lg fa-user-plus"></i> เพิ่มพนักงาน
 </button>
 <br>
 <br>
@@ -11,7 +11,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">ผู้ใช้ใหม่</h4>
+        <h4 class="modal-title" id="myModalLabel">เพิ่มพนักงาน</h4>
       </div>
 
       {!! Form::open(['route' => 'user.store', 'method' => 'POST', 'files' => true]) !!}

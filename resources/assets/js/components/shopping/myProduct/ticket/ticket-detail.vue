@@ -13,10 +13,9 @@
             <div class="modal-body">
                 <h5>Visit Day : {{ ticketDetail.visit | formatDate}} </h5>
                 <hr>
-                <hr>
                 <h5>Seat</h5>
                
-                <div v-if="seat.ringside != null">
+                <div>
                     Ringside: 
                     <span
                         v-for="(ringside,index) in seat.ringside" 
@@ -25,8 +24,11 @@
                     >
                         {{ringside}}
                     </span>
+                    <span v-if="seat.ringside.length == 0" class="badge badge-secondary mt-1">
+                        Non selected
+                    </span>
                 </div>
-                <div v-if="seat.vip != []">
+                <div>
                     VIP: 
                     <span
                         v-for="(vip,index) in seat.vip" 
@@ -35,14 +37,18 @@
                     >
                         {{vip}}
                     </span>
+                    <span v-if="seat.vip.length == 0" class="badge badge-secondary mt-1">
+                        Non selected
+                    </span>
                 </div>
                 <hr>
+                <div class="ticket-status">
                     <span class="badge badge-secondary" v-if="!ticketDetail.status">Expire</span>
                     <span class="badge badge-success" v-if="ticketDetail.status">Active</span>
-                <hr>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">OK</button>
             </div>
             </div>
         </div>
@@ -83,3 +89,11 @@ export default {
 }
 </script>
 
+<style>
+.ticket-status{
+    text-align: center;
+}
+.ticket-status span {
+    font-size: 170%;
+}
+</style>

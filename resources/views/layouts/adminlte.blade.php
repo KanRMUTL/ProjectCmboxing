@@ -6,19 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title> @yield('title')</title>
-
+  @yield('customstylesheet')
   <link rel="shortcut icon" href="{{ asset('shopping/img/logo.png') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/marketing/custom.css') }}">
-  <style>
-  .invalid-feedback{
-    width: 100%;
-    margin-top: .25rem;
-    font-size: 90%;
-    color: #dc3545;
-  }
-  </style>
-  @yield('custom-stylesheet')
+
+  
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper" id="app">
@@ -85,7 +78,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
+      <h1 class="@yield('header-class')">
         @yield('header')
         <small>@yield('description')</small>
       </h1>
