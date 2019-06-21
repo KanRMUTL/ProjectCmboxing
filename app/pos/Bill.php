@@ -12,7 +12,12 @@ class Bill extends Model
 
     public function saleDetail()
     {
-        return $this->hasMany('App\pos\SaleDetail', 'foreign_key', 'local_key');
+        return $this->hasMany('App\pos\SaleDetail', 'bill_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }
 

@@ -59,6 +59,8 @@ Route::group(['middleware' =>['auth']], function() {
         Route::get('/sale', 'pos\PosController@sale');
         Route::get('/product', 'pos\PosController@product');
         Route::get('/report', 'pos\PosController@saleReport');
+        Route::get('/bill/{id}', 'pos\ReportController@bill');
+        Route::get('/allbills/{start}/{end}', 'pos\ReportController@allBills');
     });
 
     Route::get('/userprofile','shopping\ShoppingController@profile');

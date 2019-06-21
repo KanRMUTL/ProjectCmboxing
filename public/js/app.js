@@ -62564,13 +62564,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin__["a" /* default */]],
 
   mounted: function mounted() {
-    this.getBills();
+    this.searchBills();
 
     $("#myModal").on("shown.bs.modal", function () {
       $("#myInput").trigger("focus");
@@ -62578,8 +62584,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
-      start: "",
-      end: "",
+      start: moment().startOf("week").add("d", 1).format("YYYY-MM-DD"),
+      end: moment().endOf("week").add("d", 1).format("YYYY-MM-DD"),
       bills: [],
       saleDetails: [],
       saleDetailsTotal: 0,
@@ -62771,7 +62777,18 @@ var render = function() {
                       domProps: { textContent: _vm._s(_vm.fullname(bill)) }
                     }),
                     _vm._v(" "),
-                    _vm._m(1, true)
+                    _vm._m(1, true),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { href: "/stock/bill/" + bill.id }
+                        },
+                        [_vm._v("ออกรายงาน")]
+                      )
+                    ])
                   ]
                 )
               })
@@ -62779,6 +62796,15 @@ var render = function() {
             2
           )
         ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary btn-block",
+          attrs: { href: "/stock/allbills/" + _vm.start + "/" + _vm.end }
+        },
+        [_vm._v("ออกรายงาน")]
       ),
       _vm._v(" "),
       _c(
@@ -62888,7 +62914,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("td", [_vm._v("ผู้ขาย")]),
       _vm._v(" "),
-      _c("td", [_vm._v("รายละเอียด")])
+      _c("td", [_vm._v("รายละเอียด")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("ออกรายงาน")])
     ])
   },
   function() {

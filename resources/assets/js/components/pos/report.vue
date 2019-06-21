@@ -43,6 +43,7 @@
             <td>เวลา</td>
             <td>ผู้ขาย</td>
             <td>รายละเอียด</td>
+            <td>ออกรายงาน</td>
           </tr>
           <tr
             v-for="bill in bills"
@@ -58,10 +59,13 @@
             <td>
               <button class="btn btn-primary">รายละเอียด</button>
             </td>
+            <td>
+              <a :href="'/stock/bill/' + bill.id" class="btn btn-primary">ออกรายงาน</a>
+            </td>
           </tr>
         </tbody>
       </table>
-
+      <a :href="'/stock/allbills/' + start + '/' + end" class="btn btn-primary btn-block">ออกรายงาน</a>
       <!-- Modal -->
       <div
         class="modal fade bd-example-modal-lg"
@@ -100,6 +104,7 @@
                     <td v-text="saleDetail.amount"></td>
                     <td>{{saleDetail.total | moneyFormat}}</td>
                   </tr>
+
                   <tr class="table-success">
                     <th
                       colspan="4"
@@ -110,6 +115,7 @@
                 </tbody>
               </table>
             </div>
+              
             <div class="modal-footer">
               <button
                 type="button"
@@ -131,7 +137,7 @@ export default {
   mixins: [mixin],
 
   mounted() {
-    this.getBills();
+    this.searchBills();
 
     $("#myModal").on("shown.bs.modal", function() {
       $("#myInput").trigger("focus");
@@ -140,8 +146,14 @@ export default {
 
   data() {
     return {
-      start: "",
-      end: "",
+      start: moment()
+        .startOf("week")
+        .add("d", 1)
+        .format("YYYY-MM-DD"),
+      end: moment()
+        .endOf("week")
+        .add("d", 1)
+        .format("YYYY-MM-DD"),
       bills: [],
       saleDetails: [],
       saleDetailsTotal: 0,
