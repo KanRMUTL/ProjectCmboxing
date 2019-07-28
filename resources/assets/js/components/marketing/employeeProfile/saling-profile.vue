@@ -22,7 +22,7 @@
         </div>
         </div>
       <div class="text-center">
-      <div class="col-xs-12 col-sm-3 emphasis">
+      <div class="col-xs-12 col-sm-3 emphasis" :class="{active: isActive == 0}" @click="setActive(0)">
         <h4><strong>ค่าคอมมิชชั่นพนักงาน</strong></h4>
         <h2><strong>{{empCommission.total | moneyFormat}}</strong></h2>
         <h4><strong>บาท</strong></h4>
@@ -31,19 +31,19 @@
           @click="setEmpCommission"
         ><span class="fa fa-list"></span>&emsp;ดูข้อมูล</button>
       </div>
-      <div class="col-xs-12 col-sm-3 emphasis">
+      <div class="col-xs-12 col-sm-3 emphasis" :class="{active: isActive == 1}" @click="setActive(1)">
         <h4><strong>ค่าคอมมิชชั่นไกด์</strong></h4>
         <h2><strong>{{guideCommission.total | moneyFormat}}</strong></h2>
         <h4><strong>บาท</strong></h4>
         <button class="btn btn-danger btn-block" @click="setGuideCommission"><span class="fa fa-list"></span>&emsp;ดูข้อมูล</button>
       </div>
-      <div class="col-xs-12 col-sm-3 emphasis">
+      <div class="col-xs-12 col-sm-3 emphasis" :class="{active: isActive == 2}" @click="setActive(2)">
         <h4><strong>รายได้นำเข้าสนาม</strong></h4>
         <h2><strong>{{incomes.total | moneyFormat}}</strong></h2>
         <h4><strong>บาท</strong></h4>
         <button class="btn btn-primary btn-block"  @click="setIncomeDetail"><span class="fa fa-list"></span>&emsp;ดูข้อมูล</button>
       </div>
-      <div class="col-xs-12 col-sm-3 emphasis">
+      <div class="col-xs-12 col-sm-3 emphasis" :class="{active: isActive == 3}" @click="setActive(3)">
         <h4><strong>จำนวนบัตรทั้งหมด</strong></h4>
         <h2><strong>{{countTicket}}</strong></h2>
         <h4><strong>ใบ</strong></h4>
@@ -81,7 +81,8 @@ export default {
       commissionDetail: [],
       salingDetail: [],
       countTicket: 0,
-      header: ''
+      header: '',
+      isActive: null
     };
   },
 
@@ -129,6 +130,10 @@ export default {
     
     setSalingDetail() {
       this.detail = 'saling'
+    },
+
+    setActive(number) {
+      this.isActive = number
     }
   },
 
@@ -143,5 +148,9 @@ export default {
   .box-title{
        text-align: center;
      }
+  .active {
+    background-color: #ffffff;
+    border-radius: 5px;
+  }
 </style>
 

@@ -37,7 +37,7 @@
 
         <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content" style="width:800px">
+                    <div class="modal-content" style="width:600px; margin: 0 auto;">
                         <!-- Header -->
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">

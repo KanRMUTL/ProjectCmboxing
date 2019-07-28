@@ -2,15 +2,15 @@
   <div class="container">
     <h1 class="text-center">เปลี่ยนรหัสผ่าน</h1>
     <div class="row">
-      <div class="col-md-12 personal-info">
+      <div class="col-md-6 col-md-offset-2 personal-info">
         <form
           @submit="resetPassword"
           class="form-horizontal"
           role="form"
         >
           <div class="form-group">
-            <label class="col-lg-3 control-label">รหัสผ่านเก่า</label>
-            <div class="col-lg-8">
+            <label class="col-md-4 control-label">รหัสผ่านเก่า</label>
+            <div class="col-md-8">
               <input
                 type="password"
                 class="form-control"
@@ -22,8 +22,8 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-lg-3 control-label">รหัสผ่านใหม่</label>
-            <div class="col-lg-8">
+            <label class="col-md-4 control-label">รหัสผ่านใหม่</label>
+            <div class="col-md-8">
               <input
                 type="password"
                 class="form-control"
@@ -35,8 +35,8 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-lg-3 control-label">ยืนยันรหัสผ่านใหม่</label>
-            <div class="col-lg-8">
+            <label class="col-md-4 control-label">ยืนยันรหัสผ่านใหม่</label>
+            <div class="col-md-8">
               <input
                 type="password"
                 class="form-control"
@@ -48,11 +48,13 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-lg-3 control-label"></label>
-            <button
-              type="submit"
-              class="btn btn-primary"
-            >เปลี่ยนรหัสผ่าน</button>
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-8">
+              <button
+                type="submit"
+                class="btn btn-primary btn-block"
+              >เปลี่ยนรหัสผ่าน</button>
+            </div>
           </div>
         </form>
 
@@ -107,6 +109,5 @@ export default {
         });
     }
   }
-
 };
 </script>

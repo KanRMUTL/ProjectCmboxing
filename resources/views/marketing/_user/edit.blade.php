@@ -1,11 +1,10 @@
 @extends('layouts.adminlte')
 @section('title','แก้ไขข้อมูลพนักงาน')
-@section('header','แก้ไขข้อมูลพนักงาน')
 
 @section('content')
-<div class="box box-info">
+<div class="box box-info col-md-6 col-md-offset-3">
    <div class="box-header with-border">
-      <h3 class="box-title">ผู้ใช้ : {{ $user->firstname }}&emsp;{{ $user->lastname }}</h3>
+      <h3 class="box-title">แก้ไขข้อมูลพนักงาน : {{ $user->firstname }}&emsp;{{ $user->lastname }}</h3>
    </div>
    {!! Form::open(['action' => ['UserController@update', $user->id], 'method' => 'PUT', 'files' => true]) !!}
    {{ Form::token()}}
@@ -18,7 +17,7 @@
                      <img
                         src="{{asset('/images/userImg/'.$user->img)}}"
                         class="img-circle img-responsive"
-                        style="margin: 0 auto;"
+                        style="margin: 0 auto; width:35%"
                      >
                   </figure>
             </div>

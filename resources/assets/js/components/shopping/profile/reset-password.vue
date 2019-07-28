@@ -1,7 +1,8 @@
 <template>
   <div>
+    <h3>Reset Password</h3>
     <form
-      class="form-horizontal"
+      class="form-horizontal col-md-6 "
       method="post"
       @submit="resetPassword"
     >
@@ -90,7 +91,7 @@
       <div class="form-group ">
         <button
           type="submit"
-          class="btn btn-general btn-white text-center"
+          class="btn btn-general btn-white text-center btn-block"
         >Reset Password</button>
       </div>
 
@@ -139,6 +140,14 @@ export default {
 <style>
 .invalid-feedback {
   display: block;
+}
+form {
+  margin: 0 auto;
+  margin-top: 8px;
+}
+h3 {
+  margin-top: 10px;
+  text-align: center;
 }
 </style>
 

@@ -63683,6 +63683,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -63718,7 +63720,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     }
   }
-
 });
 
 /***/ }),
@@ -63733,7 +63734,7 @@ var render = function() {
     _c("h1", { staticClass: "text-center" }, [_vm._v("เปลี่ยนรหัสผ่าน")]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12 personal-info" }, [
+      _c("div", { staticClass: "col-md-6 col-md-offset-2 personal-info" }, [
         _c(
           "form",
           {
@@ -63743,11 +63744,11 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", { staticClass: "col-lg-3 control-label" }, [
+              _c("label", { staticClass: "col-md-4 control-label" }, [
                 _vm._v("รหัสผ่านเก่า")
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-8" }, [
+              _c("div", { staticClass: "col-md-8" }, [
                 _c("input", {
                   directives: [
                     {
@@ -63781,11 +63782,11 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", { staticClass: "col-lg-3 control-label" }, [
+              _c("label", { staticClass: "col-md-4 control-label" }, [
                 _vm._v("รหัสผ่านใหม่")
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-8" }, [
+              _c("div", { staticClass: "col-md-8" }, [
                 _c("input", {
                   directives: [
                     {
@@ -63819,11 +63820,11 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", { staticClass: "col-lg-3 control-label" }, [
+              _c("label", { staticClass: "col-md-4 control-label" }, [
                 _vm._v("ยืนยันรหัสผ่านใหม่")
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-8" }, [
+              _c("div", { staticClass: "col-md-8" }, [
                 _c("input", {
                   directives: [
                     {
@@ -63873,13 +63874,18 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "col-lg-3 control-label" }),
+      _c("label", { staticClass: "col-md-4 control-label" }),
       _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("เปลี่ยนรหัสผ่าน")]
-      )
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-block",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("เปลี่ยนรหัสผ่าน")]
+        )
+      ])
     ])
   }
 ]
@@ -64139,7 +64145,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.search-box{\n  margin : 5px 5px;\n}\n.box-title{\n     text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.search-box{\n  margin : 5px 5px;\n}\n.box-title{\n     text-align: center;\n}\n.active {\n  background-color: #ffffff;\n  border-radius: 5px;\n}\n", ""]);
 
 // exports
 
@@ -64233,7 +64239,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       commissionDetail: [],
       salingDetail: [],
       countTicket: 0,
-      header: ''
+      header: '',
+      isActive: null
     };
   },
 
@@ -64281,6 +64288,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     setSalingDetail: function setSalingDetail() {
       this.detail = 'saling';
+    },
+    setActive: function setActive(number) {
+      this.isActive = number;
     }
   }
 
@@ -64370,85 +64380,133 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "text-center" }, [
-        _c("div", { staticClass: "col-xs-12 col-sm-3 emphasis" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("h2", [
-            _c("strong", [
-              _vm._v(_vm._s(_vm._f("moneyFormat")(_vm.empCommission.total)))
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success btn-block",
-              on: { click: _vm.setEmpCommission }
-            },
-            [_c("span", { staticClass: "fa fa-list" }), _vm._v(" ดูข้อมูล")]
-          )
-        ]),
+        _c(
+          "div",
+          {
+            staticClass: "col-xs-12 col-sm-3 emphasis",
+            class: { active: _vm.isActive == 0 },
+            on: {
+              click: function($event) {
+                _vm.setActive(0)
+              }
+            }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("h2", [
+              _c("strong", [
+                _vm._v(_vm._s(_vm._f("moneyFormat")(_vm.empCommission.total)))
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-block",
+                on: { click: _vm.setEmpCommission }
+              },
+              [_c("span", { staticClass: "fa fa-list" }), _vm._v(" ดูข้อมูล")]
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-xs-12 col-sm-3 emphasis" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c("h2", [
-            _c("strong", [
-              _vm._v(_vm._s(_vm._f("moneyFormat")(_vm.guideCommission.total)))
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(3),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-danger btn-block",
-              on: { click: _vm.setGuideCommission }
-            },
-            [_c("span", { staticClass: "fa fa-list" }), _vm._v(" ดูข้อมูล")]
-          )
-        ]),
+        _c(
+          "div",
+          {
+            staticClass: "col-xs-12 col-sm-3 emphasis",
+            class: { active: _vm.isActive == 1 },
+            on: {
+              click: function($event) {
+                _vm.setActive(1)
+              }
+            }
+          },
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("h2", [
+              _c("strong", [
+                _vm._v(_vm._s(_vm._f("moneyFormat")(_vm.guideCommission.total)))
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-block",
+                on: { click: _vm.setGuideCommission }
+              },
+              [_c("span", { staticClass: "fa fa-list" }), _vm._v(" ดูข้อมูล")]
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-xs-12 col-sm-3 emphasis" }, [
-          _vm._m(4),
-          _vm._v(" "),
-          _c("h2", [
-            _c("strong", [
-              _vm._v(_vm._s(_vm._f("moneyFormat")(_vm.incomes.total)))
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(5),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-block",
-              on: { click: _vm.setIncomeDetail }
-            },
-            [_c("span", { staticClass: "fa fa-list" }), _vm._v(" ดูข้อมูล")]
-          )
-        ]),
+        _c(
+          "div",
+          {
+            staticClass: "col-xs-12 col-sm-3 emphasis",
+            class: { active: _vm.isActive == 2 },
+            on: {
+              click: function($event) {
+                _vm.setActive(2)
+              }
+            }
+          },
+          [
+            _vm._m(4),
+            _vm._v(" "),
+            _c("h2", [
+              _c("strong", [
+                _vm._v(_vm._s(_vm._f("moneyFormat")(_vm.incomes.total)))
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(5),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-block",
+                on: { click: _vm.setIncomeDetail }
+              },
+              [_c("span", { staticClass: "fa fa-list" }), _vm._v(" ดูข้อมูล")]
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-xs-12 col-sm-3 emphasis" }, [
-          _vm._m(6),
-          _vm._v(" "),
-          _c("h2", [_c("strong", [_vm._v(_vm._s(_vm.countTicket))])]),
-          _vm._v(" "),
-          _vm._m(7),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-warning btn-block",
-              on: { click: _vm.setSalingDetail }
-            },
-            [_c("span", { staticClass: "fa fa-list" }), _vm._v(" ดูข้อมูล")]
-          )
-        ])
+        _c(
+          "div",
+          {
+            staticClass: "col-xs-12 col-sm-3 emphasis",
+            class: { active: _vm.isActive == 3 },
+            on: {
+              click: function($event) {
+                _vm.setActive(3)
+              }
+            }
+          },
+          [
+            _vm._m(6),
+            _vm._v(" "),
+            _c("h2", [_c("strong", [_vm._v(_vm._s(_vm.countTicket))])]),
+            _vm._v(" "),
+            _vm._m(7),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-warning btn-block",
+                on: { click: _vm.setSalingDetail }
+              },
+              [_c("span", { staticClass: "fa fa-list" }), _vm._v(" ดูข้อมูล")]
+            )
+          ]
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -70821,7 +70879,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.invalid-feedback {\r\n  display: block;\n}\r\n", ""]);
+exports.push([module.i, "\n.invalid-feedback {\r\n  display: block;\n}\nform {\r\n  margin: 0 auto;\r\n  margin-top: 8px;\n}\nh3 {\r\n  margin-top: 10px;\r\n  text-align: center;\n}\r\n", ""]);
 
 // exports
 
@@ -70833,6 +70891,7 @@ exports.push([module.i, "\n.invalid-feedback {\r\n  display: block;\n}\r\n", ""]
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin__ = __webpack_require__(5);
+//
 //
 //
 //
@@ -70976,10 +71035,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("h3", [_vm._v("Reset Password")]),
+    _vm._v(" "),
     _c(
       "form",
       {
-        staticClass: "form-horizontal",
+        staticClass: "form-horizontal col-md-6 ",
         attrs: { method: "post" },
         on: { submit: _vm.resetPassword }
       },
@@ -71194,7 +71255,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-general btn-white text-center",
+          staticClass: "btn btn-general btn-white text-center btn-block",
           attrs: { type: "submit" }
         },
         [_vm._v("Reset Password")]
@@ -71562,7 +71623,10 @@ var render = function() {
           [
             _c(
               "div",
-              { staticClass: "modal-content", staticStyle: { width: "800px" } },
+              {
+                staticClass: "modal-content",
+                staticStyle: { width: "600px", margin: "0 auto" }
+              },
               [
                 _vm._m(1),
                 _vm._v(" "),

@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\marketing;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Users;
 use Auth;
 use App\marketing\Sale;
-use App\marketing\Zone;
 use App\marketing\Ticket;
 use App\marketing\Guesthouse;
-use App\marketing\SaleType;
+use App\Http\Controllers\LineNotify;
 use Carbon\Carbon;
 use App\Http\Controllers\marketing\StarterController;
 use App\Http\Requests\marketing\TicketRequest;
@@ -63,7 +60,10 @@ class SaleController extends StarterController
         $sale->zone_id = $request->zoneId;
         $sale->total =  $ticket['price'] * $request->amount;
         $sale->created_at = now();
-        $sale->save();
+
+        $lineNotify = new LineNotify();
+        $lineNotify->notify($sale);
+
         $url = $this->changeRedirect($sale->sale_type);
         return redirect($url);
     }

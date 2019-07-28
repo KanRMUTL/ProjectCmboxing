@@ -55,11 +55,6 @@ class Sale extends Model
     {
         return $this->belongsTo('App\marketing\Zone', 'zone_id',  'id');
     }
-
-    public function saleType()
-    {
-        return $this->belongsTo('App\marketing\SaleType');
-    }
     
     /* ======= Dasboard ======== */
     public function scopeAmountTicket($query, $startOfWeek, $endOfWeek)

@@ -1,11 +1,12 @@
 @extends('layouts.adminlte')
 @section('title','แก้ไขข้อมูลการขายบัตร')
+@section('header-class', 'center')
 @section('header','แก้ไขการขายบัตร')
 
 @section('content')
 {!! Form::open(['route' => ['sale.update', $sale->id ], 'method' => 'PUT']) !!}
 {{ Form::token()}}
-<div class="modal-content">
+<div class="modal-content col-md-6 col-md-offset-3">
   <div class="modal-header">
     <h4 class="modal-title" id="myModalLabel">{{$sale->customer_name}}</h4>
   </div>
