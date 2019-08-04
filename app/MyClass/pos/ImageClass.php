@@ -15,7 +15,7 @@ class ImageClass {
                'ticket' => 'shopping\img\ticket\\',
                'product' => 'pos\product\\',
                'trainer' => 'shopping\img\trainer\\',
-               'user' => 'images\userImg\\'
+               'user' => 'images/userImg/'
           ];
           $this->destinationPath = $this->destinationArray[$type];
           $this->imgFile = $imgFile;
