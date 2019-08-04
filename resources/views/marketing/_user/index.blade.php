@@ -42,7 +42,7 @@
             <td>{{ $roles[$user->role - 1] }}</td>
             <td>
               <span class="label label-primary" style="font-size: 100%;">
-                {{-- {{ $user->employee->zone->name}} --}}
+                {{ $user->employee->zone['name']}}
                 </span>
               </td>
             <td>
