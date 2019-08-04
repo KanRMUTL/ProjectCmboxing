@@ -75,7 +75,7 @@
                     {!! Form::open(['action' => ['marketing\SaleController@destroy', $sale->id]]) !!}
                       {{ csrf_field() }}
                     {{ Form::hidden('_method','DELETE') }}
-                      <button type="submit" class="btn btn-danger"><i class="fa fa-trash fa-lg"></i></button>
+                      <button type="submit" class="btn btn-danger" onclick="return confirm('ต้องการลบข้อมูลการขายหรือไม่')"><i class="fa fa-trash fa-lg"></i></button>
                     {{ Form::close() }}
                     @endif  
                 </td>

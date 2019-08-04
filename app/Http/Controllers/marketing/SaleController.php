@@ -60,7 +60,7 @@ class SaleController extends StarterController
         $sale->zone_id = $request->zoneId;
         $sale->total =  $ticket['price'] * $request->amount;
         $sale->created_at = now();
-
+        $sale->save();
         $lineNotify = new LineNotify();
         $lineNotify->notify($sale);
 

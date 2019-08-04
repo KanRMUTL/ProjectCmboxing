@@ -32,7 +32,6 @@ class UserController extends Controller
         $data['users'] = User::getUsers()->get();
         $data['zones'] =$this->zones;
         $data['roles'] = ['แอดมิน','หัวหน้าฝ่ายการตลาด', 'พนักงานฝ่ายการตลาด'];
-        // return $data;
         return view('marketing._user.index',$data);
     }
      

@@ -25,7 +25,7 @@ class TicketMuayThaiRequest extends FormRequest
     {
         return [
             'name' => 'required|min:1|max:30',
-            'price' => 'required|numberic',
+            'price' => 'required|numeric',
             'commission' => 'required|numeric',
         ];
     }
