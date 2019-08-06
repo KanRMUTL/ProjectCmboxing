@@ -28,10 +28,10 @@
 
   <body id="page-top">
     {{-- Live ENV  --}}
-    <script src="https://www.paypal.com/sdk/js?client-id=AX33yAYWKaL0h0LiSN6tyir0CGD_Ft9ztwCP2xqhQabpK8CfakgrLgPdD1TKZd16YWL6W7FINMAK1j_7&currency=THB"></script>
+    {{-- <script src="https://www.paypal.com/sdk/js?client-id=AX33yAYWKaL0h0LiSN6tyir0CGD_Ft9ztwCP2xqhQabpK8CfakgrLgPdD1TKZd16YWL6W7FINMAK1j_7&currency=THB"></script> --}}
     
     {{-- Sandbox ENV --}}
-    {{-- <script src="https://www.paypal.com/sdk/js?client-id=AdeKmKTa4nB9aWe7oZbheexKhuDFwXkfJIwjf8qcbdVlek869ZnqJ34TvF-rUvJcjVSRcXh26ff7VdDk&currency=THB"></script> --}}
+    <script src="https://www.paypal.com/sdk/js?client-id=AdeKmKTa4nB9aWe7oZbheexKhuDFwXkfJIwjf8qcbdVlek869ZnqJ34TvF-rUvJcjVSRcXh26ff7VdDk&currency=THB"></script>
     
     @include('shopping.layout.navbar')
     
