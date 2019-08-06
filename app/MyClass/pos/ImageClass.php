@@ -12,9 +12,9 @@ class ImageClass {
      public $destinationArray;
      public function __construct($type, $imgFile) {
           $this->destinationArray = [
-               'ticket' => 'shopping\img\ticket\\',
-               'product' => 'pos\product\\',
-               'trainer' => 'shopping\img\trainer\\',
+               'ticket' => 'shopping/img/ticket/',
+               'product' => 'pos/product/',
+               'trainer' => 'shopping/img/trainer/',
                'user' => 'images/userImg/'
           ];
           $this->destinationPath = $this->destinationArray[$type];
