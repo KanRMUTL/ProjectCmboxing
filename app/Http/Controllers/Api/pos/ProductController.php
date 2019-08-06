@@ -43,16 +43,6 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
     public function updateProduct(ProductRequest $request, $id)
     {
         $product = Product::find($id);
@@ -81,7 +71,7 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        $imagePath =  'pos\product\\';
+        $imagePath =  'pos/product/';
         $product = Product::find($id);
         unlink(public_path($imagePath.$product->img));
         $product->delete();
