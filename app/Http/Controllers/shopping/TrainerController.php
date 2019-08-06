@@ -68,7 +68,7 @@ class TrainerController extends Controller
   
     public function destroy($id)
     {
-        $imagePath =  'shopping\img\trainer\\';
+        $imagePath =  'shopping/img/trainer/';
         $trainer = Trainer::find($id);
         unlink(public_path($imagePath.$trainer->img));
         $trainer->delete();
