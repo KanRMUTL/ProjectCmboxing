@@ -1,42 +1,45 @@
 <?php
-
+// เรียกข้อมูลเหมือนหาค่าคอมมิชชั่นนั่นแหละแต่เอา total ลบ ค่าคอม ก็จะรู้รายได้ของสนาม
 namespace App\Http\Controllers\marketing;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\marketing\SaleController;
+use App\User;
+use Auth;
 use App\marketing\Sale;
-use App\Http\Controllers\marketing\CommissionController;
+use Carbon\Carbon;
 use App\Http\Controllers\marketing\StarterController;
+use App\MyClass\CommissionClass;
+use App\MyClass\marketing\IncomeClass;
 
 class IncomeController extends StarterController
 {
 
-    protected $commission = CommissionController::class;
+    public function __construct() {
+        parent::__construct();
+    }
 
     public function income()
     {
-        $data = Sale::select('amount', 'ticket_id', 'total', 'sale_type_id')->get();
-        foreach($data as $index => $item){
-            $data[$index]['income'] = $this->calIncome($item['sale_type_id'], $item['total'], $item['ticket_id'], $item['amount']);
-            $data[$index]['sale_type_name'] = $item->saleType->name;
-            $data[$index]['ticket_name'] = $item->ticket->name;
-            $data[$index]['commission'] = CommissionController::calEmpCommission($item->ticket_id, $item->amount);
-        }
-        return $data;
+        $objIncome = new IncomeClass($this->start, $this->end, Auth::user()->employee->zone_id);
+        // dd($objIncome);
+        $data['incomes'] = $objIncome->CalculateIncome();
+
+        $data['zones'] =  $this->zones;
+        $data['zoneSelected'] = Auth::user()->employee->zone_id;
+        $data['range'] = $this->range;
+        return view('marketing._income/index', $data);
     }
 
-    public function calIncome($saleType, $total, $ticketId, $amount)
+    public function searchIncome(Request $request)
     {
-        if($saleType == 1) 
-        {
-            return $total - CommissionController::calEmpCommission($ticketId, $amount);
-        }
-        else if($saleType == 2)
-        {
-            return $total - CommissionController::calGuideCommission($ticketId, $amount);
-        }else{
-            return $total;
-        }
+        $objIncome = new IncomeClass( $request->start, $request->end, $request->zoneId);
+        $data['incomes'] = $objIncome->CalculateIncome();
+        $data['zones'] =  $this->zones;
+        $data['zoneSelected'] = $request->zoneId;
+        $data['range'] = ['start' => $request->start, 'end' => $request->end];
+        return view('marketing._income/index', $data);
     }
 }

@@ -3,106 +3,132 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\AddUser;
+use App\Http\Requests\marketing\EmployeeStoreRequest;
+use App\Http\Requests\marketing\EmployeeUpdateRequest;
+use App\Http\Controllers\marketing\StarterController;
+use App\MyClass\pos\ImageClass;
 use App\User;
-use App\marketing\Zone;
+use App\marketing\Employee;
 use App\marketing\Role;
+use App\marketing\Zone;
 use Auth;
 
 class UserController extends Controller
 {
+
     private $zones;
     private $roles;
-    
-    public function __construct(){
-         $this->zones = Zone::all();
-         $this->roles =  Role::where('id', '!=', 1)->get();
-    }
+    public $starter;
 
-   
+    public function __construct()
+    {
+        $starter = new StarterController();
+         $this->zones = Zone::all();
+        //  $this->roles =  Auth::user()->role;
+    }
 
     public function index()
-    {
-        if(Auth()->user()->role_id == 1)
-            $users = User::userForAdmin()->paginate(10);
-
-        else
-            $users = User::userForMkhead()->paginate(10);
-
-        $data = [
-            'users' => $users,
-            'zones' => $this->zones,
-            'roles' => $this->roles
-        ];
-        return view('_user.index',$data);
+    {  
+        $data['users'] = User::getUsers()->get();
+        $data['zones'] =$this->zones;
+        $data['roles'] = ['แอดมิน','หัวหน้าฝ่ายการตลาด', 'พนักงานฝ่ายการตลาด'];
+        return view('marketing._user.index',$data);
     }
-
-   
-    public function create()
+     
+    public function store(EmployeeStoreRequest $request)
     {
-       
-    }
-
-   
-    public function store(AddUser $request)
-    {
+        $objImage = new ImageClass('user', $request->file('img'));
+        $objImage->uploadImage();
+        
         $user = User::create([
-            'name' => $request->name,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
             'username' => $request->username,
             'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'img' =>  $objImage->imageName,
             'password' => bcrypt($request->password),
-            'role_id' => $request->role,
-            'zone_id' => $request->zone
+            'role' => $request->role,
         ]);
-
-        return redirect('/user');
+       
+        $employee = Employee::create([
+            'user_id' => $user->id,
+            'id_card' => $request->id_card,
+            'zone_id' => $request->zone_id,
+        ]);
+       
+        return back();
     }
 
-  
     public function show($id)
     {
-        
+        return view('marketing._user.profile');
     }
-
   
     public function edit($id)
-    {
-       $user = User::find($id);
-        $zones = $this->zones;
-        $data = [
-            'user' => $user,
-            'zones' => $zones,
-            'roles' => $this->roles
-        ];
-
-        // return $data;
-        return view('_user.edit',$data);
+    { 
+        try
+        {
+            $user = User::find($id);
+            $zones = $this->zones;
+            $data = [
+                    'user' => $user,
+                    'zones' => $zones,
+                    'roles' => ['2' => 'หัวหน้าฝ่ายการตลาด', '3' => 'พนักงานฝ่ายการตลาด']
+                ];
+                return view('marketing._user.edit',$data);
+        } 
+        catch(Exception $e)
+        {
+            return $e;
+        } 
     }
 
-   
-    public function update(Request $request, $id)
+    public function update(EmployeeUpdateRequest $request, $id)
     {
-        $data = [
-            'name' => $request->name,
+        $user = User::find($request->user_id);
+        $data = [ 
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
             'email' => $request->email,
-            'role_id' => $request->role,
+            'role' => $request->role
+        ];
+        if($request->hasFile('img')){ 
+            $objImage = new ImageClass('user', $request->file('img'));
+            $objImage->originalName = $user->img;
+            $objImage->updateImage();
+            $data['img'] = $objImage->imageName;
+        }
+
+        $employee = [
+            'id_card' => $request->id_card,
             'zone_id' => $request->zone,   
         ];
 
-        if($request->password != null){
-           $data['password'] = bcrypt($request->password);
-         }
-             User::find($request->id)->update($data);
-         
-         return redirect('user');
+        if($request->new_password != null){
+           $data['password'] = bcrypt($request->new_password);
+         } 
+        $user->update($data);
+        Employee::where('user_id', '=', $request->user_id)->update($employee);
+        return redirect('user');
 
     }
-
   
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-        return redirect('/user');
+        User::find($id)->delete();
+        Employee::where('user_id', $id)->delete();
+
+        return back();
     }
+
+    public function resetpassword()
+    {
+        return view('marketing._profile.reset_password');
+    }
+
+    
 }

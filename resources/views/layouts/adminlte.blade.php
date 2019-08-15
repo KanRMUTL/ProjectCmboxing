@@ -3,12 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title> @yield('title')</title>
-   <!-- CSRF Token -->
-   <meta name="csrf-token" content="{{ csrf_token() }}">
+  @yield('customstylesheet')
+  <link rel="shortcut icon" href="{{ asset('shopping/img/logo.png') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/marketing/custom.css') }}">
 
-
+  
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper" id="app">
@@ -17,7 +20,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>Cmboxing</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -40,7 +43,7 @@
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+  <aside class="main-sidebar" id="nav">
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -48,21 +51,25 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ asset('images/avatar5.png') }}" class="img-circle" alt="User Image">
+          <img src="{{ asset('images/userImg/'.Auth::user()->img) }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-        <p>{{ Auth::user()->name }}</p>
+        <p>
+          <a href="/employeeProfile/{{Auth::user()->id}}">
+            {{ Auth::user()->firstname }}
+          </a>
+        </p>
           <!-- Status -->
           <i class="fa fa-circle text-success"></i> Online
         </div>
       </div>
      
-      @if(Auth::user()->role_id == 1)
-        @include('admin.menu')
-      @elseif(Auth::user()->role_id == 2)
-        @include('head.menu')
-      @elseif(Auth::user()->role_id == 3)
-        @include('employee.menu') 
+      @if(Auth::user()->role == 1)
+        @include('marketing.admin.menu')
+      @elseif(Auth::user()->role == 2)
+        @include('marketing.head.menu')
+      @elseif(Auth::user()->role == 3)
+        @include('marketing.employee.menu') 
       @endif
     </section>
   </aside>
@@ -71,7 +78,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
+      <h1 class="@yield('header-class')">
         @yield('header')
         <small>@yield('description')</small>
       </h1>
@@ -89,7 +96,7 @@
   </div>
   <!-- /.content-wrapper -->
 </div>
+<script src="{{ asset('/js/app.js')}}"></script>
 @yield('script')
-<script src="{{ asset('js/app.js')}}"></script>
 </body>
 </html>

@@ -4,64 +4,68 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Auth;
+
 class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name',
+        'id',
+        'firstname',
+        'lastname',
         'username',
         'email',
-        'role_id',
-        'zone_id',
+        'phone_number',
+        'address',
+        'role',
+        'img',
         'password'
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    public $timestamps = false;
     protected $hidden = [
         'password', 'remember_token',
     ];
+    protected $guarded = [];
 
-    public function callUser(){
-       
-     }
+    
+    public function employee()
+    {
+        return $this->hasOne('App\marketing\Employee'); // hasOne อ่ะถูกแล้ว อย่าเปลี่ยนไม่งั้นเจ๊ง!!
+    }
 
-     public function role()
-     {
-         return $this->belongsTo('App\marketing\Role');
-     }
+    public function sales()
+    {
+        return $this->hasMany('App\marketing\Sale', 'id', 'user_id');
+    }
 
-     public function zone()
-     {
-         return $this->belongsTo('App\marketing\Zone');
-     }
-     public function sales()
-     {
-         return $this->hasMany('App\marketing\Sale');
-     }
+    public function courseRegister()
+    {
+        return $this->hasMany('App\shopping\CourseRegister');
+    }
 
-     public function scopeUserForAdmin($query){
-         return $query
-                ->where('role_id','NOT LIKE', 1)
-                ->orderBy('zone_id');
-     }
+    public function scopeGetUsers($query)
+    {
+        if(Auth()->user()->role == 1)
+        {   // Addmin
+            return $query
+            ->where([['role','NOT LIKE', 1], ['role','NOT LIKE', 4]]);
+        }
+        else
+        {   // Marketing Head
+            return $query
+                ->select('users.id', 'firstname', 'lastname', 'username', 'email', 'phone_number', 'address', 'img', 'role')
+                ->join('employees', 'users.id', '=', 'employees.user_id')
+                ->where([
+                    ['employees.zone_id','=',  Auth::user()->employee->zone_id],
+                    ['role','=', 3]
+                ]);
+        }               
+    }
 
-     public function scopeUserForMkhead($query){
-        return $query
-               ->where([
-                   ['zone_id','=', Auth::user()->zone_id],
-                   ['role_id','=', 3]
-               ])
-               ->orderBy('zone_id');
+    public function checkPass($password) 
+    {
+        return Hash::check($password, $this->password) ? true : false;
     }
 }

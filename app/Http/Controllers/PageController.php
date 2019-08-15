@@ -22,95 +22,14 @@ class PageController extends Controller
     }
     public function index()
     {
-        // return $this->amountTicket();
-        $ticketAmount = $this->amountTicket();
-        $customerAmount = $this->amountCustomer();
-        $income = $this->income();
+        $ticketAmount = Sale::amountTicket($this->startOfWeek, $this->endOfWeek)->get();
+        $customerAmount = Sale::amountCustomer($this->startOfWeek, $this->endOfWeek)->get();
+        $income = Sale::calIncome($this->startOfWeek, $this->endOfWeek)->get();
         $data = [
-            'ticketAmount' =>  $ticketAmount[0]->amount ,
+            'ticketAmount' =>  $ticketAmount[0]->amount == null ? 0 : $ticketAmount[0]->amount,
             'customerAmount' => $customerAmount[0]->amount,
             'income' =>  $income[0]->total
         ];
-        // if( Auth::user()->role_id== 1){
-            return view('admin.index',$data);
-        // }
-        // else if( Auth::user()->role_id == 2){
-        //     return view('head.index',$data);
-        // }
-        // else if( Auth::user()->role_id == 3){
-        //     return view('employee.index',$data);
-        // }
-    }
-
-    private function amountTicket()
-    {
-        if( Auth::user()->role_id == 1){
-            return Sale::
-                    select(DB::raw('SUM(amount) as amount'))
-                    ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek])
-                    ->get();
-        }
-        else if(Auth::user()->role_id == 2){
-            return Sale::
-                    select(DB::raw('SUM(amount) as amount'))
-                    ->where('zone_id', '=', Auth::user()->zone_id )
-                    ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek])
-                    ->get();
-        }
-        else if( Auth::user()->role_id== 3){
-            return Sale::
-                    select(DB::raw('SUM(amount) as amount'))
-                    ->where('user_id', '=', Auth::user()->id )
-                    ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek])
-                    ->get();
-        }
-    }
-
-    private function amountCustomer()
-    {
-        if( Auth::user()->role_id == 1){
-            return Sale::
-                select(DB::raw('COUNT(id) as amount'))
-                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek])
-                ->get();
-        }
-        else if(Auth::user()->role_id == 2){
-            return Sale::
-                select(DB::raw('COUNT(id) as amount'))
-                ->where('zone_id', '=', Auth::user()->zone_id )
-                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek])
-                ->get();
-        }
-        else if( Auth::user()->role_id== 3){
-            return Sale::
-                select(DB::raw('COUNT(id) as amount'))
-                ->where('user_id', '=', Auth::user()->id )
-                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek])
-                ->get();
-        }
-    }
-
-    private function income()
-    {
-        if( Auth::user()->role_id == 1){
-            return Sale::
-                select(DB::raw('SUM(total) as total'))
-                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek])
-                ->get();
-        }
-        else if(Auth::user()->role_id == 2){
-            return Sale::
-                select(DB::raw('SUM(total) as total'))
-                ->where('zone_id', '=', Auth::user()->zone_id )
-                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek])
-                ->get();
-        }
-        else if( Auth::user()->role_id== 3){
-            return Sale::
-                select(DB::raw('SUM(total) as total'))
-                ->where('user_id', '=', Auth::user()->id )
-                ->whereBetween('created_at', [$this->startOfWeek, $this->endOfWeek])
-                ->get();
-        }
+            return view('marketing.admin.index',$data);
     }
 }

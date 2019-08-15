@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/*!
+@import url(https://fonts.googleapis.com/css?family=Sarabun);/*!
  *   AdminLTE v2.4.8
  *   Author: Almsaeed Studio
  *	 Website: Almsaeed Studio <https://adminlte.io>
@@ -18128,7 +18128,3 @@ button.close {
   clip: auto;
 }
 
-  /* custom Css */
-.label{
-  font-size: 110%
-}
