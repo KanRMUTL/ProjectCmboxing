@@ -158,6 +158,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex' 
 export default {
   props: ["id"],
   mounted() {
@@ -203,17 +204,19 @@ export default {
     },
 
     onBooked(index) {
-      if (this.id != 0) {
+      if(!this.getConfirmCheckout){
+        if (this.id != 0) {
         var currentSeat = this.seats[index];
         currentSeat.booked == 1
           ? this.bookDetails.splice(this.bookDetails.indexOf(currentSeat), 1)
           : this.bookDetails.push(this.seats[index]);
         this.seats[index].booked = currentSeat.booked == 1 ? 0 : 1;
-      } else {
-        swal({
-          icon: "warning",
-          title: "Please login for booking"
-        });
+        } else {
+          swal({
+            icon: "warning",
+            title: "Please login for booking"
+          });
+        }
       }
     },
 
@@ -224,6 +227,7 @@ export default {
   },
 
   computed: {
+    ...mapGetters(['getConfirmCheckout']),
     getTotal() {
       var total = 0;
       if (this.bookDetails.length > 0) {
@@ -238,9 +242,6 @@ export default {
 </script>
 
 <style>
-.seatRow .btn {
-  font-size: 75%;
-}
 
 .seatSelection {
   text-align: center;

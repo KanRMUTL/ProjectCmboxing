@@ -25,9 +25,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .root {
         display: inline;
     }
+    .btn {
+        padding: 0.4rem .7rem;
+            font-size: 62%;
+        }
 </style>
 

@@ -1,6 +1,7 @@
 
 require('./bootstrap');
 import swal from 'sweetalert';
+import store from './store'
 // import moment from 'moment';
 window.Vue = require('vue');
 window.axios = require('axios');
@@ -55,10 +56,12 @@ Vue.component('manage-trainer', require('./components/shopping/addmin/trainer/ma
 
 
 const app = new Vue({
+    store,
     el: '#vue'
 });
 
 const nav = new Vue({
+    store,
     el: '#nav'
 })
 

@@ -14,6 +14,7 @@
 </template>
 
 <script>
+ import { mapActions } from 'vuex' 
 export default {
   props: ["url", "saveBooking", "total"],
   data() {
@@ -26,7 +27,9 @@ export default {
   },
 
   methods: {
+    ...mapActions(['setConfirmCheckout']),
     createOrder(total, saveBooking) {
+      this.setConfirmCheckout(true)
       this.isConfirm = false;
       paypal
         .Buttons({

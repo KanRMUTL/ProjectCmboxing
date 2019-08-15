@@ -24,6 +24,7 @@
             class="form-control"
             placeholder="Quantity"
             v-model="dateVisit"
+            :disabled="!getConfirmCheckout"
           >
         </div>
         <div class="col-md-7 input-group">
@@ -33,6 +34,7 @@
             class="form-control"
             placeholder="Quantity"
             v-model="quantity"
+            :disabled="!getConfirmCheckout"
           >
         </div>
         <div class="col-md-7 input-group">
@@ -63,7 +65,7 @@
 
 <script>
 import mixin from '../../../mixin'
-
+import { mapGetters } from 'vuex' 
 export default {
   mixins: [mixin],
   
@@ -128,6 +130,7 @@ export default {
   },
 
   computed: {
+    ...mapGetters(['getConfirmCheckout']),
     showTotal() {
       if (this.quantity <= 0) {
         this.quantity = 1;
