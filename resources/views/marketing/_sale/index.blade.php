@@ -27,15 +27,18 @@
             <tr>
               <th class="center">ชื่อลูกค้า</th>
               <th class="center">เบอร์โทร</th>
+
+              @if($saleTypeName != 'walkin')
               <th class="center">หมายเลขห้อง</th>
               <th class="center">เกสเฮาท์</th>
+              @endif
+
               <th class="center">บัตร</th>
               <th class="center">จำนวน</th>
-              
               <th class="center">วันที่เข้ามาชมมวย</th>
               <th class="center">ขายโดย...</th>
               <th class="center">วันที่ขาย</th>
-              <th class="right money">ยอดรวม</th>
+            <th class="right money">ยอดรวม</th>
               <th>แก้ไข</th>
               <th>ลบ</th>
             </tr>
@@ -43,8 +46,12 @@
             <tr>
                 <td>{{ $sale->customer_name }}</td>
                 <td class="center">{{ $sale->customer_phone }}</td>
+
+                @if($saleTypeName != 'walkin')
                 <td class="center">{{ $sale->customer_room }}</td>
                 <td class="center">{{ $sale->guesthouse->name }}</td>
+                @endif
+
                 <td class="center">
                   <span class="label label-success">
                     {{ $sale->ticket->name }}

@@ -73,32 +73,37 @@ class ReportController extends StarterController
                 <table cellspacing='1'>
                     <tr>
                         <th>ชื่อลูกค้า</th>
-                        <th>เบอร์โทร</th>
-                        <th>หมายเลขห้อง</th>
-                        <th>เกสเฮาท์</th>
-                        <th>บัตร</th>
-                        <th>จำนวน</th>
-                        <th>ยอดรวม</th>
-                        <th>วันที่เข้ามาชมมวย</th>
-                        <th>ผู้ขาย</th>
-                        <th>วันที่ขาย</th>
-                    </tr>
+                        <th>เบอร์โทร</th> ";
+        if($saleTypeId != 3) {
+            $html .= " <th>หมายเลขห้อง</th>
+                        <th>เกสเฮาท์</th>";
+        }
+        $html .= "  <th>บัตร</th>
+                    <th>จำนวน</th>
+                    <th>ยอดรวม</th>
+                    <th>วันที่เข้ามาชมมวย</th>
+                    <th>ผู้ขาย</th>
+                    <th>วันที่ขาย</th>
+                </tr>
         ";
 
         foreach($sales as $sale) {
             $html .= "
                 <tr>
                     <td>".$sale->customer_name."</td>
-                    <td>".$sale->customer_phone."</td>
-                    <td class='center'>".$sale->customer_room."</td>
-                    <td class='center'>".$sale->guesthouse->name."</td>
-                    <td class='center'>".$sale->ticket->name."</td>
+                    <td>".$sale->customer_phone."</td>";
+            if($saleTypeId != 3) {
+               $html .="<td class='center'>".$sale->customer_room."</td>
+                    <td class='center'>".$sale->guesthouse->name."</td>";
+            }        
+
+            $html .= "<td class='center'>".$sale->ticket->name."</td>
                     <td class='center'>".$sale->amount."</td>
                     <td class='right'>".number_format($sale->total, 2, '.',',')."</td>
                     <td class='center'>".$sale->visit."</td>
                     <td>".$sale->firstname."&emsp;".$sale->lastname."</td>
                     <td class='center'>".date('d/m/Y', strtotime($sale->created_at))."</td>
-                </tr>
+                    </tr>
             ";
         }
 

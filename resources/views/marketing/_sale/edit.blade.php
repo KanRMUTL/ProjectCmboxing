@@ -23,6 +23,7 @@
       @include('layouts.component.invalidFeedback', ['input' => 'customerPhone'])
     </div>
 
+    @if($sale->sale_type != 3)
     <div class="row">
       <!-- Row-->
       <div class="col-md-6 col-sm-12">
@@ -50,6 +51,7 @@
       </div>
 
     </div> <!-- end Row-->
+    @endif
 
     <div class="row">
       <div class="col-md-6">

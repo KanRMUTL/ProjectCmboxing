@@ -51,8 +51,15 @@ class SaleController extends StarterController
         $sale->amount = $request->amount;
         $sale->customer_name = $request->customerName;
         $sale->customer_phone = $request->customerPhone;
-        $sale->customer_room = $request->customerRoom;
-        $sale->guesthouse_id = $request->guesthouseId;
+
+        if($request->saleTypeId == 3) {
+            $sale->customer_room = 0;
+            $sale->guesthouse_id = 0;
+        } else {
+            $sale->customer_room = $request->customerRoom;
+            $sale->guesthouse_id = $request->guesthouseId;
+        }
+
         $sale->sale_type = $request->saleTypeId;
         $sale->visit = $request->visitDay;
         $sale->ticket_id = $request->ticketId;

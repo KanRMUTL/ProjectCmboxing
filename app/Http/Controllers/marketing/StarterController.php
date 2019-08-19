@@ -31,12 +31,13 @@ class StarterController extends Controller
         $this->now = Carbon::now();
         $this->start =  $this->now->startOfWeek()->format('Y-m-d');
         $this->end = $this->now->endOfWeek()->format('Y-m-d');
-        $this->saleTypes = ['ปกติ', 'ขายผ่านไกด์', 'หน้า Office'];
+        $this->saleTypes = ['ปกติ', 'ขายผ่านไกด์', 'หน้า Office', 'Walk in'];
         $this->range = ['start' => $this->start, 'end' => $this->end];
         $this->saleTypeUrl = [
             'employee' => 0,
             'guide' => 1,
-            'office' => 2
+            'office' => 2,
+            'walkin' => 3
         ];
     }
 
@@ -44,7 +45,8 @@ class StarterController extends Controller
     {
         if($saleTypeId == 0) return '/sale/employee';
         else if($saleTypeId == 1) return 'sale/guide';
-        else return 'sale/office';
+        else if($saleTypeId == 2) return 'sale/office';
+        else return 'sale/walkin';
     }
 
     public function setDataForSaleType($saleTypeName)
@@ -66,6 +68,12 @@ class StarterController extends Controller
                 'url' => '/sale/office',
                 'header' => 'ข้อมูลการขายหน้า Office',
                 'saleTypeId' => 2
+            ];
+        } else if($saleTypeName == 'walkin') {
+            return [
+                'url' => '/sale/walkin',
+                'header' => 'ข้อมูลการขายบัตร Walk in',
+                'saleTypeId' => 3
             ];
         }
     }

@@ -27,8 +27,6 @@ class TicketRequest extends FormRequest
             'userId' => 'required',
             'customerName' => 'required|min:1|max:30',
             'customerPhone' => 'required|min:9|max:10',
-            'customerRoom' => 'required|min:1|max:10',
-            'guesthouseId' => 'required',
             'visitDay' => 'required',
             'saleTypeId' => 'required',
             'ticketId' => 'required',
@@ -44,8 +42,6 @@ class TicketRequest extends FormRequest
             'customerName.max' => 'ชื่อของลูกค้าต้องมีความยาว 9 - 30 ตัวอักษร',
             'customerPhone.min' => 'เบอร์โทรศัพท์ของลูกค้าต้องมีความยาว 9 - 10 ตัวอักษร',
             'customerPhone.max' => 'เบอร์โทรศัพท์ของลูกค้าต้องมีความยาว 9 - 10 ตัวอักษร',
-            'customerRoom.min' => 'หมายเลขห้องลูกค้าต้องมีความยาว 1 - 10 ตัวอักษร',
-            'customerRoom.max' => 'หมายเลขห้องลูกค้าต้องมีความยาว 1 - 10 ตัวอักษร',
             'amount.min' => 'จำนวนบัตรที่ขายต้องมีตัวเลข 1 - 2 หลัก',
             'amount.max' => 'จำนวนบัตรที่ขายต้องมีตัวเลข 1 - 2 หลัก',
         ];

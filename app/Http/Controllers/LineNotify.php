@@ -8,7 +8,7 @@ class LineNotify extends Controller
 {
      public $sale;
      public $messageFormated;
-     public $saleTypes = ['ปกติ', 'ขายผ่านไกด์', 'หน้า Office'];
+     public $saleTypes = ['ปกติ', 'ขายผ่านไกด์', 'หน้า Office', 'Walk in'];
      
 
      public function formatMessage() {
@@ -16,7 +16,7 @@ class LineNotify extends Controller
          $this->messageFormated = 
                $this->sale->user->firstname." ".$this->sale->user->lastname
                ."โซน ". $this->sale->zone->name
-               ."\nขายบัตรประเภท ". $saleType ."  จำนวน ".$this->sale['amount'] ." ใบ\n"
+               ."\nประเภทการขาย ". $saleType ."  จำนวน ".$this->sale['amount'] ." ใบ\n"
                ."ยอดขายรวมทั้งหมด ".number_format($this->sale['total']) ." บาท"
                ;
      }
