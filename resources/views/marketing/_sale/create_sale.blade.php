@@ -33,6 +33,7 @@
             @include('layouts.component.invalidFeedback', ['input' => 'customerPhone'])
         </div>
 
+        @if($saleTypeName != 'walkin')
         <div class="row">
           <!-- Row-->
           <div class="col-md-6 col-sm-12">
@@ -56,6 +57,7 @@
           </div>
 
         </div> <!-- end Row-->
+        @endif
         <div class="row">
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
@@ -64,6 +66,8 @@
               @include('layouts.component.invalidFeedback', ['input' => 'visitDay'])
             </div>
           </div>
+
+          @if($saleTypeName != 'walkin')
           <div class="col-md-6 col-sm-12">
             <label for="ticketId">ประเภทการขาย</label>
             <div class="form-group" id="ticketId">
@@ -75,6 +79,10 @@
               @include('layouts.component.invalidFeedback', ['input' => 'saleTypeId'])
             </div>
           </div>
+          @else
+            <input type="hidden" name="saleTypeId" value="3">
+          @endif
+
         </div>
         <div class="row">
           <div class="col-md-6 col-sm-12">

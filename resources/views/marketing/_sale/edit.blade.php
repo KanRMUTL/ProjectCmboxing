@@ -61,6 +61,8 @@
           @include('layouts.component.invalidFeedback', ['input' => 'visitDay'])
         </div>
     </div>
+
+    @if($sale->sale_type != 3)
     <div class="col-md-6 col-sm-12">
         <label for="ticketId">ประเภทการขาย</label>
         <div class="form-group" id="ticketId">
@@ -76,6 +78,10 @@
           @include('layouts.component.invalidFeedback', ['input' => 'saleTypeId'])
         </div>
       </div>
+    @else
+      <input type="hidden" name="saleTypeId" value="3">
+    @endif
+
     </div>
     <div class="row">
       <div class="col-md-6 col-sm-12">

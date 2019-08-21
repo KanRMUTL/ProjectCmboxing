@@ -28,7 +28,6 @@ class TicketRequest extends FormRequest
             'customerName' => 'required|min:1|max:30',
             'customerPhone' => 'required|min:9|max:10',
             'visitDay' => 'required',
-            'saleTypeId' => 'required',
             'ticketId' => 'required',
             'amount' => 'required|min:1|max:2'
         ];
