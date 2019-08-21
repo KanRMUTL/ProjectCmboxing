@@ -73,4 +73,9 @@ class ShoppingController extends StarterController
     {
         return view('shopping.user.resetpassword');
     }
+
+    public function ticketOnline()
+    {
+        return view('shopping.addmin.ticket.index');
+    }
 }

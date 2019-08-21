@@ -45,6 +45,11 @@ class User extends Authenticatable
         return $this->hasMany('App\shopping\CourseRegister');
     }
 
+    public function saleTicket()
+    {
+        return $this->hasMany('App\shopping\SaleTicket', 'user_id', 'id');
+    }
+
     public function scopeGetUsers($query)
     {
         if(Auth()->user()->role == 1)

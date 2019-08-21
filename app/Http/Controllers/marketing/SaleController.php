@@ -92,7 +92,6 @@ class SaleController extends StarterController
     public function update(TicketRequest $request, $id)
     {
         $ticket = Ticket::find($request->ticketId); // เอาไว้คำนวณราคาสุทธิ total
-        // return $request;
         $data = [
             'amount' => $request->amount,
             'total' =>  $ticket['price'] * $request->amount,

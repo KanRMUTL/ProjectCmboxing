@@ -37,6 +37,7 @@ Route::post('/passwordreset/{id}', 'Api\UserController@passwordReseted');
 
 Route::get('/getTicket', 'Api\shopping\ShoppingController@ticket');
 Route::get('/showTicket/{id}', 'Api\shopping\ShoppingController@showTicket');
+Route::get('/saleTicketOnline', 'Api\shopping\BookingController@searchSaleTicketOnline');
 Route::post('/zoneSalingChart', 'Api\marketing\ChartController@zoneSaling');
 Route::post('/ticketSalingChart', 'Api\marketing\ChartController@ticketSaling');
 Route::post('/ticketSalingChart', 'Api\marketing\ChartController@ticketSaling');
