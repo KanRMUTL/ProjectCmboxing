@@ -65,6 +65,7 @@ Route::group(['middleware' =>['auth']], function() {
 
     Route::get('/userprofile','shopping\ShoppingController@profile');
     Route::get('/customer_resetpassword', 'shopping\ShoppingController@resetpassword');
+    Route::get('/saleTicketOnline', 'shopping\ShoppingController@ticketOnline');
 });
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout

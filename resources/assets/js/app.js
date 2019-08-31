@@ -53,6 +53,8 @@ Vue.component('customer-resetpassword', require('./components/shopping/profile/r
 Vue.component('course', require('./components/shopping/addmin/course/course.vue'));
 Vue.component('report-course', require('./components/shopping/addmin/course/report-course.vue'));
 Vue.component('manage-trainer', require('./components/shopping/addmin/trainer/manage.vue'));
+Vue.component('sale-ticket-online', require('./components/shopping/addmin/ticket/sale-ticket-online.vue'));
+Vue.component('ticket-online-detail', require('./components/shopping/addmin/ticket/ticket-online-detail.vue'));
 
 
 const app = new Vue({

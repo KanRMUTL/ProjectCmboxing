@@ -42,7 +42,6 @@ class BookingController extends StarterController
   
     public function store(Request $request)
     {
-        // return response()->json($request);
         try{
             $saleTicket = new SaleTicket();
 

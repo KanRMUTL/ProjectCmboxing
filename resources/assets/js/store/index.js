@@ -1,12 +1,15 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import shopping from './shopping'
+import shopping from './modules/shopping'
+import ticketOnline from './modules/ticketOnline'
+
 Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
     modules: {
-        shopping
+        shopping,
+        ticketOnline
     },
     strict: debug
 })
