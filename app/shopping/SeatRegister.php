@@ -15,6 +15,11 @@ class SeatRegister extends Model
     {
         return $this->belongsTo('App\shopping\Seat');
     }
+    
+    public function SaleTicket()
+    {
+        return $this->belongsTo('App\shopping\SaleTicket');
+    }
 
     public function scopeCheckVisit($query, $seatId, $date)
     {

@@ -15,6 +15,10 @@ class SaleTicket extends Model
         return $this->hasMany('App\shopping\SaleTicketDetail');
     }
 
+    public function SeatRegister()
+    {
+        return $this->hasMany('App\shopping\SeatRegister');
+    }
     public function scopeTicketDetail($query, $userId)
     {
         return $query

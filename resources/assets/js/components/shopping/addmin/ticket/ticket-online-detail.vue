@@ -5,22 +5,40 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content ticket">
                     <div class="ticket__content">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">CM Boxing</h5>
-                        <h5 class="visit-day">Visit Day : </h5>
-                        <div>
+                        <img id="logo" src="shopping/img/Logo.png">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">CM Boxing Stadium</h5>
+                        <h5 class="visit-day">Visit: {{ ticket.visit }}</h5>
+                        <div class="seat-detail">
                             Ringside:
-                            <span class="badge badge-primary mt-1">
-                            </span>
-                            <span class="badge badge-secondary mt-1">
-                                Non selected
+                            <b
+                                v-for="(seat, index) in ticket.sale_ticket_detail" 
+                                v-if="seat.ticket_id == 2" 
+                                :key="index"
+                            >
+                                <span 
+                                    class="badge badge-success mt-1 mr-1" 
+                                    v-for="(seat, index) in ticket.seat_register" 
+                                    :key="index">
+                                   {{ seat.name }}
+                                </span>
+                            </b>
+                            <span class="badge badge-secondary mt-1" v-else>
+                             Non selected
                             </span>
                         </div>
-                        <div>
+                        <div class="seat-detail">
                             VIP:
-                            <span class="badge badge-primary mt-1">
-                            </span>
-                            <span class="badge badge-secondary mt-1">
-                                Non selected
+                           <b
+                                v-for="(seat, index) in ticket.sale_ticket_detail" 
+                                v-if="seat.ticket_id == 3" 
+                                :key="index"
+                            >
+                                <span class="badge badge-success mt-1 mr-1" v-for="(seat, index) in ticket.seat_register" :key="index">
+                                   {{ seat.name }}
+                                </span>
+                            </b>
+                            <span class="badge badge-secondary mt-1" v-else>
+                             Non selected
                             </span>
                         </div>
                         <p class="ticket__text">Ticket
@@ -37,7 +55,7 @@
     export default {
         data() {
             return {
-                ticket: ['Grandstand', 'Ringside', 'VIP']
+                ticketType: ['Grandstand', 'Ringside', 'VIP']
             }
         },
         computed: {
@@ -50,6 +68,21 @@
 </script>
 
 <style lang="scss" scoped>
+    #logo {
+        width: 50px;
+        display: block;
+        margin: 0 auto;
+    }
+    #exampleModalCenterTitle{
+        font-size: 1.8em;
+    }
+
+    .seat-detail{
+        font-size: 1.2em;
+    }
+    .seat-detail span{
+        font-size: 1em;
+    }
     .ticket-status {
         text-align: center;
     }
@@ -64,8 +97,10 @@
 
     .modal-title,
     .visit-day {
-        text-align: center;
-        margin-bottom: 3%;
+        text-align: left;
+        margin-bottom: 7%;
+        font-size: 1.3em;
+
     }
 
     .ticket {

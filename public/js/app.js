@@ -74797,7 +74797,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.ticket-status[data-v-2783d2ef] {\n  text-align: center;\n}\n.ticket-status span[data-v-2783d2ef] {\n  font-size: 170%;\n}\n.modal-content[data-v-2783d2ef] {\n  border: 0 solid;\n}\n.modal-title[data-v-2783d2ef],\n.visit-day[data-v-2783d2ef] {\n  text-align: center;\n  margin-bottom: 3%;\n}\n.ticket[data-v-2783d2ef] {\n  position: relative;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 300px;\n  height: 450px;\n  margin: 150px auto 0;\n  padding: 20px;\n  border-radius: 10px;\n  background: #FBFBFB;\n  -webkit-box-shadow: 2px 2px 15px 0px #AB9B0D;\n          box-shadow: 2px 2px 15px 0px #AB9B0D;\n}\n.ticket[data-v-2783d2ef]:before, .ticket[data-v-2783d2ef]:after {\n    content: '';\n    position: absolute;\n    left: 5px;\n    height: 6px;\n    width: 290px;\n}\n.ticket[data-v-2783d2ef]:before {\n    top: -5px;\n    background: radial-gradient(circle, transparent, transparent 50%, #FBFBFB 50%, #FBFBFB 100%) -7px -8px/16px 16px repeat-x;\n}\n.ticket[data-v-2783d2ef]:after {\n    bottom: -5px;\n    background: radial-gradient(circle, transparent, transparent 50%, #FBFBFB 50%, #FBFBFB 100%) -7px -2px/16px 16px repeat-x;\n}\n.ticket__content[data-v-2783d2ef] {\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  height: 100%;\n  width: 100%;\n  border: 6px solid #D8D8D8;\n  padding: 6%;\n}\n.ticket__text[data-v-2783d2ef] {\n  width: 323px;\n  font-family: 'Helvetica', 'Arial', sans-serif;\n  font-size: 3rem;\n  font-weight: 900;\n  text-transform: uppercase;\n  color: #efefef;\n  -webkit-transform: translate(-25px, 25px) rotate(-55deg);\n          transform: translate(-25px, 25px) rotate(-55deg);\n}\n", ""]);
+exports.push([module.i, "\n#logo[data-v-2783d2ef] {\n  width: 50px;\n  display: block;\n  margin: 0 auto;\n}\n#exampleModalCenterTitle[data-v-2783d2ef] {\n  font-size: 1.8em;\n}\n.seat-detail[data-v-2783d2ef] {\n  font-size: 1.2em;\n}\n.seat-detail span[data-v-2783d2ef] {\n  font-size: 1em;\n}\n.ticket-status[data-v-2783d2ef] {\n  text-align: center;\n}\n.ticket-status span[data-v-2783d2ef] {\n  font-size: 170%;\n}\n.modal-content[data-v-2783d2ef] {\n  border: 0 solid;\n}\n.modal-title[data-v-2783d2ef],\n.visit-day[data-v-2783d2ef] {\n  text-align: left;\n  margin-bottom: 7%;\n  font-size: 1.3em;\n}\n.ticket[data-v-2783d2ef] {\n  position: relative;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 300px;\n  height: 450px;\n  margin: 150px auto 0;\n  padding: 20px;\n  border-radius: 10px;\n  background: #FBFBFB;\n  -webkit-box-shadow: 2px 2px 15px 0px #AB9B0D;\n          box-shadow: 2px 2px 15px 0px #AB9B0D;\n}\n.ticket[data-v-2783d2ef]:before, .ticket[data-v-2783d2ef]:after {\n    content: '';\n    position: absolute;\n    left: 5px;\n    height: 6px;\n    width: 290px;\n}\n.ticket[data-v-2783d2ef]:before {\n    top: -5px;\n    background: radial-gradient(circle, transparent, transparent 50%, #FBFBFB 50%, #FBFBFB 100%) -7px -8px/16px 16px repeat-x;\n}\n.ticket[data-v-2783d2ef]:after {\n    bottom: -5px;\n    background: radial-gradient(circle, transparent, transparent 50%, #FBFBFB 50%, #FBFBFB 100%) -7px -2px/16px 16px repeat-x;\n}\n.ticket__content[data-v-2783d2ef] {\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  height: 100%;\n  width: 100%;\n  border: 6px solid #D8D8D8;\n  padding: 6%;\n}\n.ticket__text[data-v-2783d2ef] {\n  width: 323px;\n  font-family: 'Helvetica', 'Arial', sans-serif;\n  font-size: 3rem;\n  font-weight: 900;\n  text-transform: uppercase;\n  color: #efefef;\n  -webkit-transform: translate(-25px, 25px) rotate(-55deg);\n          transform: translate(-25px, 25px) rotate(-55deg);\n}\n", ""]);
 
 // exports
 
@@ -74845,12 +74845,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            ticket: ['Grandstand', 'Ringside', 'VIP']
+            ticketType: ['Grandstand', 'Ringside', 'VIP']
         };
     },
 
@@ -74870,87 +74888,156 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "div",
-        {
-          staticClass: "modal fade",
-          attrs: {
-            id: "ticket-detail-modal",
-            tabindex: "-1",
-            role: "dialog",
-            "aria-labelledby": "exampleModalCenterTitle",
-            "aria-hidden": "true"
-          }
-        },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "modal-dialog modal-dialog-centered",
-              attrs: { role: "document" }
-            },
-            [
-              _c("div", { staticClass: "modal-content ticket" }, [
-                _c("div", { staticClass: "ticket__content" }, [
-                  _c(
-                    "h5",
-                    {
-                      staticClass: "modal-title",
-                      attrs: { id: "exampleModalCenterTitle" }
-                    },
-                    [_vm._v("CM Boxing")]
-                  ),
-                  _vm._v(" "),
-                  _c("h5", { staticClass: "visit-day" }, [
-                    _vm._v("Visit Day : ")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", [
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "ticket-detail-modal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content ticket" }, [
+              _c("div", { staticClass: "ticket__content" }, [
+                _c("img", {
+                  attrs: { id: "logo", src: "shopping/img/Logo.png" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "exampleModalCenterTitle" }
+                  },
+                  [_vm._v("CM Boxing Stadium")]
+                ),
+                _vm._v(" "),
+                _c("h5", { staticClass: "visit-day" }, [
+                  _vm._v("Visit: " + _vm._s(_vm.ticket.visit))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "seat-detail" },
+                  [
                     _vm._v(
                       "\n                        Ringside:\n                        "
                     ),
-                    _c("span", { staticClass: "badge badge-primary mt-1" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "badge badge-secondary mt-1" }, [
-                      _vm._v(
-                        "\n                            Non selected\n                        "
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", [
+                    _vm._l(_vm.ticket.sale_ticket_detail, function(
+                      seat,
+                      index
+                    ) {
+                      return seat.ticket_id == 2
+                        ? _c(
+                            "b",
+                            { key: index },
+                            _vm._l(_vm.ticket.seat_register, function(
+                              seat,
+                              index
+                            ) {
+                              return _c(
+                                "span",
+                                {
+                                  key: index,
+                                  staticClass: "badge badge-success mt-1 mr-1"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                               " +
+                                      _vm._s(seat.name) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            })
+                          )
+                        : _c(
+                            "span",
+                            { staticClass: "badge badge-secondary mt-1" },
+                            [
+                              _vm._v(
+                                "\n                         Non selected\n                        "
+                              )
+                            ]
+                          )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "seat-detail" },
+                  [
                     _vm._v(
-                      "\n                        VIP:\n                        "
+                      "\n                        VIP:\n                       "
                     ),
-                    _c("span", { staticClass: "badge badge-primary mt-1" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "badge badge-secondary mt-1" }, [
-                      _vm._v(
-                        "\n                            Non selected\n                        "
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "ticket__text" }, [
-                    _vm._v("Ticket\n                    ")
-                  ])
+                    _vm._l(_vm.ticket.sale_ticket_detail, function(
+                      seat,
+                      index
+                    ) {
+                      return seat.ticket_id == 3
+                        ? _c(
+                            "b",
+                            { key: index },
+                            _vm._l(_vm.ticket.seat_register, function(
+                              seat,
+                              index
+                            ) {
+                              return _c(
+                                "span",
+                                {
+                                  key: index,
+                                  staticClass: "badge badge-success mt-1 mr-1"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                               " +
+                                      _vm._s(seat.name) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            })
+                          )
+                        : _c(
+                            "span",
+                            { staticClass: "badge badge-secondary mt-1" },
+                            [
+                              _vm._v(
+                                "\n                         Non selected\n                        "
+                              )
+                            ]
+                          )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "ticket__text" }, [
+                  _vm._v("Ticket\n                    ")
                 ])
               ])
-            ]
-          )
-        ]
-      )
-    ])
-  }
-]
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

@@ -32,7 +32,14 @@ class BookingController extends StarterController
         $data = SaleTicket::search($request->start, $request->end)->get();
         
         foreach($data as $key => $item) {
-            $data[$key]['detail'] = $item->SaleTicketDetail;
+            $data[$key]['sale_ticket_detail'] = $item->SaleTicketDetail;
+            $data[$key]['seat_register'] = $item->SeatRegister;
+
+            foreach($item->SeatRegister as $seatKey => $seatItem){
+                // $data[$key]['seat_register']['seat'] = $seatItem->seat;
+                $data[$key]['seat_register'][$seatKey]['name'] = $seatItem->seat->name;
+            }
+
             $data[$key]['user'] = $item->user;
         }
 
