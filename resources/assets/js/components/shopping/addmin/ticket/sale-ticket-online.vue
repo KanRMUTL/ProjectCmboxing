@@ -61,7 +61,7 @@
                 </tr>
               </tbody>
             </table>
-            <a :href="reportLink" class="btn btn-block btn-primary">ออกรายงาน</a>
+            <a :href="reportLink" target="_blank" class="btn btn-block btn-primary">ออกรายงาน</a>
           </div>
         </div>
       </div>

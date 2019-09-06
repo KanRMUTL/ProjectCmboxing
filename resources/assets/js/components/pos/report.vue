@@ -60,12 +60,12 @@
               <button class="btn btn-primary">รายละเอียด</button>
             </td>
             <td>
-              <a :href="'/stock/bill/' + bill.id" class="btn btn-primary">ออกรายงาน</a>
+              <a :href="'/stock/bill/' + bill.id" target="_blank" class="btn btn-primary">ออกรายงาน</a>
             </td>
           </tr>
         </tbody>
       </table>
-      <a :href="'/stock/allbills/' + start + '/' + end" class="btn btn-primary btn-block">ออกรายงาน</a>
+      <a :href="'/stock/allbills/' + start + '/' + end" target="_blank" class="btn btn-primary btn-block">ออกรายงาน</a>
       <!-- Modal -->
       <div
         class="modal fade bd-example-modal-lg"

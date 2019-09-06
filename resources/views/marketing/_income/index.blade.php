@@ -41,7 +41,7 @@
             @endforeach
           </table>
           <div class="col-md-12 mt-3">
-            <form action="/incomeReport" method="POST">
+            <form action="/incomeReport" method="POST" target="_blank">
               {{@csrf_field()}}
               <input type="hidden" value="{{ $range['start'] }}" name="start">
               <input type="hidden" value="{{ $range['end'] }}" name="end">

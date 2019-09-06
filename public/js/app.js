@@ -64792,7 +64792,10 @@ var render = function() {
                         "a",
                         {
                           staticClass: "btn btn-primary",
-                          attrs: { href: "/stock/bill/" + bill.id }
+                          attrs: {
+                            href: "/stock/bill/" + bill.id,
+                            target: "_blank"
+                          }
                         },
                         [_vm._v("ออกรายงาน")]
                       )
@@ -64810,7 +64813,10 @@ var render = function() {
         "a",
         {
           staticClass: "btn btn-primary btn-block",
-          attrs: { href: "/stock/allbills/" + _vm.start + "/" + _vm.end }
+          attrs: {
+            href: "/stock/allbills/" + _vm.start + "/" + _vm.end,
+            target: "_blank"
+          }
         },
         [_vm._v("ออกรายงาน")]
       ),
@@ -74065,7 +74071,10 @@ var render = function() {
               "a",
               {
                 staticClass: "btn btn-block btn-primary",
-                attrs: { href: "/course/" + _vm.start + "/" + _vm.end }
+                attrs: {
+                  href: "/course/" + _vm.start + "/" + _vm.end,
+                  target: "_blank"
+                }
               },
               [_vm._v("ออกรายงาน")]
             )
@@ -74679,7 +74688,7 @@ var render = function() {
                 "a",
                 {
                   staticClass: "btn btn-block btn-primary",
-                  attrs: { href: _vm.reportLink }
+                  attrs: { href: _vm.reportLink, target: "_blank" }
                 },
                 [_vm._v("ออกรายงาน")]
               )
