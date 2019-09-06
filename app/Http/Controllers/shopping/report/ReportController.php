@@ -5,6 +5,7 @@ namespace App\Http\Controllers\shopping\report;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\shopping\CourseRegister;
+use App\shopping\SaleTicket;
 use Mpdf\Mpdf;
 
 class ReportController extends Controller
@@ -80,6 +81,48 @@ class ReportController extends Controller
                     <td class='center'>".$report->trainer_name."</td>
                     <td class='center'>".date('d/m/Y', strtotime($report->created_at))."</td>
                     <td class='center'>".date('d/m/Y', strtotime($report->start_course))."</td>
+                </tr>
+            ";
+        }
+
+        $html .= '</table></div>';
+        $html = $this->ReportStyle.$html;
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+    }
+
+    public function reportTicketOnline($start, $end)
+    {
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8']);
+       
+
+        $data = SaleTicket::search($start, $end)->get();
+        // return $data;
+        $html = "
+        <div class='content center'>"
+        .$this->ReportTitle().
+        "<p class='title'>
+            รายงานการขายบัตรออนไลน์
+            วันที่ ".date('d/m/Y', strtotime($start))." 
+            ถึงวันที่ ".date('d/m/Y', strtotime($end))." 
+        </p>
+                <table >
+                    <tr>
+                        <th width='70'>รหัสการขาย</th>
+                        <th>ชื่อลูกค้า</th>
+                        <th class='right'>ยอดขาย</th>
+                        <th>วันที่มาชมมวย</th>
+                        <th>วันที่ซื้อ</th>
+                    </tr>
+        ";
+        foreach($data as $item) {
+            $html .= "
+                <tr>
+                    <td class='center'>".$item->id."</td>
+                    <td>".$item->firstname."&emsp;". $item->lastname ."</td>
+                    <td class='right'>".$item->total."</td>
+                    <td class='center'>".date('d/m/Y', strtotime($item->visit))."</td>
+                    <td class='center'>".date('d/m/Y', strtotime($item->created_at))."</td>
                 </tr>
             ";
         }

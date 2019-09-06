@@ -22,6 +22,7 @@ Route::group(['middleware' =>['auth']], function() {
     Route::get('/course/{user_id}', 'shopping\CourseController@show'); // ลูกค้าดูรายละเอียดการซื้อคอร์ส
     Route::get('/course_report', 'shopping\ShoppingController@reportCourse'); // ลูกค้าดูรายละเอียดการซื้อคอร์ส
     Route::get('/course/{start}/{end}', 'shopping\report\ReportController@courseRegister');
+    
     // ครูสอนมวยไทย
     Route::get('/trainer', 'shopping\TrainerController@index');
     Route::post('/trainer', 'shopping\TrainerController@store');
@@ -66,6 +67,7 @@ Route::group(['middleware' =>['auth']], function() {
     Route::get('/userprofile','shopping\ShoppingController@profile');
     Route::get('/customer_resetpassword', 'shopping\ShoppingController@resetpassword');
     Route::get('/saleTicketOnline', 'shopping\ShoppingController@ticketOnline');
+    Route::get('/saleTicketOnline/{start}/{end}', 'shopping\report\ReportController@reportTicketOnline');
 });
 
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout

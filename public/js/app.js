@@ -74398,7 +74398,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -74514,7 +74514,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     ticketSelected: function ticketSelected(state) {
       return state.ticket;
     }
-  })),
+  }), {
+    reportLink: function reportLink() {
+      return 'saleTicketOnline/' + this.rang.start + '/' + this.rang.end;
+    }
+  }),
   filters: {
     dateFormat: function dateFormat(value) {
       return moment(value).format("DD/MM/YYYY");
@@ -74671,9 +74675,14 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("a", { staticClass: "btn btn-block btn-primary" }, [
-                _vm._v("ออกรายงาน")
-              ])
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-block btn-primary",
+                  attrs: { href: _vm.reportLink }
+                },
+                [_vm._v("ออกรายงาน")]
+              )
             ])
           ])
         ])

@@ -61,7 +61,7 @@
                 </tr>
               </tbody>
             </table>
-            <a class="btn btn-block btn-primary">ออกรายงาน</a>
+            <a :href="reportLink" class="btn btn-block btn-primary">ออกรายงาน</a>
           </div>
         </div>
       </div>
@@ -102,7 +102,10 @@ export default {
     ...mapState('ticketOnline',{
       tickets: state => state.tickets,
       ticketSelected: state => state.ticket
-    })   
+    }),
+    reportLink(){
+      return `saleTicketOnline/${this.rang.start}/${this.rang.end}`
+    }
   },
   filters: {
     dateFormat: function(value) {
