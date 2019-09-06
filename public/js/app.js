@@ -67646,7 +67646,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.seatSelection {\r\n  text-align: center;\r\n  padding: 5px;\r\n  margin: 15px;\n}\n.seatsReceipt {\r\n  text-align: center;\n}\n.seatNumber {\r\n  display: inline;\r\n  padding: 10px;\r\n  background-color: #5c86eb;\r\n  color: #fff;\r\n  border-radius: 5px;\r\n  cursor: default;\r\n  height: 25px;\r\n  width: 25px;\r\n  line-height: 25px;\r\n  text-align: center;\n}\n.seatEndRow {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  padding: 10px;\r\n  background-color: #5c86eb;\r\n  color: #fff;\r\n  border-radius: 5px;\r\n  cursor: default;\r\n  height: 25px;\r\n  width: 25px;\r\n  line-height: 25px;\r\n  text-align: center;\n}\n.seatRow {\r\n  padding: 10px;\n}\n.seatSelected {\r\n  background-color: lightgreen;\r\n  color: black;\n}\n.seatUnavailable {\r\n  background-color: gray;\n}\n.seatRowNumber {\r\n  clear: none;\r\n  display: inline;\n}\n.hidden {\r\n  display: none;\n}\n.seatsAmount {\r\n  max-width: 2em;\n}\r\n", ""]);
+exports.push([module.i, "\n@media(max-width: 576px){\n#booking-detail{\r\n    width: 50%;\n}\n}\n@media(max-width: 768px) {\n#booking, header, header div, header div nav, header div nav .container {\r\n    width: 1100px !important;\r\n    position: block;\n}\n#mainNav{\r\n  position: fixed;\n}\n}\n.seatSelection {\r\n  text-align: center;\r\n  padding: 5px;\r\n  margin: 15px;\n}\n.seatsReceipt {\r\n  text-align: center;\n}\n.seatNumber {\r\n  display: inline;\r\n  padding: 10px;\r\n  background-color: #5c86eb;\r\n  color: #fff;\r\n  border-radius: 5px;\r\n  cursor: default;\r\n  height: 25px;\r\n  width: 25px;\r\n  line-height: 25px;\r\n  text-align: center;\n}\n.seatEndRow {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  padding: 10px;\r\n  background-color: #5c86eb;\r\n  color: #fff;\r\n  border-radius: 5px;\r\n  cursor: default;\r\n  height: 25px;\r\n  width: 25px;\r\n  line-height: 25px;\r\n  text-align: center;\n}\n.seatRow {\r\n  padding: 10px;\n}\n.seatSelected {\r\n  background-color: lightgreen;\r\n  color: black;\n}\n.seatUnavailable {\r\n  background-color: gray;\n}\n.seatRowNumber {\r\n  clear: none;\r\n  display: inline;\n}\n.hidden {\r\n  display: none;\n}\n.seatsAmount {\r\n  max-width: 2em;\n}\r\n", ""]);
 
 // exports
 
@@ -67660,6 +67660,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(6);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
 //
 //
 //
@@ -67905,15 +67908,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { attrs: { id: "booking" } }, [
     _vm._m(0),
     _vm._v(" "),
     _c(
       "div",
-      { class: { "col-md-9": _vm.id != 0, "col-md-12": _vm.id == 0 } },
+      { class: { "col-md-12": _vm.id != 0, "col-md-12": _vm.id == 0 } },
       [
         _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "col-md-5 col-lg-3 col-xs-2 col-4" }, [
             _c("div", { staticClass: "input-group" }, [
               _c("div", { staticClass: "input-group-addon" }, [
                 _vm._v("Select Date")
@@ -67930,6 +67933,7 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 attrs: {
+                  autofocus: "",
                   type: "date",
                   id: "inlineFormInputGroup",
                   min: _vm.dateSearch
@@ -67964,8 +67968,8 @@ var render = function() {
         "div",
         {
           class: {
-            "seatSelection col-md-9": _vm.id != 0,
-            "seatSelection col-md-12": _vm.id == 0
+            "seatSelection col-md-12 col-lg-12": _vm.id != 0,
+            "seatSelection col-md-12 col-lg-9": _vm.id == 0
           }
         },
         [
@@ -67994,7 +67998,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "col-md-6 col-6" }, [
               _c(
                 "div",
                 { staticClass: "seatRow" },
@@ -68016,7 +68020,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "col-md-6 col-6" }, [
               _c(
                 "div",
                 { staticClass: "seatRow" },
@@ -68043,7 +68047,7 @@ var render = function() {
           _c("br"),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-4" }, [
+            _c("div", { staticClass: "col-md-4 col-4" }, [
               _c(
                 "div",
                 { staticClass: "seatRow" },
@@ -68067,7 +68071,7 @@ var render = function() {
             _vm._v(" "),
             _vm._m(1),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
+            _c("div", { staticClass: "col-md-4 col-4" }, [
               _c(
                 "div",
                 { staticClass: "seatRow" },
@@ -68114,11 +68118,13 @@ var render = function() {
             ])
           ])
         ]
-      ),
-      _vm._v(" "),
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-center" }, [
       _c(
         "div",
-        { staticClass: "col-md-2" },
+        { staticClass: "col-md-3 col-sm-4", attrs: { id: "booking-detail" } },
         [
           _vm.id != 0
             ? _c("booking-detail", {
@@ -68170,7 +68176,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
+    return _c("div", { staticClass: "col-md-4 col-4" }, [
       _c("img", {
         staticStyle: { width: "100%", height: "96%" },
         attrs: { src: "/shopping/img/topview.jpg" }
@@ -68428,7 +68434,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.total {\n    color: #2d15e4;\n    font-size: 125%;\n    font-weight: 600;\n    line-height: 1;\n    text-align: center;\n}\n.detail {\n    color:#2d15e4;\n    font-size: 110%;\n    font-weight: 600;\n    line-height: 1;\n}\n\n", ""]);
+exports.push([module.i, "\n.card{\n    width: 100%;\n}\n.total {\n    color: #2d15e4;\n    font-size: 125%;\n    font-weight: 600;\n    line-height: 1;\n    text-align: center;\n}\n.detail {\n    color:#2d15e4;\n    font-size: 110%;\n    font-weight: 600;\n    line-height: 1;\n}\n\n", ""]);
 
 // exports
 
@@ -68577,7 +68583,7 @@ var render = function() {
       staticStyle: { "margin-top": "20px" }
     },
     [
-      _c("div", { staticClass: "card", staticStyle: { width: "100%" } }, [
+      _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header total" }, [
           _vm._v("\n            Booking Detail\n        ")
         ]),
