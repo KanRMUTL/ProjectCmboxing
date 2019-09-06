@@ -70315,7 +70315,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticStyle: { "margin-top": "5%" } }, [
     _c("div", { staticClass: "wrapper row" }, [
-      _c("div", { staticClass: "preview col-md-6" }, [
+      _c("div", { staticClass: "preview col-md-12 col-lg-6" }, [
         _c("div", { staticClass: "preview-pic tab-content" }, [
           _c("div", { staticClass: "tab-pane active" }, [
             _c("img", {
@@ -70326,7 +70326,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "details col-md-6" }, [
+      _c("div", { staticClass: "details col-md-12 col-lg-6" }, [
         _c("h3", { staticClass: "product-title" }, [
           _vm._v(_vm._s(_vm.ticket.name))
         ]),
@@ -70342,7 +70342,7 @@ var render = function() {
           _c("span", [_vm._v(_vm._s(_vm.moneyFormat(_vm.ticket.price)) + " ฿")])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-7 input-group" }, [
+        _c("div", { staticClass: "col-md-12 col-lg-7 input-group" }, [
           _vm._m(0),
           _vm._v(" "),
           _c("input", {
@@ -70373,7 +70373,7 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-7 input-group" }, [
+        _c("div", { staticClass: "col-md-12 col-lg-7 col-md-7 input-group" }, [
           _vm._m(1),
           _vm._v(" "),
           _c("input", {
@@ -70403,7 +70403,7 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-7 input-group" }, [
+        _c("div", { staticClass: "col-md-12 col-lg-7 col-md-7 input-group" }, [
           _vm._m(2),
           _vm._v(" "),
           _c("input", {
@@ -70413,7 +70413,7 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-7 action" }, [
+        _c("div", { staticClass: "col-md-12 col-lg-7 col-md-7 action" }, [
           _c(
             "div",
             { staticClass: "title-but" },

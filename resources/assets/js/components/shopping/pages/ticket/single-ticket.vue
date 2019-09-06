@@ -2,8 +2,7 @@
   <div style="margin-top: 5%;">
 
     <div class="wrapper row">
-      <div class="preview col-md-6">
-
+      <div class="preview col-md-12 col-lg-6">
         <div class="preview-pic tab-content">
           <div class="tab-pane active"><img
               :src="'/shopping/img/ticket/' + ticket.img"
@@ -11,12 +10,13 @@
             ></div>
         </div>
       </div>
-      <div class="details col-md-6">
+
+      <div class="details col-md-12 col-lg-6">
         <h3 class="product-title">{{ ticket.name }}</h3>
         <p class="product-description">Thank you for buy ticket from our, please input date visited, quantity of ticket and confirm payment.</p>
         <h5 class="sizes">Price: <span>{{ moneyFormat(ticket.price) }} ฿</span></h5>
 
-        <div class="col-md-7 input-group">
+        <div class="col-md-12 col-lg-7 input-group">
           <div class="input-group-addon"><i class="fa fa-calendar"></i>&emsp;Date of visit</div>
           <input
             type="date"
@@ -27,7 +27,7 @@
             :disabled="!getConfirmCheckout"
           >
         </div>
-        <div class="col-md-7 input-group">
+        <div class="col-md-12 col-lg-7 col-md-7 input-group">
           <div class="input-group-addon"><i class="fa fa-ticket"></i>&emsp;Quantity</div>
           <input
             type="number"
@@ -37,7 +37,7 @@
             :disabled="!getConfirmCheckout"
           >
         </div>
-        <div class="col-md-7 input-group">
+        <div class="col-md-12 col-lg-7 col-md-7 input-group">
           <div class="input-group-addon"><i class="fa fa-money"></i>&emsp;Total</div>
           <input
             type="text"
@@ -48,7 +48,7 @@
           >
         </div>
 
-        <div class="col-md-7 action">
+        <div class="col-md-12 col-lg-7 col-md-7 action">
           <div class="title-but">
             <paypal-button-ticket
               :total="ticket.price"
