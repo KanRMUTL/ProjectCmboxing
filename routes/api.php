@@ -27,6 +27,7 @@ Route::post('/customer/{user_id}', 'Api\UserController@updateCustomer'); // แ�
 Route::resource('/courses', 'Api\shopping\CourseController');
 Route::get('/webdetail', 'Api\Shopping\WebdetailController@index');
 Route::PATCH('/webdetail/{id}', 'Api\Shopping\WebdetailController@update');
+Route::resource('/fight', 'Api\shopping\FightController'); // โปสเตอร์การชกมวย
 
 Route::resource('/registerCourse', 'Api\shopping\RegisterCourseController');
 Route::get('/report_registerCourse', 'Api\shopping\RegisterCourseController@report');
@@ -42,4 +43,5 @@ Route::post('/zoneSalingChart', 'Api\marketing\ChartController@zoneSaling');
 Route::post('/ticketSalingChart', 'Api\marketing\ChartController@ticketSaling');
 Route::post('/ticketSalingChart', 'Api\marketing\ChartController@ticketSaling');
 Route::post('/ticketAmountSalingChart', 'Api\marketing\ChartController@ticketAmountSaling');
+
 

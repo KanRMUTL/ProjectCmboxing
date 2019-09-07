@@ -17,7 +17,7 @@ class CreateFightsTable extends Migration
             $table->increments('id');
             $table->string('img',100);
             $table->date('day');
-            $table->date('created_at');
+            $table->date('created_at')->useCurrent(); // https://stackoverflow.com/questions/18067614/how-can-i-set-the-default-value-of-a-timestamp-column-to-the-current-timestamp-w
             $table->integer('user_id');
         });
     }
