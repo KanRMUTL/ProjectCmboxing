@@ -51,35 +51,35 @@
         <div class="col-md-6 col-sm-6">
           <div class="img-wrapper">
 
-            <img src="{{asset('shopping/img/ticket/ticket_grandstand.jpg')}}" class="img-fluid" alt="Work">
+            <img src="{{asset('shopping/img/ticket/ticket_ringside.jpg')}}" class="img-fluid" alt="Work">
 
           </div>
         </div>
         <div class="col-md-6 col-sm-6">
           <div class="img-wrapper">
 
-            <img src="{{asset('shopping/img/ticket/ticket_grandstand.jpg')}}" class="img-fluid" alt="Work">
+            <img src="{{asset('shopping/img/about/67249058_474733233324867_6021814512888315904_o.jpg')}}" class="img-fluid" alt="Work">
 
           </div>
         </div>
         <div class="col-md-6 col-sm-6">
           <div class="img-wrapper">
 
-            <img src="{{asset('shopping/img/ticket/ticket_grandstand.jpg')}}" class="img-fluid" alt="Work">
+            <img src="{{asset('shopping/img/about/67506406_474733356658188_6018593158567297024_o.jpg')}}" class="img-fluid" alt="Work">
 
           </div>
         </div>
         <div class="col-md-6 col-sm-6">
           <div class="img-wrapper">
 
-            <img src="{{asset('shopping/img/ticket/ticket_grandstand.jpg')}}" class="img-fluid" alt="Work">
+            <img src="{{asset('shopping/img/about/67522636_474733376658186_7376900888327094272_o.jpg')}}" class="img-fluid" alt="Work">
 
           </div>
         </div>
         <div class="col-md-6 col-sm-6">
           <div class="img-wrapper">
 
-            <img src="{{asset('shopping/img/ticket/ticket_grandstand.jpg')}}" class="img-fluid" alt="Work">
+            <img src="{{asset('shopping/img/about/67272601_472475853550605_8374041884703588352_o.jpg')}}" class="img-fluid" alt="Work">
 
           </div>
         </div>

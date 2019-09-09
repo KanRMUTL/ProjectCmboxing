@@ -29,6 +29,7 @@ Vue.component('chart', require('./components/marketing/chart/chart.vue'));
 Vue.component('booking', require('./components/shopping/booking/booking.vue'));
 Vue.component('seat', require('./components/shopping/booking/seat.vue'));
 Vue.component('booking-detail', require('./components/shopping/booking/booking-detail.vue'));
+Vue.component('fight-list', require('./components/shopping/fight/fight-list.vue'));
 
 Vue.component('paypal-button', require('./components/Paypal/paypal-button.vue'));
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\shopping\Fight;
 use App\MyClass\pos\ImageClass;
-use Exception;
+use Exception;  
 
 class FightController extends Controller
 {
@@ -34,11 +34,10 @@ class FightController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Fight $fight)
     {
-        $fight = Fight::find($id);
-
-        if ($request->hasFile('img')) {
+        // $fight = Fight::find($id);
+        if ($fight->hasFile('img')) {
             $objImage = new ImageClass('fight', $request->file('img'));
             $objImage->originalName = $fight->img;
             $objImage->updateImage();
@@ -46,10 +45,11 @@ class FightController extends Controller
             $fight->day = $request->day;
             $fight->save();
         } else {
+            
+            return response()->json($fight);
             $fight->day = $request->day;
             $fight->save();
          }
-         return response()->json($fight);
     }
 
     public function show($id)

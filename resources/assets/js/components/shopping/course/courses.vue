@@ -11,7 +11,7 @@
         >
           Our MuayThai Course
         </h1>
-
+         <div class="heading-border"></div>
       </div>
     </div>
     <h3 class="center"></h3>

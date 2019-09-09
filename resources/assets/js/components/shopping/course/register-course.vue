@@ -61,10 +61,12 @@
 
       <div class="col-md-4">
         <button
-          class="btn btn-success btn-block"
+          class="btn btn-general btn-white btn-block"
           @click="createOrder(parseInt(course.price), register)"
           v-show="showCheckoutBtn"
-        >Checkout</button>
+        >
+          <i class="fa fa-paypal"></i> Checkout
+        </button>
       </div>
 
     </div>
