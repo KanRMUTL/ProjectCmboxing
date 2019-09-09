@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="booking">
     <div
       class="row title-bar" style="padding: 0px;" >
       <div class="col-md-12">
@@ -10,12 +10,13 @@
       </div>
     </div>
     
-    <div :class="{'col-md-9': id != 0, 'col-md-12': id == 0}">
+    <div :class="{'col-md-12': id != 0, 'col-md-12': id == 0}">
       <div class="row justify-content-center">
-        <div class="col-md-3">
+        <div class="col-md-5 col-lg-3 col-xs-2 col-4">
           <div class="input-group">
             <div class="input-group-addon">Select Date</div>
             <input
+              autofocus
               type="date"
               v-model="dateSearch"
               class="form-control"
@@ -31,8 +32,9 @@
       </div>
     </div>
 
+
     <div class="row">
-      <div :class="{'seatSelection col-md-9': id != 0, 'seatSelection col-md-12': id == 0}">
+      <div :class="{'seatSelection col-md-12 col-lg-12': id != 0, 'seatSelection col-md-12 col-lg-9': id == 0}">
         <div class="row">
           <div class="col-md-12">
             <div class="seatRow">
@@ -52,7 +54,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-6">
             <div class="seatRow">
               <seat
                 v-for="(seat, index) in seats"
@@ -68,7 +70,7 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 col-6">
             <div class="seatRow">
               <seat
                 v-for="(seat, index) in seats"
@@ -86,7 +88,7 @@
         </div>
         <br><br>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-4">
             <div class="seatRow">
               <seat
                 v-for="(seat, index) in seats"
@@ -102,11 +104,11 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4 col-4">
             <img src="/shopping/img/topview.jpg" style="width: 100%; height: 96%;"/>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4 col-4">
             <div class="seatRow">
               <seat
                 v-for="(seat, index) in seats"
@@ -141,19 +143,20 @@
           </div>
         </div>
       </div>
-      <div class="col-md-2">
-        <booking-detail
-          v-if="id != 0"
-          :bookDetail="bookDetails"
-          :total="getTotal"
-          :dateVisit="dateSearch"
-          :userId="id"
-          :searchSeat="searchSeat"
-          :clearData="clearData"
-        />
-      </div>
-
     </div>
+        <div class="row justify-content-center">
+      <div class="col-md-3 col-sm-4" id="booking-detail">
+          <booking-detail
+            v-if="id != 0"
+            :bookDetail="bookDetails"
+            :total="getTotal"
+            :dateVisit="dateSearch"
+            :userId="id"
+            :searchSeat="searchSeat"
+            :clearData="clearData"
+          />
+        </div>
+      </div>
   </div>
 </template>
 
@@ -242,6 +245,20 @@ export default {
 </script>
 
 <style>
+@media(max-width: 576px){
+  #booking-detail{
+    width: 50%;
+  }
+}
+@media(max-width: 768px) {
+  #booking, header, header div, header div nav, header div nav .container {
+    width: 1100px !important;
+    position: block;
+}
+#mainNav{
+  position: fixed;
+}
+}
 
 .seatSelection {
   text-align: center;

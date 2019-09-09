@@ -1,6 +1,6 @@
 <template>
     <div class="row justify-content-center" style="margin-top: 20px">
-        <div class="card" style="width:100%;">
+        <div class="card">
             <div class="card-header total">
                 Booking Detail
             </div>
@@ -137,6 +137,10 @@ export default {
 </script>
 
 <style>
+    .card{
+        width: 100%;
+    }
+    
     .total {
         color: #2d15e4;
         font-size: 125%;
