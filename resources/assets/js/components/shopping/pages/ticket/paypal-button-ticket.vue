@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   props: ["total", "saveBooking"],
 
@@ -22,15 +23,13 @@ export default {
     };
   },
 
-  mounted() {
-    
-  },
-
   methods: {
+    ...mapActions('shopping',['setConfirmCheckout']),
 
     confirmed() {
       this.confirm = true;
       this.createOrder(this.total, this.id, this.saveBooking);
+      this.setConfirmCheckout(true)
     },
 
     createOrder(total, id, saveBooking) {

@@ -61544,6 +61544,7 @@ var getters = {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = ({
+     namespaced: true,
      state: state,
      mutations: mutations,
      actions: actions,
@@ -70649,7 +70650,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }
   },
 
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])(['getConfirmCheckout']), {
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])('shopping', ['getConfirmCheckout']), {
     showTotal: function showTotal() {
       if (this.quantity <= 0) {
         this.quantity = 1;
@@ -70714,7 +70715,7 @@ var render = function() {
               type: "date",
               min: _vm.dateVisit,
               placeholder: "Quantity",
-              disabled: !_vm.getConfirmCheckout
+              disabled: _vm.getConfirmCheckout
             },
             domProps: { value: _vm.dateVisit },
             on: {
@@ -70744,7 +70745,7 @@ var render = function() {
             attrs: {
               type: "number",
               placeholder: "Quantity",
-              disabled: !_vm.getConfirmCheckout
+              disabled: _vm.getConfirmCheckout
             },
             domProps: { value: _vm.quantity },
             on: {
@@ -70875,6 +70876,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(6);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -70889,6 +70893,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["total", "saveBooking"],
@@ -70898,13 +70903,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       confirm: false
     };
   },
-  mounted: function mounted() {},
 
 
-  methods: {
+  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])('shopping', ['setConfirmCheckout']), {
     confirmed: function confirmed() {
       this.confirm = true;
       this.createOrder(this.total, this.id, this.saveBooking);
+      this.setConfirmCheckout(true);
     },
     createOrder: function createOrder(total, id, saveBooking) {
       paypal.Buttons({
@@ -70939,7 +70944,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }).render("#paypal-button");
     }
-  }
+  })
 });
 
 /***/ }),

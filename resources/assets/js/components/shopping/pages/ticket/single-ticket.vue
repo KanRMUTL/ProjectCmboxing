@@ -24,7 +24,7 @@
             class="form-control"
             placeholder="Quantity"
             v-model="dateVisit"
-            :disabled="!getConfirmCheckout"
+            :disabled="getConfirmCheckout"
           >
         </div>
         <div class="col-md-12 col-lg-7 col-md-7 input-group">
@@ -34,7 +34,7 @@
             class="form-control"
             placeholder="Quantity"
             v-model="quantity"
-            :disabled="!getConfirmCheckout"
+            :disabled="getConfirmCheckout"
           >
         </div>
         <div class="col-md-12 col-lg-7 col-md-7 input-group">
@@ -130,7 +130,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getConfirmCheckout']),
+    ...mapGetters('shopping', ['getConfirmCheckout']),
     showTotal() {
       if (this.quantity <= 0) {
         this.quantity = 1;
