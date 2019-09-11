@@ -13,8 +13,8 @@
 
   
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper" id="app">
+<body class="hold-transition skin-blue sidebar-mini" style="background-color: #222d32;">
+<div class="wrapper" id="app" >
 
   <!-- Main Header -->
   <header class="main-header">
