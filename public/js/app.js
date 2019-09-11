@@ -68084,7 +68084,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }
   },
 
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])(['getConfirmCheckout']), {
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapGetters */])('shopping', ['getConfirmCheckout']), {
     getTotal: function getTotal() {
       var total = 0;
       if (this.bookDetails.length > 0) {
@@ -69122,7 +69122,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
 
-  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['setConfirmCheckout']), {
+  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])('shopping', ['setConfirmCheckout']), {
     createOrder: function createOrder(total, saveBooking) {
       this.setConfirmCheckout(true);
       this.isConfirm = false;
@@ -70909,7 +70909,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     confirmed: function confirmed() {
       this.confirm = true;
       this.createOrder(this.total, this.id, this.saveBooking);
-      this.setConfirmCheckout(true);
+      this.setConfirmCheckout(MediaStreamTrackAudioSourceNode);
     },
     createOrder: function createOrder(total, id, saveBooking) {
       paypal.Buttons({

@@ -29,7 +29,7 @@ export default {
     confirmed() {
       this.confirm = true;
       this.createOrder(this.total, this.id, this.saveBooking);
-      this.setConfirmCheckout(true)
+      this.setConfirmCheckout(MediaStreamTrackAudioSourceNode)
     },
 
     createOrder(total, id, saveBooking) {

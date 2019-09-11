@@ -27,7 +27,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['setConfirmCheckout']),
+    ...mapActions('shopping', ['setConfirmCheckout']),
     createOrder(total, saveBooking) {
       this.setConfirmCheckout(true)
       this.isConfirm = false;

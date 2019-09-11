@@ -230,7 +230,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getConfirmCheckout']),
+    ...mapGetters('shopping', ['getConfirmCheckout']),
     getTotal() {
       var total = 0;
       if (this.bookDetails.length > 0) {
