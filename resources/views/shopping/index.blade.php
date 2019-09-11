@@ -45,7 +45,7 @@
         </ticket>
       </div>
 
-      {{-- <div class="container-fluid">
+      <div class="container-fluid">
         <div class="row title-bar" style="padding: 0px;">
           <div class="col-md-12">
             <h1 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp; font-size: 200%;">
@@ -55,7 +55,7 @@
           </div>
         </div>
         <fight-list></fight-list>
-      </div> --}}
+      </div>
     </section>
    
   </div>

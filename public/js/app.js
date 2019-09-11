@@ -68951,6 +68951,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -68965,7 +68971,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     fights: function fights(state) {
       return state.fights;
     }
-  }))
+  })),
+  filters: {
+    dateFormat: function dateFormat(value) {
+      return moment(value).format('DD/MM/YYYY');
+    }
+  }
 });
 
 /***/ }),
@@ -68980,8 +68991,32 @@ var render = function() {
     "div",
     { staticClass: "row" },
     _vm._l(_vm.fights.data, function(fight, index) {
-      return _c("div", { key: index, staticClass: "card col-md-6 col-sm-12" }, [
-        _c("div", { staticClass: "card-body text-center" }, [
+      return _c("div", { key: index, staticClass: "col-md-6 col-sm-12 mb-2" }, [
+        _c("div", { staticClass: "card" }, [
+          _c(
+            "div",
+            {
+              staticClass: "card-body text-center",
+              staticStyle: {
+                "background-color": "#f1b81e",
+                "padding-top": "11px",
+                "padding-bottom": "9px",
+                color: "#fff"
+              }
+            },
+            [
+              _c("i", { staticClass: "fa fa-calendar fa-lg" }),
+              _c(
+                "h5",
+                {
+                  staticClass: "card-title",
+                  staticStyle: { color: "#fff", "font-size": "1.2em" }
+                },
+                [_vm._v("  " + _vm._s(_vm._f("dateFormat")(fight.day)))]
+              )
+            ]
+          ),
+          _vm._v(" "),
           _c("img", {
             staticClass: "card-img-top",
             attrs: { src: "/shopping/img/fight/" + fight.img, alt: "" }

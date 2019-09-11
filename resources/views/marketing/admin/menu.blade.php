@@ -60,12 +60,16 @@
 
   <li class="treeview">
     <a href="#">
-      <i class="fa fa-tasks fa-lg"></i> <span>คอร์สสอนมวยไทย</span>
+      <i class="fa fa-tasks fa-lg"></i> <span>มวยไทย</span>
       <span class="pull-right-container">
         <i class="fa fa-angle-left pull-right"></i>
       </span>
     </a>
     <ul class="treeview-menu">
+      <li><a href="{{ url('/fight') }}">
+          <i class="fa fa-circle-o"></i>
+          <span>ข้อมูลการชกมวย</span></a>
+      </li>
       <li><a href="{{ url('/course') }}">
           <i class="fa fa-circle-o"></i>
           <span>คอร์ส</span></a>
