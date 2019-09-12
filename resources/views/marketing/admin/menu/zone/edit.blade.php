@@ -8,8 +8,8 @@
 {!! Form::open(['action' => ['marketing\ZoneController@update', $id ], 'method' => 'PUT'])
 !!}
 {{ Form::token()}}
-<div class="col-md-3"></div>
-<div class="form-horizontal col-md-5 offset-md-3">
+<div class="col-md-4"></div>
+<div class="form-horizontal col-md-4">
 
   <div class="box-body">
     <div class="form-group">
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="card-footer">
-    <button type="submit" class="btn btn-primary">บันทึก</button>
+    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-lg fa-save"></i> บันทึก</button>
   </div>
 </div>
 

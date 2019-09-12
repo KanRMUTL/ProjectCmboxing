@@ -1,4 +1,5 @@
 @extends('layouts.adminlte')
+@section('header-class', 'center')
 @section('title','แก้ไขข้อมูลพนักงาน')
 
 @section('content')
@@ -133,7 +134,7 @@
       </div>
 
       <div class="box-footer">
-         <button type="submit" class="btn btn-primary pull-right">บันทึก</button>
+         <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-lg fa-save"></i> บันทึก</button>
       </div>
    </div>
    <!-- /.box -->

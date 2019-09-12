@@ -40,7 +40,7 @@
   </div> <!-- End Boxbody -->
 
   <div class="card-footer">
-    <button type="submit" class="btn btn-primary btn-block">บันทึก</button>
+    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-lg fa-save"></i> บันทึก</button>
   </div>
 </div>
 

@@ -64530,7 +64530,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("บันทึก")]
+        [_c("i", { staticClass: "fa fa-lg fa-save" }), _vm._v(" บันทึก")]
       )
     ])
   }
@@ -65375,6 +65375,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -65451,7 +65452,9 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-9 personal-info" }, [
+        _c("div", { staticClass: "col-md-1" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9  personal-info" }, [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col" }, [
               _c("img", {
@@ -74677,7 +74680,7 @@ var render = function() {
               staticClass: "btn btn-primary btn-block",
               on: { click: _vm.save }
             },
-            [_vm._v("บันทึก")]
+            [_c("i", { staticClass: "fa fa-lg fa-save" }), _vm._v(" บันทึก")]
           )
         ])
       ])

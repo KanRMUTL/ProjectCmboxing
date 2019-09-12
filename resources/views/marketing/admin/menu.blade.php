@@ -4,6 +4,10 @@
       <i class="fa fa-dashboard fa-lg"></i>
       <span>แดชบอร์ด</span></a>
   </li>
+  <li><a href="{{ url('/webdetail') }}">
+      <i class="fa fa-desktop fa-lg"></i>
+      <span>แก้ไขเว็บไซต์</span></a>
+  </li>
 
   <!--treeview  -->
   <li class="treeview">

@@ -1,6 +1,7 @@
 
 @extends('layouts.adminlte')
 @section('title','พนักงาน')
+@section('header-class', 'center')
 @section('header','พนักงานทั้งหมด')
 @section('description','สำหรับจัดการพนักงานทั้งหมด')
 

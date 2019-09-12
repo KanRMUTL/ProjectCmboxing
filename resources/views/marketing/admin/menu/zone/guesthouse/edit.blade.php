@@ -1,15 +1,15 @@
 @extends('layouts.adminlte')
-@section('title','แก้ไขข้อมูลบัตร')
+@section('title','แก้ไขเกสเฮาท์')
 @section('header-class', 'center')
-@section('header','แก้ไขบัตร')
-@section('description','สำหรับแก้ไขข้อมูลบัตร')
+@section('header','แก้ไขเกสเฮาท์')
+@section('description','')
 
 @section('content')
 {!! Form::open(['action' => ['marketing\GuesthouseController@update', $guesthouse->id ], 'method' => 'PUT'])
 !!}
 {{ Form::token()}}
-<div class="col-md-3"></div>
-<div class="form-horizontal col-md-5 offset-md-3">
+<div class="col-md-4"></div>
+<div class="form-horizontal col-md-4">
 
   <div class="box-body">
     <div class="form-group">
@@ -28,7 +28,7 @@
     </div>
   </div>
   <div class="card-footer">
-    <button type="submit" class="btn btn-primary">บันทึก</button>
+    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-lg fa-save"></i> บันทึก</button>
   </div>
 </div>
 

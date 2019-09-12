@@ -15,7 +15,7 @@
                     <textarea class="form-control" id="detail" v-model="trainer.detail"></textarea>
                 </div>
                 <div class="col-md-offset-4 col-md-6">
-                    <span class="btn btn-primary btn-block" @click="save">บันทึก</span>
+                    <span class="btn btn-primary btn-block" @click="save"><i class="fa fa-lg fa-save"></i> บันทึก</span>
                 </div>
             </div>
         </form>

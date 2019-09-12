@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button type="submit" class="btn btn-primary">บันทึก</button>
+      <button type="submit" class="btn btn-primary"><i class="fa fa-lg fa-save"></i> บันทึก</button>
     </div>
 
 </div>
