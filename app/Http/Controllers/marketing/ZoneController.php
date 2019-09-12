@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\marketing;
+namespace App\Http\Controllers\marketing;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,8 +10,8 @@ class ZoneController extends Controller
 {
     public function index()
     {
-        $data = Zone::all();
-        return response()->json($data);
+        $data['zones'] = Zone::all();
+        return view('marketing.admin.menu.zone.index', $data);
     }
 
     public function store(Request $request)
@@ -21,7 +21,7 @@ class ZoneController extends Controller
         $zone->latitude = $request->latitude;
         $zone->longitude = $request->longitude;
         $zone->save();
-        return response()->json($zone);
+        return redirect('/zone');
     }
 
     public function show(Zone $zone)
@@ -29,21 +29,27 @@ class ZoneController extends Controller
         return response()->json($zone); 
     }
 
+    public function edit(Zone $zone)
+    {
+        return view('marketing.admin.menu.zone.edit', $zone);
+    }
+
     public function update(Request $request, Zone $zone)
     {
         $zone->name = $request->name;
         $zone->save();
-        return $zone;
+        return redirect('/zone');
     }
 
     public function destroy(Zone $zone)
     {
         $zone->delete();
+        return redirect('/zone');
     }
 
     public function guesthouse($id){
-        $data = Zone::find($id);
-        $data['guesthouses'] =  $data->guesthouses;
-        return response()->json($data);
+        $data['zone'] = Zone::find($id);
+        $data['guesthouses'] =  $data['zone']->guesthouses;
+        return view('marketing.admin.menu.zone.guesthouse.index', $data);
     }
 }

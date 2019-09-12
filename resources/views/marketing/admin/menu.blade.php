@@ -85,6 +85,11 @@
     </ul>
   </li>
 
+  <li><a href="{{ url('/zone') }}">
+      <i class="fa fa-connectdevelop fa-lg"></i>
+      <span>โซนการตลาด</span></a>
+  </li>
+
   <li><a href="{{ url('/income') }}">
       <i class="fa fa-usd fa-lg"></i>
       <span>รายได้เข้าสนาม</span></a>

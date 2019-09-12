@@ -28,9 +28,6 @@ Route::resource('/courses', 'Api\shopping\CourseController');
 Route::get('/webdetail', 'Api\Shopping\WebdetailController@index');
 Route::PATCH('/webdetail/{id}', 'Api\Shopping\WebdetailController@update');
 Route::resource('/fight', 'Api\shopping\FightController'); // โปสเตอร์การชกมวย
-Route::resource('/zone', 'Api\marketing\ZoneController');
-Route::get('zone/{id}/guesthouse', 'Api\marketing\ZoneController@guesthouse');
-Route::resource('/guesthouse', 'Api\marketing\GuesthouseController');
 
 Route::resource('/registerCourse', 'Api\shopping\RegisterCourseController');
 Route::get('/report_registerCourse', 'Api\shopping\RegisterCourseController@report');

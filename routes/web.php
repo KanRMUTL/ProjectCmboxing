@@ -73,4 +73,10 @@ Route::group(['middleware' =>['auth']], function() {
 // รายการชกมวย
 Route::resource('fight', 'shopping\FightController');
 
+// โซน, เกสเฮาส์
+Route::resource('/zone', 'marketing\ZoneController');
+Route::get('zone/{id}/guesthouse', 'marketing\ZoneController@guesthouse');
+Route::resource('/guesthouse', 'marketing\GuesthouseController');
+
+
 

@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-    <i class="fa fa-lg fa-trainer"></i> เพิ่มครูสอน
+    <i class="fa fa-lg fa-plus"></i> เพิ่มข้อมูลการชกมวย
 </button>
 <br><br>
 <!-- Modal -->
@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="modal-footer form-group">
-          <button type="submit" class="btn btn-primary">บันทึก</button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-lg fa-save"></i> บันทึก</button>
           {!! Form::close() !!}
         </div>
       </div>
