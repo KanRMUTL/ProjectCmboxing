@@ -8,6 +8,7 @@ Route::get('/about', 'shopping\ShoppingController@about');
 Route::resource('/booking', 'shopping\SeatController');
 Route::get('/courses','shopping\CourseController@courses');
 Route::post('/customerRegister', 'shopping\ShoppingController@register');
+
 Route::group(['middleware' =>['auth']], function() {
     
     Route::get('/saleticket/{id}', 'shopping\ShoppingController@saleTicket');
@@ -68,15 +69,19 @@ Route::group(['middleware' =>['auth']], function() {
     Route::get('/customer_resetpassword', 'shopping\ShoppingController@resetpassword');
     Route::get('/saleTicketOnline', 'shopping\ShoppingController@ticketOnline');
     Route::get('/saleTicketOnline/{start}/{end}', 'shopping\report\ReportController@reportTicketOnline');
-});
+
+    // โซน, เกสเฮาส์
+    Route::resource('/zone', 'marketing\ZoneController');
+    Route::get('zone/{id}/guesthouse', 'marketing\ZoneController@guesthouse');
+    Route::resource('/guesthouse', 'marketing\GuesthouseController');
+
+    Route::get('/webdetail', 'WebdetailController@index');
+    Route::put('/webdetail', 'WebdetailController@update');
+});  // End Middleware
 
 // รายการชกมวย
 Route::resource('fight', 'shopping\FightController');
 
-// โซน, เกสเฮาส์
-Route::resource('/zone', 'marketing\ZoneController');
-Route::get('zone/{id}/guesthouse', 'marketing\ZoneController@guesthouse');
-Route::resource('/guesthouse', 'marketing\GuesthouseController');
 
 
 
