@@ -40,9 +40,9 @@ Route::group(['middleware' =>['auth']], function() {
         Route::get('/{id}/edit', 'marketing\SaleController@edit')->name('sale.edit');
     });
     
-    Route::post('/saleReport', 'marketing\report\ReportController@saleReport')->name('report.sale');
-    Route::post('/EmpCommissionReport', 'marketing\report\ReportController@EmpCommissionReport')->name('report.empCommission');
-    Route::post('/guideCommissionReport', 'marketing\report\ReportController@guideCommissionReport')->name('report.guideCommission');
+    Route::get('/saleReport', 'marketing\report\ReportController@saleReport')->name('report.sale');
+    Route::get('/EmpCommissionReport', 'marketing\report\ReportController@EmpCommissionReport')->name('report.empCommission');
+    Route::get('/guideCommissionReport', 'marketing\report\ReportController@guideCommissionReport')->name('report.guideCommission');
     Route::get('/salingReport','marketing\report\ReportController@sampleRreport');
 
     Route::get('/chart', 'marketing\ChartSaleController@index');

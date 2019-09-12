@@ -89,7 +89,7 @@
       </div>
       <!-- /.box -->
       <div class="col-md-12 mt-3">
-        {!! Form::open(['url' => '/guideCommissionReport', 'method' => 'POST', 'traget' => '_blank']) !!}
+        {!! Form::open(['url' => '/guideCommissionReport', 'method' => 'GET']) !!}
         {{ Form::token()}}
           <input type="hidden" value="{{ $range['start'] }}" name="start">
           <input type="hidden" value="{{ $range['end'] }}" name="end">
