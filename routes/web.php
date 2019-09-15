@@ -5,6 +5,7 @@ Route::auth();
 Route::get('/logout', 'Auth\LoginController@logout'); // For logout
 Route::get('/', 'shopping\ShoppingController@index');
 Route::get('/about', 'shopping\ShoppingController@about');
+Route::get('/location', 'shopping\ShoppingController@location');
 Route::resource('/booking', 'shopping\SeatController');
 Route::get('/courses','shopping\CourseController@courses');
 Route::post('/customerRegister', 'shopping\ShoppingController@register');

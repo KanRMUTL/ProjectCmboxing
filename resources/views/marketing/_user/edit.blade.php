@@ -94,16 +94,14 @@
          <div class="row">
             <div class="col-md-6">
                <label for="role">ตำแหน่ง</label>
-               <select class="form-control" id="role" name="role">
-                  @foreach ($roles as $key => $role)
-                     @if($user->role == $key)
-                        <option value="{{ $key }}" selected>{{ $role }}</option>           
-                        @continue       
-                     @endif
-                        <option value="{{ $key }}" >{{ $role }}</option>                  
-
-                  @endforeach
-               </select>
+               @foreach($roles as $key => $role)
+              <div class="form-check form-check-inline" id="check">
+                <input class="form-check-input" type="radio" id="{{ $key }}" name="role" value="{{ $key }}" {{ $user->role == $key ? 'checked' : null }}>
+                <label class="form-check-label" for="{{ $key }}">
+                    {{ $role}}
+                </label>
+              </div>
+              @endforeach
             </div>
             <div class="col-md-6">
                <label for="zone">โซน</label>
