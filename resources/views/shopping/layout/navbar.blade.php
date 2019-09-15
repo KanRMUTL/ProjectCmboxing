@@ -17,6 +17,7 @@
                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="/booking">Booking</a></li>
                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="/courses">Training Muay Thai</a></li>
                 <li class="nav-item" ><a class="nav-link smooth-scroll" href="/about">About</a></li>
+                <li class="nav-item" ><a class="nav-link smooth-scroll" href="/location">Location</a></li>
 
                 @if(Auth::check())
                    

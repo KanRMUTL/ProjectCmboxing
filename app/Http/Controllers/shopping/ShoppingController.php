@@ -28,18 +28,25 @@ class ShoppingController extends StarterController
         $data = [
             'webdetail' => WebDetail::find(1)
         ];
-        
+
         return view('shopping/about', $data);
     }
 
-    public function saleTicket($id) {
+    function location()
+    {
+        return view('shopping/location');
+     }
+
+    public function saleTicket($id)
+    {
         return view('shopping/sale_ticket', ['id' => $id]);
     }
 
-    public function register(UserRegisterRequest $request) {
+    public function register(UserRegisterRequest $request)
+    {
         $user = new User;
 
-        if($request->hasfile('img')){
+        if ($request->hasfile('img')) {
             $objImage = new ImageClass('user', $request->file('img'));
             $objImage->originalName = $user->img;
             $objImage->uploadImage();
@@ -55,7 +62,7 @@ class ShoppingController extends StarterController
         $user->role = 4;
         $user->password = bcrypt($request->password);
         $user->save();
-        
+
         return redirect('/login');
     }
 
