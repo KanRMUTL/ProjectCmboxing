@@ -68163,13 +68163,13 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
       _c(
         "div",
         {
           class: {
             "seatSelection col-md-12 col-lg-12": _vm.id != 0,
-            "seatSelection col-md-12 col-lg-9": _vm.id == 0
+            "seatSelection col-md-12": _vm.id == 0
           }
         },
         [
@@ -71141,16 +71141,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -71188,7 +71178,7 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _vm._m(0),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-4 col-sm-6 " }, [
+        _c("div", { staticClass: "col-md-6 col-sm-6 " }, [
           _vm._m(1),
           _vm._v(" "),
           _c("ul", { staticClass: "list-unstyled thumb-list" }, [
@@ -71236,9 +71226,7 @@ var render = function() {
               ])
             ])
           ])
-        ]),
-        _vm._v(" "),
-        _vm._m(5)
+        ])
       ])
     ])
   ])
@@ -71248,7 +71236,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 col-sm-6 " }, [
+    return _c("div", { staticClass: "col-md-6 col-sm-6 " }, [
       _c("div", { staticClass: "heading-footer" }, [
         _c("h2", [_vm._v("Useful Links")])
       ]),
@@ -71260,12 +71248,17 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("li", [
+          _c("a", { attrs: { href: "/booking" } }, [_vm._v("Booking")]),
+          _c("i", { staticClass: "fa fa-angle-right" })
+        ]),
+        _vm._v(" "),
+        _c("li", [
           _c("a", { attrs: { href: "/about" } }, [_vm._v("About us")]),
           _c("i", { staticClass: "fa fa-angle-right" })
         ]),
         _vm._v(" "),
         _c("li", [
-          _c("a", { attrs: { href: "/booking" } }, [_vm._v("Booking")]),
+          _c("a", { attrs: { href: "/location" } }, [_vm._v("Location")]),
           _c("i", { staticClass: "fa fa-angle-right" })
         ]),
         _vm._v(" "),
@@ -71313,24 +71306,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-1" }, [
       _c("a", { attrs: { href: "#", target: "_empty" } }, [
         _c("i", { staticClass: "fa top-social fa-facebook" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 col-sm-6" }, [
-      _c("div", { staticClass: "card map p-2" }, [
-        _c("iframe", {
-          staticStyle: { border: "0", height: "200px" },
-          attrs: {
-            src:
-              "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3776.9180670916057!2d98.98038551538194!3d18.801804365418594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30da3a93abd71e55%3A0x43c8fac502001a10!2sChiangmai+Boxing+Stadium!5e0!3m2!1sth!2sth!4v1558955967888!5m2!1sth!2sth",
-            frameborder: "0",
-            allowfullscreen: ""
-          }
-        })
       ])
     ])
   }

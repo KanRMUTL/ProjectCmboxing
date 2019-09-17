@@ -43,7 +43,7 @@ class SaleController extends StarterController
         return view('marketing._sale.index', $data);
     }
         
-    public function store(TicketRequest $request)
+    public function store(Request $request)
     {
         $ticket = Ticket::find($request->ticketId);
         $sale = new Sale;

@@ -31,12 +31,11 @@
     {{-- <script src="https://www.paypal.com/sdk/js?client-id=AX33yAYWKaL0h0LiSN6tyir0CGD_Ft9ztwCP2xqhQabpK8CfakgrLgPdD1TKZd16YWL6W7FINMAK1j_7&currency=THB"></script> --}}
     
     {{-- Sandbox ENV --}}
-    <script src="https://www.paypal.com/sdk/js?client-id=AdeKmKTa4nB9aWe7oZbheexKhuDFwXkfJIwjf8qcbdVlek869ZnqJ34TvF-rUvJcjVSRcXh26ff7VdDk&currency=THB"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AYRdeNWYAop7ueYexmDKFc9zSxN0ILG6Pji7dN5-0cIZFw_4Vi-ByQ9S7Ur6X6Ga_uPUhgmb9ZlJQ6sP&currency=THB"></script>
     
     @include('shopping.layout.navbar')
-    
-    @yield('content')
-    
+      @yield('content')
+    @include('shopping/layout/footer')
     <script src="{{ asset('js/app.js') }}"></script>
 
     <!--Global JavaScript -->

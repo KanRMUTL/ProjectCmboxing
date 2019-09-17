@@ -61,4 +61,6 @@
   </div>
 </div>
 
+@include('shopping/layout/footer')
+
 @endsection

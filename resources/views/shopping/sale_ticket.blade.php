@@ -10,5 +10,6 @@
 <div class="container" id="vue">
      <single-ticket :id="{{$id}}" :title="{{ Auth::user()->id }}"/>
 </div>
+@include('shopping/layout/footer')
 
 @endsection
