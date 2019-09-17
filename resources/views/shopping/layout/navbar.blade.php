@@ -6,7 +6,7 @@
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" data-toggle="affix">
         <div class="container">
         <a class="navbar-brand smooth-scroll" href="/">
-            <img src="{{ asset('shopping/img/logo.png') }}" id="logo" alt="logo" style="height:55px">
+            <img src="{{ asset('shopping/img/Logo.png') }}" id="logo" alt="logo" style="height:55px">
         </a> 
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> 
             <span class="navbar-toggler-icon"></span>

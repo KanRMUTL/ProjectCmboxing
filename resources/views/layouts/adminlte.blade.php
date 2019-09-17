@@ -7,7 +7,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title> @yield('title')</title>
   @yield('customstylesheet')
-  <link rel="shortcut icon" href="{{ asset('shopping/img/logo.png') }}">
+  <link rel="shortcut icon" href="{{ asset('shopping/img/Logo.png') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/marketing/custom.css') }}">
 

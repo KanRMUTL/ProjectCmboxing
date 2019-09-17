@@ -40,7 +40,7 @@ class ReportController extends Controller
 
     public function ReportTitle() {
         return "
-            <img class='logo' src='".public_path()."/shopping/img/logo.png'>
+            <img class='logo' src='".public_path()."/shopping/img/Logo.png'>
             <p class='title'>ห้างหุ้นส่วนจำกัด ยิ่งเจริญ มวยไทย</p>
             <p class='title'>177  ถนนช้างเผือก  ตำบลศรีภูมิ  อำเภอเมืองเชียงใหม่  จังหวัดเชียงใหม่ 50200</p>
             <p class='title'>Tel: (053)216-489  Fax: (053)216-489</p>

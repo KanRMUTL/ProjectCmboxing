@@ -9,7 +9,7 @@
 
 
     <title>@yield('title')</title>
-    <link rel="shortcut icon" href="{{ asset('shopping/img/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('shopping/img/Logo.png') }}">
 
     <!-- Global Stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">

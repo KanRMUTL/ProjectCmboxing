@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-12 ">
           <div class="contact-h-cont">
-            <h3 class="text-center"><img src="shopping/img/logo.png" class="img-fluid" alt=""></h3><br>
+            <h3 class="text-center"><img src="shopping/img/Logo.png" class="img-fluid" alt=""></h3><br>
             <form id="login-form" action="{{ route('login') }}" method="post">
               {{ csrf_field() }}
               <div class="form-group">

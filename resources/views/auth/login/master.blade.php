@@ -13,7 +13,7 @@
     <meta name="robots" content="all,follow">
 
     <title>Login</title>
-    <link rel="shortcut icon" href="{{ asset('shopping/img/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('shopping/img/Logo.png') }}">
     
     <!-- global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
