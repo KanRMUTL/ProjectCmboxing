@@ -64,7 +64,7 @@
               <div class="card-body text-center"
                 style="background-color:#f1b81e; padding-top: 11px; padding-bottom: 9px; color: #fff">
                 <i class="fa fa-calendar fa-lg"></i>
-                <h5 class="card-title" style="color: #fff; font-size: 1.2em;"> {{ $fight->day }}</h5>
+                <h5 class="card-title" style="color: #fff; font-size: 1.2em;"> {{ date_format(date_create($fight->day), 'd/m/Y') }}</h5>
               </div>
               <img class="card-img-top" src="/shopping/img/fight/{{ $fight->img }}" alt="" />
             </div>
