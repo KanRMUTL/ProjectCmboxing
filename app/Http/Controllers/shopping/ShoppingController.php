@@ -9,6 +9,7 @@ use App\marketing\Ticket;
 use App\shopping\WebDetail;
 use App\Http\Controllers\marketing\StarterController;
 use App\MyClass\pos\ImageClass;
+use App\shopping\Fight;
 use App\Http\Requests\shopping\UserRegisterRequest;
 use App\User;
 
@@ -18,7 +19,8 @@ class ShoppingController extends StarterController
     {
         $data = [
             'tickets' => $this->tickets,
-            'webdetail' => WebDetail::find(1)
+            'webdetail' => WebDetail::find(1),
+            'fights' => Fight::orderBy('day', 'desc')->get()
         ];
         return view('shopping/index', $data);
     }
