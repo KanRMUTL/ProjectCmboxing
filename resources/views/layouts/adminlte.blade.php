@@ -53,13 +53,14 @@
         <div class="pull-left image">
           <img src="{{ asset('images/userImg/'.Auth::user()->img) }}" class="img-circle" alt="User Image">
         </div>
-        <div class="pull-left info">
+        <div class="pull-left image" style="padding-left: 12px;">
         <p>
           <a href="/employeeProfile/{{Auth::user()->id}}">
             {{ Auth::user()->firstname }}
           </a>
         </p>
-        </div>
+        <i class="fa fa-circle text-success"></i> Online
+      </div>
       </div>
      
       @if(Auth::user()->role == 1)
