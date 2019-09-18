@@ -115,7 +115,9 @@ export default {
         swal({
           title: "Register Complete",
           icon: "success"
-        });
+        }).then(setTimeout(()=>{
+          window.location = `/course/${this.userId}`
+        }, 3000));
       });
     },
 
