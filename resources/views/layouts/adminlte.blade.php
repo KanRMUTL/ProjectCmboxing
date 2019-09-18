@@ -36,7 +36,7 @@
       <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <li>
-              <a href="{{ route('logout') }}"><i class="fa fa-2x fa-sign-out"></i></a>
+              <a href="{{ route('logout') }}"><i class="fa fa-lg fa-sign-out"></i></a>
             </li>
           </div>
       </div>
@@ -59,8 +59,6 @@
             {{ Auth::user()->firstname }}
           </a>
         </p>
-          <!-- Status -->
-          <i class="fa fa-circle text-success"></i> Online
         </div>
       </div>
      
