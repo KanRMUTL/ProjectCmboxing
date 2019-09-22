@@ -13,5 +13,9 @@
             <courses-index id="0"></courses-index>
         @endif
     </div>    
+    
+    <section id="footer-s1" class="footer-s1">
+        <web-footer />
+    </section>
 </div>
-@endsection
+    @endsection

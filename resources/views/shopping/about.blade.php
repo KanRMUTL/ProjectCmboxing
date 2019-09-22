@@ -38,6 +38,8 @@
     </div>
   </section>
 
+  @include('shopping/components/history')
+
   <section>
     <div class="row" id="media">
       <div class="row no-gutters">
