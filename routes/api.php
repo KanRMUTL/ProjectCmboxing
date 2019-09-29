@@ -25,8 +25,8 @@ Route::get('/customer/{user_id}', 'Api\UserController@showCustomer'); // แก�
 Route::post('/customer/{user_id}', 'Api\UserController@updateCustomer'); // แก้ไขโปรไฟล์
 
 Route::resource('/courses', 'Api\shopping\CourseController');
-Route::get('/webdetail', 'Api\Shopping\WebdetailController@index');
-Route::PATCH('/webdetail/{id}', 'Api\Shopping\WebdetailController@update');
+Route::get('/webdetail', 'Api\Shopping\WebDetailController@index');
+Route::PATCH('/webdetail/{id}', 'Api\Shopping\WebDetailController@update');
 Route::resource('/fight', 'Api\shopping\FightController'); // โปสเตอร์การชกมวย
 
 Route::resource('/registerCourse', 'Api\shopping\RegisterCourseController');
