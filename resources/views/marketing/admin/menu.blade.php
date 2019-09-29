@@ -4,7 +4,7 @@
       <i class="fa fa-dashboard fa-lg"></i>
       <span>แดชบอร์ด</span></a>
   </li>
-  <li><a href="{{ url('/webdetail') }}">
+  <li class="hidden-xs-down"><a href="{{ url('/webdetail') }}">
       <i class="fa fa-desktop fa-lg"></i>
       <span>แก้ไขเว็บไซต์</span></a>
   </li>
@@ -46,7 +46,7 @@
     </ul>
   </li>
 
-  <li class="treeview">
+  <li class="treeview hidden-xs-down">
     <a href="#">
       <i class="fa fa-barcode fa-lg"></i>
       <span>คลังสินค้า</span>
@@ -62,7 +62,7 @@
   </li>
 
 
-  <li class="treeview">
+  <li class="treeview hidden-xs-down">
     <a href="#">
       <i class="fa fa-tasks fa-lg"></i> <span>มวยไทย</span>
       <span class="pull-right-container">
@@ -104,12 +104,12 @@
       <span>รายงานการขาย</span></a>
   </li>
   <!--treeview  -->
-  <li><a href="{{ url('/ticket') }}">
+  <li class="hidden-xs-down"><a href="{{ url('/ticket') }}">
       <i class="fa fa-edit fa-lg"></i>
       <span>จัดการบัตร</span></a>
   </li>
 
-  <li><a href="{{ url('/user') }}">
+  <li class="hidden-xs-down"><a href="{{ url('/user') }}">
       <i class="fa fa-users fa-lg"></i>
       <span>พนักงาน</span></a>
   </li>

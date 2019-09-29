@@ -10,20 +10,20 @@
 
   <div class="row">
     @if(Auth::user()->role == 1)  
-    @include('marketing.admin.sale_search')
+      @include('marketing.admin.sale_search')
     @elseif(Auth::user()->role == 2)
-    @include('marketing.head.sale_search')
-    @elseif(Auth::user()->role == 3)
-    @include('marketing.head.sale_search')
+      @include('marketing.head.sale_search')
+    @elseif(Auth::user()->role == 3) --}}
+      @include('marketing.head.sale_search')
     @endif()
   </div>
   
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-md-12">
       <div class="box box-info">
         <!-- /.box-header -->
         <div class="box-body table-responsive">
-          <table style="font-size: 120%" class="table table-hover">
+          <table style="font-size: 120%" class="table table-striped table-hover center">
             <tr>
               <th class="center">ชื่อลูกค้า</th>
               <th class="center">เบอร์โทร</th>
