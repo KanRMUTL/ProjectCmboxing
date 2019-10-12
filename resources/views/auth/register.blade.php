@@ -1,4 +1,5 @@
 @extends('auth.login.master')
+@section('title','Register')
 @section('content')
 <section class="hero-area">
   <div class="overlay"></div>

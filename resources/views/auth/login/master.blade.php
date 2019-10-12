@@ -12,7 +12,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="all,follow">
 
-    <title>Login</title>
+    <title>@yield('title')</title>
     <link rel="shortcut icon" href="{{ asset('shopping/img/Logo.png') }}">
     
     <!-- global stylesheets -->
