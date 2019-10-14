@@ -13,7 +13,7 @@
       @include('marketing.admin.sale_search')
     @elseif(Auth::user()->role == 2)
       @include('marketing.head.sale_search')
-    @elseif(Auth::user()->role == 3) --}}
+    @elseif(Auth::user()->role == 3)
       @include('marketing.head.sale_search')
     @endif()
   </div>
