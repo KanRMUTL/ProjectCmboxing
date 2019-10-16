@@ -14,8 +14,9 @@ class WebdetailController extends Controller
         return view('webdetail', $data);
     }
 
-    public function update(Request $request, Webdetail $webdetail)
+    public function update(Request $request)
     {
+	$webdetail = Webdetail::find(1);
         try{
             $webdetail->email = $request->email;   
             $webdetail->phone = $request->phone;   
