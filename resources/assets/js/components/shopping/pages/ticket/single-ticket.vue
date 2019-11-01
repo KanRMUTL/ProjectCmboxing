@@ -114,8 +114,7 @@ export default {
               title: "Booking Complete"
             }).then(function(){
               window.location = "/booking/1"
-            }) 
-          console.log(response.data);
+            })
         }
       });
     },

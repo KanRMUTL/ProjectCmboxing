@@ -1,20 +1,22 @@
 <template>
-  <div>
-    <!-- <div id="paypal-button-container" @click="createOrder()"></div> -->
+  <div class="col-md-12">
     <button
-      class="btn btn-success btn-block"
+      class="btn btn-primary btn-block"
       v-show="isConfirm"
       @click="createOrder(total, saveBooking)"
-    >Confirm Checkout</button>
+    >
+      Checkout
+    </button>
     <div
       id="paypal-button-container"
       v-show="!isConfirm && total > 0"
-    ></div>
+    >
+    </div>
   </div>
 </template>
 
 <script>
- import { mapActions } from 'vuex' 
+import { mapActions } from "vuex";
 export default {
   props: ["url", "saveBooking", "total"],
   data() {
@@ -27,9 +29,9 @@ export default {
   },
 
   methods: {
-    ...mapActions('shopping', ['setConfirmCheckout']),
+    ...mapActions("shopping", ["setConfirmCheckout"]),
     createOrder(total, saveBooking) {
-      this.setConfirmCheckout(true)
+      this.setConfirmCheckout(true);
       this.isConfirm = false;
       paypal
         .Buttons({

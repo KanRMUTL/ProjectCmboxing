@@ -2,7 +2,6 @@
 require('./bootstrap');
 import swal from 'sweetalert';
 import store from './store'
-// import moment from 'moment';
 window.Vue = require('vue');
 window.axios = require('axios');
 window.moment = require('moment');
@@ -30,24 +29,17 @@ Vue.component('booking', require('./components/shopping/booking/booking.vue'));
 Vue.component('seat', require('./components/shopping/booking/seat.vue'));
 Vue.component('booking-detail', require('./components/shopping/booking/booking-detail.vue'));
 Vue.component('fight-list', require('./components/shopping/fight/fight-list.vue'));
-
 Vue.component('paypal-button', require('./components/Paypal/paypal-button.vue'));
-
 Vue.component('my-ticket', require('./components/shopping/myProduct/ticket/My-Ticket.vue'));
 Vue.component('ticket-detail', require('./components/shopping/myProduct/ticket/ticket-detail.vue'));
 Vue.component('my-course', require('./components/shopping/myProduct/course/My-Course.vue'));
-
-Vue.component('ticket', require('./components/shopping/pages/ticket/ticket.vue'));
 Vue.component('single-ticket', require('./components/shopping/pages/ticket/single-ticket.vue'));
 Vue.component('paypal-button-ticket', require('./components/shopping/pages/ticket/paypal-button-ticket.vue'));
-
 Vue.component('web-footer', require('./components/shopping/pages/footer/footer.vue'));
-
 Vue.component('courses-index', require('./components/shopping/course/index.vue'));
 Vue.component('courses', require('./components/shopping/course/courses.vue'));
 Vue.component('trainer', require('./components/shopping/course/trainer.vue'));
 Vue.component('register-course', require('./components/shopping/course/register-course.vue'));
-
 Vue.component('user-profile', require('./components/shopping/profile/user-profile.vue'));
 Vue.component('customer-resetpassword', require('./components/shopping/profile/reset-password.vue'));
 // Admin
@@ -67,4 +59,5 @@ const nav = new Vue({
     store,
     el: '#nav'
 })
+
 

@@ -4,9 +4,10 @@
 }
 
 /* pagination */
-ul.pagination li{
+ul.pagination li {
      margin: 1%;
 }
+
 ul.pagination li span,
 ul.pagination li a {
      color: #fac564;
@@ -24,4 +25,16 @@ ul.pagination li.active span {
      background: #fac564;
      color: #fff;
      border: 1px solid transparent;
+}
+
+/* Booking Seat */
+
+.btn-booked { /* เมื่อกดจอง */
+     background: rgb(0, 0, 0) !important;
+     color: #fac564 !important;
+}
+
+.btn[disabled=true] { /* เมื่อมีคนจองแล้ว */
+     background: rgb(130, 123, 123) !important;
+     color: #fff !important;
 }

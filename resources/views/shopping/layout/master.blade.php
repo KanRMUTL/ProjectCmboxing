@@ -38,9 +38,9 @@
   {{-- <script src="https://www.paypal.com/sdk/js?client-id=AYyIR29sBnQywy4Gwn0-BU77TM_0Io4MP5R8CGAkh1RpyACdgsRTZWRepiL7oY3OM4oVtpwqcaPlpdZI&currency=THB"></script> --}}
 
   {{-- Live ENV  Token of CMBS --}}
-  {{-- <script
+  <script
     src="https://www.paypal.com/sdk/js?client-id=AYRdeNWYAop7ueYexmDKFc9zSxN0ILG6Pji7dN5-0cIZFw_4Vi-ByQ9S7Ur6X6Ga_uPUhgmb9ZlJQ6sP&currency=THB">
-  </script> --}}
+  </script>
 
   @include('shopping.layout.navbar')
   @yield('content')

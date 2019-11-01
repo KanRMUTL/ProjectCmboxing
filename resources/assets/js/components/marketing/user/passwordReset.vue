@@ -87,7 +87,6 @@ export default {
       axios
         .post("/api/passwordreset/" + this.id, this.form)
         .then(res => {
-          console.log(res.data);
           res.data.status == false
             ? swal(
                 res.data.message,

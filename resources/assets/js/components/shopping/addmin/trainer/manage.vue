@@ -52,7 +52,6 @@ export default {
             }
             axios.post('/api/trainer', data).then(
                 res => {
-                    console.log(res)
                 }
             )
         }
