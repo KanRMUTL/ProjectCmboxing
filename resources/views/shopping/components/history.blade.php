@@ -1,14 +1,12 @@
   {{-- About Muay thai --}}
-  <section class="about">
+  <section class="about pt-3">
           <div class="container">
             <div class="row title-bar" style="padding: 20px;">
               <div class="col-md-12">
-                <h1 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <h1 class="wow fadeInUp text-center pb-2" style="visibility: visible; animation-name: fadeInUp;">
                   History of Muay Thai
                 </h1>
                 <div class="heading-border"></div>
-      
-      
                 <div class="row">
                   <div class="col-md-6">
                     <div class="career-p1-desc">

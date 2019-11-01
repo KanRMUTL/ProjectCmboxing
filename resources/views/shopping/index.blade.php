@@ -4,86 +4,90 @@
 
 @include('shopping.layout.default_banner')
 <div id="vue">
-  <section class="about">
-    <div class="container">
-      <div class="row title-bar" style="padding: 20px;">
-        <div class="col-md-12">
-          <h1 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-            Welcome To Chiangmai Boxing Stadium
-          </h1>
-          <div class="heading-border"></div>
-          <p class="wow fadeInUp" data-wow-delay="0.4s"
-            style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-            {{ $webdetail->about }}
-          </p>
-          <div class="title-but">
-            <button class="btn btn-general btn-green" role="button">
-              <a href="/about">Read More</a>
-            </button>
-          </div>
-        </div>
+
+  <section class="ftco-about d-md-flex">
+    <div class="one-half img" style="background-image: url(shopping/img/about/about1.jpg);"></div>
+    <div class="one-half">
+      <div class="heading-section">
+        <h3 class="mb-4"> Welcome To <span>Chiangmai Boxing Stadium</span></h3>
+      </div>
+      <div>
+        <p>{{ $webdetail->about }}</p>
       </div>
     </div>
   </section>
-  <hr>
+
   <!--====================================================
                          Ticket List
 ======================================================-->
-  <div>
+  <section class="ftco-section">
     <div class="container">
-      <section id="comp-offer" style="padding: 20px;">
-        <div class="container-fluid">
-          <div class="row title-bar" style="padding: 0px;">
-            <div class="col-md-12">
-              <h1 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp; font-size: 200%;">
-                Ticket
-              </h1>
-              <div class="heading-border"></div>
-            </div>
-          </div>
-          <ticket>
-          </ticket>
+      <div class="row justify-content-center pb-3">
+        <div class="col-md-7 heading-section ftco-animate text-center fadeInUp ftco-animated">
+          <h2 class="mb-4">Tickets</h2>
         </div>
-
-        <!--====================================================
-                         Fight List
-======================================================-->
-        <div class="container-fluid">
-          <div class="row title-bar" style="padding: 0px;">
-            <div class="col-md-12">
-              <h1 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp; font-size: 200%;">
-                Daily Fight
-              </h1>
-              <div class="heading-border"></div>
-            </div>
-          </div>
-          <div class="row">
-            @foreach ($fights as $fight)
-            <div class="col-md-6 col-sm-12 mb-2">
-              <div class="card">
-                <div class="card-body text-center"
-                  style="background-color:#f1b81e; padding-top: 11px; padding-bottom: 9px; color: #fff">
-                  <i class="fa fa-calendar fa-lg"></i>
-                  <h5 class="card-title" style="color: #fff; font-size: 1.2em;">
-                    {{ date_format(date_create($fight->day), 'd/m/Y') }}</h5>
-                </div>
-                <img class="card-img-top" src="/shopping/img/fight/{{ $fight->img }}" alt="" />
+      </div>
+      <div class="row">
+        @foreach ($tickets as $ticket)
+        <div class="col-md-6 col-lg-4">
+          <div class="package-program ftco-animate fadeInUp ftco-animated">
+            <div class="img" style="background-image: url(/shopping/img/ticket/{{ $ticket->img }});"></div>
+            <div class="text mt-4">
+              <h3>{{ $ticket->name }}</h3>
+              <div class="d-flex mt-4">
+                <p class="price"><sup>฿</sup>{{ $ticket->price}}<sub></sub></p>
+                <p class="btn-custom float-right"><a href="/saleticket/{{ $ticket->id }}">Buy Now</a></p>
               </div>
             </div>
-            @endforeach
-
           </div>
         </div>
-      </section>
-
+        @endforeach
+      </div>
     </div>
-  </div>
-
-  @include('shopping/components/history')
-  
-  <section id="footer-s1" class="footer-s1">
-    <web-footer />
   </section>
+
+  <!--====================================================
+                         Fight List
+======================================================-->
+  <section class="ftco-gallery">
+    <div class="row justify-content-center pb-3">
+      <div class="col-md-7 heading-section ftco-animate text-center fadeInUp ftco-animated">
+        <h2 class="mb-4">Daily Fights</h2>
+      </div>
+    </div>
+    <div class="container-wrap">
+      <div class="row no-gutters">
+        @foreach ($fights as $fight)
+        <div class="col-md-3 ftco-animate fadeInUp ftco-animated">
+          <div class="card-body text-center"
+            style="background-color:#f1b81e; padding-top: 11px; padding-bottom: 9px; color: #fff">
+            <i class="icon-calendar"></i>
+            <h5 class="card-title" style="color: #fff; font-size: 1.2em;">
+              {{ date_format(date_create($fight->day), 'd/m/Y') }}</h5>
+          </div>
+          <a href="shopping/img/fight/{{ $fight->img }}" class="gallery img d-flex align-items-center"
+            style="background-image: url(shopping/img/fight/{{ $fight->img }});" data-lightbox="example-2">
+            <div class="icon mb-4 d-flex align-items-center justify-content-center">
+              <span class="icon-search"></span>
+            </div>
+          </a>
+          <a href="shopping/img/fight/{{ $fight->img }}" data-lightbox="roadtrip"></a>
+        </div>
+        @endforeach
+      </div>
+    </div>
+    <div class="row justify-content-md-center pt-3">
+      {{ $fights->links() }}
+    </div>
+  </section>
+  
+ 
+
+
+@include('shopping/components/history')
+
+
+<web-footer />
 
 </div>
 @endsection

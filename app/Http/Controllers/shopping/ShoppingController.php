@@ -20,7 +20,7 @@ class ShoppingController extends StarterController
         $data = [
             'tickets' => $this->tickets,
             'webdetail' => WebDetail::find(1),
-            'fights' => Fight::orderBy('day', 'desc')->get()
+            'fights' => Fight::orderBy('day', 'desc')->paginate(4)
         ];
         return view('shopping/index', $data);
     }
