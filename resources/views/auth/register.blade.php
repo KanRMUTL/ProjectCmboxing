@@ -4,17 +4,15 @@
 
 @include('shopping.layout.default_banner')
 
-<section class="pb-5">
+<section class="pb-5 bg-overay">
     <div class="row justify-content-center pt-5 ">
         <div class="col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated">
           <h2 class="mb-4">Register</h2>
         </div>
       </div>
       <div class="col-md-4 offset-md-4">
-        
           <form class="form-horizontal" method="post" action="/customerRegister" enctype="multipart/form-data">
             {!! csrf_field() !!}
-
             <div class="form-group">
               <label for="img" class="cols-sm-2 control-label">Profile Image</label>
               <div class="cols-sm-10">
@@ -25,10 +23,8 @@
                   {{$errors->first('img')}}
                 </div>
                 @endif
-                
               </div>
             </div>
-
             <div class="form-group">
               <div class="cols-sm-10">
                 <input type="text" name="username" placeholder="Username" id="username" class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}" value="{{ old('username') }}">
@@ -38,10 +34,9 @@
                     {{$errors->first('username')}}
                   </div>
                 @endif
-
+                
               </div>
             </div>
-
             <div class="row">
               <div class="form-group col-md-6">
                 <div class="cols-sm-10">
