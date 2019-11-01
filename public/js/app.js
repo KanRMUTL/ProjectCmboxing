@@ -73060,26 +73060,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -73124,7 +73104,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h3", [_vm._v("Reset Password")]),
+    _vm._m(0),
     _vm._v(" "),
     _c(
       "form",
@@ -73135,19 +73115,8 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "cols-sm-2 control-label",
-              attrs: { for: "oldpassword" }
-            },
-            [_vm._v("Password")]
-          ),
-          _vm._v(" "),
           _c("div", { staticClass: "cols-sm-10" }, [
             _c("div", { staticClass: "input-group" }, [
-              _vm._m(0),
-              _vm._v(" "),
               _c("input", {
                 directives: [
                   {
@@ -73162,7 +73131,7 @@ var render = function() {
                   type: "password",
                   name: "password",
                   id: "oldpassword",
-                  placeholder: "Enter your Password",
+                  placeholder: "Enter Current Password",
                   required: ""
                 },
                 domProps: { value: _vm.form.oldPassword },
@@ -73188,19 +73157,8 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "cols-sm-2 control-label",
-              attrs: { for: "password" }
-            },
-            [_vm._v("New Password")]
-          ),
-          _vm._v(" "),
           _c("div", { staticClass: "cols-sm-10" }, [
             _c("div", { staticClass: "input-group" }, [
-              _vm._m(1),
-              _vm._v(" "),
               _c("input", {
                 directives: [
                   {
@@ -73241,19 +73199,8 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "cols-sm-2 control-label",
-              attrs: { for: "confirm" }
-            },
-            [_vm._v("Confirm Password")]
-          ),
-          _vm._v(" "),
           _c("div", { staticClass: "cols-sm-10" }, [
             _c("div", { staticClass: "input-group" }, [
-              _vm._m(2),
-              _vm._v(" "),
               _c("input", {
                 directives: [
                   {
@@ -73297,7 +73244,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(3)
+        _vm._m(1)
       ]
     )
   ])
@@ -73307,33 +73254,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "input-group-addon" }, [
-      _c("i", {
-        staticClass: "fa fa-lock fa-lg",
-        attrs: { "aria-hidden": "true" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "input-group-addon" }, [
-      _c("i", {
-        staticClass: "fa fa-lock fa-lg",
-        attrs: { "aria-hidden": "true" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "input-group-addon" }, [
-      _c("i", {
-        staticClass: "fa fa-lock fa-lg",
-        attrs: { "aria-hidden": "true" }
-      })
+    return _c("div", { staticClass: "row justify-content-center pt-5 mt-5" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated"
+        },
+        [_c("h2", { staticClass: "mb-4" }, [_vm._v("Reset Password")])]
+      )
     ])
   },
   function() {
@@ -73344,7 +73273,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-general btn-white text-center btn-block",
+          staticClass: "btn btn-primary text-center btn-block",
           attrs: { type: "submit" }
         },
         [_vm._v("Reset Password")]
