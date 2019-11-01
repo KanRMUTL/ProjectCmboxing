@@ -69389,6 +69389,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id"],
@@ -69467,7 +69473,7 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-hover table-condensed" }, [
+      _c("table", { staticClass: "table" }, [
         _vm._m(1),
         _vm._v(" "),
         _c(
@@ -69477,6 +69483,7 @@ var render = function() {
               "tr",
               {
                 key: index,
+                staticClass: "text-center bg-overay",
                 attrs: {
                   "data-toggle": "modal",
                   "data-target": "#ticket-detail-modal"
@@ -69488,44 +69495,54 @@ var render = function() {
                 }
               },
               [
-                _c("td", { staticClass: "text-center" }, [
-                  _vm._v(_vm._s(_vm._f("formatDate")(ticketDetail.visit)))
+                _c("td", [
+                  _c("span", { staticClass: "trainer" }, [
+                    _vm._v(_vm._s(_vm._f("formatDate")(ticketDetail.visit)))
+                  ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "text-center" },
-                  _vm._l(ticketDetail.detail, function(detail, index) {
-                    return _c(
-                      "span",
-                      { key: index, staticClass: "badge badge-primary" },
-                      [
-                        _vm._v(
-                          "\n            " +
-                            _vm._s(detail.amount + " * " + detail.name) +
-                            "\n          "
-                        )
-                      ]
+                _c("td", [
+                  _c(
+                    "span",
+                    { staticClass: "trainer" },
+                    _vm._l(ticketDetail.detail, function(detail, index) {
+                      return _c(
+                        "span",
+                        { key: index, staticClass: "badge badge-primary" },
+                        [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(detail.amount + " * " + detail.name) +
+                              "\n            "
+                          )
+                        ]
+                      )
+                    })
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("span", { staticClass: "trainer" }, [
+                    _vm._v(
+                      _vm._s(_vm._f("formatDate")(ticketDetail.created_at))
                     )
-                  })
-                ),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [
-                  _vm._v(_vm._s(_vm._f("formatDate")(ticketDetail.created_at)))
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [
-                  !ticketDetail.status
-                    ? _c("span", { staticClass: "badge badge-secondary" }, [
-                        _vm._v("Expire")
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  ticketDetail.status
-                    ? _c("span", { staticClass: "badge badge-success" }, [
-                        _vm._v("Active")
-                      ])
-                    : _vm._e()
+                _c("td", [
+                  _c("span", { staticClass: "trainer" }, [
+                    !ticketDetail.status
+                      ? _c("span", { staticClass: "badge badge-secondary" }, [
+                          _vm._v("Expire")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    ticketDetail.status
+                      ? _c("span", { staticClass: "badge badge-success" }, [
+                          _vm._v("Active")
+                        ])
+                      : _vm._e()
+                  ])
                 ]),
                 _vm._v(" "),
                 _vm._m(2, true)
@@ -69551,44 +69568,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "row title-bar", staticStyle: { padding: "0" } },
-      [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c(
-            "h1",
-            {
-              staticClass: "wow fadeInUp",
-              staticStyle: {
-                visibility: "visible",
-                "animation-name": "fadeInUp",
-                "font-size": "200%"
-              }
-            },
-            [_vm._v("My Ticket")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "heading-border" })
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "row justify-content-center pt-5 mt-5" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated"
+        },
+        [_c("h2", { staticClass: "mb-4" }, [_vm._v("Our Muay Thai Course")])]
+      )
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Visit Day")]),
+    return _c("thead", { staticClass: "thead-primary" }, [
+      _c("tr", { staticClass: "text-center" }, [
+        _c("th", [_vm._v("Visit Day")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Detail")]),
+        _c("th", [_vm._v("Detail")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Created")]),
+        _c("th", [_vm._v("Created")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Status")]),
+        _c("th", [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("View")])
+        _c("th", [_vm._v("View")])
       ])
     ])
   },
@@ -69597,8 +69602,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", { staticClass: "text-center" }, [
-      _c("button", { staticClass: "btn btn-warning btn-sm" }, [
-        _c("i", { staticClass: "fa fa-search" })
+      _c("span", { staticClass: "trainer" }, [
+        _c("button", { staticClass: "btn btn-warning btn-sm" }, [
+          _c("i", { staticClass: "icon icon-search" })
+        ])
       ])
     ])
   }

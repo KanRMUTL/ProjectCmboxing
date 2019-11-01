@@ -1,48 +1,51 @@
 <template>
   <div>
 
-    <div class="row title-bar" style="padding: 0;">
-      <div class="col-md-12">
-        <h1
-          class="wow fadeInUp"
-          style="visibility: visible; animation-name: fadeInUp; font-size: 200%;"
-        >My Ticket</h1>
-        <div class="heading-border"></div>
-       
+    <div class="row justify-content-center pt-5 mt-5">
+      <div class="col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated">
+        <h2 class="mb-4">Our Muay Thai Course</h2>
       </div>
     </div>
 
-    <table class="table table-hover table-condensed">
-      <thead>
-        <tr>
-          <th class="text-center">Visit Day</th>
-          <th class="text-center">Detail</th>
-          <th class="text-center">Created</th>
-          <th class="text-center">Status</th>
-          <th class="text-center">View</th>
+    <table class="table">
+      <thead class="thead-primary">
+        <tr class="text-center">
+          <th>Visit Day</th>
+          <th>Detail</th>
+          <th>Created</th>
+          <th>Status</th>
+          <th>View</th>
         </tr>
       </thead>
       <tbody>
         <tr
+          class="text-center bg-overay"
           v-for="(ticketDetail, index) in ticketDetails"
           :key="index"
           @click="sendDataToTicketDetail(ticketDetail)"
           data-toggle="modal"
           data-target="#ticket-detail-modal"
         >
-          <td class="text-center">{{ ticketDetail.visit | formatDate }}</td>
-          <td class="text-center">
-            <span
-              class="badge badge-primary"
-              v-for="(detail, index) in ticketDetail.detail"
-              :key="index"
-            >
-              {{ detail.amount + " * " + detail.name }}
+          <td>
+            <span class="trainer">{{ ticketDetail.visit | formatDate }}</span>
+          </td>
+          <td>
+            <span class="trainer">
+              <span
+                class="badge badge-primary"
+                v-for="(detail, index) in ticketDetail.detail"
+                :key="index"
+              >
+                {{ detail.amount + " * " + detail.name }}
+              </span>
             </span>
           </td>
 
-          <td class="text-center">{{ ticketDetail.created_at | formatDate }}</td>
-          <td class="text-center">
+          <td>
+            <span class="trainer">{{ ticketDetail.created_at | formatDate }}</span>
+          </td>
+          <td>
+            <span class="trainer">
             <span
               class="badge badge-secondary"
               v-if="!ticketDetail.status"
@@ -51,9 +54,12 @@
               class="badge badge-success"
               v-if="ticketDetail.status"
             >Active</span>
+            </span>
           </td>
           <td class="text-center">
-            <button class="btn btn-warning btn-sm"><i class="fa fa-search"></i></button>
+            <span class="trainer">
+            <button class="btn btn-warning btn-sm"><i class="icon icon-search"></i></button>
+            </span>
           </td>
         </tr>
       </tbody>
