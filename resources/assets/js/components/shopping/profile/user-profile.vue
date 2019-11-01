@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-12 main-login main-center">
+      <div class="col-md-12 main-login main-center pt-5 mt-5">
 
         <form
           class="form-horizontal"
@@ -14,7 +14,7 @@
                 :src="'/images/userImg/' + customer.img"
                 class="img-circle"
               >
-              <h3 class="title">
+              <h3 class="title mt-2">
                 {{ fullname }}
               </h3>
             </div>
@@ -152,7 +152,7 @@
           <div class="form-group ">
             <button
               type="submit"
-              class="btn btn-general btn-white text-center"
+              class="btn btn-primary btn-block text-center"
             >Update</button>
           </div>
         </form>

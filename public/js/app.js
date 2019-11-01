@@ -72502,7 +72502,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12 main-login main-center" }, [
+      _c("div", { staticClass: "col-md-12 main-login main-center pt-5 mt-5" }, [
         _c(
           "form",
           {
@@ -72518,7 +72518,7 @@ var render = function() {
                   attrs: { src: "/images/userImg/" + _vm.customer.img }
                 }),
                 _vm._v(" "),
-                _c("h3", { staticClass: "title" }, [
+                _c("h3", { staticClass: "title mt-2" }, [
                   _vm._v(
                     "\n              " + _vm._s(_vm.fullname) + "\n            "
                   )
@@ -72865,7 +72865,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-general btn-white text-center",
+          staticClass: "btn btn-primary btn-block text-center",
           attrs: { type: "submit" }
         },
         [_vm._v("Update")]
