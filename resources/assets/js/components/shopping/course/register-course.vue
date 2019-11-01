@@ -1,20 +1,36 @@
 <template>
   <div>
 
+    <div class="row justify-content-center pt-2">
+      <div class="col-md-7 heading-section ftco-animate text-center fadeInUp ftco-animated">
+        <h2 class="mb-4">Your Course</h2>
+      </div>
+    </div>
     <div class="row">
-      <div class="col-md-6 m-4 p-0">
-        <h5>1. Your Course</h5>
-        <div class="card">
-          <div class="card-header">
-            <h4>{{ course.name }}</h4>
-          </div>
-          <div class="card-body">
-            <p class="card-text">{{ course.detail }}</p>
+
+      <!-- your course  -->
+
+      <div class="col-md-6 offset-md-3 col-sm-12">
+        <div class="package-program ftco-animate fadeInUp ftco-animated">
+          <div
+            class="img"
+            style="background-image: url(/shopping/img/about/course_cover.jpg);"
+          ></div>
+          <div class="text mt-4">
+            <h3 class="price">{{ course.name }}</h3>
+            <p class="pt-2">
+              {{ course.detail }}
+            </p>
+            <div class="d-flex mt-4 ">
+              <p class="price">{{ course.price | coursePrice }}฿</p>
+            </div>
           </div>
         </div>
       </div>
+      <!-- End your course  -->
+
       <div class="col-md-6 m-4 p-0">
-        <h5>2. Started when</h5>
+        <h5 class="price">1. Started when</h5>
         <input
           type="date"
           :min="startCourse"
@@ -26,42 +42,43 @@
 
     <div class="row justify-content-md-center">
       <div class="col-md-12">
-        <h5>3. Choose trainer</h5>
+        <h5 class="price">2. Choose trainer</h5>
       </div>
+      <!-- Choose your trainer  -->
       <div
-        class="card-group col-md-3 m-4 p-0"
+        class="col-lg-6 d-flex"
         v-for="(trainer, index) in trainers"
         :key="index"
       >
-        <div class="card">
-          <img
-            class="card-img-top"
-            :src="'/shopping/img/trainer/'+trainer.img"
-            alt="Card image cap"
-          >
-          <div class="card-body">
+        <div class="coach d-sm-flex align-items-stretch">
+          <div
+            class="img"
+            :style="`background-image: url(/shopping/img/trainer/${trainer.img}); height: 500px;`"
+          ></div>
+          <div class="text py-4 px-5">
             <label
               class="radio"
               @click="onTrainerClick(trainer)"
             >
-              <h5 class="card-title">{{trainer.name}}</h5>
+              <h3>{{ trainer.name }}</h3>
               <input
                 type="radio"
                 name="trainer"
               >
               <span class="checkround"></span>
             </label>
-            <hr>
-            <p class="card-text">{{trainer.detail}}</p>
+            <p>&emsp;{{ trainer.detail }}</p>
           </div>
         </div>
       </div>
+      <!-- Choose your trainer  -->
     </div>
+
     <div class="row justify-content-md-center">
 
-      <div class="col-md-4">
+      <div class="col-md-4 pb-3">
         <button
-          class="btn btn-general btn-white btn-block"
+          class="btn btn-primary btn-block"
           @click="createOrder(parseInt(course.price), register)"
           v-show="showCheckoutBtn"
         >
@@ -94,7 +111,7 @@ export default {
   data() {
     return {
       trainerSelected: [],
-      startCourse: moment().format('YYYY-MM-DD'),
+      startCourse: moment().format("YYYY-MM-DD"),
       showCheckoutBtn: true
     };
   },
@@ -115,9 +132,11 @@ export default {
         swal({
           title: "Register Complete",
           icon: "success"
-        }).then(setTimeout(()=>{
-          window.location = `/course/${this.userId}`
-        }, 3000));
+        }).then(
+          setTimeout(() => {
+            window.location = `/course/${this.userId}`;
+          }, 3000)
+        );
       });
     },
 

@@ -6,7 +6,7 @@
 
         <div class="col-lg-6 col-md-6">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Contact Us</h2>
+            <h2 class="ftco-heading-2">Usefull Links</h2>
             <div class="block-23 mb-3">
               <ul>
                 <li><a href="/"><span class="icon icon-chevron-right"></span><span class="text">Home</span></a></li>

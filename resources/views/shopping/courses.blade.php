@@ -3,10 +3,10 @@
 
 @section('content')
 
-@include('shopping.layout.about_banner')
+@include('shopping.layout.default_banner')
 
 <div id="vue">
-    <div  class="container">
+    <div class="container pt-5">
         @if(Auth::check())
             <courses-index id="{{ Auth::user()->id }}"></courses-index>
         @else

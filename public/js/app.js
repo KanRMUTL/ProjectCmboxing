@@ -70996,7 +70996,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-6 col-md-6" }, [
       _c("div", { staticClass: "ftco-footer-widget mb-4" }, [
-        _c("h2", { staticClass: "ftco-heading-2" }, [_vm._v("Contact Us")]),
+        _c("h2", { staticClass: "ftco-heading-2" }, [_vm._v("Usefull Links")]),
         _vm._v(" "),
         _c("div", { staticClass: "block-23 mb-3" }, [
           _c("ul", [
@@ -71354,20 +71354,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["courseSelect", "changeShowIndex", "userId"],
@@ -71428,46 +71414,59 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c("h3", { staticClass: "center" }),
-    _vm._v(" "),
     _c(
       "div",
-      { staticClass: "row justify-content-md-center" },
+      { staticClass: "row justify-content-center" },
       _vm._l(_vm.courses, function(course, index) {
-        return _c("div", { key: index, staticClass: "card col-md-3 m-4 p-0" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-9" }, [
-                _c("h4", [_vm._v(_vm._s(course.name))])
-              ]),
+        return _c("div", { key: index, staticClass: "col-md-4 col-sm-6" }, [
+          _c(
+            "div",
+            {
+              staticClass: "package-program ftco-animate fadeInUp ftco-animated"
+            },
+            [
+              _c("div", {
+                staticClass: "img",
+                staticStyle: {
+                  "background-image":
+                    "url(/shopping/img/about/course_cover.jpg)"
+                }
+              }),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-2" }, [
-                _c("span", { staticClass: "badge badge-success" }, [
-                  _vm._v(_vm._s(_vm._f("coursePrice")(course.price)) + "฿")
+              _c("div", { staticClass: "text mt-4" }, [
+                _c("h3", { staticClass: "price" }, [
+                  _vm._v(_vm._s(course.name))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "pt-2" }, [
+                  _vm._v(
+                    "\n            " + _vm._s(course.detail) + "\n          "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex mt-4 " }, [
+                  _c("p", { staticClass: "price" }, [
+                    _vm._v(_vm._s(_vm._f("coursePrice")(course.price)) + "฿")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "btn-custom float-right" }, [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            _vm.onRegisterClick(course)
+                          }
+                        }
+                      },
+                      [_vm._v("Enroll Now")]
+                    )
+                  ])
                 ])
               ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v(_vm._s(course.detail))
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary",
-                attrs: { "data-toggle": "modal", "data-target": "#modal" },
-                on: {
-                  click: function($event) {
-                    _vm.onRegisterClick(course)
-                  }
-                }
-              },
-              [_vm._v("\n          Register Course\n        ")]
-            )
-          ])
+            ]
+          )
         ])
       })
     )
@@ -71478,28 +71477,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "row title-bar", staticStyle: { padding: "0px" } },
-      [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c(
-            "h1",
-            {
-              staticClass: "wow fadeInUp",
-              staticStyle: {
-                visibility: "visible",
-                "animation-name": "fadeInUp",
-                "font-size": "200%"
-              }
-            },
-            [_vm._v("\n        Our MuayThai Course\n      ")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "heading-border" })
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "row justify-content-center pt-3" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated"
+        },
+        [_c("h2", { staticClass: "mb-4" }, [_vm._v("Our Muay Thai Course")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -71597,7 +71584,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Chart.js */\n@-webkit-keyframes chartjs-render-animation{\nfrom{opacity:0.99\n}\nto{opacity:1\n}\n}\n@keyframes chartjs-render-animation{\nfrom{opacity:0.99\n}\nto{opacity:1\n}\n}\n.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;\n}\n.center{\r\n    text-align: center;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Chart.js */\n@-webkit-keyframes chartjs-render-animation {\nfrom {\r\n    opacity: 0.99;\n}\nto {\r\n    opacity: 1;\n}\n}\n@keyframes chartjs-render-animation {\nfrom {\r\n    opacity: 0.99;\n}\nto {\r\n    opacity: 1;\n}\n}\n.chartjs-render-monitor {\r\n  -webkit-animation: chartjs-render-animation 0.001s;\r\n  animation: chartjs-render-animation 0.001s;\n}\n.center {\r\n  text-align: center;\n}\r\n", ""]);
 
 // exports
 
@@ -71625,24 +71612,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['trainers'],
+  props: ["trainers"],
 
-    data: function data() {
-        return {};
-    },
+  data: function data() {
+    return {};
+  },
 
-    methods: {
-        getAllTrainer: function getAllTrainer() {
-            var _this = this;
+  methods: {
+    getAllTrainer: function getAllTrainer() {
+      var _this = this;
 
-            axios.get('/api/trainer').then(function (response) {
-                _this.trainers = response.data;
-            });
-        }
+      axios.get("/api/trainer").then(function (response) {
+        _this.trainers = response.data;
+      });
     }
-
+  }
 });
 
 /***/ }),
@@ -71653,49 +71651,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row justify-content-md-center" },
-    [
+  return _c("section", { staticClass: "ftco-section" }, [
+    _c("div", { staticClass: "container" }, [
       _vm._m(0),
       _vm._v(" "),
-      _vm._l(_vm.trainers, function(trainer, index) {
-        return _c(
-          "div",
-          { key: index, staticClass: "card-group col-md-3 m-4 p-0" },
-          [
-            _c("div", { staticClass: "card" }, [
-              _c("img", {
-                staticClass: "card-img-top",
-                attrs: { src: "/shopping/img/trainer/" + trainer.img }
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.trainers, function(trainer, index) {
+          return _c("div", { key: index, staticClass: "col-lg-6 d-flex" }, [
+            _c("div", { staticClass: "coach d-sm-flex align-items-stretch" }, [
+              _c("div", {
+                staticClass: "img",
+                style:
+                  "background-image: url(/shopping/img/trainer/" +
+                  trainer.img +
+                  "); height: 500px;"
               }),
               _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("h5", { staticClass: "card-title center" }, [
-                  _vm._v(_vm._s(trainer.name))
+              _c("div", { staticClass: "text py-4 px-5" }, [
+                _c("h3", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v(_vm._s(trainer.name))
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _c("p", { staticClass: "card-text detail" }, [
-                  _vm._v(" " + _vm._s(trainer.detail))
-                ])
+                _c("p", [_vm._v(" " + _vm._s(trainer.detail))])
               ])
             ])
-          ]
-        )
-      })
-    ],
-    2
-  )
+          ])
+        })
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12 mt-4" }, [
-      _c("h3", { staticClass: "center" }, [_vm._v("Our trainer")])
+    return _c("div", { staticClass: "row justify-content-center mb-2" }, [
+      _c("div", { staticClass: "col-md-7 heading-section text-center" }, [
+        _c("h3", { staticClass: "mb-4" }, [_vm._v("Our Trainer")])
+      ])
     ])
   }
 ]
@@ -71794,7 +71792,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* The radio */\n.radio {\r\n  display: block;\r\n  position: relative;\r\n  padding-left: 30px;\r\n  margin-bottom: 12px;\r\n  cursor: pointer;\r\n  font-size: 20px;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\n}\r\n\r\n/* Hide the browser's default radio button */\n.radio input {\r\n  position: absolute;\r\n  opacity: 0;\r\n  cursor: pointer;\n}\r\n\r\n/* Create a custom radio button */\n.checkround {\r\n  position: absolute;\r\n  top: 6px;\r\n  left: 0;\r\n  height: 20px;\r\n  width: 20px;\r\n  background-color: #fff;\r\n  border-color: #1d79f1;\r\n  border-style: solid;\r\n  border-width: 2px;\r\n  border-radius: 50%;\n}\r\n\r\n/* When the radio button is checked, add a blue background */\n.radio input:checked ~ .checkround {\r\n  background-color: #fff;\n}\r\n\r\n/* Create the indicator (the dot/circle - hidden when not checked) */\n.checkround:after {\r\n  content: \"\";\r\n  position: absolute;\r\n  display: none;\n}\r\n\r\n/* Show the indicator (dot/circle) when checked */\n.radio input:checked ~ .checkround:after {\r\n  display: block;\n}\r\n\r\n/* Style the indicator (dot/circle) */\n.radio .checkround:after {\r\n  left: 2px;\r\n  top: 2px;\r\n  width: 12px;\r\n  height: 12px;\r\n  border-radius: 50%;\r\n  background: #1d79f1;\n}\r\n\r\n/* The check */\n.check {\r\n  display: block;\r\n  position: relative;\r\n  padding-left: 25px;\r\n  margin-bottom: 12px;\r\n  padding-right: 15px;\r\n  cursor: pointer;\r\n  font-size: 18px;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\n}\r\n\r\n/* Hide the browser's default checkbox */\n.check input {\r\n  position: absolute;\r\n  opacity: 0;\r\n  cursor: pointer;\n}\r\n\r\n/* Create a custom checkbox */\n.checkmark {\r\n  position: absolute;\r\n  top: 3px;\r\n  left: 0;\r\n  height: 18px;\r\n  width: 18px;\r\n  background-color: #fff;\r\n  border-color: #1d79f1;\r\n  border-style: solid;\r\n  border-width: 2px;\n}\r\n\r\n/* When the checkbox is checked, add a blue background */\n.check input:checked ~ .checkmark {\r\n  background-color: #fff;\n}\r\n\r\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark:after {\r\n  content: \"\";\r\n  position: absolute;\r\n  display: none;\n}\r\n\r\n/* Show the checkmark when checked */\n.check input:checked ~ .checkmark:after {\r\n  display: block;\n}\r\n\r\n/* Style the checkmark/indicator */\n.check .checkmark:after {\r\n  left: 5px;\r\n  top: 1px;\r\n  width: 5px;\r\n  height: 10px;\r\n  border: solid;\r\n  border-color: #1d79f1;\r\n  border-width: 0 3px 3px 0;\r\n  -webkit-transform: rotate(45deg);\r\n  transform: rotate(45deg);\n}\n.cust-btn {\r\n  margin-bottom: 10px;\r\n  background-color: #1d79f1;\r\n  border-width: 2px;\r\n  border-color: #1d79f1;\r\n  color: #fff;\n}\n.cust-btn:hover {\r\n  border-color: #1d79f1;\r\n  background-color: #fff;\r\n  color: #1d79f1;\r\n  border-radius: 20px;\r\n  -webkit-transform-style: 2s;\r\n          transform-style: 2s;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* The radio */\n.radio {\r\n  display: block;\r\n  position: relative;\r\n  padding-left: 30px;\r\n  margin-bottom: 12px;\r\n  cursor: pointer;\r\n  font-size: 20px;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\n}\r\n\r\n/* Hide the browser's default radio button */\n.radio input {\r\n  position: absolute;\r\n  opacity: 0;\r\n  cursor: pointer;\n}\r\n\r\n/* Create a custom radio button */\n.checkround {\r\n  position: absolute;\r\n  top: 6px;\r\n  left: 0;\r\n  height: 20px;\r\n  width: 20px;\r\n  background-color: #fff;\r\n  border-color: #1d79f1;\r\n  border-style: solid;\r\n  border-width: 2px;\r\n  border-radius: 50%;\n}\r\n\r\n/* When the radio button is checked, add a blue background */\n.radio input:checked ~ .checkround {\r\n  background-color: #fff;\n}\r\n\r\n/* Create the indicator (the dot/circle - hidden when not checked) */\n.checkround:after {\r\n  content: \"\";\r\n  position: absolute;\r\n  display: none;\n}\r\n\r\n/* Show the indicator (dot/circle) when checked */\n.radio input:checked ~ .checkround:after {\r\n  display: block;\n}\r\n\r\n/* Style the indicator (dot/circle) */\n.radio .checkround:after {\r\n  left: 2px;\r\n  top: 2px;\r\n  width: 12px;\r\n  height: 12px;\r\n  border-radius: 50%;\r\n  background: #1d79f1;\n}\r\n\r\n/* The check */\n.check {\r\n  display: block;\r\n  position: relative;\r\n  padding-left: 25px;\r\n  margin-bottom: 12px;\r\n  padding-right: 15px;\r\n  cursor: pointer;\r\n  font-size: 18px;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\n}\r\n\r\n/* Hide the browser's default checkbox */\n.check input {\r\n  position: absolute;\r\n  opacity: 0;\r\n  cursor: pointer;\n}\r\n\r\n/* Create a custom checkbox */\n.checkmark {\r\n  position: absolute;\r\n  top: 3px;\r\n  left: 0;\r\n  height: 18px;\r\n  width: 18px;\r\n  background-color: #fff;\r\n  border-color: #1d79f1;\r\n  border-style: solid;\r\n  border-width: 2px;\n}\r\n\r\n/* When the checkbox is checked, add a blue background */\n.check input:checked ~ .checkmark {\r\n  background-color: #fff;\n}\r\n\r\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark:after {\r\n  content: \"\";\r\n  position: absolute;\r\n  display: none;\n}\r\n\r\n/* Show the checkmark when checked */\n.check input:checked ~ .checkmark:after {\r\n  display: block;\n}\r\n\r\n/* Style the checkmark/indicator */\n.check .checkmark:after {\r\n  left: 5px;\r\n  top: 1px;\r\n  width: 5px;\r\n  height: 10px;\r\n  border: solid;\r\n  border-color: #1d79f1;\r\n  border-width: 0 3px 3px 0;\r\n  -webkit-transform: rotate(45deg);\r\n  transform: rotate(45deg);\n}\n.cust-btn {\r\n  margin-bottom: 10px;\r\n  background-color: #1d79f1;\r\n  border-width: 2px;\r\n  border-color: #1d79f1;\r\n  color: #fff;\n}\n.cust-btn:hover {\r\n  border-color: #1d79f1;\r\n  background-color: #fff;\r\n  color: #1d79f1;\r\n  border-radius: 20px;\r\n  -webkit-transform-style: 2s;\r\n          transform-style: 2s;\n}\r\n", ""]);
 
 // exports
 
@@ -71805,6 +71803,23 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -71900,7 +71915,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       trainerSelected: [],
-      startCourse: moment().format('YYYY-MM-DD'),
+      startCourse: moment().format("YYYY-MM-DD"),
       showCheckoutBtn: true
     };
   },
@@ -71974,25 +71989,46 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6 m-4 p-0" }, [
-        _c("h5", [_vm._v("1. Your Course")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h4", [_vm._v(_vm._s(_vm.course.name))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v(_vm._s(_vm.course.detail))
+      _c("div", { staticClass: "col-md-6 offset-md-3 col-sm-12" }, [
+        _c(
+          "div",
+          {
+            staticClass: "package-program ftco-animate fadeInUp ftco-animated"
+          },
+          [
+            _c("div", {
+              staticClass: "img",
+              staticStyle: {
+                "background-image": "url(/shopping/img/about/course_cover.jpg)"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "text mt-4" }, [
+              _c("h3", { staticClass: "price" }, [
+                _vm._v(_vm._s(_vm.course.name))
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "pt-2" }, [
+                _vm._v(
+                  "\n            " + _vm._s(_vm.course.detail) + "\n          "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-flex mt-4 " }, [
+                _c("p", { staticClass: "price" }, [
+                  _vm._v(_vm._s(_vm._f("coursePrice")(_vm.course.price)) + "฿")
+                ])
+              ])
             ])
-          ])
-        ])
+          ]
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6 m-4 p-0" }, [
-        _c("h5", [_vm._v("2. Started when")]),
+        _c("h5", { staticClass: "price" }, [_vm._v("1. Started when")]),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -72022,62 +72058,50 @@ var render = function() {
       "div",
       { staticClass: "row justify-content-md-center" },
       [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _vm._l(_vm.trainers, function(trainer, index) {
-          return _c(
-            "div",
-            { key: index, staticClass: "card-group col-md-3 m-4 p-0" },
-            [
-              _c("div", { staticClass: "card" }, [
-                _c("img", {
-                  staticClass: "card-img-top",
-                  attrs: {
-                    src: "/shopping/img/trainer/" + trainer.img,
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "radio",
-                      on: {
-                        click: function($event) {
-                          _vm.onTrainerClick(trainer)
-                        }
+          return _c("div", { key: index, staticClass: "col-lg-6 d-flex" }, [
+            _c("div", { staticClass: "coach d-sm-flex align-items-stretch" }, [
+              _c("div", {
+                staticClass: "img",
+                style:
+                  "background-image: url(/shopping/img/trainer/" +
+                  trainer.img +
+                  "); height: 500px;"
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "text py-4 px-5" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "radio",
+                    on: {
+                      click: function($event) {
+                        _vm.onTrainerClick(trainer)
                       }
-                    },
-                    [
-                      _c("h5", { staticClass: "card-title" }, [
-                        _vm._v(_vm._s(trainer.name))
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { type: "radio", name: "trainer" }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "checkround" })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(_vm._s(trainer.detail))
-                  ])
-                ])
+                    }
+                  },
+                  [
+                    _c("h3", [_vm._v(_vm._s(trainer.name))]),
+                    _vm._v(" "),
+                    _c("input", { attrs: { type: "radio", name: "trainer" } }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "checkround" })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("p", [_vm._v(" " + _vm._s(trainer.detail))])
               ])
-            ]
-          )
+            ])
+          ])
         })
       ],
       2
     ),
     _vm._v(" "),
     _c("div", { staticClass: "row justify-content-md-center" }, [
-      _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "col-md-4 pb-3" }, [
         _c(
           "button",
           {
@@ -72089,7 +72113,7 @@ var render = function() {
                 expression: "showCheckoutBtn"
               }
             ],
-            staticClass: "btn btn-general btn-white btn-block",
+            staticClass: "btn btn-primary btn-block",
             on: {
               click: function($event) {
                 _vm.createOrder(parseInt(_vm.course.price), _vm.register)
@@ -72104,7 +72128,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(2)
   ])
 }
 var staticRenderFns = [
@@ -72112,8 +72136,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center pt-2" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "col-md-7 heading-section ftco-animate text-center fadeInUp ftco-animated"
+        },
+        [_c("h2", { staticClass: "mb-4" }, [_vm._v("Your Course")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-12" }, [
-      _c("h5", [_vm._v("3. Choose trainer")])
+      _c("h5", { staticClass: "price" }, [_vm._v("2. Choose trainer")])
     ])
   },
   function() {
