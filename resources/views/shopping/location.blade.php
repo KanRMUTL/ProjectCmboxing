@@ -1,9 +1,9 @@
 @extends('shopping.layout.master')
 @section('title', 'Welcome to CM Boxing')
 @section('content')
-<div class="container">
+<div class="container pb-5">
   <div class="row">
-    <div class="col-md-12" style="padding: 2%;">
+    <div class="col-md-12 pt-5 mt-5">
       <h1 class="wow fadeInUp text-center" style="visibility: visible; animation-name: fadeInUp;">
         Location
       </h1>
