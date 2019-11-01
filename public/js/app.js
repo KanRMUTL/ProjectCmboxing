@@ -70946,42 +70946,48 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("footer", { staticClass: "ftco-footer ftco-section img" }, [
-    _c("div", { staticClass: "overlay" }),
-    _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-6 col-md-6 " }, [
-          _c("div", { staticClass: "ftco-footer-widget mb-4" }, [
-            _c("h2", { staticClass: "ftco-heading-2" }, [_vm._v("Contact Us")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "block-23 mb-3" }, [
-              _c("ul", [
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("span", { staticClass: "icon icon-phone" }),
-                    _c("span", { staticClass: "text" }, [
-                      _vm._v(_vm._s(_vm.webDetail.phone))
+  return _c(
+    "footer",
+    { staticClass: "ftco-footer ftco-section img bg-overay" },
+    [
+      _c("div", { staticClass: "overlay" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-6 col-md-6 " }, [
+            _c("div", { staticClass: "ftco-footer-widget mb-4" }, [
+              _c("h2", { staticClass: "ftco-heading-2" }, [
+                _vm._v("Contact Us")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "block-23 mb-3" }, [
+                _c("ul", [
+                  _c("li", [
+                    _c("a", { attrs: { href: "#" } }, [
+                      _c("span", { staticClass: "icon icon-phone" }),
+                      _c("span", { staticClass: "text" }, [
+                        _vm._v(_vm._s(_vm.webDetail.phone))
+                      ])
                     ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("span", { staticClass: "icon icon-envelope" }),
-                    _c("span", { staticClass: "text" }, [
-                      _vm._v(_vm._s(_vm.webDetail.email))
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("a", { attrs: { href: "#" } }, [
+                      _c("span", { staticClass: "icon icon-envelope" }),
+                      _c("span", { staticClass: "text" }, [
+                        _vm._v(_vm._s(_vm.webDetail.email))
+                      ])
                     ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: _vm.webDetail.facebook } }, [
-                    _c("span", { staticClass: "icon icon-facebook-square" }),
-                    _c("span", { staticClass: "text" }, [
-                      _vm._v("Chiangmai Boxing Stadium Offcial")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("a", { attrs: { href: _vm.webDetail.facebook } }, [
+                      _c("span", { staticClass: "icon icon-facebook-square" }),
+                      _c("span", { staticClass: "text" }, [
+                        _vm._v("Chiangmai Boxing Stadium Offcial")
+                      ])
                     ])
                   ])
                 ])
@@ -70990,8 +70996,8 @@ var render = function() {
           ])
         ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {

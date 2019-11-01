@@ -5,7 +5,7 @@
 @include('shopping.layout.default_banner')
 <div id="vue">
 
-  <section class="ftco-about d-md-flex">
+  <section class="ftco-about d-md-flex bg-overay">
     <div class="one-half img" style="background-image: url(shopping/img/about/about1.jpg);"></div>
     <div class="one-half">
       <div class="heading-section">
@@ -49,8 +49,8 @@
   <!--====================================================
                          Fight List
 ======================================================-->
-  <section class="ftco-gallery">
-    <div class="row justify-content-center pb-3">
+  <section class="ftco-gallery bg-overay">
+    <div class="row justify-content-center pb-3 pt-3">
       <div class="col-md-7 heading-section ftco-animate text-center fadeInUp ftco-animated">
         <h2 class="mb-4">Daily Fights</h2>
       </div>
