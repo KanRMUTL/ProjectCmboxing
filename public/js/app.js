@@ -69473,7 +69473,7 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _c("table", { staticClass: "table" }, [
+      _c("table", { staticClass: "table table-hover" }, [
         _vm._m(1),
         _vm._v(" "),
         _c(
@@ -69575,7 +69575,7 @@ var staticRenderFns = [
           staticClass:
             "col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated"
         },
-        [_c("h2", { staticClass: "mb-4" }, [_vm._v("Our Muay Thai Course")])]
+        [_c("h2", { staticClass: "mb-4" }, [_vm._v("My Ticket")])]
       )
     ])
   },
@@ -69998,7 +69998,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\ntd {\n    vertical-align: middle !important;\n}\n", ""]);
+exports.push([module.i, "\ntd {\r\n  vertical-align: middle !important;\n}\r\n", ""]);
 
 // exports
 
@@ -70009,9 +70009,6 @@ exports.push([module.i, "\ntd {\n    vertical-align: middle !important;\n}\n", "
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
 //
 //
 //
@@ -70114,7 +70111,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "cart" } }, [
+  return _c("div", [
     _vm._m(0),
     _vm._v(" "),
     _c("table", { staticClass: "table table-hover" }, [
@@ -70123,69 +70120,77 @@ var render = function() {
       _c(
         "tbody",
         _vm._l(_vm.courses, function(course, index) {
-          return _c("tr", { key: index }, [
-            _c(
-              "td",
-              {
-                staticClass: "text-center",
-                staticStyle: { width: "50%" },
-                attrs: { "data-th": "trainer" }
-              },
-              [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-2 hidden-xs" }, [
-                    _c("img", {
-                      staticClass: "img-responsive",
-                      staticStyle: { width: "100%" },
-                      attrs: {
-                        src: "/shopping/img/trainer/" + course.trainerImg
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-sm-10 prod-desc" }, [
-                    _c("h6", { staticClass: "nomargin" }, [
-                      _vm._v(_vm._s(course.trainerName))
+          return _c(
+            "tr",
+            { key: index, staticClass: "text-center bg-overay" },
+            [
+              _c(
+                "td",
+                {
+                  staticClass: "text-center",
+                  staticStyle: { width: "50%" },
+                  attrs: { "data-th": "trainer" }
+                },
+                [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-2 hidden-xs" }, [
+                      _c("img", {
+                        staticClass: "img-responsive",
+                        staticStyle: { width: "100%" },
+                        attrs: {
+                          src: "/shopping/img/trainer/" + course.trainerImg
+                        }
+                      })
                     ]),
                     _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(course.trainerDetail))])
+                    _c("div", { staticClass: "col-sm-10 prod-desc" }, [
+                      _c("span", { staticClass: "nomargin" }, [
+                        _vm._v(_vm._s(course.trainerName))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(course.trainerDetail))])
+                    ])
                   ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  staticClass: "text-center",
+                  attrs: { "data-th": "course-name" }
+                },
+                [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "badge badge-primary",
+                      staticStyle: { "font-size": "120%" }
+                    },
+                    [
+                      _vm._v(
+                        "\n            " +
+                          _vm._s(course.courseName) +
+                          "\n          "
+                      )
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("td", { staticClass: "text-center" }, [
+                _c("span", [
+                  _vm._v(_vm._s(_vm._f("dateFormat")(course.created_at)))
                 ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "td",
-              {
-                staticClass: "text-center",
-                attrs: { "data-th": "course-name" }
-              },
-              [
-                _c(
-                  "span",
-                  {
-                    staticClass: "badge badge-primary",
-                    staticStyle: { "font-size": "120%" }
-                  },
-                  [
-                    _vm._v(
-                      "\n            " +
-                        _vm._s(course.courseName) +
-                        "\n          "
-                    )
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(_vm._f("dateFormat")(course.created_at)))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(_vm._f("dateFormat")(course.start_course)))
-            ])
-          ])
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "text-center" }, [
+                _c("span", [
+                  _vm._v(_vm._s(_vm._f("dateFormat")(course.start_course)))
+                ])
+              ])
+            ]
+          )
         })
       )
     ])
@@ -70196,42 +70201,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "row title-bar", staticStyle: { padding: "0" } },
-      [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c(
-            "h1",
-            {
-              staticClass: "wow fadeInUp",
-              staticStyle: {
-                visibility: "visible",
-                "animation-name": "fadeInUp",
-                "font-size": "200%"
-              }
-            },
-            [_vm._v("\n        My Course\n      ")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "heading-border" })
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "row justify-content-center pt-5 mt-5" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated"
+        },
+        [_c("h2", { staticClass: "mb-4" }, [_vm._v("My Course")])]
+      )
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Trainer")]),
+    return _c("thead", { staticClass: "thead-primary" }, [
+      _c("tr", { staticClass: "text-center" }, [
+        _c("th", [_vm._v("Trainer")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Course name")]),
+        _c("th", [_vm._v("Course name")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Register time")]),
+        _c("th", [_vm._v("Register time")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Started When")])
+        _c("th", [_vm._v("Started When")])
       ])
     ])
   }

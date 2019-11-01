@@ -22,7 +22,7 @@
                     <div class="dropdown-menu dropdown-cust" aria-labelledby="navbarDropdownMenuLink">
                         @if(Auth::user()->role == 4)
                         <a class="dropdown-item nav-link" href="/booking/{{ Auth::user()->id }}">My Ticket</a>
-                        <a class="dropdown-item" href="/course/{{ Auth::user()->id }}">My Course</a>
+                        <a class="dropdown-item nav-link" href="/course/{{ Auth::user()->id }}">My Course</a>
                         @endif
                         @if(Auth::user()->role != 4) {{-- ไม่ใช่ user ทั่วไป --}}
                         <a class="dropdown-item nav-link" href="/dashboard">Dashboard</a>

@@ -3,11 +3,11 @@
 
     <div class="row justify-content-center pt-5 mt-5">
       <div class="col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated">
-        <h2 class="mb-4">Our Muay Thai Course</h2>
+        <h2 class="mb-4">My Ticket</h2>
       </div>
     </div>
 
-    <table class="table">
+    <table class="table table-hover">
       <thead class="thead-primary">
         <tr class="text-center">
           <th>Visit Day</th>
