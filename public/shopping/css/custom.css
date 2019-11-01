@@ -1,0 +1,27 @@
+/* navbar */
+.dropdown-item.nav-link {
+     color: #ffffff;
+}
+
+/* pagination */
+ul.pagination li{
+     margin: 1%;
+}
+ul.pagination li span,
+ul.pagination li a {
+     color: #fac564;
+     text-align: center;
+     display: inline-block;
+     width: 40px;
+     height: 40px;
+     line-height: 40px;
+     border-radius: 50%;
+     border: 1px solid #bf7e06;
+     padding: 1%;
+}
+
+ul.pagination li.active span {
+     background: #fac564;
+     color: #fff;
+     border: 1px solid transparent;
+}
