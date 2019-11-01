@@ -38,3 +38,7 @@ ul.pagination li.active span {
      background: rgb(130, 123, 123) !important;
      color: #fff !important;
 }
+
+.text-golden{
+     color: #e5ce48;
+}

@@ -1,7 +1,7 @@
 <template>
   <div>
     <button
-      class="btn btn-general btn-white btn-block"
+      class="btn btn-primary btn-block"
       role="button"
       @click="confirmed()"
       v-show="!confirm"

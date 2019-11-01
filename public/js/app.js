@@ -70404,6 +70404,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -70488,37 +70494,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticStyle: { "margin-top": "5%" } }, [
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
     _c("div", { staticClass: "wrapper row" }, [
       _c("div", { staticClass: "preview col-md-12 col-lg-6" }, [
-        _c("div", { staticClass: "preview-pic tab-content" }, [
-          _c("div", { staticClass: "tab-pane active" }, [
-            _c("img", {
-              staticStyle: { width: "100%" },
-              attrs: { src: "/shopping/img/ticket/" + _vm.ticket.img }
-            })
-          ])
+        _c("div", { staticClass: "tab-pane active" }, [
+          _c("img", {
+            staticStyle: { width: "100%" },
+            attrs: { src: "/shopping/img/ticket/" + _vm.ticket.img }
+          })
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "details col-md-12 col-lg-6" }, [
-        _c("h3", { staticClass: "product-title" }, [
+      _c("div", { staticClass: "col-md-12 col-lg-6" }, [
+        _c("h3", { staticClass: "text-golden" }, [
           _vm._v(_vm._s(_vm.ticket.name))
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "product-description" }, [
+        _c("p", {}, [
           _vm._v(
             "Thank you for buy ticket from our, please input date visited, quantity of ticket and confirm payment."
           )
         ]),
         _vm._v(" "),
-        _c("h5", { staticClass: "sizes" }, [
+        _c("h5", [
           _vm._v("Price: "),
           _c("span", [_vm._v(_vm._s(_vm.moneyFormat(_vm.ticket.price)) + " ฿")])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-12 col-lg-7 input-group" }, [
-          _vm._m(0),
+        _c("div", { staticClass: "col-md-12 col-lg-7 form-group" }, [
+          _c(
+            "label",
+            { staticClass: "input-group-addon", attrs: { for: "date" } },
+            [_vm._v("Date of visit")]
+          ),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -70532,6 +70542,7 @@ var render = function() {
             staticClass: "form-control",
             attrs: {
               type: "date",
+              id: "date",
               min: _vm.dateVisit,
               placeholder: "Quantity",
               disabled: _vm.getConfirmCheckout
@@ -70548,8 +70559,12 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-12 col-lg-7 col-md-7 input-group" }, [
-          _vm._m(1),
+        _c("div", { staticClass: "col-md-12 col-lg-7 form-group" }, [
+          _c(
+            "label",
+            { staticClass: "input-group-addon", attrs: { for: "quantity" } },
+            [_vm._v("Quantity")]
+          ),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -70563,6 +70578,7 @@ var render = function() {
             staticClass: "form-control",
             attrs: {
               type: "number",
+              id: "quantity",
               placeholder: "Quantity",
               disabled: _vm.getConfirmCheckout
             },
@@ -70578,8 +70594,8 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-12 col-lg-7 col-md-7 input-group" }, [
-          _vm._m(2),
+        _c("div", { staticClass: "col-md-12 col-lg-7 col-md-7 form-group" }, [
+          _c("div", { staticClass: "input-group-addon" }, [_vm._v("Total")]),
           _vm._v(" "),
           _c("input", {
             staticClass: "form-control",
@@ -70609,27 +70625,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-addon" }, [
-      _c("i", { staticClass: "fa fa-calendar" }),
-      _vm._v(" Date of visit")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-addon" }, [
-      _c("i", { staticClass: "fa fa-ticket" }),
-      _vm._v(" Quantity")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-addon" }, [
-      _c("i", { staticClass: "fa fa-money" }),
-      _vm._v(" Total")
+    return _c("div", { staticClass: "row justify-content-center pt-5 mt-5" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated"
+        },
+        [_c("h2", { staticClass: "mb-4" }, [_vm._v("Buy Ticket")])]
+      )
     ])
   }
 ]
@@ -70786,7 +70790,7 @@ var render = function() {
             expression: "!confirm"
           }
         ],
-        staticClass: "btn btn-general btn-white btn-block",
+        staticClass: "btn btn-primary btn-block",
         attrs: { role: "button" },
         on: {
           click: function($event) {

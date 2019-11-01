@@ -2,8 +2,6 @@
 @section('title', 'Payment')
 @section('content')
 
-@include('shopping.layout.about_banner')
-
 <!--====================================================
                          Single Ticket
 ======================================================-->
