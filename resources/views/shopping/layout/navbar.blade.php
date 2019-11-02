@@ -15,7 +15,7 @@
 
                 @if(Auth::check())
                 <li class="dropdown show nav-item">
-                    <a class="nav-link dropdown-toggle smooth-scroll" href="#" id="navbarDropdownMenuLink"
+                    <a class="nav-link dropdown-toggle smooth-scroll" id="navbarDropdownMenuLink"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->firstname }}&emsp;{{ Auth::user()->lastname }}
                     </a>
@@ -35,11 +35,11 @@
                 </li>
                 @else
                 <li class="dropdown show nav-item">
-                    <a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle smooth-scroll" role="button" id="acount-dropdown" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         Account
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-menu" aria-labelledby="acount-dropdown">
                         <a class="dropdown-item nav-link" href="/register">Register</a>
                         <a class="dropdown-item nav-link" href="/login">Login</a>
                     </div>
