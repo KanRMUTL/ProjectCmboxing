@@ -27,15 +27,28 @@ class BookingController extends StarterController
     }
 
     
-    public function create()
+    public function searchSaleTicketOnline(Request $request)
     {
-        //
+        $data = SaleTicket::search($request->start, $request->end)->get();
+        
+        foreach($data as $key => $item) {
+            $data[$key]['sale_ticket_detail'] = $item->SaleTicketDetail;
+            $data[$key]['seat_register'] = $item->SeatRegister;
+
+            foreach($item->SeatRegister as $seatKey => $seatItem){
+                // $data[$key]['seat_register']['seat'] = $seatItem->seat;
+                $data[$key]['seat_register'][$seatKey]['name'] = $seatItem->seat->name;
+            }
+
+            $data[$key]['user'] = $item->user;
+        }
+
+        return response()->json($data);
     }
 
   
     public function store(Request $request)
     {
-        // return response()->json($request);
         try{
             $saleTicket = new SaleTicket();
 
@@ -90,24 +103,6 @@ class BookingController extends StarterController
             $ticketDetails[$index]['seat'] = SeatRegister::RegisterDetail($ticketDetail->id)->get();
         }
         return response()->json(['ticketDetails' => $ticketDetails, 'tickets' => $tickets]);
-    }
-
-  
-    public function edit($id)
-    {
-        //
-    }
-
-   
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-   
-    public function destroy($id)
-    {
-        //
     }
 
     public function addAttribute($seat ,$date)

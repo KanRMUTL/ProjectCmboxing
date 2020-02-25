@@ -1,44 +1,50 @@
 <template>
-  <div style="margin-top: 5%;">
+  <div>
+     <div class="row justify-content-center pt-5 mt-5">
+      <div class="col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated">
+        <h2 class="mb-4">Buy Ticket</h2>
+      </div>
+    </div>
 
     <div class="wrapper row">
-      <div class="preview col-md-6">
-
-        <div class="preview-pic tab-content">
-          <div class="tab-pane active"><img
+      <div class="preview col-md-12 col-lg-6">
+          <div class="tab-pane active">
+            <img
               :src="'/shopping/img/ticket/' + ticket.img"
               style="width:100%"
             ></div>
-        </div>
       </div>
-      <div class="details col-md-6">
-        <h3 class="product-title">{{ ticket.name }}</h3>
-        <p class="product-description">Thank you for buy ticket from our, please input date visited, quantity of ticket and confirm payment.</p>
-        <h5 class="sizes">Price: <span>{{ moneyFormat(ticket.price) }} ฿</span></h5>
 
-        <div class="col-md-7 input-group">
-          <div class="input-group-addon"><i class="fa fa-calendar"></i>&emsp;Date of visit</div>
+      <div class="col-md-12 col-lg-6">
+        <h3 class="text-golden">{{ ticket.name }}</h3>
+        <p class="">Thank you for buy ticket from our, please input date visited, quantity of ticket and confirm payment.</p>
+        <h5>Price: <span>{{ moneyFormat(ticket.price) }} ฿</span></h5>
+
+        <div class="col-md-12 col-lg-7 form-group">
+          <label class="input-group-addon" for="date">Date of visit</label>
           <input
             type="date"
+            id="date"
             :min="dateVisit"
             class="form-control"
             placeholder="Quantity"
             v-model="dateVisit"
-            :disabled="!getConfirmCheckout"
+            :disabled="getConfirmCheckout"
           >
         </div>
-        <div class="col-md-7 input-group">
-          <div class="input-group-addon"><i class="fa fa-ticket"></i>&emsp;Quantity</div>
+        <div class="col-md-12 col-lg-7 form-group">
+          <label class="input-group-addon" for="quantity">Quantity</label>
           <input
             type="number"
+            id="quantity"
             class="form-control"
             placeholder="Quantity"
             v-model="quantity"
-            :disabled="!getConfirmCheckout"
+            :disabled="getConfirmCheckout"
           >
         </div>
-        <div class="col-md-7 input-group">
-          <div class="input-group-addon"><i class="fa fa-money"></i>&emsp;Total</div>
+        <div class="col-md-12 col-lg-7 col-md-7 form-group">
+          <div class="input-group-addon">Total</div>
           <input
             type="text"
             class="form-control"
@@ -48,7 +54,7 @@
           >
         </div>
 
-        <div class="col-md-7 action">
+        <div class="col-md-12 col-lg-7 col-md-7 action">
           <div class="title-but">
             <paypal-button-ticket
               :total="ticket.price"
@@ -114,8 +120,7 @@ export default {
               title: "Booking Complete"
             }).then(function(){
               window.location = "/booking/1"
-            }) 
-          console.log(response.data);
+            })
         }
       });
     },
@@ -130,7 +135,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getConfirmCheckout']),
+    ...mapGetters('shopping', ['getConfirmCheckout']),
     showTotal() {
       if (this.quantity <= 0) {
         this.quantity = 1;

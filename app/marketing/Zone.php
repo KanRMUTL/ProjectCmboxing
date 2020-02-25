@@ -12,7 +12,7 @@ class Zone extends Model
         'latitude',
         'longitude'
     ];
-
+    public $timestamps = false;
     public function guesthouses()
     {
         return $this->hasMany('App\marketing\Guesthouse');

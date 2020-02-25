@@ -38,13 +38,12 @@ class SaleController extends StarterController
             'url' => $dataForSaleType['url'],
             'header' => $dataForSaleType['header'],
         ];
-        // dd($sales->SearchSale());
         $data['sales'] = $sales->SearchSale();
-
+        
         return view('marketing._sale.index', $data);
     }
         
-    public function store(TicketRequest $request)
+    public function store(Request $request)
     {
         $ticket = Ticket::find($request->ticketId);
         $sale = new Sale;
@@ -92,7 +91,6 @@ class SaleController extends StarterController
    
     public function update(TicketRequest $request, $id)
     {
-    
         $ticket = Ticket::find($request->ticketId); // เอาไว้คำนวณราคาสุทธิ total
         $data = [
             'amount' => $request->amount,

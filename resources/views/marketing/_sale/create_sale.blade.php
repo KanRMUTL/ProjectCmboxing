@@ -33,6 +33,7 @@
             @include('layouts.component.invalidFeedback', ['input' => 'customerPhone'])
         </div>
 
+        @if($saleTypeName != 'walkin')
         <div class="row">
           <!-- Row-->
           <div class="col-md-6 col-sm-12">
@@ -56,15 +57,25 @@
           </div>
 
         </div> <!-- end Row-->
+        @endif
         <div class="row">
+          @if($saleTypeName != 'walkin')
+
           <div class="col-md-6 col-sm-12">
+            <label for="check">ประเภทการขาย</label>
             <div class="form-group">
-              <label for="visitDay">วันที่เข้ามาชม</label>
-              <input type="date" class="form-control" id="visitDay" name="visitDay" value="{{ old('visitDay') }}">
-              @include('layouts.component.invalidFeedback', ['input' => 'visitDay'])
+            @foreach ($saleTypes as $key => $saleType)
+              <div class="form-check form-check-inline" id="check">
+                  <input class="form-check-input" type="radio" name="saleTypeId" id="type{{ $errors->isEmpty() ? $key : old('saleTypeId') }}" value="{{  $errors->isEmpty() ? $key : old('saleTypeId') }}">
+                  <label class="form-check-label" for="type{{ $errors->isEmpty() ? $key : old('saleTypeId') }}">
+                      {{ $saleType }}
+                  </label>
+              </div>
+              @include('layouts.component.invalidFeedback', ['input' => 'saleTypeId'])
+             @endforeach
             </div>
           </div>
-          <div class="col-md-6 col-sm-12">
+          {{-- <div class="col-md-6 col-sm-12">
             <label for="ticketId">ประเภทการขาย</label>
             <div class="form-group" id="ticketId">
               <select class="form-control" name="saleTypeId" value="{{ old('saleTypeId') }}">
@@ -74,10 +85,27 @@
               </select>
               @include('layouts.component.invalidFeedback', ['input' => 'saleTypeId'])
             </div>
-          </div>
-        </div>
-        <div class="row">
+          </div> --}}
+          
+          @else
+            <input type="hidden" name="saleTypeId" value="3">
+          @endif
+
           <div class="col-md-6 col-sm-12">
+            <label for="ticketId">ประเภทบัตร</label>
+            <div class="form-group" id="ticketId">
+                @foreach ($tickets as $ticket)
+                <div class="form-check form-check-inline" id="check">
+                    <input class="form-check-input" type="radio" name="ticketId" id="ticket{{  $ticket->id }}" value="{{  $ticket->id }}">
+                    <label class="form-check-label" for="ticket{{  $ticket->id }}">
+                        {{ $ticket->name }}
+                    </label>
+                </div>
+                @endforeach
+              @include('layouts.component.invalidFeedback', ['input' => 'ticketId'])
+            </div>
+          </div>
+          {{-- <div class="col-md-6 col-sm-12">
             <label for="ticketId">ประเภทบัตร</label>
             <div class="form-group" id="ticketId">
               <select class="form-control" name="ticketId" value="{{ old('ticketId') }}">
@@ -88,18 +116,26 @@
               </select>
               @include('layouts.component.invalidFeedback', ['input' => 'ticketId'])
             </div>
-          </div>
+          </div> --}}
 
+        </div>
+        <div class="row">
           <div class="col-md-6 col-sm-12">
             <label for="amount">จำนวนบัตร</label>
             <input type="number" class="form-control" id="amount" name="amount" placeholder="จำนวน" value="{{ old('amount') }}">
             @include('layouts.component.invalidFeedback', ['input' => 'amount'])
           </div>
+      
+          <div class="col-md-6 col-sm-12">
+            <label for="visitDay">วันที่มาชมมวย</label>
+            <input type="date" class="form-control" id="visitDay" name="visitDay" placeholder="จำนวน" value="{{ old('visitDay') }}">
+            @include('layouts.component.invalidFeedback', ['input' => 'visitDay'])
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-        <button type="submit" class="btn btn-primary">บันทึก</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-lg fa-ban"></i> ยกเลิก</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-lg fa-save"></i> บันทึก</button>
         {!! Form::close() !!}
       </div>
     </div>

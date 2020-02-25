@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="modal-footer form-group">
-          <button type="submit" class="btn btn-primary">บันทึก</button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-lg fa-save"></i> บันทึก</button>
           {!! Form::close() !!}
         </div>
       </div>

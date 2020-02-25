@@ -1,38 +1,41 @@
 <template>
-  <div>
-    <div
-      class="row title-bar" style="padding: 0px;" >
-      <div class="col-md-12">
-        <h1 class="wow fadeInUp"  style="visibility: visible; animation-name: fadeInUp; font-size: 200%;">
-            Booking
-            </h1>
-        <div class="heading-border"></div>
+  <section id="booking">
+
+    <div class="row justify-content-center pt-5 mt-5">
+      <div class="col-md-7 heading-section ftco-animate text-center fadeInUp ftco-animated">
+        <h2 class="mb-4">Booking</h2>
       </div>
     </div>
-    
-    <div :class="{'col-md-9': id != 0, 'col-md-12': id == 0}">
+    <div :class="{'col-md-12': id != 0, 'col-md-12': id == 0}">
       <div class="row justify-content-center">
-        <div class="col-md-3">
-          <div class="input-group">
-            <div class="input-group-addon">Select Date</div>
+        <div class="col-md-5 col-lg-3 col-xs-2 col-4">
+          <div class="form-group">
+            <label
+              class="input-group-addon"
+              for="inlineFormInputGroup"
+            >Select Date</label>
             <input
+              autofocus
               type="date"
               v-model="dateSearch"
               class="form-control"
               id="inlineFormInputGroup"
-              :min="dateSearch"
+              :min="min"
             >
-            <div
-              class="input-group-addon"
+          </div>
+          <div class="form-group">
+            <input
+              value="Search"
+              class="btn btn-primary btn-block"
               @click="searchSeat"
-            ><i class="fa fa-search"></i></div>
+            >
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div :class="{'seatSelection col-md-9': id != 0, 'seatSelection col-md-12': id == 0}">
+    <div class="row justify-content-center">
+      <div :class="{'seatSelection col-md-12 col-lg-12': id != 0, 'seatSelection col-md-12': id == 0}">
         <div class="row">
           <div class="col-md-12">
             <div class="seatRow">
@@ -52,7 +55,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-6">
             <div class="seatRow">
               <seat
                 v-for="(seat, index) in seats"
@@ -68,7 +71,7 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 col-6">
             <div class="seatRow">
               <seat
                 v-for="(seat, index) in seats"
@@ -86,7 +89,7 @@
         </div>
         <br><br>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-4">
             <div class="seatRow">
               <seat
                 v-for="(seat, index) in seats"
@@ -102,11 +105,14 @@
             </div>
           </div>
 
-          <div class="col-md-4">
-            <img src="/shopping/img/topview.jpg" style="width: 100%; height: 96%;"/>
+          <div class="col-md-4 col-4">
+            <img
+              src="/shopping/img/topview.jpg"
+              style="width: 100%; height: 96%;"
+            />
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4 col-4">
             <div class="seatRow">
               <seat
                 v-for="(seat, index) in seats"
@@ -141,7 +147,12 @@
           </div>
         </div>
       </div>
-      <div class="col-md-2">
+    </div>
+    <div class="row justify-content-center">
+      <div
+        class="col-md-3 col-sm-4"
+        id="booking-detail"
+      >
         <booking-detail
           v-if="id != 0"
           :bookDetail="bookDetails"
@@ -152,13 +163,12 @@
           :clearData="clearData"
         />
       </div>
-
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex' 
+import { mapGetters } from "vuex";
 export default {
   props: ["id"],
   mounted() {
@@ -167,6 +177,7 @@ export default {
 
   data() {
     return {
+      min: this.today(),
       dateSearch: this.today(),
       seats: [],
       bookDetails: [],
@@ -204,13 +215,13 @@ export default {
     },
 
     onBooked(index) {
-      if(!this.getConfirmCheckout){
+      if (!this.getConfirmCheckout) {
         if (this.id != 0) {
-        var currentSeat = this.seats[index];
-        currentSeat.booked == 1
-          ? this.bookDetails.splice(this.bookDetails.indexOf(currentSeat), 1)
-          : this.bookDetails.push(this.seats[index]);
-        this.seats[index].booked = currentSeat.booked == 1 ? 0 : 1;
+          var currentSeat = this.seats[index];
+          currentSeat.booked == 1
+            ? this.bookDetails.splice(this.bookDetails.indexOf(currentSeat), 1)
+            : this.bookDetails.push(this.seats[index]);
+          this.seats[index].booked = currentSeat.booked == 1 ? 0 : 1;
         } else {
           swal({
             icon: "warning",
@@ -227,7 +238,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getConfirmCheckout']),
+    ...mapGetters("shopping", ["getConfirmCheckout"]),
     getTotal() {
       var total = 0;
       if (this.bookDetails.length > 0) {
@@ -242,6 +253,24 @@ export default {
 </script>
 
 <style>
+@media (max-width: 576px) {
+  #booking-detail {
+    width: 50%;
+  }
+}
+@media (max-width: 768px) {
+  #booking,
+  header,
+  header div,
+  header div nav,
+  header div nav .container {
+    width: 1100px !important;
+    position: block;
+  }
+  #mainNav {
+    position: fixed;
+  }
+}
 
 .seatSelection {
   text-align: center;

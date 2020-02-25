@@ -58,6 +58,9 @@
 </script>
 
 <style lang="scss" scoped>
+h5{
+    color: #000 !important;
+}
     .ticket-status {
         text-align: center;
     }

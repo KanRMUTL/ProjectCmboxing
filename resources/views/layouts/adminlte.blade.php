@@ -7,14 +7,14 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title> @yield('title')</title>
   @yield('customstylesheet')
-  <link rel="shortcut icon" href="{{ asset('shopping/img/logo.png') }}">
+  <link rel="shortcut icon" href="{{ asset('shopping/img/Logo.png') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/marketing/custom.css') }}">
 
   
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper" id="app">
+<body class="hold-transition skin-blue sidebar-mini" style="background-color: #222d32;">
+<div class="wrapper" id="app" >
 
   <!-- Main Header -->
   <header class="main-header">
@@ -36,7 +36,7 @@
       <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <li>
-              <a href="{{ route('logout') }}"><i class="fa fa-2x fa-sign-out"></i></a>
+              <a href="{{ route('logout') }}"><i class="fa fa-lg fa-sign-out"></i></a>
             </li>
           </div>
       </div>
@@ -53,15 +53,14 @@
         <div class="pull-left image">
           <img src="{{ asset('images/userImg/'.Auth::user()->img) }}" class="img-circle" alt="User Image">
         </div>
-        <div class="pull-left info">
+        <div class="pull-left image" style="padding-left: 12px;">
         <p>
           <a href="/employeeProfile/{{Auth::user()->id}}">
             {{ Auth::user()->firstname }}
           </a>
         </p>
-          <!-- Status -->
-          <i class="fa fa-circle text-success"></i> Online
-        </div>
+        <i class="fa fa-circle text-success"></i> Online
+      </div>
       </div>
      
       @if(Auth::user()->role == 1)

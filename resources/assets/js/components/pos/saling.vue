@@ -87,11 +87,7 @@ export default {
   mixins: [mixin],
 
   props: ["id"],
-
-  mounted() {
-    console.log("Saling Component mounted.");
-  },
-
+  
   data() {
     return {
       barcode: "",

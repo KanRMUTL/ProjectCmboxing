@@ -12,6 +12,7 @@ class Guesthouse extends Model
         'name',
         'zone_id'
     ];
+    public $timestamps = false;
 
     public function zone()
     {

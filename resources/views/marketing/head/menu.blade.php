@@ -17,6 +17,7 @@
       <li><a href="{{ url('/sale/employee') }}"><i class="fa fa-circle-o"></i>พนักงาน</a></li>
       <li><a href="{{ url('/sale/guide') }}"><i class="fa fa-circle-o"></i>ไกด์</a></li>
       <li><a href="{{ url('/sale/office') }}"><i class="fa fa-circle-o"></i>หน้า Office</a></li>
+      <li><a href="{{ url('/sale/walkin') }}"><i class="fa fa-circle-o"></i>Walk in</a></li>
     </ul>
   </li>
 

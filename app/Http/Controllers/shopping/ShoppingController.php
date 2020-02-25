@@ -9,6 +9,7 @@ use App\marketing\Ticket;
 use App\shopping\WebDetail;
 use App\Http\Controllers\marketing\StarterController;
 use App\MyClass\pos\ImageClass;
+use App\shopping\Fight;
 use App\Http\Requests\shopping\UserRegisterRequest;
 use App\User;
 
@@ -18,7 +19,8 @@ class ShoppingController extends StarterController
     {
         $data = [
             'tickets' => $this->tickets,
-            'webdetail' => WebDetail::find(1)
+            'webdetail' => WebDetail::find(1),
+            'fights' => Fight::orderBy('day', 'desc')->paginate(4)
         ];
         return view('shopping/index', $data);
     }
@@ -28,18 +30,25 @@ class ShoppingController extends StarterController
         $data = [
             'webdetail' => WebDetail::find(1)
         ];
-        
+
         return view('shopping/about', $data);
     }
 
-    public function saleTicket($id) {
+    function location()
+    {
+        return view('shopping/location');
+     }
+
+    public function saleTicket($id)
+    {
         return view('shopping/sale_ticket', ['id' => $id]);
     }
 
-    public function register(UserRegisterRequest $request) {
+    public function register(UserRegisterRequest $request)
+    {
         $user = new User;
 
-        if($request->hasfile('img')){
+        if ($request->hasfile('img')) {
             $objImage = new ImageClass('user', $request->file('img'));
             $objImage->originalName = $user->img;
             $objImage->uploadImage();
@@ -55,7 +64,7 @@ class ShoppingController extends StarterController
         $user->role = 4;
         $user->password = bcrypt($request->password);
         $user->save();
-        
+
         return redirect('/login');
     }
 
@@ -72,5 +81,10 @@ class ShoppingController extends StarterController
     public function resetpassword()
     {
         return view('shopping.user.resetpassword');
+    }
+
+    public function ticketOnline()
+    {
+        return view('shopping.addmin.ticket.index');
     }
 }

@@ -1,46 +1,32 @@
 <template>
   <div>
-    <div
-      class="row title-bar"
-      style="padding: 0px;"
-    >
-      <div class="col-md-12">
-        <h1
-          class="wow fadeInUp"
-          style="visibility: visible; animation-name: fadeInUp; font-size: 200%;"
-        >
-          Our MuayThai Course
-        </h1>
-
+    <div class="row justify-content-center pt-3">
+      <div class="col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated">
+        <h2 class="mb-4">Our Muay Thai Course</h2>
       </div>
     </div>
-    <h3 class="center"></h3>
-    <div class="row justify-content-md-center">
+
+    <div class="row justify-content-center">
       <div
-        class="card col-md-3 m-4 p-0"
+        class="col-md-4 col-sm-6"
         v-for="(course, index) in courses"
         :key="index"
       >
-        <div class="card-header">
-          <div class="row">
-            <div class="col-md-9">
-              <h4>{{ course.name }}</h4>
-            </div>
-            <div class="col-md-2">
-              <span class="badge badge-success">{{ course.price | coursePrice }}฿</span>
+        <div class="package-program ftco-animate fadeInUp ftco-animated">
+          <div class="img" style="background-image: url(/shopping/img/about/course_cover.jpg);"></div>
+          <div class="text mt-4">
+            <h3 class="price">{{ course.name }}</h3>
+            <p class="pt-2">
+              {{ course.detail }}
+            </p>
+
+            <div class="d-flex mt-4 ">
+              <p class="price">{{ course.price | coursePrice }}฿</p>
+              <p class="btn-custom float-right">
+                <a href="#" @click="onRegisterClick(course)">Enroll Now</a>
+              </p>
             </div>
           </div>
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{ course.detail }}</p>
-          <button
-            class="btn btn-primary"
-            data-toggle="modal"
-            data-target="#modal"
-            @click="onRegisterClick(course)"
-          >
-            Register Course
-          </button>
         </div>
       </div>
     </div>

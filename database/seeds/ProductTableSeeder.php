@@ -11,7 +11,7 @@ class ProductTableSeeder extends Seeder
             [
                 'barcode' => '80378123456',
                 'name' => 'กางเกงนักมวย',
-                'img' => '',
+                'img' => '1.jpg',
                 'price' => 600,
                 'unit' => 'ตัว',
                 'amount' => 104,
@@ -19,7 +19,7 @@ class ProductTableSeeder extends Seeder
             [
                 'barcode' => '80378123457',
                 'name' => 'เสื้อยืดลายมวยไทย',
-                'img' => '',
+                'img' => '2.jpg',
                 'price' => 300,
                 'unit' => 'ผืน',
                 'amount' => 300,
@@ -27,7 +27,7 @@ class ProductTableSeeder extends Seeder
             [
                 'barcode' => '80378123456',
                 'name' => 'นวมชกมวย',
-                'img' => '',
+                'img' => '3.jpg',
                 'price' => 600,
                 'unit' => 'คู่',
                 'amount' => 133,

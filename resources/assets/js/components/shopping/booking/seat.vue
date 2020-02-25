@@ -3,7 +3,7 @@
         <button 
             :title="seat.ticketName"
             :disabled="!seat.status"
-            :class="{'btn btn-primary mr-1 mt-1': seat.status, 'btn btn-danger mr-1 mt-1': !seat.status || seat.booked}"
+            :class="{'btn btn-primary mr-1 mt-1': seat.status, 'btn btn-booked mr-1 mt-1': !seat.status || seat.booked}"
             @click="onBooked(realIndex)"
         >
             {{ seat.seatName }}

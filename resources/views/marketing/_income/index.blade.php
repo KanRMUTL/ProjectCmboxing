@@ -1,18 +1,19 @@
 
 @extends('layouts.adminlte')
 @section('title','ข้อมูลรายได้นำเข้าสนามมวย')
-
+@section('header', 'ข้อมูลรายได้นำเข้าสนามมวย')
 @section('content')
 
 {{-- Condition Search --}}
-@if(Auth::user()->role ==1)
-  @include('marketing.admin.income_search')
-@elseif(Auth::user()->role == 2)
-  @include('marketing.head.income_search')
-@else
-  @include('marketing.head.income_search')
-@endif
-
+<div class="row">
+  @if(Auth::user()->role ==1)
+    @include('marketing.admin.income_search')
+  @elseif(Auth::user()->role == 2)
+    @include('marketing.head.income_search')
+  @else
+    @include('marketing.head.income_search')
+  @endif
+</div>
   <div class="row">
     <div class="col-xs-12">
       <div class="box box box-info">
@@ -41,7 +42,7 @@
             @endforeach
           </table>
           <div class="col-md-12 mt-3">
-            <form action="/incomeReport" method="POST">
+            <form action="/incomeReport" method="POST" target="_blank">
               {{@csrf_field()}}
               <input type="hidden" value="{{ $range['start'] }}" name="start">
               <input type="hidden" value="{{ $range['end'] }}" name="end">

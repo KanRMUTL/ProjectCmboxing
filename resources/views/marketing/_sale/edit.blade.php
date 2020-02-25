@@ -61,21 +61,27 @@
           @include('layouts.component.invalidFeedback', ['input' => 'visitDay'])
         </div>
     </div>
+
+    @if($sale->sale_type != 3)
     <div class="col-md-6 col-sm-12">
-        <label for="ticketId">ประเภทการขาย</label>
-        <div class="form-group" id="ticketId">
-          <select class="form-control" name="saleTypeId">
-            @foreach ($saleTypes as $key => $saleType)
-              @if ($sale->sale_type == $key)
-                <option value="{{ $key }}" selected>{{ $saleType }}</option>
-                @continue
-              @endif
-              <option value="{{ $key }}">{{ $saleType}}</option>
-            @endforeach
-          </select>
+        <label for="check">ประเภทการขาย</label>
+
+       
+        @foreach ($saleTypes as $key => $saleType)
+          <div class="form-check form-check-inline" id="check">
+              <input class="form-check-input" type="radio" name="saleTypeId" id="type{{ $errors->isEmpty() ? $key : old('saleTypeId') }}" value="{{  $errors->isEmpty() ? $key : old('saleTypeId') }}" {{ $sale->sale_type == $key ? 'checked' : null}}>
+              <label class="form-check-label" for="type{{ $errors->isEmpty() ? $key : old('saleTypeId') }}">
+                  {{ $saleType }}
+              </label>
+          </div>
           @include('layouts.component.invalidFeedback', ['input' => 'saleTypeId'])
-        </div>
+          @endforeach
+
       </div>
+    @else
+      <input type="hidden" name="saleTypeId" value="3">
+    @endif
+
     </div>
     <div class="row">
       <div class="col-md-6 col-sm-12">
@@ -104,7 +110,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary">บันทึก</button>
+    <button type="submit" class="btn btn-primary"><i class="fa fa-lg fa-save"></i> บันทึก</button>
   </div>
 </div>
 <!-- /.box -->

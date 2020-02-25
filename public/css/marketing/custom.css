@@ -12,3 +12,23 @@
     font-size: 90%;
     color: #dc3545;
   }
+
+@media (max-width: 575px){
+    .hidden-xs-down {
+        display: none!important;
+    }
+    .pt-3{
+        padding-top: 9px;
+    }
+    
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 80vh;
+    width: 80vw;
+  }
+
+
+ 

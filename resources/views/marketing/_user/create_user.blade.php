@@ -86,15 +86,18 @@
             <!-- ถ้าเป็น Admin สามารถกำหนด ตำแหน่ง กับ โซน -->
             <label for="role">ตำแหน่ง</label>
             <div class="form-group" id="role">
-              <select class="form-control" name="role" required>
-                <option disabled selected>เลือกตำแหน่ง</option>
-                @foreach ($roles as $key => $role)
-                  @if ($loop->first)
-                     @continue 
-                  @endif
-                  <option value="{{ $key+1 }}">{{ $role}}</option>
-                @endforeach
-              </select>
+
+              @foreach($roles as $key => $role)
+              @if ($loop->first)
+                  @continue 
+              @endif
+              <div class="form-check form-check-inline" id="check">
+                <input class="form-check-input" type="radio" id="{{ $key }}" name="role" value="{{ $key+1 }}">
+                <label class="form-check-label" for="{{ $key }}">
+                    {{ $role}}
+                </label>
+              </div>
+              @endforeach
               @include('layouts.component.invalidFeedback', ['input' => 'role'])
             </div>
           </div>
@@ -135,8 +138,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-        <button type="submit" class="btn btn-primary">บันทึก</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-lg fa-ban"></i> ยกเลิก</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-lg fa-save"></i> บันทึก</button>
         {!! Form::close() !!}
       </div>
     </div>

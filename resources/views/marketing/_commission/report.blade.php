@@ -1,5 +1,5 @@
 <div class="col-md-12 mt-3">
-    {!! Form::open(['url' => '/EmpCommissionReport', 'method' => 'POST']) !!}
+    {!! Form::open(['url' => '/EmpCommissionReport', 'method' => 'GET']) !!}
     {{ Form::token()}}
       <input type="hidden" value="{{ $range['start'] }}" name="start">
       <input type="hidden" value="{{ $range['end'] }}" name="end">

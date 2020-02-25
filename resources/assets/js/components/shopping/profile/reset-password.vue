@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h3>Reset Password</h3>
+     <div class="row justify-content-center pt-5 mt-5">
+      <div class="col-md-12 heading-section ftco-animate text-center fadeInUp ftco-animated">
+        <h2 class="mb-4">Reset Password</h2>
+      </div>
+    </div>
     <form
       class="form-horizontal col-md-6 "
       method="post"
@@ -8,23 +12,15 @@
     >
 
       <div class="form-group">
-        <label
-          for="oldpassword"
-          class="cols-sm-2 control-label"
-        >Password</label>
         <div class="cols-sm-10">
           <div class="input-group">
-            <span class="input-group-addon"><i
-                class="fa fa-lock fa-lg"
-                aria-hidden="true"
-              ></i></span>
             <input
               v-model="form.oldPassword"
               type="password"
               class="form-control"
               name="password"
               id="oldpassword"
-              placeholder="Enter your Password"
+              placeholder="Enter Current Password"
               required
             >
           </div>
@@ -35,17 +31,9 @@
       </div>
 
       <div class="form-group">
-        <label
-          for="password"
-          class="cols-sm-2 control-label"
-        >New Password</label>
         <div class="cols-sm-10">
           <div class="input-group">
-            <span class="input-group-addon"><i
-                class="fa fa-lock fa-lg"
-                aria-hidden="true"
-              ></i></span>
-            <input
+           <input
               v-model="form.password"
               type="password"
               class="form-control"
@@ -62,16 +50,8 @@
       </div>
 
       <div class="form-group">
-        <label
-          for="confirm"
-          class="cols-sm-2 control-label"
-        >Confirm Password</label>
         <div class="cols-sm-10">
           <div class="input-group">
-            <span class="input-group-addon"><i
-                class="fa fa-lock fa-lg"
-                aria-hidden="true"
-              ></i></span>
             <input
               v-model="form.password_confirmation"
               type="password"
@@ -91,7 +71,7 @@
       <div class="form-group ">
         <button
           type="submit"
-          class="btn btn-general btn-white text-center btn-block"
+          class="btn btn-primary text-center btn-block"
         >Reset Password</button>
       </div>
 

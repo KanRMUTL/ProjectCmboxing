@@ -1,0 +1,52 @@
+/* navbar */
+.dropdown-item.nav-link {
+     color: #ffffff;
+}
+
+/* pagination */
+ul.pagination li {
+     margin: 1%;
+}
+
+ul.pagination li span,
+ul.pagination li a {
+     color: #fac564;
+     text-align: center;
+     display: inline-block;
+     width: 40px;
+     height: 40px;
+     line-height: 40px;
+     border-radius: 50%;
+     border: 1px solid #bf7e06;
+     padding: 1%;
+}
+
+ul.pagination li.active span {
+     background: #fac564;
+     color: #fff;
+     border: 1px solid transparent;
+}
+
+/* Booking Seat */
+
+.btn-booked { /* เมื่อกดจอง */
+     background: rgb(0, 0, 0) !important;
+     color: #fac564 !important;
+}
+
+.btn[disabled=true] { /* เมื่อมีคนจองแล้ว */
+     background: rgb(130, 123, 123) !important;
+     color: #fff !important;
+}
+
+.text-golden{
+     color: #e5ce48;
+}
+
+.bg-overay{
+     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.table tbody tr td {
+     padding: 15px 10px
+}

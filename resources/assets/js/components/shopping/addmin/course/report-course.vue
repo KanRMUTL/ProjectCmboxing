@@ -60,7 +60,7 @@
                 </tr>
               </tbody>
             </table>
-            <a class="btn btn-block btn-primary" :href="'/course/' + start + '/' + end ">ออกรายงาน</a>
+            <a class="btn btn-block btn-primary" :href="'/course/' + start + '/' + end " target="_blank">ออกรายงาน</a>
           </div>
         </div>
       </div>

@@ -2,8 +2,10 @@
 
 Auth::routes();
 Route::auth();
+Route::get('/logout', 'Auth\LoginController@logout'); // For logout
 Route::get('/', 'shopping\ShoppingController@index');
 Route::get('/about', 'shopping\ShoppingController@about');
+Route::get('/location', 'shopping\ShoppingController@location');
 Route::resource('/booking', 'shopping\SeatController');
 Route::get('/courses','shopping\CourseController@courses');
 Route::post('/customerRegister', 'shopping\ShoppingController@register');
@@ -22,6 +24,7 @@ Route::group(['middleware' =>['auth']], function() {
     Route::get('/course/{user_id}', 'shopping\CourseController@show'); // ลูกค้าดูรายละเอียดการซื้อคอร์ส
     Route::get('/course_report', 'shopping\ShoppingController@reportCourse'); // ลูกค้าดูรายละเอียดการซื้อคอร์ส
     Route::get('/course/{start}/{end}', 'shopping\report\ReportController@courseRegister');
+    
     // ครูสอนมวยไทย
     Route::get('/trainer', 'shopping\TrainerController@index');
     Route::post('/trainer', 'shopping\TrainerController@store');
@@ -39,9 +42,9 @@ Route::group(['middleware' =>['auth']], function() {
         Route::get('/{id}/edit', 'marketing\SaleController@edit')->name('sale.edit');
     });
     
-    Route::post('/saleReport', 'marketing\report\ReportController@saleReport')->name('report.sale');
-    Route::post('/EmpCommissionReport', 'marketing\report\ReportController@EmpCommissionReport')->name('report.empCommission');
-    Route::post('/guideCommissionReport', 'marketing\report\ReportController@guideCommissionReport')->name('report.guideCommission');
+    Route::get('/saleReport', 'marketing\report\ReportController@saleReport')->name('report.sale');
+    Route::get('/EmpCommissionReport', 'marketing\report\ReportController@EmpCommissionReport')->name('report.empCommission');
+    Route::get('/guideCommissionReport', 'marketing\report\ReportController@guideCommissionReport')->name('report.guideCommission');
     Route::get('/salingReport','marketing\report\ReportController@sampleRreport');
 
     Route::get('/chart', 'marketing\ChartSaleController@index');
@@ -65,6 +68,21 @@ Route::group(['middleware' =>['auth']], function() {
 
     Route::get('/userprofile','shopping\ShoppingController@profile');
     Route::get('/customer_resetpassword', 'shopping\ShoppingController@resetpassword');
-});
+    Route::get('/saleTicketOnline', 'shopping\ShoppingController@ticketOnline');
+    Route::get('/saleTicketOnline/{start}/{end}', 'shopping\report\ReportController@reportTicketOnline');
 
-Route::get('/logout', 'Auth\LoginController@logout'); // For logout
+    // โซน, เกสเฮาส์
+    Route::resource('/zone', 'marketing\ZoneController');
+    Route::get('zone/{id}/guesthouse', 'marketing\ZoneController@guesthouse');
+    Route::resource('/guesthouse', 'marketing\GuesthouseController');
+
+    Route::get('/webdetail', 'WebdetailController@index');
+    Route::put('/webdetail', 'WebdetailController@update');
+});  // End Middleware
+
+// รายการชกมวย
+Route::resource('fight', 'shopping\FightController');
+
+
+
+

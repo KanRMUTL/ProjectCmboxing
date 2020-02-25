@@ -14,7 +14,7 @@
         </div>
       </div>
 
-      <div class="col-md-3  align-self-center">
+      <div class="col-md-3 pt-3 align-self-center">
         <div class="input-group">
           <span class="input-group-addon">สิ้นสุด</span>
           <input
@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div class="col-md-3  align-self-center">
+      <div class="col-md-3 pt-3 align-self-center">
         <div class="input-group">
           <select
             type="date"
@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div class="col-md-3 align-self-center">
+      <div class="col-md-3 pt-3 align-self-center">
         <button
           class="btn btn-primary"
           @click="search()"
@@ -53,9 +53,9 @@
       </div>
 
     </div>
-
+      
       <canvas id="chart"></canvas>
-
+      
   </div>
 </template>
 
@@ -151,6 +151,7 @@ export default {
     createChart(labels, total, header, barName) {
       var ctx = document.getElementById("chart").getContext("2d");
       this.barGraph = new Chart(ctx, {
+          maintainAspectRatio: false,
         type: "bar",
         responsive: true,
         data: {

@@ -13,7 +13,7 @@ class IncomeClass {
      public $sart;
      public $end;
      public $zoneId;
-     public $saleTypes = ['ปกติ', 'ขายผ่านไกด์', 'หน้า Office'];
+     public $saleTypes = ['ปกติ', 'ขายผ่านไกด์', 'หน้า Office', 'walkin'];
 
     public function __construct($start, $end, $zoneId) {
           $this->start = $start;
